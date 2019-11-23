@@ -1,0 +1,13 @@
+# Editor/OS files
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+/.vscode
+
+# Generated files
+/public/js/*.js
+/generated
+/node_modules
+/.eslintcache
+*.js.map
+npm-debug.log

@@ -1,0 +1,167 @@
+{
+	"id": "16",
+	"name": "Three Houses",
+	"globals": {
+		"maxLevel": 99,
+		"maxStat": 99,
+		"classChangeResetsLevel": false,
+		"classChangeGetsAtLeast1HP": false
+	},
+	"stats": ["HP", "Str", "Mag", "Dex", "Spd", "Lck", "Def", "Res", "Cha"],
+	"chars": {
+		"BylethM": {
+			"name": "BylethM",
+			"gender": "M",
+			"baseClass": "Commoner",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 27,
+				"Str": 13,
+				"Mag": 6,
+				"Dex": 9,
+				"Spd": 8,
+				"Lck": 8,
+				"Def": 6,
+				"Res": 6,
+				"Cha": 7
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 45,
+				"Mag": 35,
+				"Dex": 45,
+				"Spd": 45,
+				"Lck": 45,
+				"Def": 35,
+				"Res": 30,
+				"Cha": 45
+			},
+			"maxStats": {
+				"HP": 88,
+				"Str": 77,
+				"Mag": 55,
+				"Dex": 66,
+				"Spd": 66,
+				"Lck": 66,
+				"Def": 55,
+				"Res": 55,
+				"Cha": 99
+			}
+		},
+		"BylethF": {
+			"name": "BylethF",
+			"gender": "F",
+			"baseClass": "Commoner",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 27,
+				"Str": 13,
+				"Mag": 6,
+				"Dex": 9,
+				"Spd": 8,
+				"Lck": 8,
+				"Def": 6,
+				"Res": 6,
+				"Cha": 7
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 45,
+				"Mag": 35,
+				"Dex": 45,
+				"Spd": 45,
+				"Lck": 45,
+				"Def": 35,
+				"Res": 30,
+				"Cha": 45
+			},
+			"maxStats": {
+				"HP": 88,
+				"Str": 77,
+				"Mag": 55,
+				"Dex": 66,
+				"Spd": 66,
+				"Lck": 66,
+				"Def": 55,
+				"Res": 55,
+				"Cha": 99
+			}
+		}
+	},
+	"classes": {
+		"Commoner": {
+			"name": "Commoner",
+			"requiredGender": "",
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
+			}
+		},
+		"Noble": {
+			"name": "Noble",
+			"requiredGender": "",
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 5
+			}
+		}
+	}
+}

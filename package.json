@@ -1,0 +1,73 @@
+{
+	"name": "fe-char-ts",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"check": "run-p -s lint ts test",
+		"pretty": "pretty-quick --write --branch master",
+		"pretty-all": "prettier \"{src,test}/**/*.{js,jsx,json,css,ts,tsx}\" --write",
+		"lint": "eslint --cache \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+		"ts": "tsc --noEmit",
+		"test": "NODE_NO_WARNINGS=1 ava",
+		"build": "rollup -c",
+		"watch": "rollup -cw",
+		"start": "http-server public -c-1 -o index.html"
+	},
+	"ava": {
+		"compileEnhancements": false,
+		"extensions": [
+			"ts",
+			"tsx"
+		],
+		"require": [
+			"ts-node/register/transpile-only"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "pretty-quick --staged"
+		}
+	},
+	"dependencies": {
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.4.5",
+		"@babel/preset-env": "^7.4.5",
+		"@babel/preset-react": "^7.7.4",
+		"@babel/preset-typescript": "^7.3.3",
+		"@babel/register": "^7.4.4",
+		"@types/bluebird": "^3.5.27",
+		"@types/js-yaml": "^3.12.1",
+		"@types/lodash": "^4.14.134",
+		"@types/mkdirp": "^0.5.2",
+		"@types/react": "^16.9.12",
+		"@types/react-dom": "^16.9.4",
+		"@typescript-eslint/eslint-plugin": "^1.9.0",
+		"@typescript-eslint/parser": "^1.9.0",
+		"ava": "^2.3.0",
+		"babel-plugin-inline-import": "^3.0.0",
+		"bluebird": "^3.5.5",
+		"eslint": "^5.16.0",
+		"eslint-plugin-import": "^2.18.2",
+		"http-server": "github:http-party/http-server#master",
+		"husky": "^3.0.5",
+		"js-yaml": "^3.13.1",
+		"lodash": "^4.17.11",
+		"mkdirp": "^0.5.1",
+		"npm-run-all": "^4.1.5",
+		"prettier": "^1.18.2",
+		"pretty-quick": "^1.11.0",
+		"rollup": "^1.16.2",
+		"rollup-plugin-babel": "^4.3.3",
+		"rollup-plugin-commonjs": "^10.0.0",
+		"rollup-plugin-json": "^4.0.0",
+		"rollup-plugin-node-resolve": "^5.0.4",
+		"rollup-plugin-replace": "^2.2.0",
+		"rollup-plugin-string": "^3.0.0",
+		"ts-node": "^7.0.1",
+		"ts-node-dev": "^1.0.0-pre.39",
+		"typescript": "^3.5.3"
+	}
+}

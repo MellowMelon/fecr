@@ -1,0 +1,132 @@
+/*
+Main
+*/
+
+body {
+	overflow-y: scroll;
+	font-family: Helvetica, Arial;
+	font-size: 14px;
+}
+
+input:focus,
+div:focus,
+button:focus {
+	outline: none;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.char-perc-error {
+	color: red;
+}
+.char-class-level-error {
+	color: red;
+}
+
+.edit-toggle {
+	width: 200px;
+	text-align: center;
+}
+
+.edit-bases-class {
+	height: 24px;
+	line-height: 24px;
+	margin: 4px 0;
+}
+.edit-stats-cell {
+	width: 40px;
+	height: 20px;
+	text-align: center;
+}
+.edit-stats-input {
+	width: 30px;
+}
+
+.histedit-entry.inapplicable {
+	color: #888;
+}
+.histedit-class-input {
+	width: 150px;
+}
+.histedit-level-input,
+.histedit-increase-input {
+	width: 30px;
+}
+
+.charnamesel {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.charnamesel-button {
+	padding: 2px;
+}
+.charnamesel-button.filled {
+	background: #ccc;
+}
+.charnamesel-button.selected {
+	background: #ff7;
+}
+.charnamesel-button img {
+	display: block;
+	width: 50px;
+	height: 50px;
+}
+
+.char-main-panel {
+	margin: 8px 0;
+}
+
+.edit-entry {
+	width: 600px;
+	margin: 8px;
+	padding: 4px;
+	border: 1px dashed #444;
+}
+
+.edit-base {
+	background: #ffa;
+}
+
+.edit-base h2 {
+	margin: 0;
+	padding: 0;
+}
+
+.histedit-entry-class {
+	background: #ccf;
+}
+
+.histedit-entry-boost {
+	background: #fbe;
+}
+
+.histedit-entry-checkpoint {
+	border: 2px solid #444;
+	padding: 3px;
+	background: #9f9;
+}
+
+.histedit-entry-bad {
+	background: #ccc;
+}
+
+table.char-stats td {
+	border: 1px solid #aaa;
+	padding: 2px;
+	min-width: 68px;
+}
+table.char-stats td.row-label {
+	width: 107px;
+}
+table.char-stats td.stats-name {
+	font-weight: bold;
+}
+table.char-stats tr.sep {
+	height: 8px;
+}
+table.char-stats tr.char-stats-curr td {
+	background: #dff;
+}
