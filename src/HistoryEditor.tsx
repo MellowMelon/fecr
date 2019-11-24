@@ -60,7 +60,7 @@ function renderEntryRow(props: Props, index: number) {
 		/>
 	);
 	return (
-		<div className="histedit-row">
+		<div className="histedit-row" key={index}>
 			{insertButton} {deleteButton} {editEl}
 		</div>
 	);

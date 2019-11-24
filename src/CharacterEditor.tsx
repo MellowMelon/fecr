@@ -95,13 +95,15 @@ const CharacterEditor: React.FunctionComponent<Props> = function(props: Props) {
 			<div className="edit-entry edit-base">
 				<h2>Bases</h2>
 				<div>
-					<input
-						className="edit-base-custom-check"
-						type="checkbox"
-						checked={baseCustom}
-						onChange={evt => props.setBaseCustom(evt.target.checked)}
-					/>{" "}
-					Customize
+					<label>
+						<input
+							className="edit-base-custom-check"
+							type="checkbox"
+							checked={baseCustom}
+							onChange={evt => props.setBaseCustom(evt.target.checked)}
+						/>{" "}
+						Customize
+					</label>
 				</div>
 				<div className="edit-bases-class">
 					<strong>Class</strong>: {baseClassEl} level {baseLevelEl}
