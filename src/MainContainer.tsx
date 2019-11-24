@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {
 	Stat,
 	History,
@@ -10,21 +10,59 @@ import {
 	GameData,
 } from "./common";
 import {createCharacter} from "./CharUtils";
+import {unserialize} from "./CharSerialize";
 
+import Persistence from "./Persistence";
 import CharacterSelector from "./CharacterSelector";
 import CharacterEditor from "./CharacterEditor";
 import CharacterPanel from "./CharacterPanel";
 
 type Props = {
 	game: GameData;
+	initialHash: string;
 };
 
 const MainContainer: React.FunctionComponent<Props> = function(props: Props) {
-	const {game} = props;
+	const {game, initialHash} = props;
 	const firstName = Object.keys(game.chars)[0];
 	const [editing, setEditing] = useState<boolean>(true);
 	const [team, setTeam] = useState<Team>({});
 	const [selName, setSelName] = useState<CharacterName>(firstName);
+
+	const [loadedHash, setLoadedHash] = useState<string>("");
+	function handleLoadHash(hash: string) {
+		if (hash && loadedHash !== hash) {
+			try {
+				const unserChar = unserialize(game, hash);
+				const name = unserChar.name;
+				setLoadedHash(hash);
+				setEditing(false);
+				setTeam({
+					...team,
+					[name]: unserChar,
+				});
+				setSelName(name);
+				return true;
+			} catch (ex) {
+				console.log("Could not load the URL hash as a valid character", ex);
+				setLoadedHash(hash);
+				return false;
+			}
+		}
+	}
+
+	useEffect(() => {
+		if (typeof window !== "undefined" && !window.onhashchange) {
+			window.onhashchange = () => {
+				handleLoadHash(window.location.hash.slice(1));
+			};
+		}
+	});
+
+	if (initialHash && loadedHash !== initialHash) {
+		handleLoadHash(initialHash);
+		return <div />;
+	}
 
 	const currChar: Character = team[selName] || createCharacter(game, selName);
 
@@ -121,6 +159,7 @@ const MainContainer: React.FunctionComponent<Props> = function(props: Props) {
 				{editing ? charEditor : null}
 				{!editing ? charPanel : null}
 			</div>
+			<Persistence game={game} char={currChar} loadHash={handleLoadHash} />
 		</div>
 	);
 };

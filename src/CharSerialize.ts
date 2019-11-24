@@ -4,7 +4,7 @@ import {StatsTable, HistoryEntry, Character, GameData} from "./common";
 type ArrayData = (string | number)[];
 
 function encodeBase64(data: string): string {
-	const g: any = global;
+	const g: any = typeof global !== "undefined" ? global : window;
 	if (g.btoa) {
 		return g.btoa(data);
 	} else if (g.Buffer) {
@@ -15,7 +15,7 @@ function encodeBase64(data: string): string {
 }
 
 function decodeBase64(data: string): string {
-	const g: any = global;
+	const g: any = typeof global !== "undefined" ? global : window;
 	if (g.atob) {
 		return g.atob(data);
 	} else if (g.Buffer) {
@@ -150,6 +150,9 @@ export function unserialize(game: GameData, data: string): Character {
 	read(arrP);
 
 	const name = read(arrP);
+	if (!game.chars[name]) {
+		throw new Error("Character " + name + " is not in game " + gameID);
+	}
 	const baseClass = read(arrP) || undefined;
 	const baseLevel = parseInt(read(arrP)) || undefined;
 	const baseStats = parseStatsTable(game, arrP) || undefined;

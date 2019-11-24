@@ -128,7 +128,7 @@ const CharacterSelector: React.FunctionComponent<Props> = function(
 
 	const rowInfo: StatsRowInfoSep[] = [
 		{
-			label: "Current",
+			label: "Actual",
 			className: "char-stats-curr",
 			vals: cpReport.charRealStats,
 		},

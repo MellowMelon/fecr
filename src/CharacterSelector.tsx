@@ -20,7 +20,7 @@ const CharacterSelector: React.FunctionComponent<Props> = function(
 		className += name === props.currName ? " selected" : "";
 		return (
 			<div key={name} className={className} onClick={() => props.setName(name)}>
-				<img src={src} />
+				<img src={src} title={name} />
 			</div>
 		);
 	});
