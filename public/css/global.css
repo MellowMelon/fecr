@@ -114,6 +114,10 @@ table {
 	background: #ccc;
 }
 
+.char-cp-select {
+	margin: 4px 0;
+}
+
 table.char-stats td {
 	border: 1px solid #aaa;
 	padding: 2px;

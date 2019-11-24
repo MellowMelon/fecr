@@ -103,6 +103,8 @@ const MainContainer: React.FunctionComponent<Props> = function(props: Props) {
 
 	const charPanel = <CharacterPanel game={game} char={currChar} />;
 
+	const editingLabel = editing ? "Editing" : "Report";
+
 	return (
 		<div>
 			<CharacterSelector
@@ -111,7 +113,9 @@ const MainContainer: React.FunctionComponent<Props> = function(props: Props) {
 				currName={selName}
 				setName={handleSetCharName}
 			/>
-			<h1 className="char-name">{currChar.name}</h1>
+			<h1 className="char-name">
+				{currChar.name} - {editingLabel}
+			</h1>
 			{editingButton}
 			<div className="char-main-panel">
 				{editing ? charEditor : null}

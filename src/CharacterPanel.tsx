@@ -45,7 +45,7 @@ function renderStatsRow(game: GameData, info: StatsRowInfo) {
 }
 
 function renderCPLabel(cp: CharacterCheckpoint, index: number): string {
-	return `Checkpoint ${index + 1}: ${cp.charClass} level ${cp.level}`;
+	return `${index + 1}. ${cp.charClass} level ${cp.level}`;
 }
 
 function renderCPSelect(
@@ -153,7 +153,21 @@ const CharacterSelector: React.FunctionComponent<Props> = function(
 
 	return (
 		<div className="char">
-			<div className="char-cp-select">{cpSelect}</div>
+			<div className="char-help">
+				<p>
+					For each checkpoint you specified in the editor, this will compare the
+					character's actual statistics to their theoretical ones. The
+					theoretical stats are given in several ways: averages, medians,
+					percentiles, and graphs of the probability distribution.
+				</p>
+				<p>
+					Click "Edit Character" above if you want to make further changes to
+					the character's history of class changes and stat boosts.
+				</p>
+			</div>
+			<div className="char-cp-select">
+				<label>Checkpoint Selector: {cpSelect}</label>
+			</div>
 			<table className="char-stats">
 				{thead}
 				<tbody>{rows}</tbody>

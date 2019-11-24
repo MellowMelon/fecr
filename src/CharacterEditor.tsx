@@ -92,6 +92,18 @@ const CharacterEditor: React.FunctionComponent<Props> = function(props: Props) {
 
 	return (
 		<div className="charedit">
+			<div className="edit-help">
+				<p>
+					Specify the class changes and stat boosts for this character below.
+					You can also add checkpoints with the character's actual statistics
+					for any point in time you have it.
+				</p>
+				<p>
+					When you are done, click "Show Character Report". You will be able to
+					view how blessed or cursed the character's levels were at each
+					checkpoint.
+				</p>
+			</div>
 			<div className="edit-entry edit-base">
 				<h2>Bases</h2>
 				<div>
