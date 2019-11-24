@@ -1,6 +1,6 @@
-import test, {ExecutionContext} from "ava";
+import test from "ava";
 
-import {StatsDist, Character, GameData} from "../src/common";
+import {Character, GameData} from "../src/common";
 import {serializeCharacter, unserialize} from "../src/CharSerialize";
 
 const game1: GameData = {

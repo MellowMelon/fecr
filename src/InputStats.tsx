@@ -20,7 +20,7 @@ const InputLevel: React.FunctionComponent<Props> = function(props: Props) {
 				type="stat"
 				value={value[statName]}
 				editable={editable}
-				onChange={value => onChange(statName, value)}
+				onChange={v => onChange(statName, v)}
 			/>
 		);
 	}

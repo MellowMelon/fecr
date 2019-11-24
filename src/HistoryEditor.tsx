@@ -56,7 +56,7 @@ function renderEntryRow(props: Props, index: number) {
 			typeEditable={!locked}
 			final={locked}
 			editable={true}
-			onChange={entry => props.changeEntry(entry, index)}
+			onChange={e => props.changeEntry(e, index)}
 		/>
 	);
 	return (
