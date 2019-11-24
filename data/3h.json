@@ -1558,10 +1558,10 @@
 				"Str": 0,
 				"Mag": 0,
 				"Dex": 0,
-				"Spd": 10,
+				"Spd": 5,
 				"Lck": 0,
 				"Def": 0,
-				"Res": -10,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -1594,11 +1594,11 @@
 				"HP": 10,
 				"Str": 0,
 				"Mag": 0,
-				"Dex": 10,
+				"Dex": 5,
 				"Spd": 0,
 				"Lck": 0,
 				"Def": 0,
-				"Res": -10,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -1629,13 +1629,13 @@
 			},
 			"growths": {
 				"HP": 10,
-				"Str": 10,
+				"Str": 5,
 				"Mag": 0,
 				"Dex": 0,
 				"Spd": 0,
 				"Lck": 0,
 				"Def": 0,
-				"Res": -10,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -1665,14 +1665,14 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 10,
+				"HP": 5,
 				"Str": 0,
 				"Mag": 0,
 				"Dex": 0,
 				"Spd": 0,
 				"Lck": 0,
 				"Def": 0,
-				"Res": 20,
+				"Res": 5,
 				"Cha": 5
 			}
 		},
@@ -1703,12 +1703,12 @@
 			},
 			"growths": {
 				"HP": 20,
-				"Str": 15,
+				"Str": 0,
 				"Mag": 0,
 				"Dex": 10,
 				"Spd": 0,
 				"Lck": 0,
-				"Def": 10,
+				"Def": 0,
 				"Res": 0,
 				"Cha": 10
 			}
@@ -1740,13 +1740,13 @@
 			},
 			"growths": {
 				"HP": 20,
-				"Str": 15,
+				"Str": 5,
 				"Mag": 0,
 				"Dex": 0,
-				"Spd": 10,
+				"Spd": 5,
 				"Lck": 0,
-				"Def": 10,
-				"Res": -10,
+				"Def": 0,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -1777,12 +1777,12 @@
 			},
 			"growths": {
 				"HP": 20,
-				"Str": 15,
+				"Str": 0,
 				"Mag": 0,
 				"Dex": 10,
-				"Spd": 15,
+				"Spd": 10,
 				"Lck": 0,
-				"Def": 10,
+				"Def": 0,
 				"Res": 0,
 				"Cha": 5
 			}
@@ -1806,21 +1806,21 @@
 				"Str": 0,
 				"Mag": 0,
 				"Dex": 0,
-				"Spd": -2,
+				"Spd": 0,
 				"Lck": 0,
 				"Def": 4,
-				"Res": -1,
+				"Res": 0,
 				"Cha": 0
 			},
 			"growths": {
 				"HP": 20,
-				"Str": 15,
+				"Str": 0,
 				"Mag": 0,
 				"Dex": 0,
-				"Spd": -30,
+				"Spd": 0,
 				"Lck": 0,
-				"Def": 40,
-				"Res": -20,
+				"Def": 10,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -1843,7 +1843,7 @@
 				"Str": 1,
 				"Mag": 0,
 				"Dex": 2,
-				"Spd": 1,
+				"Spd": -1,
 				"Lck": 0,
 				"Def": 1,
 				"Res": 0,
@@ -1851,12 +1851,12 @@
 			},
 			"growths": {
 				"HP": 20,
-				"Str": 20,
+				"Str": 5,
 				"Mag": 0,
-				"Dex": 0,
+				"Dex": 5,
 				"Spd": 0,
 				"Lck": 0,
-				"Def": 15,
+				"Def": 5,
 				"Res": 0,
 				"Cha": 5
 			}
@@ -1888,13 +1888,13 @@
 			},
 			"growths": {
 				"HP": 30,
-				"Str": 25,
+				"Str": 10,
 				"Mag": 0,
 				"Dex": 0,
 				"Spd": 0,
 				"Lck": 0,
-				"Def": 10,
-				"Res": -10,
+				"Def": 0,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -1924,12 +1924,12 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 10,
-				"Str": 15,
+				"HP": 5,
+				"Str": 0,
 				"Mag": 0,
 				"Dex": 10,
 				"Spd": 0,
-				"Lck": 10,
+				"Lck": 5,
 				"Def": 0,
 				"Res": 0,
 				"Cha": 5
@@ -1961,14 +1961,14 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 10,
-				"Str": -5,
+				"HP": 5,
+				"Str": 0,
 				"Mag": 10,
-				"Dex": 0,
+				"Dex": 5,
 				"Spd": 0,
 				"Lck": 0,
-				"Def": -10,
-				"Res": 35,
+				"Def": 0,
+				"Res": 5,
 				"Cha": 5
 			}
 		},
@@ -1998,14 +1998,14 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 10,
-				"Str": -5,
+				"HP": 5,
+				"Str": 0,
 				"Mag": 5,
-				"Dex": 0,
+				"Dex": 5,
 				"Spd": 0,
-				"Lck": 10,
-				"Def": -10,
-				"Res": 35,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 10,
 				"Cha": 10
 			}
 		},
@@ -2031,18 +2031,18 @@
 				"Spd": 2,
 				"Lck": 0,
 				"Def": 0,
-				"Res": -1,
+				"Res": 0,
 				"Cha": 0
 			},
 			"growths": {
 				"HP": 30,
-				"Str": 15,
-				"Mag": -10,
+				"Str": 0,
+				"Mag": 0,
 				"Dex": 10,
-				"Spd": 20,
+				"Spd": 10,
 				"Lck": 0,
-				"Def": 10,
-				"Res": -10,
+				"Def": 0,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -2072,14 +2072,14 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 10,
-				"Str": -5,
+				"HP": 5,
+				"Str": 0,
 				"Mag": 10,
-				"Dex": 0,
+				"Dex": 5,
 				"Spd": 0,
 				"Lck": 0,
-				"Def": -10,
-				"Res": 35,
+				"Def": 0,
+				"Res": 5,
 				"Cha": 0
 			}
 		},
@@ -2102,21 +2102,21 @@
 				"Str": 0,
 				"Mag": 0,
 				"Dex": 2,
-				"Spd": 1,
+				"Spd": 3,
 				"Lck": 0,
 				"Def": 0,
 				"Res": 2,
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 30,
-				"Str": 15,
+				"HP": 15,
+				"Str": 0,
 				"Mag": 0,
 				"Dex": 0,
 				"Spd": 10,
 				"Lck": 0,
-				"Def": 25,
-				"Res": 25,
+				"Def": 0,
+				"Res": 5,
 				"Cha": 10
 			}
 		},
@@ -2146,14 +2146,14 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 50,
-				"Str": 22,
+				"HP": 30,
+				"Str": 10,
 				"Mag": 0,
-				"Dex": 5,
-				"Spd": 15,
+				"Dex": 0,
+				"Spd": 10,
 				"Lck": 0,
-				"Def": 30,
-				"Res": -5,
+				"Def": 0,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -2183,14 +2183,14 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 40,
-				"Str": 20,
+				"HP": 25,
+				"Str": 10,
 				"Mag": 0,
-				"Dex": 10,
-				"Spd": 30,
+				"Dex": 0,
+				"Spd": 20,
 				"Lck": 0,
-				"Def": 25,
-				"Res": -5,
+				"Def": 0,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -2220,13 +2220,13 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 30,
-				"Str": 18,
+				"HP": 20,
+				"Str": 0,
 				"Mag": 0,
 				"Dex": 20,
-				"Spd": 30,
+				"Spd": 20,
 				"Lck": 0,
-				"Def": 25,
+				"Def": 0,
 				"Res": 0,
 				"Cha": 0
 			}
@@ -2250,21 +2250,21 @@
 				"Str": 0,
 				"Mag": 0,
 				"Dex": 0,
-				"Spd": -6,
+				"Spd": 0,
 				"Lck": 0,
 				"Def": 10,
 				"Res": 0,
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 50,
-				"Str": 20,
+				"HP": 30,
+				"Str": 10,
 				"Mag": 0,
 				"Dex": 0,
-				"Spd": -30,
+				"Spd": 0,
 				"Lck": 0,
-				"Def": 60,
-				"Res": -20,
+				"Def": 15,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -2287,21 +2287,21 @@
 				"Str": 2,
 				"Mag": 0,
 				"Dex": 2,
-				"Spd": 1,
+				"Spd": -1,
 				"Lck": 0,
 				"Def": 2,
 				"Res": 2,
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 40,
-				"Str": 15,
+				"HP": 30,
+				"Str": 10,
 				"Mag": 0,
 				"Dex": 5,
 				"Spd": 0,
 				"Lck": 5,
-				"Def": 40,
-				"Res": 10,
+				"Def": 5,
+				"Res": 5,
 				"Cha": 5
 			}
 		},
@@ -2321,24 +2321,24 @@
 			},
 			"statMods": {
 				"HP": 1,
-				"Str": 2,
+				"Str": 3,
 				"Mag": 0,
 				"Dex": 1,
-				"Spd": 1,
+				"Spd": 3,
 				"Lck": 0,
 				"Def": 2,
 				"Res": 0,
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 40,
-				"Str": 25,
-				"Mag": -5,
+				"HP": 30,
+				"Str": 10,
+				"Mag": 0,
 				"Dex": 0,
 				"Spd": 0,
 				"Lck": 0,
-				"Def": 35,
-				"Res": -10,
+				"Def": 5,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -2368,13 +2368,13 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 50,
-				"Str": 30,
+				"HP": 40,
+				"Str": 15,
 				"Mag": 0,
 				"Dex": 0,
 				"Spd": 0,
 				"Lck": 0,
-				"Def": 25,
+				"Def": 0,
 				"Res": 0,
 				"Cha": 5
 			}
@@ -2405,13 +2405,13 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 30,
-				"Str": 15,
+				"HP": 10,
+				"Str": 5,
 				"Mag": 0,
-				"Dex": 30,
+				"Dex": 20,
 				"Spd": 0,
-				"Lck": 0,
-				"Def": 20,
+				"Lck": 10,
+				"Def": 0,
 				"Res": 0,
 				"Cha": 5
 			}
@@ -2438,17 +2438,17 @@
 				"Spd": 3,
 				"Lck": 0,
 				"Def": 1,
-				"Res": -1,
+				"Res": 0,
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 50,
-				"Str": 18,
+				"HP": 40,
+				"Str": 10,
 				"Mag": 0,
-				"Dex": 0,
-				"Spd": 0,
+				"Dex": 10,
+				"Spd": 10,
 				"Lck": 0,
-				"Def": 25,
+				"Def": 0,
 				"Res": 0,
 				"Cha": 5
 			}
@@ -2479,14 +2479,14 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 30,
+				"HP": 10,
 				"Str": 0,
 				"Mag": 10,
 				"Dex": 0,
 				"Spd": 0,
 				"Lck": 0,
-				"Def": -5,
-				"Res": 50,
+				"Def": 0,
+				"Res": 5,
 				"Cha": 5
 			}
 		},
@@ -2516,14 +2516,14 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 30,
+				"HP": 10,
 				"Str": 0,
 				"Mag": 10,
 				"Dex": 0,
 				"Spd": 0,
 				"Lck": 10,
-				"Def": -5,
-				"Res": 50,
+				"Def": 0,
+				"Res": 5,
 				"Cha": 10
 			}
 		},
@@ -2543,24 +2543,24 @@
 			},
 			"statMods": {
 				"HP": 0,
-				"Str": 0,
+				"Str": 1,
 				"Mag": 0,
 				"Dex": 4,
-				"Spd": 3,
+				"Spd": 5,
 				"Lck": 0,
 				"Def": 0,
 				"Res": 4,
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 40,
-				"Str": 23,
+				"HP": 30,
+				"Str": 10,
 				"Mag": 0,
 				"Dex": 0,
 				"Spd": 20,
 				"Lck": 0,
-				"Def": 35,
-				"Res": 35,
+				"Def": 0,
+				"Res": 5,
 				"Cha": 10
 			}
 		},
@@ -2580,23 +2580,23 @@
 			},
 			"statMods": {
 				"HP": 2,
-				"Str": 2,
+				"Str": 4,
 				"Mag": 0,
 				"Dex": 1,
-				"Spd": 2,
+				"Spd": 4,
 				"Lck": 0,
 				"Def": 3,
 				"Res": 0,
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 40,
-				"Str": 28,
-				"Mag": -5,
+				"HP": 30,
+				"Str": 15,
+				"Mag": 0,
 				"Dex": 0,
 				"Spd": 10,
 				"Lck": 0,
-				"Def": 50,
+				"Def": 5,
 				"Res": 0,
 				"Cha": 5
 			}
@@ -2627,14 +2627,14 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 40,
-				"Str": 20,
+				"HP": 20,
+				"Str": 10,
 				"Mag": 10,
 				"Dex": 0,
-				"Spd": -10,
-				"Lck": 20,
-				"Def": 20,
-				"Res": 35,
+				"Spd": 0,
+				"Lck": 10,
+				"Def": 0,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -2657,21 +2657,21 @@
 				"Str": 1,
 				"Mag": 0,
 				"Dex": 0,
-				"Spd": -2,
+				"Spd": 0,
 				"Lck": 0,
-				"Def": 6,
+				"Def": 8,
 				"Res": 0,
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 50,
-				"Str": 22,
+				"HP": 30,
+				"Str": 10,
 				"Mag": 0,
 				"Dex": 0,
-				"Spd": -20,
+				"Spd": 0,
 				"Lck": 0,
-				"Def": 55,
-				"Res": -10,
+				"Def": 5,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -2694,21 +2694,21 @@
 				"Str": 1,
 				"Mag": 0,
 				"Dex": 3,
-				"Spd": 3,
+				"Spd": 1,
 				"Lck": 1,
 				"Def": 1,
 				"Res": 0,
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 40,
-				"Str": 15,
+				"HP": 10,
+				"Str": 0,
 				"Mag": 0,
-				"Dex": 10,
-				"Spd": -5,
+				"Dex": 0,
+				"Spd": 0,
 				"Lck": 0,
-				"Def": 25,
-				"Res": 5,
+				"Def": 0,
+				"Res": 0,
 				"Cha": 5
 			}
 		},
@@ -2731,21 +2731,21 @@
 				"Str": 1,
 				"Mag": 2,
 				"Dex": 2,
-				"Spd": 1,
+				"Spd": -1,
 				"Lck": 0,
-				"Def": 1,
+				"Def": 2,
 				"Res": 3,
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 40,
-				"Str": 15,
+				"HP": 10,
+				"Str": 5,
 				"Mag": 10,
 				"Dex": 0,
 				"Spd": 0,
 				"Lck": 0,
-				"Def": 20,
-				"Res": 45,
+				"Def": 5,
+				"Res": 10,
 				"Cha": 5
 			}
 		},
@@ -2768,21 +2768,21 @@
 				"Str": 1,
 				"Mag": 1,
 				"Dex": 2,
-				"Spd": 1,
+				"Spd": -1,
 				"Lck": 0,
-				"Def": 0,
+				"Def": 1,
 				"Res": 4,
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 35,
+				"HP": 10,
 				"Str": 0,
-				"Mag": 20,
+				"Mag": 10,
 				"Dex": 0,
 				"Spd": 0,
 				"Lck": 10,
 				"Def": 5,
-				"Res": 50,
+				"Res": 10,
 				"Cha": 10
 			}
 		},
@@ -2812,13 +2812,13 @@
 				"Cha": 0
 			},
 			"growths": {
-				"HP": 60,
-				"Str": 32,
+				"HP": 40,
+				"Str": 15,
 				"Mag": 0,
 				"Dex": 0,
-				"Spd": 20,
+				"Spd": 10,
 				"Lck": 0,
-				"Def": 35,
+				"Def": 0,
 				"Res": 0,
 				"Cha": 5
 			}
@@ -2849,15 +2849,52 @@
 				"Cha": 2
 			},
 			"growths": {
-				"HP": 30,
+				"HP": 10,
 				"Str": 0,
-				"Mag": 35,
-				"Dex": 20,
+				"Mag": 10,
+				"Dex": 10,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 5,
+				"Cha": 10
+			}
+		},
+		"Death Knight": {
+			"name": "Death Knight",
+			"requiredGender": "",
+			"statMins": {
+				"HP": 32,
+				"Str": 10,
+				"Mag": 17,
+				"Dex": 14,
+				"Spd": 16,
+				"Lck": 12,
+				"Def": 13,
+				"Res": 15,
+				"Cha": 0
+			},
+			"statMods": {
+				"HP": 5,
+				"Str": 4,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": 3,
+				"Res": 3,
+				"Cha": 0
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 10,
+				"Mag": 10,
+				"Dex": 0,
 				"Spd": 0,
 				"Lck": 0,
 				"Def": 5,
-				"Res": 55,
-				"Cha": 10
+				"Res": 5,
+				"Cha": 0
 			}
 		}
 	}

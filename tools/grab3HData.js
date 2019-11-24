@@ -99,6 +99,7 @@ const classMappingRaw = [
 	["Holy Knight"],
 	["War Master"],
 	["Gremory"],
+	["Death Knight"],
 ];
 
 const classMapping = {};
@@ -106,6 +107,15 @@ classMappingRaw.forEach(n => {
 	classMapping[n[0]] = classMapping[n[0]] || [];
 	classMapping[n[0]].push(n[1] || n[0]);
 });
+
+function parseCell(value) {
+	const re = /^([0-9]*) ?(?:\(([+-][0-9]*)\))?$/;
+	const m = re.exec(value);
+	if (m) {
+		return parseInt(m[1] || 0) + parseInt(m[2] || 0);
+	}
+	return 0;
+}
 
 function scrapeTRs(body) {
 	const trs = [];
@@ -145,12 +155,11 @@ function turnTRsToCharStats(trs) {
 	trs.forEach(tr => {
 		const toNames = charMapping[tr[0]];
 		if (!toNames) return;
-		const stats = _.zipObject(
-			statsList,
-			tr.slice(1).map(a => parseInt(a) || 0)
-		);
+		const stats = _.zipObject(statsList, tr.slice(1).map(parseCell));
 		toNames.forEach(n => {
-			charStats[n] = stats;
+			if (!charStats[n]) {
+				charStats[n] = stats;
+			}
 		});
 	});
 	return charStats;
@@ -161,12 +170,11 @@ function turnTRsToClassStats(trs) {
 	trs.forEach(tr => {
 		const toNames = classMapping[tr[0]];
 		if (!toNames) return;
-		const stats = _.zipObject(
-			statsList,
-			tr.slice(1).map(a => parseInt(a) || 0)
-		);
+		const stats = _.zipObject(statsList, tr.slice(1).map(parseCell));
 		toNames.forEach(n => {
-			classStats[n] = stats;
+			if (!classStats[n]) {
+				classStats[n] = stats;
+			}
 		});
 	});
 	return classStats;
@@ -428,6 +436,7 @@ async function main() {
 			"Holy Knight": {name: "Holy Knight", requiredGender: ""},
 			"War Master": {name: "War Master", requiredGender: "M"},
 			Gremory: {name: "Gremory", requiredGender: "F"},
+			"Death Knight": {name: "Death Knight", requiredGender: ""},
 		},
 	};
 
