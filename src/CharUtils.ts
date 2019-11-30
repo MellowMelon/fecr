@@ -63,3 +63,23 @@ export function createHistoryEntry(
 		};
 	}
 }
+
+export function doesCharHaveData(
+	game: GameData,
+	char: Character | undefined | null
+): boolean {
+	if (!char) return false;
+	if (char.history.length > 1) return true;
+	if (char.history.length < 1) return false;
+	const h = char.history[0];
+	const gameCharData = game.chars[char.name];
+	const baseLevel = char.baseLevel || gameCharData.baseLevel;
+	if (baseLevel !== gameCharData.baseLevel) return true;
+	const baseStats = char.baseStats || gameCharData.baseStats;
+	if (!_.isEqual(baseStats, gameCharData.baseStats)) return true;
+	const isBaseH =
+		h.type === "checkpoint" &&
+		h.level === baseLevel &&
+		_.isEqual(h.stats, baseStats);
+	return !isBaseH;
+}

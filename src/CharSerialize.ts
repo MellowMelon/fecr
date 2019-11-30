@@ -1,5 +1,6 @@
 import _ from "lodash";
-import {StatsTable, HistoryEntry, Character, GameData} from "./common";
+import {StatsTable, HistoryEntry, Character, Team, GameData} from "./common";
+import {doesCharHaveData} from "./CharUtils";
 
 type ArrayData = (string | number)[];
 
@@ -58,16 +59,45 @@ function arrayifyHistory(game: GameData, char: Character): ArrayData {
 	return arrData;
 }
 
-export function serializeCharacter(game: GameData, char: Character): string {
-	const arrData: ArrayData = [
-		game.id,
-		1, // Format version
+export function arrayifyCharacter(game: GameData, char: Character): ArrayData {
+	return [
 		char.name,
 		char.baseClass || "",
 		char.baseLevel || "",
 		...arrayifyStatsTable(game, char.baseStats || null),
 		char.history.length,
 		...arrayifyHistory(game, char),
+	];
+}
+
+export function arrayifyTeam(game: GameData, team: Team): ArrayData {
+	const chars: Character[] = [];
+	Object.keys(team).forEach(name => {
+		if (doesCharHaveData(game, team[name])) {
+			chars.push(team[name]);
+		}
+	});
+	const arrData: ArrayData = [chars.length];
+	chars.forEach(c => {
+		arrData.push(...arrayifyCharacter(game, c));
+	});
+	return arrData;
+}
+
+export function serializeCharacter(game: GameData, char: Character): string {
+	const arrData: ArrayData = [
+		game.id,
+		1, // Format version
+		...arrayifyCharacter(game, char),
+	];
+	return encodeBase64(arrData.join(";"));
+}
+
+export function serializeTeam(game: GameData, team: Team): string {
+	const arrData: ArrayData = [
+		game.id,
+		1, // Format version
+		...arrayifyTeam(game, team),
 	];
 	return encodeBase64(arrData.join(";"));
 }
@@ -137,21 +167,10 @@ function parseHistoryEntry(game: GameData, arrP: ArrayParser): HistoryEntry {
 	}
 }
 
-export function unserialize(game: GameData, data: string): Character {
-	const arrData = decodeBase64(data).split(";");
-	const arrP = {arrData, index: 0};
-
-	const gameID = read(arrP);
-	if (gameID !== game.id) {
-		throw new Error(
-			"Serialized data is for game ID " + gameID + ", not " + game.id
-		);
-	}
-	read(arrP);
-
+function parseCharacter(game: GameData, arrP: ArrayParser): Character {
 	const name = read(arrP);
 	if (!game.chars[name]) {
-		throw new Error("Character " + name + " is not in game " + gameID);
+		throw new Error("Character " + name + " is not in game " + game.id);
 	}
 	const baseClass = read(arrP) || undefined;
 	const baseLevel = parseInt(read(arrP)) || undefined;
@@ -176,4 +195,38 @@ export function unserialize(game: GameData, data: string): Character {
 	}
 
 	return char;
+}
+
+function parseTeam(game: GameData, amount: number, arrP: ArrayParser): Team {
+	const team: Team = {};
+	for (let i = 0; i < amount; i += 1) {
+		const c = parseCharacter(game, arrP);
+		team[c.name] = c;
+	}
+	return team;
+}
+
+export type UnserializeResult =
+	| {type: "character"; char: Character}
+	| {type: "team"; team: Team};
+
+export function unserialize(game: GameData, data: string): UnserializeResult {
+	data = data.replace(/\s/g, "");
+	const arrData = decodeBase64(data).split(";");
+	const arrP = {arrData, index: 0};
+
+	const gameID = read(arrP);
+	if (gameID !== game.id) {
+		throw new Error(
+			"Serialized data is for game ID " + gameID + ", not " + game.id
+		);
+	}
+	read(arrP);
+	const charAmount = parseInt(read(arrP));
+	if (charAmount || charAmount === 0) {
+		return {type: "team", team: parseTeam(game, charAmount, arrP)};
+	} else {
+		arrP.index -= 1;
+		return {type: "character", char: parseCharacter(game, arrP)};
+	}
 }

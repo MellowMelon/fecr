@@ -17,11 +17,12 @@ type Props = {
 
 function makeInsertHandler(props: Props, index: number | null) {
 	return function() {
+		const oldEntry = index !== null ? props.char.history[index] || null : null;
 		const entry = createHistoryEntry(
 			props.game,
 			props.char,
 			"checkpoint",
-			null
+			oldEntry
 		);
 		props.insertEntry(entry, index);
 	};

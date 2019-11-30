@@ -1196,15 +1196,15 @@
 				"Cha": 4
 			},
 			"growths": {
-				"HP": 35,
-				"Str": 20,
-				"Mag": 15,
-				"Dex": 40,
-				"Spd": 40,
-				"Lck": 30,
-				"Def": 10,
-				"Res": 10,
-				"Cha": 15
+				"HP": 55,
+				"Str": 40,
+				"Mag": 35,
+				"Dex": 60,
+				"Spd": 60,
+				"Lck": 50,
+				"Def": 30,
+				"Res": 30,
+				"Cha": 35
 			},
 			"maxStats": {
 				"HP": 85,

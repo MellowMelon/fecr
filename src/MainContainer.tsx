@@ -33,15 +33,25 @@ const MainContainer: React.FunctionComponent<Props> = function(props: Props) {
 	function handleLoadHash(hash: string) {
 		if (hash && loadedHash !== hash) {
 			try {
-				const unserChar = unserialize(game, hash);
-				const name = unserChar.name;
-				setLoadedHash(hash);
-				setEditing(false);
-				setTeam({
-					...team,
-					[name]: unserChar,
-				});
-				setSelName(name);
+				const unser = unserialize(game, hash);
+				if (unser.type === "character") {
+					const name = unser.char.name;
+					const newTeam = {
+						...team,
+						[name]: unser.char,
+					};
+					setLoadedHash(hash);
+					setEditing(false);
+					setTeam(newTeam);
+					setSelName(name);
+				} else {
+					setLoadedHash(hash);
+					const newTeam = {
+						...team,
+						...unser.team,
+					};
+					setTeam(newTeam);
+				}
 				return true;
 			} catch (ex) {
 				console.log("Could not load the URL hash as a valid character", ex);
@@ -50,14 +60,6 @@ const MainContainer: React.FunctionComponent<Props> = function(props: Props) {
 			}
 		}
 	}
-
-	useEffect(() => {
-		if (typeof window !== "undefined" && !window.onhashchange) {
-			window.onhashchange = () => {
-				handleLoadHash(window.location.hash.slice(1));
-			};
-		}
-	});
 
 	if (initialHash && loadedHash !== initialHash) {
 		handleLoadHash(initialHash);
@@ -159,7 +161,12 @@ const MainContainer: React.FunctionComponent<Props> = function(props: Props) {
 				{editing ? charEditor : null}
 				{!editing ? charPanel : null}
 			</div>
-			<Persistence game={game} char={currChar} loadHash={handleLoadHash} />
+			<Persistence
+				game={game}
+				team={team}
+				char={currChar}
+				loadHash={handleLoadHash}
+			/>
 		</div>
 	);
 };

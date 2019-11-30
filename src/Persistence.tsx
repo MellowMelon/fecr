@@ -1,23 +1,35 @@
 import _ from "lodash";
-import React, {useRef, useEffect} from "react";
-import {Character, GameData} from "./common";
-import {serializeCharacter} from "./CharSerialize";
+import React, {useState} from "react";
+import {Character, Team, GameData} from "./common";
+import {serializeCharacter, serializeTeam} from "./CharSerialize";
 
 type Props = {
 	game: GameData;
+	team: Team;
 	char: Character;
 	loadHash: (hash: string) => void;
 };
 
 const Persistence: React.FunctionComponent<Props> = function(props: Props) {
-	const {game, char} = props;
-	const loadRef = useRef<HTMLInputElement>(null);
+	const {game, team, char} = props;
+
+	const [showingTeam, setShowingTeam] = useState<boolean>(true);
 
 	function selectOnClick(evt: any) {
 		evt.target.setSelectionRange(0, evt.target.value.length);
 	}
 
-	const hash = serializeCharacter(game, char);
+	function loadOnKeyPress(evt: any) {
+		if (evt.key === "Enter") {
+			const hashToLoad = evt.target.value;
+			evt.target.value = "";
+			props.loadHash(hashToLoad);
+		}
+	}
+
+	const hash = showingTeam
+		? serializeTeam(game, team)
+		: serializeCharacter(game, char);
 	const hashInput = (
 		<input
 			className="persistence-hash"
@@ -26,27 +38,31 @@ const Persistence: React.FunctionComponent<Props> = function(props: Props) {
 			value={hash}
 		/>
 	);
-	const loadInput = <input ref={loadRef} className="persistence-load" />;
+	const loadInput = (
+		<input className="persistence-load" onKeyPress={loadOnKeyPress} />
+	);
 
-	useEffect(() => {
-		const loadInputEl = loadRef.current;
-		if (loadInputEl) {
-			loadInputEl.addEventListener("keypress", evt => {
-				if (evt.keyCode === 13) {
-					const hashToLoad = loadInputEl.value;
-					loadInputEl.value = "";
-					props.loadHash(hashToLoad);
-				}
-			});
-		}
-	});
+	const noun = showingTeam ? "team" : "character";
 
 	return (
 		<div className="persistence">
-			<h1>Save/Load</h1>
-			<div>String code for the current character: {hashInput}</div>
+			<h1>Save/Load {noun}</h1>
 			<div>
-				To load this character later, use the address of{" "}
+				<label>
+					Save whole team:{" "}
+					<input
+						className="persistence-team-check"
+						type="checkbox"
+						checked={showingTeam}
+						onChange={evt => setShowingTeam(evt.target.checked)}
+					/>
+				</label>
+			</div>
+			<div>
+				String code for the current {noun}: {hashInput}
+			</div>
+			<div>
+				To load this {noun} later, use the address of{" "}
 				<a href={"#" + hash}>this link</a>. Alternately, you can type a code
 				into the input box below and hit enter.
 			</div>

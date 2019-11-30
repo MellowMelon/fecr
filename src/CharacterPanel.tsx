@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import * as ProbDist from "./ProbDist";
 import {Character, CharacterCheckpoint, GameData} from "./common";
 import {computeCharacter} from "./CharAdvance";
-import {getCharReport} from "./CharReport";
+import {CharacterReport, getCharReport} from "./CharReport";
 
 import ProbDistGraph from "./ProbDistGraph";
 
@@ -69,38 +69,7 @@ function renderCPSelect(
 	);
 }
 
-const CharacterSelector: React.FunctionComponent<Props> = function(
-	props: Props
-) {
-	const {game, char} = props;
-	let computed;
-	try {
-		computed = computeCharacter(game, char);
-	} catch (ex) {
-		return (
-			<div className="char">
-				<div className="error">{ex.message}</div>
-			</div>
-		);
-	}
-
-	if (!computed.checkpoints.length) {
-		return (
-			<div className="char">
-				<div className="char-cp-select">
-					Define at least one checkpoint for the character to see a report here.
-				</div>
-			</div>
-		);
-	}
-
-	const initCPIndex = computed.checkpoints.length - 1;
-	const [cpIndex, setCPIndex] = useState<number>(initCPIndex);
-
-	const cpSelect = renderCPSelect(computed.checkpoints, cpIndex, setCPIndex);
-	const cp = computed.checkpoints[cpIndex];
-	const cpReport = getCharReport(game, cp);
-
+function renderTable(game: GameData, cpReport: CharacterReport) {
 	const thead = (
 		<thead>
 			<tr>
@@ -121,9 +90,10 @@ const CharacterSelector: React.FunctionComponent<Props> = function(
 	const renderedPercentiles: {
 		[stat: string]: React.ReactNode;
 	} = _.mapValues(cpReport.sdPercentiles, x => renderPercentRange(x));
-	const renderedDists: {[stat: string]: React.ReactNode} = _.mapValues(
-		cp.dist,
-		(pd, statName) => renderDist(pd, cp.stats[statName])
+	const renderedDists: {
+		[stat: string]: React.ReactNode;
+	} = _.mapValues(cpReport.statsDist, (pd, statName) =>
+		renderDist(pd, cpReport.charRealStats[statName])
 	);
 
 	const rowInfo: StatsRowInfoSep[] = [
@@ -152,6 +122,59 @@ const CharacterSelector: React.FunctionComponent<Props> = function(
 	});
 
 	return (
+		<table className="char-stats">
+			{thead}
+			<tbody>{rows}</tbody>
+		</table>
+	);
+}
+
+const CharacterSelector: React.FunctionComponent<Props> = function(
+	props: Props
+) {
+	const {game, char} = props;
+	let computed;
+	try {
+		computed = computeCharacter(game, char);
+	} catch (ex) {
+		return (
+			<div className="char">
+				<div className="error">{ex.message}</div>
+			</div>
+		);
+	}
+
+	if (!computed.checkpoints.length) {
+		return (
+			<div className="char">
+				<div className="char-cp-select">
+					Define at least one checkpoint for the character to see a report here.
+				</div>
+			</div>
+		);
+	}
+
+	const initCPIndex = computed.checkpoints.length - 1;
+	const [cpIndex, setCPIndex] = useState<number>(initCPIndex);
+	const [renderedName, setRenderedName] = useState<string>(char.name);
+
+	if (char.name !== renderedName) {
+		setCPIndex(initCPIndex);
+		setRenderedName(char.name);
+	} else if (computed.checkpoints.length <= cpIndex) {
+		setCPIndex(computed.checkpoints.length - 1);
+	}
+
+	const cpSelect = renderCPSelect(computed.checkpoints, cpIndex, setCPIndex);
+	const cp = computed.checkpoints[cpIndex];
+
+	let mainTable = <div className="error">No data found</div>;
+	if (cp) {
+		const cpReport = getCharReport(game, cp);
+		mainTable = renderTable(game, cpReport);
+	}
+
+	return (
 		<div className="char">
 			<div className="char-help">
 				<p>
@@ -168,10 +191,7 @@ const CharacterSelector: React.FunctionComponent<Props> = function(
 			<div className="char-cp-select">
 				<label>Checkpoint Selector: {cpSelect}</label>
 			</div>
-			<table className="char-stats">
-				{thead}
-				<tbody>{rows}</tbody>
-			</table>
+			{mainTable}
 		</div>
 	);
 };

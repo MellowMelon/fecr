@@ -68,11 +68,11 @@ table {
 .charnamesel-button {
 	padding: 2px;
 }
-.charnamesel-button.filled {
-	background: #ccc;
+.charnamesel-button.no-data {
+	opacity: 0.5;
 }
 .charnamesel-button.selected {
-	background: #ff7;
+	background: #f44;
 }
 .charnamesel-button img {
 	display: block;

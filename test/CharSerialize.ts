@@ -1,7 +1,11 @@
 import test from "ava";
 
-import {Character, GameData} from "../src/common";
-import {serializeCharacter, unserialize} from "../src/CharSerialize";
+import {Character, Team, GameData} from "../src/common";
+import {
+	serializeCharacter,
+	serializeTeam,
+	unserialize,
+} from "../src/CharSerialize";
 
 const game1: GameData = {
 	id: "test",
@@ -126,11 +130,32 @@ const game1Chars: Character[] = [
 	},
 ];
 
-game1Chars.forEach((c, i) => {
-	test("serialize game1 test case " + (i + 1), t => {
-		const ser = serializeCharacter(game1, c);
+const game1Teams: Team[] = [
+	{},
+	{
+		Alice: game1Chars[1],
+		Bob: game1Chars[2],
+	},
+	{
+		Alice: game1Chars[1],
+		Bob: game1Chars[4],
+	},
+];
+
+game1Chars.forEach((char, i) => {
+	test("serialize game1 char test case " + (i + 1), t => {
+		const ser = serializeCharacter(game1, char);
 		t.is(typeof ser, "string");
 		const unser = unserialize(game1, ser);
-		t.deepEqual(unser, c);
+		t.deepEqual(unser, {type: "character", char: char});
+	});
+});
+
+game1Teams.forEach((team, i) => {
+	test("serialize game1 team test case " + (i + 1), t => {
+		const ser = serializeTeam(game1, team);
+		t.is(typeof ser, "string");
+		const unser = unserialize(game1, ser);
+		t.deepEqual(unser, {type: "team", team});
 	});
 });
