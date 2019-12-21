@@ -10,12 +10,9 @@
 		"experimentalDecorators": true,
 		"noUnusedLocals": true,
 		"baseUrl": ".",
-		"resolveJsonModule": true,
-		"allowSyntheticDefaultImports": true,
-		"paths": {
-			"*": ["node_modules/*"]
-		}
+		"skipLibCheck": true,
+		"resolveJsonModule": true
 	},
 	"include": ["src/**/*", "test/**/*"],
-	"exclude": ["data/**/*"]
+	"exclude": ["data"]
 }

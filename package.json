@@ -9,8 +9,8 @@
 		"lint": "eslint --cache \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
 		"ts": "tsc --noEmit",
 		"test": "NODE_NO_WARNINGS=1 ava",
-		"build": "rollup -c",
-		"watch": "rollup -cw",
+		"build": "webpack",
+		"watch": "webpack -w",
 		"start": "http-server public -c-1 -o index.html"
 	},
 	"ava": {
@@ -47,11 +47,13 @@
 		"@typescript-eslint/eslint-plugin": "^1.9.0",
 		"@typescript-eslint/parser": "^1.9.0",
 		"ava": "^2.3.0",
+		"babel-loader": "^8.0.6",
 		"babel-plugin-inline-import": "^3.0.0",
 		"bluebird": "^3.5.5",
+		"cache-loader": "^4.1.0",
 		"eslint": "^5.16.0",
 		"eslint-plugin-import": "^2.18.2",
-		"http-server": "github:http-party/http-server#master",
+		"http-server": "^0.12.0",
 		"husky": "^3.0.5",
 		"js-yaml": "^3.13.1",
 		"lodash": "^4.17.11",
@@ -60,15 +62,11 @@
 		"prettier": "^1.18.2",
 		"pretty-quick": "^1.11.0",
 		"request": "^2.88.0",
-		"rollup": "^1.16.2",
-		"rollup-plugin-babel": "^4.3.3",
-		"rollup-plugin-commonjs": "^10.0.0",
-		"rollup-plugin-json": "^4.0.0",
-		"rollup-plugin-node-resolve": "^5.0.4",
-		"rollup-plugin-replace": "^2.2.0",
-		"rollup-plugin-string": "^3.0.0",
+		"ts-loader": "^6.2.1",
 		"ts-node": "^7.0.1",
 		"ts-node-dev": "^1.0.0-pre.39",
-		"typescript": "^3.5.3"
+		"typescript": "^3.7.3",
+		"webpack": "^4.41.2",
+		"webpack-cli": "^3.3.10"
 	}
 }

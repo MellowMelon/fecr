@@ -129,9 +129,7 @@ function renderTable(game: GameData, cpReport: CharacterReport) {
 	);
 }
 
-const CharacterSelector: React.FunctionComponent<Props> = function(
-	props: Props
-) {
+const CharacterPanel: React.FunctionComponent<Props> = function(props: Props) {
 	const {game, char} = props;
 	let computed;
 	try {
@@ -195,4 +193,4 @@ const CharacterSelector: React.FunctionComponent<Props> = function(
 		</div>
 	);
 };
-export default CharacterSelector;
+export default CharacterPanel;
