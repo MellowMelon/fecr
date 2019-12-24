@@ -41,7 +41,8 @@ const grommetTheme: any = {
 	},
 };
 
-function setURLHash(hash: string) {
+function saveHash(hash: string) {
+	window.localStorage.setItem("autosave", hash);
 	window.history.replaceState({}, "", "#" + hash);
 }
 
@@ -74,7 +75,7 @@ const Main: React.FunctionComponent<Props> = function(props: Props) {
 		const onUpdateState = (newState: ViewState.State) => {
 			if (newState.game && newState.team !== viewState.team) {
 				const hash = serialize(newState.game, newState.team);
-				setURLHash(hash);
+				saveHash(hash);
 			}
 			setState(newState);
 		};

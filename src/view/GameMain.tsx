@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import {Button, Box, Heading, Layer, Menu, Paragraph, Tabs, Tab} from "grommet";
+import {Button, Box, Heading, Layer, Markdown, Menu, Tabs, Tab} from "grommet";
 import {FormClose as FormCloseIcon, Menu as MenuIcon} from "grommet-icons";
 
 import {CharName, Char} from "../common";
+import HelpTable from "../HelpTable";
 import * as ViewState from "../ViewState";
 import {createChar} from "../CharUtils";
 
@@ -37,20 +38,15 @@ const GameMain: React.FunctionComponent<Props> = function(props: Props) {
 
 		persistModal = (
 			<Layer onEsc={onClose} onClickOutside={onClose}>
-				<Box>
-					<Button icon={<FormCloseIcon />} onClick={onClose} />
-					<Paragraph>
-						To <strong>save</strong>, copy the URL in your address bar. This URL
-						updates after everything you do.
-					</Paragraph>
-					<Paragraph>
-						To <strong>load</strong>, paste a URL saved previously.
-					</Paragraph>
-					<Paragraph>
-						If you'd like to start over, use the button below. Make sure you've
-						recorded the current URL if you want to view the current team at a
-						later time.
-					</Paragraph>
+				<Box pad="medium" overflow="auto">
+					<Box direction="row" align="center">
+						<Heading margin="none" level={4}>
+							Save / Load
+						</Heading>
+						<Box flex />
+						<Button icon={<FormCloseIcon />} onClick={onClose} />
+					</Box>
+					<Markdown>{HelpTable.saveLoad}</Markdown>
 					<Button label="Reset" onClick={onReset} />
 				</Box>
 			</Layer>
