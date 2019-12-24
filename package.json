@@ -31,6 +31,7 @@
 	"dependencies": {
 		"grommet": "^2.8.0",
 		"grommet-icons": "^4.4.0",
+		"jsonpack": "^1.1.5",
 		"lodash": "^4.17.11",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
@@ -45,6 +46,7 @@
 		"@babel/register": "^7.4.4",
 		"@types/bluebird": "^3.5.27",
 		"@types/js-yaml": "^3.12.1",
+		"@types/jsonpack": "^1.1.0",
 		"@types/lodash": "^4.14.134",
 		"@types/mkdirp": "^0.5.2",
 		"@types/react": "^16.9.12",

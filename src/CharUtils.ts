@@ -9,7 +9,7 @@ import {
 	GameData,
 } from "./common";
 
-function makeZeroStats(game: GameData): StatsTable {
+export function makeZeroStats(game: GameData): StatsTable {
 	const ret: StatsTable = {};
 	game.stats.forEach(n => {
 		ret[n] = 0;
@@ -63,7 +63,7 @@ export function createHistoryEntry(
 			id,
 			level,
 			newClass: Object.keys(game.classes)[0]!,
-			newLevel: game.globals.classChangeResetsLevel ? 1 : level,
+			newLevel: game.globals.classChangeResetsLevel ? 1 : null,
 			ignoreMins: false,
 		};
 	} else if (type === "boost") {

@@ -3,6 +3,7 @@ import {Box, Grommet, Layer} from "grommet";
 
 import {GameID} from "../common";
 import * as ViewState from "../ViewState";
+import {serialize} from "../CharSerialize";
 
 import LoadErrorModal from "./LoadErrorModal";
 import GameSelect from "./GameSelect";
@@ -52,7 +53,11 @@ const Main: React.FunctionComponent<Props> = function(props: Props) {
 		};
 		errorModal = (
 			<Layer onEsc={onClose} onClickOutside={onClose}>
-				<LoadErrorModal error={viewState.loadError} onClose={onClose} />
+				<LoadErrorModal
+					error={viewState.loadError}
+					warningOnly={!!viewState.loadWarningOnly}
+					onClose={onClose}
+				/>
 			</Layer>
 		);
 	}
@@ -64,6 +69,9 @@ const Main: React.FunctionComponent<Props> = function(props: Props) {
 		};
 		const onUpdateState = (s: ViewState.State) => {
 			console.log(s);
+			if (s.game) {
+				console.log(serialize(s.game, s.team));
+			}
 			setState(s);
 		};
 		mainView = (

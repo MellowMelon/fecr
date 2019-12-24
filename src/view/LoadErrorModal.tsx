@@ -5,10 +5,19 @@ import * as ViewState from "../ViewState";
 
 type Props = {
 	error: ViewState.LoadError;
+	warningOnly: boolean;
 	onClose: () => void;
 };
 
 const LoadErrorModal: React.FunctionComponent<Props> = function(props: Props) {
+	if (props.warningOnly) {
+		return (
+			<Box border={{color: "status-error", size: "large"}} pad="small">
+				<Paragraph color="status-error">{props.error}</Paragraph>
+				<Button label="Continue" onClick={props.onClose} />
+			</Box>
+		);
+	}
 	// TODO: where to report bugs?
 	return (
 		<Box border={{color: "status-error", size: "large"}} pad="small">

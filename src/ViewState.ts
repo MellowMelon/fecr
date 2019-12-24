@@ -1,6 +1,7 @@
 import {CharName, Team, GameID, GameData} from "./common";
 import gameTable from "./GameTable";
 import {UnserializeResult, unserialize} from "./CharSerialize";
+import {fixTeam} from "./CharFix";
 
 export type CharTab = "select" | "edit" | "view";
 
@@ -24,17 +25,8 @@ export type State = {
 	charName: CharName | null;
 	charTab: CharTab;
 	loadError: LoadError | null;
+	loadWarningOnly?: boolean;
 };
-
-function convertUnserToTeam(unser: UnserializeResult): Team {
-	if (unser.type === "character") {
-		return {[unser.char.name]: unser.char};
-	} else if (unser.type === "team") {
-		return unser.team;
-	} else {
-		return {};
-	}
-}
 
 function loadFromURL(hash: string): LoadResult {
 	try {
@@ -102,7 +94,19 @@ function createStateFromUnser(unser: UnserializeResult): State {
 		);
 	}
 
-	const team = convertUnserToTeam(unser);
+	const fixRes = fixTeam(unser.gameID, unser.team);
+	let loadError = null;
+	let loadWarningOnly = false;
+	if (fixRes.errors.length) {
+		fixRes.errors.forEach(e => console.warn(e));
+		loadError =
+			"The data requested was successfully loaded, " +
+			"but it had issues that needed fixing. " +
+			"Details can be found in the developer console.";
+		loadWarningOnly = true;
+	}
+
+	const team = fixRes.value;
 	const charName = Object.keys(team)[0] || null;
 	const charTab = charName ? "view" : "select";
 	return {
@@ -111,7 +115,8 @@ function createStateFromUnser(unser: UnserializeResult): State {
 		team,
 		charName,
 		charTab,
-		loadError: null,
+		loadError,
+		loadWarningOnly,
 	};
 }
 
@@ -149,6 +154,7 @@ export function closeLoadError(s: State): State {
 	return {
 		...s,
 		loadError: null,
+		loadWarningOnly: false,
 	};
 }
 
