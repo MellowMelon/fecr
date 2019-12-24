@@ -97,6 +97,7 @@ export function getBaseChar(game: GameData, char: Char): CharCheckpoint {
 	baseChar.level = char.baseLevel || baseChar.level;
 	baseChar.stats = char.baseStats || baseChar.stats;
 	baseChar.dist = getBaseDist(baseChar.stats);
+	baseChar.distNB = baseChar.dist;
 	return baseChar;
 }
 

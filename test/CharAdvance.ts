@@ -95,14 +95,18 @@ function checkFinal(
 	// Save the expected dists, then replace them with the actual ones and do
 	// a deep equality check.
 	const expDists = exp.checkpoints.map(c => c.dist);
+	const expDistsNB = exp.checkpoints.map(c => c.distNB);
 	exp.checkpoints.forEach((c, i) => {
 		c.dist = actual.checkpoints[i].dist;
+		c.distNB = actual.checkpoints[i].distNB;
 	});
 	t.deepEqual(actual, exp);
 	// Now manually check the dists with tolerances.
 	exp.checkpoints.forEach((c, i) => {
 		c.dist = expDists[i];
-		checkDist(t, actual.checkpoints[i].dist, c.dist, `cp[${i}]`);
+		checkDist(t, actual.checkpoints[i].dist, c.dist, `cp[${i}] dist`);
+		c.distNB = expDistsNB[i];
+		checkDist(t, actual.checkpoints[i].distNB, c.distNB, `cp[${i}] distNB`);
 	});
 }
 
