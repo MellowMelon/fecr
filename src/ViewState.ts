@@ -1,5 +1,6 @@
 import {CharName, Team, GameID, GameData} from "./common";
 import gameTable from "./GameTable";
+import {getTeamCharList} from "./CharUtils";
 import {UnserializeResult, unserialize} from "./CharSerialize";
 import {fixTeam} from "./CharFix";
 
@@ -107,12 +108,16 @@ function createStateFromUnser(unser: UnserializeResult): State {
 	}
 
 	const team = fixRes.value;
+	const teamCharList = getTeamCharList(game, team, null);
+	const charName = teamCharList.chars[0] || null;
+	const charTab = charName ? "view" : "select";
+
 	return {
 		viewingGame: true,
 		game,
 		team,
-		charName: null,
-		charTab: "select",
+		charName,
+		charTab,
 		loadError,
 		loadWarningOnly,
 	};

@@ -105,10 +105,21 @@ const GameMain: React.FunctionComponent<Props> = function(props: Props) {
 					/>
 				</Tab>
 				<Tab title="Edit" disabled={!charName}>
-					<CharEditPanel game={game} char={char} onUpdateChar={onUpdateChar} />
+					<CharEditPanel
+						game={game}
+						team={team}
+						char={char}
+						onUpdateChar={onUpdateChar}
+						onSelectChar={name => onSelectChar(name, true)}
+					/>
 				</Tab>
 				<Tab title="Report" disabled={!charName}>
-					<CharReportPanel game={game} char={char} />
+					<CharReportPanel
+						game={game}
+						team={team}
+						char={char}
+						onSelectChar={name => onSelectChar(name, false)}
+					/>
 				</Tab>
 			</Tabs>
 			{persistModal}

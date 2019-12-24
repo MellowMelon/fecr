@@ -6,8 +6,14 @@ import {
 	Char,
 	HistoryEntryCheckpoint,
 	HistoryEntry,
+	Team,
 	GameData,
 } from "./common";
+
+export type TeamCharList = {
+	index: number;
+	chars: CharName[];
+};
 
 export function makeZeroStats(game: GameData): StatsTable {
 	const ret: StatsTable = {};
@@ -29,6 +35,18 @@ function lastIndexOfCheckpoint(game: GameData, char: Char): number {
 		}
 	}
 	return -1;
+}
+
+export function getTeamCharList(
+	game: GameData,
+	team: Team | null,
+	curr: CharName | null
+): TeamCharList {
+	const chars = Object.keys(game.chars).filter(n => {
+		return !team || (team[n] && doesCharHaveData(game, team[n]));
+	});
+	const index = curr ? chars.indexOf(curr) : -1;
+	return {index, chars};
 }
 
 export function createChar(game: GameData, name: CharName): Char {

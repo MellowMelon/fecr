@@ -10,7 +10,7 @@ import {
 } from "grommet";
 import {Table, TableBody, TableCell, TableRow} from "grommet";
 
-import {Stat, Char, CharCheckpoint, GameData} from "../common";
+import {Stat, CharName, Char, CharCheckpoint, Team, GameData} from "../common";
 import {computeChar} from "../CharAdvance";
 import {CharReport, getCharReport} from "../CharReport";
 
@@ -19,7 +19,9 @@ import ProbDistGraph, {GraphDims} from "./ProbDistGraph";
 
 type Props = {
 	game: GameData;
+	team: Team;
 	char: Char | null;
+	onSelectChar: (name: CharName) => void;
 };
 
 const pdgSmallDims: Partial<GraphDims> = {
@@ -182,8 +184,17 @@ function renderStatPanel(cr: CharReport, statName: Stat, screenSize: string) {
 }
 
 const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
-	const {game, char} = props;
+	const {game, team, char, onSelectChar} = props;
 	if (!char) return null;
+
+	const charHeader = (
+		<CharHeader
+			game={game}
+			team={team}
+			charName={char.name}
+			onSelectChar={onSelectChar}
+		/>
+	);
 
 	let computed;
 	try {
@@ -206,7 +217,7 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 	if (!computed.checkpoints.length) {
 		return (
 			<Box>
-				<CharHeader game={props.game} charName={char.name} />
+				{charHeader}
 				<Paragraph>
 					Provide a checkpoint in the Edit tab to view this character's report.
 				</Paragraph>
@@ -225,7 +236,7 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 
 	return (
 		<Box>
-			<CharHeader game={props.game} charName={char.name} />
+			{charHeader}
 			<Box direction="row" wrap>
 				<Text weight="bold">Checkpoint</Text>
 				{cpSelect}

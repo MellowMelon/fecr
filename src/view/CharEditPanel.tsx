@@ -4,10 +4,12 @@ import FlipMove from "react-flip-move";
 
 import {
 	Stat,
+	CharName,
 	CharClass,
 	HistoryEntry,
 	History,
 	Char,
+	Team,
 	GameData,
 } from "../common";
 import {createHistoryEntry} from "../CharUtils";
@@ -20,14 +22,16 @@ import HistoryEntryView from "./HistoryEntryView";
 
 type Props = {
 	game: GameData;
+	team: Team;
 	char: Char | null;
 	onUpdateChar: (newChar: Char) => void;
+	onSelectChar: (name: CharName) => void;
 };
 
 const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 	const char = props.char;
 	if (!char) return null;
-	const {game, onUpdateChar} = props;
+	const {game, onUpdateChar, onSelectChar} = props;
 
 	const onSelectBaseClass = function(newClass: CharClass) {
 		const newChar = {
@@ -107,7 +111,12 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 	// TODO: reset button on bases panel
 	return (
 		<Box gap="small">
-			<CharHeader game={game} charName={char.name} />
+			<CharHeader
+				game={game}
+				team={null}
+				charName={char.name}
+				onSelectChar={onSelectChar}
+			/>
 			<HistoryBase
 				game={game}
 				canRearrange={false}
@@ -134,6 +143,7 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 				</Box>
 			</HistoryBase>
 			<FlipMove
+				key={char.name}
 				duration={200}
 				enterAnimation="accordionVertical"
 				leaveAnimation="accordionVertical"
