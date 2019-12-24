@@ -60,6 +60,7 @@ export type CharCheckpoint = {
 	level: number;
 	stats: StatsTable;
 	dist: StatsDist;
+	distNB: StatsDist;
 	maxStats: StatsTable;
 };
 

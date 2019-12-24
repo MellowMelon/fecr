@@ -13,10 +13,12 @@ import {
 	History,
 	GameData,
 } from "../common";
+import HelpTable from "../HelpTable";
 
 import HistoryBase from "./HistoryBase";
 import InputStats from "./InputStats";
 import InputClass from "./InputClass";
+import HelpButton from "./HelpButton";
 
 type Props = {
 	game: GameData;
@@ -24,6 +26,20 @@ type Props = {
 	index: number;
 	onUpdateHistory: (h: History) => void;
 };
+
+function renderHistoryHeader(title: string, helpMD: string): React.ReactNode {
+	const helpButton = helpMD ? (
+		<HelpButton title={"Help - " + title} md={helpMD} />
+	) : null;
+	return (
+		<Box direction="row" align="center">
+			<Heading level={3} margin="none">
+				{title}
+			</Heading>
+			{helpButton}
+		</Box>
+	);
+}
 
 const HistoryEntryView: React.FunctionComponent<Props> = function(
 	props: Props
@@ -54,9 +70,7 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 
 			return (
 				<Box gap="small">
-					<Heading level={3} margin="none">
-						Checkpoint
-					</Heading>
+					{renderHistoryHeader("Checkpoint", HelpTable.histCheckpoint)}
 					<InputStats game={game} value={h.stats} onChange={onChangeStats} />
 				</Box>
 			);
@@ -72,10 +86,14 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 
 			return (
 				<Box gap="small">
-					<Heading level={3} margin="none">
-						Class Change
-					</Heading>
-					<InputClass game={game} value={h.newClass} onSelect={onSelectClass} />
+					{renderHistoryHeader("Class Change", HelpTable.histClassChange)}
+					<Box direction="row">
+						<InputClass
+							game={game}
+							value={h.newClass}
+							onSelect={onSelectClass}
+						/>
+					</Box>
 				</Box>
 			);
 		},
@@ -94,9 +112,7 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 
 			return (
 				<Box gap="small">
-					<Heading level={3} margin="none">
-						Stat Boosts
-					</Heading>
+					{renderHistoryHeader("Stat Boost", HelpTable.histStatBoost)}
 					<InputStats
 						game={game}
 						value={h.stats}
@@ -121,9 +137,7 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 
 			return (
 				<Box gap="small">
-					<Heading level={3} margin="none">
-						Max Stat Increases
-					</Heading>
+					{renderHistoryHeader("Max Stat Increase", HelpTable.histMaxStat)}
 					<InputStats
 						game={game}
 						value={h.stats}

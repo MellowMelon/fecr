@@ -18,7 +18,7 @@ const CharHeader: React.FunctionComponent<Props> = function(props: Props) {
 
 	const src = "images/chars/" + game.id + "-" + charName.toLowerCase() + ".jpg";
 	const img = (
-		<Box height="64px" width="64px">
+		<Box flex={false} height="64px" width="64px">
 			<Image src={src} height="100%" />
 		</Box>
 	);
@@ -27,9 +27,9 @@ const CharHeader: React.FunctionComponent<Props> = function(props: Props) {
 		const n = teamCharList.chars.length;
 		let newIndex = teamCharList.index + dir;
 		if (newIndex < 0) {
-			newIndex += n;
+			newIndex = n - 1;
 		} else if (newIndex >= n) {
-			newIndex -= n;
+			newIndex = 0;
 		}
 		onSelectChar && onSelectChar(teamCharList.chars[newIndex]);
 	};
@@ -50,7 +50,7 @@ const CharHeader: React.FunctionComponent<Props> = function(props: Props) {
 	);
 
 	return (
-		<Box direction="row" align="center" gap="medium">
+		<Box direction="row" align="center" gap="small">
 			{prevButton}
 			<Heading level={2}>{charName}</Heading>
 			<Box flex />

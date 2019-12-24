@@ -87,8 +87,34 @@ const GameMain: React.FunctionComponent<Props> = function(props: Props) {
 		props.onUpdateState(newState);
 	};
 
+	const selectTabBody = charTab === "select" && (
+		<CharSelectPanel
+			game={game}
+			team={team}
+			charName={charName}
+			onSelect={onSelectChar}
+		/>
+	);
+	const editTabBody = charTab === "edit" && (
+		<CharEditPanel
+			game={game}
+			team={team}
+			char={char}
+			onUpdateChar={onUpdateChar}
+			onSelectChar={name => onSelectChar(name, true)}
+		/>
+	);
+	const reportTabBody = charTab === "view" && (
+		<CharReportPanel
+			game={game}
+			team={team}
+			char={char}
+			onSelectChar={name => onSelectChar(name, false)}
+		/>
+	);
+
 	return (
-		<Box>
+		<Box gap="medium">
 			<Box direction="row">
 				<Menu icon={<MenuIcon />} items={topMenuItems} />
 			</Box>
@@ -96,30 +122,12 @@ const GameMain: React.FunctionComponent<Props> = function(props: Props) {
 				{game.name}
 			</Heading>
 			<Tabs activeIndex={tabIndex} onActive={onSelectTab}>
-				<Tab title="Select">
-					<CharSelectPanel
-						game={game}
-						team={team}
-						charName={charName}
-						onSelect={onSelectChar}
-					/>
-				</Tab>
+				<Tab title="Select">{selectTabBody}</Tab>
 				<Tab title="Edit" disabled={!charName}>
-					<CharEditPanel
-						game={game}
-						team={team}
-						char={char}
-						onUpdateChar={onUpdateChar}
-						onSelectChar={name => onSelectChar(name, true)}
-					/>
+					{editTabBody}
 				</Tab>
 				<Tab title="Report" disabled={!charName}>
-					<CharReportPanel
-						game={game}
-						team={team}
-						char={char}
-						onSelectChar={name => onSelectChar(name, false)}
-					/>
+					{reportTabBody}
 				</Tab>
 			</Tabs>
 			{persistModal}

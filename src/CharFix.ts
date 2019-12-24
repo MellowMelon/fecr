@@ -202,7 +202,7 @@ function fixChar(
 			`${where} history: Not an array (typeof: ${typeof data.history})`
 		);
 	} else {
-		data.history.forEach((e, i) => {
+		data.history.forEach((e: HistoryEntry | null, i: number) => {
 			e = extract(fixHistoryEntry(game, `${where} history #${i + 1}`, i, e));
 			if (e) {
 				char.history!.push(e);

@@ -19,10 +19,14 @@ export type CharReport = {
 	classGrowths: StatsTable;
 	realGrowths: StatsTable;
 	statsDist: StatsDist;
-	sdAverage: {[stat: string]: number};
-	sdMedian: {[stat: string]: number};
+	sdAverage: {[stat: string]: string};
+	sdMedian: {[stat: string]: string};
 	sdMedianDiff: {[stat: string]: string};
 	sdPercentiles: {[stat: string]: [number, number]};
+	sdNBAverage: {[stat: string]: string};
+	sdNBMedian: {[stat: string]: string};
+	sdNBMedianDiff: {[stat: string]: string};
+	sdNBPercentiles: {[stat: string]: [number, number]};
 };
 
 function computePercentiles(
@@ -36,6 +40,38 @@ function computePercentiles(
 		return [1, 2];
 	}
 	return ProbDist.getPercentileRangeOfValue(pd, curr);
+}
+
+type DistAgg = {
+	sdAverage: {[stat: string]: string};
+	sdMedian: {[stat: string]: string};
+	sdMedianDiff: {[stat: string]: string};
+	sdPercentiles: {[stat: string]: [number, number]};
+};
+
+function halfIntToString(halfInt: number): string {
+	const fp = ((halfInt % 1) + 1) % 1;
+	if (fp > 0.1 && fp < 0.9) {
+		return halfInt.toFixed(1);
+	}
+	return halfInt.toFixed(0);
+}
+
+function computeDistDerived(stats: StatsTable, dist: StatsDist): DistAgg {
+	const sdAverage = _.mapValues(dist, pd => ProbDist.getAverage(pd).toFixed(2));
+	const sdMedian = _.mapValues(dist, ProbDist.getMedian);
+	const sdMedianDisp = _.mapValues(sdMedian, halfIntToString);
+	const sdMedianDiff = _.mapValues(sdMedian, (med, statName) => {
+		const curr = stats[statName];
+		let diff = halfIntToString(curr - med);
+		if (curr > med) return "+" + diff;
+		if (curr < med) return String(diff);
+		return "0";
+	});
+	const sdPercentiles = _.mapValues(dist, (pd, statName) =>
+		computePercentiles(pd, statName, stats[statName])
+	);
+	return {sdAverage, sdMedian: sdMedianDisp, sdMedianDiff, sdPercentiles};
 }
 
 export function getCharReport(
@@ -52,21 +88,8 @@ export function getCharReport(
 		throw new Error("No class named " + charClass + " in game " + game.name);
 	}
 
-	const sdAverage = _.mapValues(char.dist, ProbDist.getAverage);
-	const sdMedian = _.mapValues(char.dist, ProbDist.getMedian);
-	const sdMedianDiff = _.mapValues(sdMedian, (med, statName) => {
-		const curr = char.stats[statName];
-		let diff: string | number = curr - med;
-		if (Math.abs(diff % 1) > 0.005) {
-			diff = diff.toFixed(2);
-		}
-		if (curr > med) return "+" + diff;
-		if (curr < med) return String(diff);
-		return "0";
-	});
-	const sdPercentiles = _.mapValues(char.dist, (pd, statName) =>
-		computePercentiles(pd, statName, char.stats[statName])
-	);
+	const distAgg = computeDistDerived(char.stats, char.dist);
+	const distNBAgg = computeDistDerived(char.stats, char.distNB);
 
 	return {
 		charClass,
@@ -78,9 +101,13 @@ export function getCharReport(
 		classGrowths: gameClassData.growths,
 		realGrowths: sumObjects(gameCharData.growths, gameClassData.growths),
 		statsDist: char.dist,
-		sdAverage,
-		sdMedian,
-		sdMedianDiff,
-		sdPercentiles,
+		sdAverage: distAgg.sdAverage,
+		sdMedian: distAgg.sdMedian,
+		sdMedianDiff: distAgg.sdMedianDiff,
+		sdPercentiles: distAgg.sdPercentiles,
+		sdNBAverage: distNBAgg.sdAverage,
+		sdNBMedian: distNBAgg.sdMedian,
+		sdNBMedianDiff: distNBAgg.sdMedianDiff,
+		sdNBPercentiles: distNBAgg.sdPercentiles,
 	};
 }

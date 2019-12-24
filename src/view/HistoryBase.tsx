@@ -85,7 +85,9 @@ const HistoryBase: React.FunctionComponent<Props> = function(props: Props) {
 				/>
 			</Box>
 			{divider}
-			<Box>{props.children}</Box>
+			<Box flex align="stretch">
+				{props.children}
+			</Box>
 		</Box>
 	);
 };

@@ -3,6 +3,7 @@ import _ from "lodash";
 import * as ProbDist from "./ProbDist";
 import {sumObjects} from "./common";
 import {
+	Stat,
 	StatsTable,
 	CharClass,
 	CharName,
@@ -25,6 +26,7 @@ type AdvanceChar = {
 	charClass: CharClass;
 	level: number;
 	dist: StatsDist;
+	distNB: StatsDist;
 	maxStats: StatsTable;
 	base: CharCheckpoint;
 	checkpoints: CharCheckpoint[];
@@ -46,6 +48,28 @@ function getBaseDist(stats: StatsTable): StatsDist {
 	return _.mapValues(stats, val => ProbDist.initAtValue(val));
 }
 
+function modifyBothDists(
+	char: AdvanceChar,
+	f: (dist: StatsDist) => StatsDist
+): AdvanceChar {
+	const newDist = f(char.dist);
+	const newDistNB = f(char.distNB);
+	return {
+		...char,
+		dist: newDist,
+		distNB: newDistNB,
+	};
+}
+
+function modifyBothDistsMV(
+	char: AdvanceChar,
+	f: (pd: ProbDist.ProbDist, statName: Stat) => ProbDist.ProbDist
+): AdvanceChar {
+	return modifyBothDists(char, dist => {
+		return _.mapValues(dist, f);
+	});
+}
+
 export function getBaseGameChar(
 	game: GameData,
 	name: CharName
@@ -55,12 +79,14 @@ export function getBaseGameChar(
 		throw new Error("Char " + name + " not in game " + game.name);
 	}
 	const stats = gameCharData.baseStats;
+	const dist = getBaseDist(stats);
 	return {
 		name,
 		charClass: gameCharData.baseClass,
 		level: gameCharData.baseLevel,
 		stats,
-		dist: getBaseDist(stats),
+		dist,
+		distNB: dist,
 		maxStats: gameCharData.maxStats,
 	};
 }
@@ -84,6 +110,7 @@ export function getCharPlan(game: GameData, char: Char): AdvancePlan {
 		charClass: baseChar.charClass,
 		level: baseChar.level,
 		dist: baseChar.dist,
+		distNB: baseChar.dist,
 		maxStats: baseChar.maxStats,
 		base: baseChar,
 		checkpoints: [],
@@ -119,7 +146,7 @@ function addCheckpoint(
 	char: AdvanceChar,
 	entry: HistoryEntryCheckpoint
 ): AdvanceChar {
-	const realDist = _.mapValues(char.dist, (pd, statName) => {
+	const realChar = modifyBothDistsMV(char, (pd, statName) => {
 		const max = char.maxStats[statName];
 		pd = ProbDist.applyMax(pd, max);
 		return pd;
@@ -129,7 +156,8 @@ function addCheckpoint(
 		charClass: char.charClass,
 		level: entry.level,
 		stats: entry.stats,
-		dist: realDist,
+		dist: realChar.dist,
+		distNB: realChar.distNB,
 		maxStats: char.maxStats,
 	};
 	return {...char, checkpoints: [...char.checkpoints, newCP]};
@@ -188,7 +216,12 @@ function simulateClass(
 	const newMins = game.classes[entry.newClass].statMins;
 	const oldMods = game.classes[char.charClass].statMods;
 	const newMods = game.classes[entry.newClass].statMods;
-	const newDist = _.mapValues(char.dist, (pd, statName) => {
+	let newChar = {
+		...char,
+		charClass: newClass,
+		level: newLevel || char.level,
+	};
+	newChar = modifyBothDistsMV(newChar, (pd, statName) => {
 		pd = ProbDist.applyIncrease(pd, -oldMods[statName]);
 		if (!ignoreMins) {
 			if (statName === "hp" && classChangeGetsAtLeast1HP) {
@@ -201,12 +234,7 @@ function simulateClass(
 		pd = ProbDist.applyIncrease(pd, newMods[statName]);
 		return pd;
 	});
-	return {
-		...char,
-		charClass: newClass,
-		level: newLevel || char.level,
-		dist: newDist,
-	};
+	return newChar;
 }
 
 function simulateBoosts(
@@ -215,6 +243,7 @@ function simulateBoosts(
 	entry: HistoryEntryBoost
 ): AdvanceChar {
 	const {stats} = entry;
+	// The whole point of distNB is to not use modifyBothDists here.
 	const newDist = _.mapValues(char.dist, (pd, statName) => {
 		if (!stats[statName]) return pd;
 		const max = char.maxStats[statName];
@@ -240,12 +269,16 @@ function simulateLevel(game: GameData, char: AdvanceChar): AdvanceChar {
 	const gameCharData = game.chars[char.name];
 	const gameClassData = game.classes[char.charClass];
 	const realGrowths = sumObjects(gameCharData.growths, gameClassData.growths);
-	const newDist = _.mapValues(char.dist, (pd, statName) => {
+	let newChar = {
+		...char,
+		level: char.level + 1,
+	};
+	newChar = modifyBothDistsMV(newChar, (pd, statName) => {
 		const max = char.maxStats[statName];
 		pd = ProbDist.applyGrowthRate(pd, realGrowths[statName] / 100, max);
 		return pd;
 	});
-	return {...char, level: char.level + 1, dist: newDist};
+	return newChar;
 }
 
 export function reduceChar(

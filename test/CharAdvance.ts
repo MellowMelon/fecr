@@ -115,6 +115,10 @@ const defaultBase = {
 		hp: {30: 1},
 		mp: {10: 1},
 	},
+	distNB: {
+		hp: {30: 1},
+		mp: {10: 1},
+	},
 	maxStats: game1.chars.Bob.maxStats,
 };
 
@@ -136,6 +140,10 @@ test("computeChar, base default", t => {
 				level: 2,
 				stats: {hp: 30, mp: 10},
 				dist: {
+					hp: {30: 1},
+					mp: {10: 1},
+				},
+				distNB: {
 					hp: {30: 1},
 					mp: {10: 1},
 				},
@@ -165,6 +173,10 @@ test("computeChar, base custom", t => {
 				hp: {35: 1},
 				mp: {15: 1},
 			},
+			distNB: {
+				hp: {35: 1},
+				mp: {15: 1},
+			},
 			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
@@ -174,6 +186,10 @@ test("computeChar, base custom", t => {
 				level: 4,
 				stats: {hp: 35, mp: 15},
 				dist: {
+					hp: {35: 1},
+					mp: {15: 1},
+				},
+				distNB: {
 					hp: {35: 1},
 					mp: {15: 1},
 				},
@@ -208,6 +224,10 @@ test("computeChar, leveling", t => {
 					hp: {30: 0.5, 31: 0.5},
 					mp: {10: 0.8, 11: 0.2},
 				},
+				distNB: {
+					hp: {30: 0.5, 31: 0.5},
+					mp: {10: 0.8, 11: 0.2},
+				},
 				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
@@ -216,6 +236,10 @@ test("computeChar, leveling", t => {
 				level: 5,
 				stats: {hp: 32, mp: 11},
 				dist: {
+					hp: {30: 0.125, 31: 0.375, 32: 0.375, 33: 0.125},
+					mp: {10: 0.512, 11: 0.384, 12: 0.096, 13: 0.008},
+				},
+				distNB: {
 					hp: {30: 0.125, 31: 0.375, 32: 0.375, 33: 0.125},
 					mp: {10: 0.512, 11: 0.384, 12: 0.096, 13: 0.008},
 				},
@@ -252,6 +276,10 @@ test("computeChar, boosts", t => {
 					hp: {35: 1},
 					mp: {10: 1},
 				},
+				distNB: {
+					hp: {30: 1},
+					mp: {10: 1},
+				},
 				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
@@ -262,6 +290,10 @@ test("computeChar, boosts", t => {
 				dist: {
 					hp: {35: 1},
 					mp: {12: 1},
+				},
+				distNB: {
+					hp: {30: 1},
+					mp: {10: 1},
 				},
 				maxStats: game1.chars.Bob.maxStats,
 			},
@@ -310,6 +342,10 @@ test("computeChar, class change min and mods", t => {
 					hp: {40: 1},
 					mp: {30: 1},
 				},
+				distNB: {
+					hp: {40: 1},
+					mp: {30: 1},
+				},
 				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
@@ -318,6 +354,10 @@ test("computeChar, class change min and mods", t => {
 				level: 2,
 				stats: {hp: 30, mp: 20},
 				dist: {
+					hp: {30: 1},
+					mp: {20: 1},
+				},
+				distNB: {
 					hp: {30: 1},
 					mp: {20: 1},
 				},
@@ -368,6 +408,10 @@ test("computeChar, class change ignoreMins", t => {
 					hp: {40: 1},
 					mp: {20: 1},
 				},
+				distNB: {
+					hp: {40: 1},
+					mp: {20: 1},
+				},
 				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
@@ -376,6 +420,10 @@ test("computeChar, class change ignoreMins", t => {
 				level: 2,
 				stats: {hp: 30, mp: 10},
 				dist: {
+					hp: {30: 1},
+					mp: {10: 1},
+				},
+				distNB: {
 					hp: {30: 1},
 					mp: {10: 1},
 				},
@@ -418,6 +466,10 @@ test("computeChar, class change growths", t => {
 					hp: {40: 0.5, 41: 0.5},
 					mp: {30: 1},
 				},
+				distNB: {
+					hp: {40: 0.5, 41: 0.5},
+					mp: {30: 1},
+				},
 				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
@@ -426,6 +478,10 @@ test("computeChar, class change growths", t => {
 				level: 4,
 				stats: {hp: 41, mp: 30},
 				dist: {
+					hp: {40: 0.1, 41: 0.5, 42: 0.4},
+					mp: {30: 0.5, 31: 0.5},
+				},
+				distNB: {
 					hp: {40: 0.1, 41: 0.5, 42: 0.4},
 					mp: {30: 0.5, 31: 0.5},
 				},
@@ -467,6 +523,10 @@ test("computeChar, class change level reset", t => {
 					hp: {40: 0.1, 41: 0.5, 42: 0.4},
 					mp: {30: 0.5, 31: 0.5},
 				},
+				distNB: {
+					hp: {40: 0.1, 41: 0.5, 42: 0.4},
+					mp: {30: 0.5, 31: 0.5},
+				},
 				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
@@ -493,6 +553,10 @@ test("computeChar, caps", t => {
 				hp: {49: 1},
 				mp: {48: 1},
 			},
+			distNB: {
+				hp: {49: 1},
+				mp: {48: 1},
+			},
 			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
@@ -502,6 +566,10 @@ test("computeChar, caps", t => {
 				level: 5,
 				stats: {hp: 50, mp: 50},
 				dist: {
+					hp: {49: 0.125, 50: 0.875},
+					mp: {48: 0.512, 49: 0.384, 50: 0.104},
+				},
+				distNB: {
 					hp: {49: 0.125, 50: 0.875},
 					mp: {48: 0.512, 49: 0.384, 50: 0.104},
 				},
@@ -534,6 +602,10 @@ test("computeChar, boosts hitting a cap", t => {
 				hp: {49: 1},
 				mp: {48: 1},
 			},
+			distNB: {
+				hp: {49: 1},
+				mp: {48: 1},
+			},
 			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
@@ -544,6 +616,10 @@ test("computeChar, boosts hitting a cap", t => {
 				stats: {hp: 50, mp: 48},
 				dist: {
 					hp: {50: 1},
+					mp: {48: 1},
+				},
+				distNB: {
+					hp: {49: 1},
 					mp: {48: 1},
 				},
 				maxStats: game1.chars.Bob.maxStats,
@@ -591,6 +667,10 @@ test("computeChar, real stats remembered when class mods go over cap", t => {
 				hp: {49: 1},
 				mp: {48: 1},
 			},
+			distNB: {
+				hp: {49: 1},
+				mp: {48: 1},
+			},
 			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
@@ -603,6 +683,10 @@ test("computeChar, real stats remembered when class mods go over cap", t => {
 					hp: {50: 1},
 					mp: {50: 1},
 				},
+				distNB: {
+					hp: {50: 1},
+					mp: {50: 1},
+				},
 				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
@@ -611,6 +695,10 @@ test("computeChar, real stats remembered when class mods go over cap", t => {
 				level: 10,
 				stats: {hp: 49, mp: 48},
 				dist: {
+					hp: {49: 0.5, 50: 0.5},
+					mp: {48: 0.8, 49: 0.2},
+				},
+				distNB: {
 					hp: {49: 0.5, 50: 0.5},
 					mp: {48: 0.8, 49: 0.2},
 				},
@@ -650,6 +738,10 @@ test("computeChar, class change hp up 1 when all mins met", t => {
 				hp: {30: 1},
 				mp: {30: 1},
 			},
+			distNB: {
+				hp: {30: 1},
+				mp: {30: 1},
+			},
 			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
@@ -659,6 +751,10 @@ test("computeChar, class change hp up 1 when all mins met", t => {
 				level: 2,
 				stats: {hp: 41, mp: 40},
 				dist: {
+					hp: {41: 1},
+					mp: {40: 1},
+				},
+				distNB: {
 					hp: {41: 1},
 					mp: {40: 1},
 				},
@@ -698,6 +794,10 @@ test("computeChar, class change hp up 1 skipped with ignoreMins", t => {
 				hp: {30: 1},
 				mp: {30: 1},
 			},
+			distNB: {
+				hp: {30: 1},
+				mp: {30: 1},
+			},
 			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
@@ -707,6 +807,10 @@ test("computeChar, class change hp up 1 skipped with ignoreMins", t => {
 				level: 2,
 				stats: {hp: 40, mp: 40},
 				dist: {
+					hp: {40: 1},
+					mp: {40: 1},
+				},
+				distNB: {
 					hp: {40: 1},
 					mp: {40: 1},
 				},
@@ -747,6 +851,10 @@ test("computeChar, class change hp up 1 respects other stat chances", t => {
 				hp: {30: 1},
 				mp: {19: 1},
 			},
+			distNB: {
+				hp: {30: 1},
+				mp: {19: 1},
+			},
 			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
@@ -759,6 +867,10 @@ test("computeChar, class change hp up 1 respects other stat chances", t => {
 					hp: {30: 0.25, 31: 0.5, 32: 0.25},
 					mp: {19: 0.64, 20: 0.32, 31: 0.04},
 				},
+				distNB: {
+					hp: {30: 0.25, 31: 0.5, 32: 0.25},
+					mp: {19: 0.64, 20: 0.32, 31: 0.04},
+				},
 				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
@@ -767,6 +879,10 @@ test("computeChar, class change hp up 1 respects other stat chances", t => {
 				level: 4,
 				stats: {hp: 41, mp: 30},
 				dist: {
+					hp: {40: 0.16, 41: 0.41, 42: 0.34, 43: 0.09},
+					mp: {30: 0.96, 31: 0.04},
+				},
+				distNB: {
 					hp: {40: 0.16, 41: 0.41, 42: 0.34, 43: 0.09},
 					mp: {30: 0.96, 31: 0.04},
 				},
@@ -807,6 +923,10 @@ test("computeChar, class change hp up 1 respects own stat chances", t => {
 				hp: {19: 1},
 				mp: {19: 1},
 			},
+			distNB: {
+				hp: {19: 1},
+				mp: {19: 1},
+			},
 			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
@@ -819,6 +939,10 @@ test("computeChar, class change hp up 1 respects own stat chances", t => {
 					hp: {19: 0.5, 20: 0.5},
 					mp: {19: 0.8, 20: 0.2},
 				},
+				distNB: {
+					hp: {19: 0.5, 20: 0.5},
+					mp: {19: 0.8, 20: 0.2},
+				},
 				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
@@ -827,6 +951,10 @@ test("computeChar, class change hp up 1 respects own stat chances", t => {
 				level: 3,
 				stats: {hp: 31, mp: 30},
 				dist: {
+					hp: {30: 0.9, 31: 0.1},
+					mp: {30: 1},
+				},
+				distNB: {
 					hp: {30: 0.9, 31: 0.1},
 					mp: {30: 1},
 				},

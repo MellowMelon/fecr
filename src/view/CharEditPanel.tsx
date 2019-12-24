@@ -12,13 +12,15 @@ import {
 	Team,
 	GameData,
 } from "../common";
-import {createHistoryEntry} from "../CharUtils";
+import {createChar, createHistoryEntry} from "../CharUtils";
+import HelpTable from "../HelpTable";
 
 import CharHeader from "./CharHeader";
 import InputClass from "./InputClass";
 import InputStats from "./InputStats";
 import HistoryBase from "./HistoryBase";
 import HistoryEntryView from "./HistoryEntryView";
+import HelpButton from "./HelpButton";
 
 type Props = {
 	game: GameData;
@@ -32,6 +34,17 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 	const char = props.char;
 	if (!char) return null;
 	const {game, onUpdateChar, onSelectChar} = props;
+
+	const onResetBases = function() {
+		const defaultChar = createChar(game, char.name);
+		const newChar = {
+			...char,
+			baseClass: defaultChar.baseClass,
+			baseLevel: defaultChar.baseLevel,
+			baseStats: defaultChar.baseStats,
+		};
+		onUpdateChar(newChar);
+	};
 
 	const onSelectBaseClass = function(newClass: CharClass) {
 		const newChar = {
@@ -87,11 +100,19 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 	};
 
 	const historyAdd = (
-		<Box>
-			{makeHistoryAddButton("Add Checkpoint", "checkpoint")}
-			{makeHistoryAddButton("Add Class Change", "class")}
-			{makeHistoryAddButton("Add Stat Boosts", "boost")}
-			{makeHistoryAddButton("Add Max Stat Increases", "maxboost")}
+		<Box pad="medium" gap="small">
+			<Box direction="row">
+				<Heading level={3}>Add History</Heading>
+				<HelpButton title="Help - Add History" md={HelpTable.histAdd} />
+			</Box>
+			<Box direction="row" gap="small">
+				{makeHistoryAddButton("Add Checkpoint", "checkpoint")}
+				{makeHistoryAddButton("Add Class Change", "class")}
+			</Box>
+			<Box direction="row" gap="small">
+				{makeHistoryAddButton("Add Stat Boost", "boost")}
+				{makeHistoryAddButton("Add Max Stat Increase", "maxboost")}
+			</Box>
 		</Box>
 	);
 
@@ -124,9 +145,16 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 				onSetLevel={onChangeBaseLevel}
 			>
 				<Box gap="small">
-					<Heading level={3} margin="none">
-						Initial
-					</Heading>
+					<Box direction="row" align="center">
+						<Heading level={3} margin="none">
+							Initial
+						</Heading>
+						<HelpButton title="Help - Initial Stats" md={HelpTable.bases} />
+						<Box flex />
+						<Box width="small">
+							<Button label="Reset" onClick={onResetBases} />
+						</Box>
+					</Box>
 					<Box direction="row" align="center" gap="small">
 						<Text weight="bold">Class</Text>
 						<InputClass

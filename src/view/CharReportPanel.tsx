@@ -13,9 +13,11 @@ import {Table, TableBody, TableCell, TableRow} from "grommet";
 import {Stat, CharName, Char, CharCheckpoint, Team, GameData} from "../common";
 import {computeChar} from "../CharAdvance";
 import {CharReport, getCharReport} from "../CharReport";
+import HelpTable from "../HelpTable";
 
 import CharHeader from "./CharHeader";
 import ProbDistGraph, {GraphDims} from "./ProbDistGraph";
+import HelpButton from "./HelpButton";
 
 type Props = {
 	game: GameData;
@@ -164,11 +166,15 @@ function renderStatPanel(cr: CharReport, statName: Stat, screenSize: string) {
 	const details: [string, React.ReactNode][] = [
 		["Current", cr.charRealStats[statName]],
 		["Percentile Range", renderPercentRange(perc)],
-		["Median", cr.sdMedian[statName].toFixed(2)],
+		["Median", cr.sdMedian[statName]],
 		["Ahead/behind", cr.sdMedianDiff[statName]],
-		["Average", cr.sdAverage[statName].toFixed(2)],
+		["Average", cr.sdAverage[statName]],
+		["Percentile Range NB", renderPercentRange(cr.sdNBPercentiles[statName])],
+		["Median NB", cr.sdNBMedian[statName]],
+		["Ahead/behind NB", cr.sdNBMedianDiff[statName]],
+		["Average NB", cr.sdNBAverage[statName]],
 		["Class Modifier", cr.classStatMods[statName]],
-		["Cap", cr.maxStats[statName]],
+		["Maximum", cr.maxStats[statName]],
 		["Real Growth", cr.realGrowths[statName]],
 		["Char. Growth", cr.charGrowths[statName]],
 		["Class Growth", cr.classGrowths[statName]],
@@ -237,9 +243,14 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 	return (
 		<Box>
 			{charHeader}
-			<Box direction="row" wrap>
-				<Text weight="bold">Checkpoint</Text>
-				{cpSelect}
+			<Box pad={{horizontal: "large"}} alignSelf="end">
+				<HelpButton title="Help - Report" md={HelpTable.report} />
+			</Box>
+			<Box direction="row" pad={{horizontal: "large"}} wrap>
+				<Box margin={{right: "medium"}}>
+					<Text weight="bold">Checkpoint</Text>
+				</Box>
+				<Box width="medium">{cpSelect}</Box>
 			</Box>
 			<Accordion>
 				{game.stats.map(s => renderStatPanel(cr, s, screenSize))}
