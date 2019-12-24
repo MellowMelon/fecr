@@ -41,6 +41,10 @@ const grommetTheme: any = {
 	},
 };
 
+function setURLHash(hash: string) {
+	window.history.replaceState({}, "", "#" + hash);
+}
+
 const Main: React.FunctionComponent<Props> = function(props: Props) {
 	const [viewState, setState] = useState<ViewState.State>(
 		ViewState.createState(props.urlHash)
@@ -67,12 +71,12 @@ const Main: React.FunctionComponent<Props> = function(props: Props) {
 		const onGameSelect = () => {
 			setState(ViewState.goToGameSelect(viewState));
 		};
-		const onUpdateState = (s: ViewState.State) => {
-			console.log(s);
-			if (s.game) {
-				console.log(serialize(s.game, s.team));
+		const onUpdateState = (newState: ViewState.State) => {
+			if (newState.game && newState.team !== viewState.team) {
+				const hash = serialize(newState.game, newState.team);
+				setURLHash(hash);
 			}
-			setState(s);
+			setState(newState);
 		};
 		mainView = (
 			<GameMain

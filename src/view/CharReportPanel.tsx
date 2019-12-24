@@ -216,7 +216,6 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 
 	const initCPIndex = computed.checkpoints.length - 1;
 	const [cpIndex, setCPIndex] = useState<number>(initCPIndex);
-	console.log(cpIndex);
 
 	const cpSelect = renderCPSelect(computed.checkpoints, cpIndex, setCPIndex);
 	const cp = computed.checkpoints[cpIndex];

@@ -107,14 +107,12 @@ function createStateFromUnser(unser: UnserializeResult): State {
 	}
 
 	const team = fixRes.value;
-	const charName = Object.keys(team)[0] || null;
-	const charTab = charName ? "view" : "select";
 	return {
 		viewingGame: true,
 		game,
 		team,
-		charName,
-		charTab,
+		charName: null,
+		charTab: "select",
 		loadError,
 		loadWarningOnly,
 	};
