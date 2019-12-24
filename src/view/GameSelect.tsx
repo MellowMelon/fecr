@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Box, Text} from "grommet";
+import {Box, Button, Heading, Image, Text} from "grommet";
 
 import {GameID} from "../common";
 import gameTable from "../GameTable";
@@ -14,14 +14,27 @@ const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 
 	Object.keys(gameTable).map(gameID => {
 		const game = gameTable[gameID];
+		const src = "images/" + gameID + "-banner.jpg";
+		const el = (
+			<Box gap="small" pad="small">
+				<Text size="large" weight="bold">
+					{game.name}
+				</Text>
+				<Image src={src} />
+			</Box>
+		);
 		gameEls.push(
-			<Box direction="row" key={gameID} pad="medium">
-				<Button label="Select" onClick={() => props.onSelect(gameID)} />
-				<Text>{game.name}</Text>
+			<Box key={gameID}>
+				<Button label={el} onClick={() => props.onSelect(gameID)} />
 			</Box>
 		);
 	});
 
-	return <Box>{gameEls}</Box>;
+	return (
+		<Box align="center">
+			<Heading level={1}>Select Game</Heading>
+			{gameEls}
+		</Box>
+	);
 };
 export default GameSelect;

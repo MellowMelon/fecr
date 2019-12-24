@@ -29,7 +29,7 @@ const InputNumber: React.FunctionComponent<Props> = function(props: Props) {
 	}
 
 	function onInputChange(evt: any) {
-		setValue(evt.target.value);
+		setValue(parseInt(evt.target.value));
 	}
 
 	const roundSize = "4px";
