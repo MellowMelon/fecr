@@ -1,7 +1,7 @@
 import test, {ExecutionContext} from "ava";
 
-import {StatsDist, Character, GameData} from "../src/common";
-import {AdvanceFinal, computeCharacter} from "../src/CharAdvance";
+import {StatsDist, Char, GameData} from "../src/common";
+import {AdvanceFinal, computeChar} from "../src/CharAdvance";
 
 const TOLERANCE = 0.000001;
 
@@ -115,14 +115,18 @@ const defaultBase = {
 		hp: {30: 1},
 		mp: {10: 1},
 	},
+	maxStats: game1.chars.Bob.maxStats,
 };
 
-test("computeCharacter, base default", t => {
-	const c: Character = {
+test("computeChar, base default", t => {
+	const c: Char = {
 		name: "Bob",
-		history: [{type: "checkpoint", level: 2, stats: {hp: 30, mp: 10}}],
+		history: [{type: "checkpoint", id: 1, level: 2, stats: {hp: 30, mp: 10}}],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
+		baseStats: game1.chars.Bob.baseStats,
 	};
-	const final = computeCharacter(game1, c);
+	const final = computeChar(game1, c);
 	checkFinal(t, final, {
 		base: defaultBase,
 		checkpoints: [
@@ -135,20 +139,22 @@ test("computeCharacter, base default", t => {
 					hp: {30: 1},
 					mp: {10: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, base custom", t => {
-	const c: Character = {
+test("computeChar, base custom", t => {
+	const c: Char = {
 		name: "Bob",
-		history: [{type: "checkpoint", level: 4, stats: {hp: 35, mp: 15}}],
+		history: [{type: "checkpoint", id: 1, level: 4, stats: {hp: 35, mp: 15}}],
+		baseClass: game1.chars.Bob.baseClass,
 		baseLevel: 4,
 		baseStats: {hp: 35, mp: 15},
 	};
-	const final = computeCharacter(game1, c);
+	const final = computeChar(game1, c);
 	checkFinal(t, final, {
 		base: {
 			name: "Bob",
@@ -159,6 +165,7 @@ test("computeCharacter, base custom", t => {
 				hp: {35: 1},
 				mp: {15: 1},
 			},
+			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
 			{
@@ -170,21 +177,25 @@ test("computeCharacter, base custom", t => {
 					hp: {35: 1},
 					mp: {15: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, leveling", t => {
-	const c: Character = {
+test("computeChar, leveling", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
-			{type: "checkpoint", level: 3, stats: {hp: 31, mp: 11}},
-			{type: "checkpoint", level: 5, stats: {hp: 32, mp: 11}},
+			{type: "checkpoint", id: 1, level: 3, stats: {hp: 31, mp: 11}},
+			{type: "checkpoint", id: 2, level: 5, stats: {hp: 32, mp: 11}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
+		baseStats: game1.chars.Bob.baseStats,
 	};
-	const final = computeCharacter(game1, c);
+	const final = computeChar(game1, c);
 	checkFinal(t, final, {
 		base: defaultBase,
 		checkpoints: [
@@ -197,6 +208,7 @@ test("computeCharacter, leveling", t => {
 					hp: {30: 0.5, 31: 0.5},
 					mp: {10: 0.8, 11: 0.2},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
 				name: "Bob",
@@ -207,23 +219,27 @@ test("computeCharacter, leveling", t => {
 					hp: {30: 0.125, 31: 0.375, 32: 0.375, 33: 0.125},
 					mp: {10: 0.512, 11: 0.384, 12: 0.096, 13: 0.008},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, boosts", t => {
-	const c: Character = {
+test("computeChar, boosts", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
-			{type: "boost", level: 2, stat: "hp", increase: 5},
-			{type: "checkpoint", level: 2, stats: {hp: 35, mp: 10}},
-			{type: "boost", level: 2, stat: "mp", increase: 2},
-			{type: "checkpoint", level: 2, stats: {hp: 35, mp: 12}},
+			{type: "boost", id: 1, level: 2, stats: {hp: 5}},
+			{type: "checkpoint", id: 2, level: 2, stats: {hp: 35, mp: 10}},
+			{type: "boost", id: 3, level: 2, stats: {mp: 2}},
+			{type: "checkpoint", id: 4, level: 2, stats: {hp: 35, mp: 12}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
+		baseStats: game1.chars.Bob.baseStats,
 	};
-	const final = computeCharacter(game1, c);
+	const final = computeChar(game1, c);
 	checkFinal(t, final, {
 		base: defaultBase,
 		checkpoints: [
@@ -236,6 +252,7 @@ test("computeCharacter, boosts", t => {
 					hp: {35: 1},
 					mp: {10: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
 				name: "Bob",
@@ -246,35 +263,41 @@ test("computeCharacter, boosts", t => {
 					hp: {35: 1},
 					mp: {12: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, class change min and mods", t => {
-	const c: Character = {
+test("computeChar, class change min and mods", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
 			{
 				type: "class",
+				id: 1,
 				level: 2,
 				newClass: "strong",
 				newLevel: null,
 				ignoreMins: false,
 			},
-			{type: "checkpoint", level: 2, stats: {hp: 40, mp: 30}},
+			{type: "checkpoint", id: 2, level: 2, stats: {hp: 40, mp: 30}},
 			{
 				type: "class",
+				id: 3,
 				level: 2,
 				newClass: "weak",
 				newLevel: null,
 				ignoreMins: false,
 			},
-			{type: "checkpoint", level: 2, stats: {hp: 30, mp: 20}},
+			{type: "checkpoint", id: 4, level: 2, stats: {hp: 30, mp: 20}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
+		baseStats: game1.chars.Bob.baseStats,
 	};
-	const final = computeCharacter(game1, c);
+	const final = computeChar(game1, c);
 	checkFinal(t, final, {
 		base: defaultBase,
 		checkpoints: [
@@ -287,6 +310,7 @@ test("computeCharacter, class change min and mods", t => {
 					hp: {40: 1},
 					mp: {30: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
 				name: "Bob",
@@ -297,35 +321,41 @@ test("computeCharacter, class change min and mods", t => {
 					hp: {30: 1},
 					mp: {20: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, class change ignoreMins", t => {
-	const c: Character = {
+test("computeChar, class change ignoreMins", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
 			{
 				type: "class",
+				id: 1,
 				level: 2,
 				newClass: "strong",
 				newLevel: null,
 				ignoreMins: true,
 			},
-			{type: "checkpoint", level: 2, stats: {hp: 40, mp: 20}},
+			{type: "checkpoint", id: 2, level: 2, stats: {hp: 40, mp: 20}},
 			{
 				type: "class",
+				id: 3,
 				level: 2,
 				newClass: "weak",
 				newLevel: null,
 				ignoreMins: true,
 			},
-			{type: "checkpoint", level: 2, stats: {hp: 30, mp: 10}},
+			{type: "checkpoint", id: 4, level: 2, stats: {hp: 30, mp: 10}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
+		baseStats: game1.chars.Bob.baseStats,
 	};
-	const final = computeCharacter(game1, c);
+	const final = computeChar(game1, c);
 	checkFinal(t, final, {
 		base: defaultBase,
 		checkpoints: [
@@ -338,6 +368,7 @@ test("computeCharacter, class change ignoreMins", t => {
 					hp: {40: 1},
 					mp: {20: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
 				name: "Bob",
@@ -348,28 +379,33 @@ test("computeCharacter, class change ignoreMins", t => {
 					hp: {30: 1},
 					mp: {10: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, class change growths", t => {
-	const c: Character = {
+test("computeChar, class change growths", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
 			{
 				type: "class",
+				id: 1,
 				level: 3,
 				newClass: "strong",
 				newLevel: null,
 				ignoreMins: false,
 			},
-			{type: "checkpoint", level: 3, stats: {hp: 40, mp: 30}},
-			{type: "checkpoint", level: 4, stats: {hp: 41, mp: 30}},
+			{type: "checkpoint", id: 2, level: 3, stats: {hp: 40, mp: 30}},
+			{type: "checkpoint", id: 3, level: 4, stats: {hp: 41, mp: 30}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
+		baseStats: game1.chars.Bob.baseStats,
 	};
-	const final = computeCharacter(game1, c);
+	const final = computeChar(game1, c);
 	checkFinal(t, final, {
 		base: defaultBase,
 		checkpoints: [
@@ -382,6 +418,7 @@ test("computeCharacter, class change growths", t => {
 					hp: {40: 0.5, 41: 0.5},
 					mp: {30: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
 				name: "Bob",
@@ -392,27 +429,32 @@ test("computeCharacter, class change growths", t => {
 					hp: {40: 0.1, 41: 0.5, 42: 0.4},
 					mp: {30: 0.5, 31: 0.5},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, class change level reset", t => {
-	const c: Character = {
+test("computeChar, class change level reset", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
 			{
 				type: "class",
+				id: 1,
 				level: 3,
 				newClass: "strong",
 				newLevel: 1,
 				ignoreMins: false,
 			},
-			{type: "checkpoint", level: 2, stats: {hp: 41, mp: 30}},
+			{type: "checkpoint", id: 2, level: 2, stats: {hp: 41, mp: 30}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
+		baseStats: game1.chars.Bob.baseStats,
 	};
-	const final = computeCharacter(game1, c);
+	const final = computeChar(game1, c);
 	checkFinal(t, final, {
 		base: defaultBase,
 		checkpoints: [
@@ -425,19 +467,22 @@ test("computeCharacter, class change level reset", t => {
 					hp: {40: 0.1, 41: 0.5, 42: 0.4},
 					mp: {30: 0.5, 31: 0.5},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, caps", t => {
-	const c: Character = {
+test("computeChar, caps", t => {
+	const c: Char = {
 		name: "Bob",
-		history: [{type: "checkpoint", level: 5, stats: {hp: 50, mp: 50}}],
+		history: [{type: "checkpoint", id: 1, level: 5, stats: {hp: 50, mp: 50}}],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
 		baseStats: {hp: 49, mp: 48},
 	};
-	const final = computeCharacter(game1, c);
+	const final = computeChar(game1, c);
 	checkFinal(t, final, {
 		base: {
 			name: "Bob",
@@ -448,6 +493,7 @@ test("computeCharacter, caps", t => {
 				hp: {49: 1},
 				mp: {48: 1},
 			},
+			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
 			{
@@ -459,22 +505,25 @@ test("computeCharacter, caps", t => {
 					hp: {49: 0.125, 50: 0.875},
 					mp: {48: 0.512, 49: 0.384, 50: 0.104},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, boosts hitting a cap", t => {
-	const c: Character = {
+test("computeChar, boosts hitting a cap", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
-			{type: "boost", level: 2, stat: "hp", increase: 10},
-			{type: "checkpoint", level: 2, stats: {hp: 50, mp: 48}},
+			{type: "boost", id: 1, level: 2, stats: {hp: 10}},
+			{type: "checkpoint", id: 2, level: 2, stats: {hp: 50, mp: 48}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
 		baseStats: {hp: 49, mp: 48},
 	};
-	const final = computeCharacter(game1, c);
+	const final = computeChar(game1, c);
 	checkFinal(t, final, {
 		base: {
 			name: "Bob",
@@ -485,6 +534,7 @@ test("computeCharacter, boosts hitting a cap", t => {
 				hp: {49: 1},
 				mp: {48: 1},
 			},
+			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
 			{
@@ -496,36 +546,41 @@ test("computeCharacter, boosts hitting a cap", t => {
 					hp: {50: 1},
 					mp: {48: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, real stats remembered when class mods go over cap", t => {
-	const c: Character = {
+test("computeChar, real stats remembered when class mods go over cap", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
 			{
 				type: "class",
+				id: 1,
 				level: 2,
 				newClass: "strong",
 				newLevel: null,
 				ignoreMins: false,
 			},
-			{type: "checkpoint", level: 9, stats: {hp: 50, mp: 50}},
+			{type: "checkpoint", id: 2, level: 9, stats: {hp: 50, mp: 50}},
 			{
 				type: "class",
+				id: 3,
 				level: 9,
 				newClass: "weak",
 				newLevel: null,
 				ignoreMins: false,
 			},
-			{type: "checkpoint", level: 10, stats: {hp: 49, mp: 48}},
+			{type: "checkpoint", id: 4, level: 10, stats: {hp: 49, mp: 48}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
 		baseStats: {hp: 49, mp: 48},
 	};
-	const final = computeCharacter(game1, c);
+	const final = computeChar(game1, c);
 	checkFinal(t, final, {
 		base: {
 			name: "Bob",
@@ -536,6 +591,7 @@ test("computeCharacter, real stats remembered when class mods go over cap", t =>
 				hp: {49: 1},
 				mp: {48: 1},
 			},
+			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
 			{
@@ -547,6 +603,7 @@ test("computeCharacter, real stats remembered when class mods go over cap", t =>
 					hp: {50: 1},
 					mp: {50: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
 				name: "Bob",
@@ -557,28 +614,32 @@ test("computeCharacter, real stats remembered when class mods go over cap", t =>
 					hp: {49: 0.5, 50: 0.5},
 					mp: {48: 0.8, 49: 0.2},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, class change hp up 1 when all mins met", t => {
-	const c: Character = {
+test("computeChar, class change hp up 1 when all mins met", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
 			{
 				type: "class",
+				id: 1,
 				level: 2,
 				newClass: "strong",
 				newLevel: null,
 				ignoreMins: false,
 			},
-			{type: "checkpoint", level: 2, stats: {hp: 41, mp: 40}},
+			{type: "checkpoint", id: 2, level: 2, stats: {hp: 41, mp: 40}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
 		baseStats: {hp: 30, mp: 30},
 	};
-	const final = computeCharacter(game2, c);
+	const final = computeChar(game2, c);
 	checkFinal(t, final, {
 		base: {
 			name: "Bob",
@@ -589,6 +650,7 @@ test("computeCharacter, class change hp up 1 when all mins met", t => {
 				hp: {30: 1},
 				mp: {30: 1},
 			},
+			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
 			{
@@ -600,28 +662,32 @@ test("computeCharacter, class change hp up 1 when all mins met", t => {
 					hp: {41: 1},
 					mp: {40: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, class change hp up 1 skipped with ignoreMins", t => {
-	const c: Character = {
+test("computeChar, class change hp up 1 skipped with ignoreMins", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
 			{
 				type: "class",
+				id: 1,
 				level: 2,
 				newClass: "strong",
 				newLevel: null,
 				ignoreMins: true,
 			},
-			{type: "checkpoint", level: 2, stats: {hp: 40, mp: 40}},
+			{type: "checkpoint", id: 2, level: 2, stats: {hp: 40, mp: 40}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
 		baseStats: {hp: 30, mp: 30},
 	};
-	const final = computeCharacter(game2, c);
+	const final = computeChar(game2, c);
 	checkFinal(t, final, {
 		base: {
 			name: "Bob",
@@ -632,6 +698,7 @@ test("computeCharacter, class change hp up 1 skipped with ignoreMins", t => {
 				hp: {30: 1},
 				mp: {30: 1},
 			},
+			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
 			{
@@ -643,29 +710,33 @@ test("computeCharacter, class change hp up 1 skipped with ignoreMins", t => {
 					hp: {40: 1},
 					mp: {40: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, class change hp up 1 respects other stat chances", t => {
-	const c: Character = {
+test("computeChar, class change hp up 1 respects other stat chances", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
-			{type: "checkpoint", level: 4, stats: {hp: 31, mp: 20}},
+			{type: "checkpoint", id: 1, level: 4, stats: {hp: 31, mp: 20}},
 			{
 				type: "class",
+				id: 2,
 				level: 4,
 				newClass: "strong",
 				newLevel: null,
 				ignoreMins: false,
 			},
-			{type: "checkpoint", level: 4, stats: {hp: 41, mp: 30}},
+			{type: "checkpoint", id: 3, level: 4, stats: {hp: 41, mp: 30}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
 		baseStats: {hp: 30, mp: 19},
 	};
-	const final = computeCharacter(game2, c);
+	const final = computeChar(game2, c);
 	checkFinal(t, final, {
 		base: {
 			name: "Bob",
@@ -676,6 +747,7 @@ test("computeCharacter, class change hp up 1 respects other stat chances", t => 
 				hp: {30: 1},
 				mp: {19: 1},
 			},
+			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
 			{
@@ -687,6 +759,7 @@ test("computeCharacter, class change hp up 1 respects other stat chances", t => 
 					hp: {30: 0.25, 31: 0.5, 32: 0.25},
 					mp: {19: 0.64, 20: 0.32, 31: 0.04},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
 				name: "Bob",
@@ -697,29 +770,33 @@ test("computeCharacter, class change hp up 1 respects other stat chances", t => 
 					hp: {40: 0.16, 41: 0.41, 42: 0.34, 43: 0.09},
 					mp: {30: 0.96, 31: 0.04},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeCharacter, class change hp up 1 respects own stat chances", t => {
-	const c: Character = {
+test("computeChar, class change hp up 1 respects own stat chances", t => {
+	const c: Char = {
 		name: "Bob",
 		history: [
-			{type: "checkpoint", level: 3, stats: {hp: 20, mp: 20}},
+			{type: "checkpoint", id: 1, level: 3, stats: {hp: 20, mp: 20}},
 			{
 				type: "class",
+				id: 2,
 				level: 3,
 				newClass: "strong",
 				newLevel: null,
 				ignoreMins: false,
 			},
-			{type: "checkpoint", level: 3, stats: {hp: 31, mp: 30}},
+			{type: "checkpoint", id: 3, level: 3, stats: {hp: 31, mp: 30}},
 		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
 		baseStats: {hp: 19, mp: 19},
 	};
-	const final = computeCharacter(game2, c);
+	const final = computeChar(game2, c);
 	checkFinal(t, final, {
 		base: {
 			name: "Bob",
@@ -730,6 +807,7 @@ test("computeCharacter, class change hp up 1 respects own stat chances", t => {
 				hp: {19: 1},
 				mp: {19: 1},
 			},
+			maxStats: game1.chars.Bob.maxStats,
 		},
 		checkpoints: [
 			{
@@ -741,6 +819,7 @@ test("computeCharacter, class change hp up 1 respects own stat chances", t => {
 					hp: {19: 0.5, 20: 0.5},
 					mp: {19: 0.8, 20: 0.2},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 			{
 				name: "Bob",
@@ -751,6 +830,7 @@ test("computeCharacter, class change hp up 1 respects own stat chances", t => {
 					hp: {30: 0.9, 31: 0.1},
 					mp: {30: 1},
 				},
+				maxStats: game1.chars.Bob.maxStats,
 			},
 		],
 		errors: [],

@@ -1,5 +1,6 @@
 import _ from "lodash";
-import {StatsTable, HistoryEntry, Character, Team, GameData} from "./common";
+import {StatsTable, HistoryEntry, Char, Team, GameID, GameData} from "./common";
+import gameTable from "./GameTable";
 import {doesCharHaveData} from "./CharUtils";
 
 type ArrayData = (string | number)[];
@@ -51,7 +52,7 @@ function arrayifyHistoryEntry(game: GameData, entry: HistoryEntry): ArrayData {
 	}
 }
 
-function arrayifyHistory(game: GameData, char: Character): ArrayData {
+function arrayifyHistory(game: GameData, char: Char): ArrayData {
 	const arrData: ArrayData = [];
 	char.history.forEach(e => {
 		arrData.push(...arrayifyHistoryEntry(game, e));
@@ -59,7 +60,7 @@ function arrayifyHistory(game: GameData, char: Character): ArrayData {
 	return arrData;
 }
 
-export function arrayifyCharacter(game: GameData, char: Character): ArrayData {
+export function arrayifyChar(game: GameData, char: Char): ArrayData {
 	return [
 		char.name,
 		char.baseClass || "",
@@ -71,7 +72,7 @@ export function arrayifyCharacter(game: GameData, char: Character): ArrayData {
 }
 
 export function arrayifyTeam(game: GameData, team: Team): ArrayData {
-	const chars: Character[] = [];
+	const chars: Char[] = [];
 	Object.keys(team).forEach(name => {
 		if (doesCharHaveData(game, team[name])) {
 			chars.push(team[name]);
@@ -79,16 +80,16 @@ export function arrayifyTeam(game: GameData, team: Team): ArrayData {
 	});
 	const arrData: ArrayData = [chars.length];
 	chars.forEach(c => {
-		arrData.push(...arrayifyCharacter(game, c));
+		arrData.push(...arrayifyChar(game, c));
 	});
 	return arrData;
 }
 
-export function serializeCharacter(game: GameData, char: Character): string {
+export function serializeChar(game: GameData, char: Char): string {
 	const arrData: ArrayData = [
 		game.id,
 		1, // Format version
-		...arrayifyCharacter(game, char),
+		...arrayifyChar(game, char),
 	];
 	return encodeBase64(arrData.join(";"));
 }
@@ -167,27 +168,24 @@ function parseHistoryEntry(game: GameData, arrP: ArrayParser): HistoryEntry {
 	}
 }
 
-function parseCharacter(game: GameData, arrP: ArrayParser): Character {
+function parseChar(game: GameData, arrP: ArrayParser): Char {
 	const name = read(arrP);
 	if (!game.chars[name]) {
 		throw new Error("Character " + name + " is not in game " + game.id);
 	}
-	const baseClass = read(arrP) || undefined;
-	const baseLevel = parseInt(read(arrP)) || undefined;
-	const baseStats = parseStatsTable(game, arrP) || undefined;
-	const char: Character = {
+	const baseClass = read(arrP);
+	const baseLevel = parseInt(read(arrP));
+	const baseStats = parseStatsTable(game, arrP);
+	if (!baseStats) {
+		throw new Error("Character had missing base stats table");
+	}
+	const char: Char = {
 		name,
 		history: [],
+		baseClass,
+		baseLevel,
+		baseStats,
 	};
-	if (baseClass !== undefined) {
-		char.baseClass = baseClass;
-	}
-	if (baseLevel !== undefined) {
-		char.baseLevel = baseLevel;
-	}
-	if (baseStats !== undefined) {
-		char.baseStats = baseStats;
-	}
 
 	const historyLen = parseInt(read(arrP));
 	for (let i = 0; i < historyLen; i += 1) {
@@ -200,33 +198,43 @@ function parseCharacter(game: GameData, arrP: ArrayParser): Character {
 function parseTeam(game: GameData, amount: number, arrP: ArrayParser): Team {
 	const team: Team = {};
 	for (let i = 0; i < amount; i += 1) {
-		const c = parseCharacter(game, arrP);
+		const c = parseChar(game, arrP);
 		team[c.name] = c;
 	}
 	return team;
 }
 
 export type UnserializeResult =
-	| {type: "character"; char: Character}
-	| {type: "team"; team: Team};
+	| {gameID: GameID; type: "character"; char: Char; src: string}
+	| {gameID: GameID; type: "team"; team: Team; src: string};
 
-export function unserialize(game: GameData, data: string): UnserializeResult {
+export function unserialize(data: string): UnserializeResult {
 	data = data.replace(/\s/g, "");
 	const arrData = decodeBase64(data).split(";");
 	const arrP = {arrData, index: 0};
 
 	const gameID = read(arrP);
-	if (gameID !== game.id) {
-		throw new Error(
-			"Serialized data is for game ID " + gameID + ", not " + game.id
-		);
+	const game = gameTable[gameID];
+	if (!game) {
+		throw new Error("Unrecognized game ID " + gameID);
 	}
+
 	read(arrP);
 	const charAmount = parseInt(read(arrP));
 	if (charAmount || charAmount === 0) {
-		return {type: "team", team: parseTeam(game, charAmount, arrP)};
+		return {
+			gameID,
+			type: "team",
+			team: parseTeam(game, charAmount, arrP),
+			src: data,
+		};
 	} else {
 		arrP.index -= 1;
-		return {type: "character", char: parseCharacter(game, arrP)};
+		return {
+			gameID,
+			type: "character",
+			char: parseChar(game, arrP),
+			src: data,
+		};
 	}
 }

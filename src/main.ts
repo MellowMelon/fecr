@@ -1,12 +1,21 @@
 import ReactDOM from "react-dom";
 import React from "react";
-import MainContainer from "./MainContainer";
-import game from "../data/3h.json";
+import MainContainer from "./view/Main";
+
+function renderFromURLHash() {
+	const h = window.location.hash.slice(1) || null;
+	const el = React.createElement(MainContainer, {urlHash: h});
+	const container = document.getElementById("main-container");
+	if (container) {
+		ReactDOM.unmountComponentAtNode(container);
+		ReactDOM.render(el, container);
+	}
+}
 
 document.addEventListener("DOMContentLoaded", function() {
-	const initialHash = window.location.hash.slice(1);
-	ReactDOM.render(
-		React.createElement(MainContainer, {game: game as any, initialHash}),
-		document.getElementById("main-container")
-	);
+	renderFromURLHash();
+
+	window.addEventListener("hashchange", function() {
+		renderFromURLHash();
+	});
 });

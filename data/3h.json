@@ -1,9 +1,9 @@
 {
 	"id": "16",
-	"name": "Three Houses",
+	"name": "Fire Emblem: Three Houses",
 	"globals": {
 		"maxLevel": 99,
-		"maxStat": 99,
+		"maxStat": 999,
 		"classChangeResetsLevel": false,
 		"classChangeGetsAtLeast1HP": false
 	},

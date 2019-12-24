@@ -1,39 +1,57 @@
 import _ from "lodash";
 
-import {CharacterName, Character, HistoryEntry, GameData} from "./common";
+import {
+	StatsTable,
+	CharName,
+	Char,
+	HistoryEntryCheckpoint,
+	HistoryEntry,
+	GameData,
+} from "./common";
 
-export function createCharacter(
-	game: GameData,
-	name: CharacterName
-): Character {
+function makeZeroStats(game: GameData): StatsTable {
+	const ret: StatsTable = {};
+	game.stats.forEach(n => {
+		ret[n] = 0;
+	});
+	return ret;
+}
+
+function getNextHistoryID(char: Char): number {
+	const last = _.max(char.history.map(h => h.id));
+	return (last || 0) + 1;
+}
+
+function lastIndexOfCheckpoint(game: GameData, char: Char): number {
+	for (let i = char.history.length - 1; i >= 0; i -= 1) {
+		if (char.history[i].type === "checkpoint") {
+			return i;
+		}
+	}
+	return -1;
+}
+
+export function createChar(game: GameData, name: CharName): Char {
 	const gameCharData = game.chars[name];
 	return {
 		name,
-		history: [
-			{
-				type: "checkpoint",
-				level: gameCharData.baseLevel,
-				stats: gameCharData.baseStats,
-			},
-		],
+		history: [],
+		baseClass: gameCharData.baseClass,
+		baseLevel: gameCharData.baseLevel,
+		baseStats: gameCharData.baseStats,
 	};
 }
 
 export function createHistoryEntry(
 	game: GameData,
-	char: Character,
-	type: HistoryEntry["type"],
-	oldEntry: HistoryEntry | null
+	char: Char,
+	type: HistoryEntry["type"]
 ): HistoryEntry {
-	if (oldEntry && oldEntry.type === type) {
-		return oldEntry;
-	}
 	const gameCharData = game.chars[char.name];
+	const id = getNextHistoryID(char);
 
 	let level: number;
-	if (oldEntry) {
-		level = oldEntry.level;
-	} else if (char.history.length) {
+	if (char.history.length) {
 		level = _.last(char.history)!.level;
 	} else {
 		level = char.baseLevel || gameCharData.baseLevel;
@@ -42,6 +60,7 @@ export function createHistoryEntry(
 	if (type === "class") {
 		return {
 			type: "class",
+			id,
 			level,
 			newClass: Object.keys(game.classes)[0]!,
 			newLevel: game.globals.classChangeResetsLevel ? 1 : level,
@@ -50,14 +69,27 @@ export function createHistoryEntry(
 	} else if (type === "boost") {
 		return {
 			type: "boost",
+			id,
 			level,
-			stat: game.stats[0]!,
-			increase: 1,
+			stats: makeZeroStats(game),
+		};
+	} else if (type === "maxboost") {
+		return {
+			type: "maxboost",
+			id,
+			level,
+			stats: makeZeroStats(game),
 		};
 	} else {
-		const stats = char.baseStats || gameCharData.baseStats;
+		const lastCPI = lastIndexOfCheckpoint(game, char);
+		let stats = char.baseStats || gameCharData.baseStats;
+		if (lastCPI > -1) {
+			const lastCP = char.history[lastCPI] as HistoryEntryCheckpoint;
+			stats = lastCP.stats;
+		}
 		return {
 			type: "checkpoint",
+			id,
 			level,
 			stats,
 		};
@@ -66,20 +98,9 @@ export function createHistoryEntry(
 
 export function doesCharHaveData(
 	game: GameData,
-	char: Character | undefined | null
+	char: Char | undefined | null
 ): boolean {
 	if (!char) return false;
-	if (char.history.length > 1) return true;
-	if (char.history.length < 1) return false;
-	const h = char.history[0];
-	const gameCharData = game.chars[char.name];
-	const baseLevel = char.baseLevel || gameCharData.baseLevel;
-	if (baseLevel !== gameCharData.baseLevel) return true;
-	const baseStats = char.baseStats || gameCharData.baseStats;
-	if (!_.isEqual(baseStats, gameCharData.baseStats)) return true;
-	const isBaseH =
-		h.type === "checkpoint" &&
-		h.level === baseLevel &&
-		_.isEqual(h.stats, baseStats);
-	return !isBaseH;
+	const cp = char.history.find(h => h.type === "checkpoint");
+	return !!cp;
 }

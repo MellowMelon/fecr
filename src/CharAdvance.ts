@@ -4,13 +4,14 @@ import * as ProbDist from "./ProbDist";
 import {sumObjects} from "./common";
 import {
 	StatsTable,
-	CharacterClass,
-	CharacterName,
-	Character,
-	CharacterCheckpoint,
+	CharClass,
+	CharName,
+	Char,
+	CharCheckpoint,
+	HistoryEntryCheckpoint,
 	HistoryEntryClass,
 	HistoryEntryBoost,
-	HistoryEntryCheckpoint,
+	HistoryEntryMaxBoost,
 	HistoryEntry,
 	StatsDist,
 	GameData,
@@ -20,12 +21,13 @@ type AdvanceEntry = HistoryEntry | {type: "level"};
 type AdvanceError = {historyIndex: number; error: string};
 
 type AdvanceChar = {
-	name: CharacterName;
-	charClass: CharacterClass;
+	name: CharName;
+	charClass: CharClass;
 	level: number;
 	dist: StatsDist;
-	base: CharacterCheckpoint;
-	checkpoints: CharacterCheckpoint[];
+	maxStats: StatsTable;
+	base: CharCheckpoint;
+	checkpoints: CharCheckpoint[];
 };
 
 type AdvancePlan = {
@@ -35,8 +37,8 @@ type AdvancePlan = {
 };
 
 export type AdvanceFinal = {
-	base: CharacterCheckpoint;
-	checkpoints: CharacterCheckpoint[];
+	base: CharCheckpoint;
+	checkpoints: CharCheckpoint[];
 	errors: AdvanceError[];
 };
 
@@ -44,13 +46,13 @@ function getBaseDist(stats: StatsTable): StatsDist {
 	return _.mapValues(stats, val => ProbDist.initAtValue(val));
 }
 
-export function getBaseGameCharacter(
+export function getBaseGameChar(
 	game: GameData,
-	name: CharacterName
-): CharacterCheckpoint {
+	name: CharName
+): CharCheckpoint {
 	const gameCharData = game.chars[name];
 	if (!gameCharData) {
-		throw new Error("Character " + name + " not in game " + game.name);
+		throw new Error("Char " + name + " not in game " + game.name);
 	}
 	const stats = gameCharData.baseStats;
 	return {
@@ -59,14 +61,12 @@ export function getBaseGameCharacter(
 		level: gameCharData.baseLevel,
 		stats,
 		dist: getBaseDist(stats),
+		maxStats: gameCharData.maxStats,
 	};
 }
 
-export function getBaseCharacter(
-	game: GameData,
-	char: Character
-): CharacterCheckpoint {
-	const baseChar = getBaseGameCharacter(game, char.name);
+export function getBaseChar(game: GameData, char: Char): CharCheckpoint {
+	const baseChar = getBaseGameChar(game, char.name);
 	baseChar.charClass = char.baseClass || baseChar.charClass;
 	baseChar.level = char.baseLevel || baseChar.level;
 	baseChar.stats = char.baseStats || baseChar.stats;
@@ -74,16 +74,17 @@ export function getBaseCharacter(
 	return baseChar;
 }
 
-export function getCharacterPlan(game: GameData, char: Character): AdvancePlan {
+export function getCharPlan(game: GameData, char: Char): AdvancePlan {
 	const entries: AdvanceEntry[] = [];
 	const errors: AdvanceError[] = [];
 
-	const baseChar = getBaseCharacter(game, char);
+	const baseChar = getBaseChar(game, char);
 	const init = {
 		name: baseChar.name,
 		charClass: baseChar.charClass,
 		level: baseChar.level,
 		dist: baseChar.dist,
+		maxStats: baseChar.maxStats,
 		base: baseChar,
 		checkpoints: [],
 	};
@@ -118,9 +119,8 @@ function addCheckpoint(
 	char: AdvanceChar,
 	entry: HistoryEntryCheckpoint
 ): AdvanceChar {
-	const gameCharData = game.chars[char.name];
 	const realDist = _.mapValues(char.dist, (pd, statName) => {
-		const max = gameCharData.maxStats[statName];
+		const max = char.maxStats[statName];
 		pd = ProbDist.applyMax(pd, max);
 		return pd;
 	});
@@ -130,6 +130,7 @@ function addCheckpoint(
 		level: entry.level,
 		stats: entry.stats,
 		dist: realDist,
+		maxStats: char.maxStats,
 	};
 	return {...char, checkpoints: [...char.checkpoints, newCP]};
 }
@@ -208,19 +209,31 @@ function simulateClass(
 	};
 }
 
-function simulateBoost(
+function simulateBoosts(
 	game: GameData,
 	char: AdvanceChar,
 	entry: HistoryEntryBoost
 ): AdvanceChar {
-	const {stat, increase} = entry;
-	const gameCharData = game.chars[char.name];
-	const max = gameCharData.maxStats[stat];
-	let newPD = char.dist[stat];
-	newPD = ProbDist.applyIncrease(newPD, increase, max);
-	const newDist = _.clone(char.dist);
-	newDist[stat] = newPD;
+	const {stats} = entry;
+	const newDist = _.mapValues(char.dist, (pd, statName) => {
+		if (!stats[statName]) return pd;
+		const max = char.maxStats[statName];
+		pd = ProbDist.applyIncrease(pd, stats[statName], max);
+		return pd;
+	});
 	return {...char, dist: newDist};
+}
+
+function simulateMaxBoosts(
+	game: GameData,
+	char: AdvanceChar,
+	entry: HistoryEntryMaxBoost
+): AdvanceChar {
+	const {stats} = entry;
+	const newMax = _.mapValues(char.maxStats, (val, statName) => {
+		return val + stats[statName];
+	});
+	return {...char, maxStats: newMax};
 }
 
 function simulateLevel(game: GameData, char: AdvanceChar): AdvanceChar {
@@ -228,37 +241,36 @@ function simulateLevel(game: GameData, char: AdvanceChar): AdvanceChar {
 	const gameClassData = game.classes[char.charClass];
 	const realGrowths = sumObjects(gameCharData.growths, gameClassData.growths);
 	const newDist = _.mapValues(char.dist, (pd, statName) => {
-		const max = gameCharData.maxStats[statName];
+		const max = char.maxStats[statName];
 		pd = ProbDist.applyGrowthRate(pd, realGrowths[statName] / 100, max);
 		return pd;
 	});
 	return {...char, level: char.level + 1, dist: newDist};
 }
 
-export function reduceCharacter(
+export function reduceChar(
 	game: GameData,
 	char: AdvanceChar,
 	entry: AdvanceEntry
 ): AdvanceChar {
 	if (entry.type === "level") {
 		return simulateLevel(game, char);
-	} else if (entry.type === "boost") {
-		return simulateBoost(game, char, entry);
-	} else if (entry.type === "class") {
-		return simulateClass(game, char, entry);
 	} else if (entry.type === "checkpoint") {
 		return addCheckpoint(game, char, entry);
+	} else if (entry.type === "class") {
+		return simulateClass(game, char, entry);
+	} else if (entry.type === "boost") {
+		return simulateBoosts(game, char, entry);
+	} else if (entry.type === "maxboost") {
+		return simulateMaxBoosts(game, char, entry);
 	}
 	throw new Error("Unrecognized AdvanceEntry");
 }
 
-export function computeCharacter(
-	game: GameData,
-	char: Character
-): AdvanceFinal {
-	const plan = getCharacterPlan(game, char);
+export function computeChar(game: GameData, char: Char): AdvanceFinal {
+	const plan = getCharPlan(game, char);
 	const final = plan.entries.reduce(
-		(c, e) => reduceCharacter(game, c, e),
+		(c, e) => reduceChar(game, c, e),
 		plan.init
 	);
 	return {

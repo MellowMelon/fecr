@@ -8,27 +8,27 @@ const FETCH_CACHE_DIR = Path.resolve(__dirname, ".cache");
 
 const urlFetchList = [
 	{
-		name: "charBases",
+		name: "3h_char_bases",
 		url: "https://serenesforest.net/three-houses/characters/base-stats/",
 	},
 	{
-		name: "charGrowths",
+		name: "3h_char_growths",
 		url: "https://serenesforest.net/three-houses/characters/growth-rates/",
 	},
 	{
-		name: "charMax",
+		name: "3h_char_max",
 		url: "https://serenesforest.net/three-houses/characters/maximum-stats/",
 	},
 	{
-		name: "classMins",
+		name: "3h_class_mins",
 		url: "https://serenesforest.net/three-houses/classes/base-stats/",
 	},
 	{
-		name: "classMods",
+		name: "3h_class_mods",
 		url: "https://serenesforest.net/three-houses/classes/stat-boosts/",
 	},
 	{
-		name: "classGrowths",
+		name: "3h_class_growths",
 		url: "https://serenesforest.net/three-houses/classes/growth-rates/",
 	},
 ];
@@ -224,7 +224,7 @@ async function fetchURL(url) {
 	return new Promise((resolve, reject) => {
 		const urlEntry = urlFetchTable[url];
 		if (!urlEntry) reject("Unrecognized URL " + url);
-		const cacheName = `3h_${urlEntry.name}.html`;
+		const cacheName = `${urlEntry.name}.html`;
 		const cachePath = Path.join(FETCH_CACHE_DIR, cacheName);
 		if (FS.existsSync(cachePath)) {
 			const contents = FS.readFileSync(cachePath, "utf8");
@@ -326,10 +326,10 @@ async function main() {
 
 	const finalJSON = {
 		id: "16",
-		name: "Three Houses",
+		name: "Fire Emblem: Three Houses",
 		globals: {
 			maxLevel: 99,
-			maxStat: 99,
+			maxStat: 999,
 			classChangeResetsLevel: false,
 			classChangeGetsAtLeast1HP: false,
 		},

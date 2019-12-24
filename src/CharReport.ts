@@ -1,7 +1,7 @@
 import _ from "lodash";
 import {
-	CharacterClass,
-	CharacterCheckpoint,
+	CharClass,
+	CharCheckpoint,
 	StatsTable,
 	StatsDist,
 	GameData,
@@ -9,8 +9,8 @@ import {
 } from "./common";
 import * as ProbDist from "./ProbDist";
 
-export type CharacterReport = {
-	charClass: CharacterClass;
+export type CharReport = {
+	charClass: CharClass;
 	charLevel: number;
 	charRealStats: StatsTable;
 	classStatMods: StatsTable;
@@ -21,6 +21,7 @@ export type CharacterReport = {
 	statsDist: StatsDist;
 	sdAverage: {[stat: string]: number};
 	sdMedian: {[stat: string]: number};
+	sdMedianDiff: {[stat: string]: string};
 	sdPercentiles: {[stat: string]: [number, number]};
 };
 
@@ -39,8 +40,8 @@ function computePercentiles(
 
 export function getCharReport(
 	game: GameData,
-	char: CharacterCheckpoint
-): CharacterReport {
+	char: CharCheckpoint
+): CharReport {
 	const {name, charClass, level} = char;
 	const gameCharData = game.chars[name];
 	if (!gameCharData) {
@@ -53,6 +54,16 @@ export function getCharReport(
 
 	const sdAverage = _.mapValues(char.dist, ProbDist.getAverage);
 	const sdMedian = _.mapValues(char.dist, ProbDist.getMedian);
+	const sdMedianDiff = _.mapValues(sdMedian, (med, statName) => {
+		const curr = char.stats[statName];
+		let diff: string | number = curr - med;
+		if (Math.abs(diff % 1) > 0.005) {
+			diff = diff.toFixed(2);
+		}
+		if (curr > med) return "+" + diff;
+		if (curr < med) return String(diff);
+		return "0";
+	});
 	const sdPercentiles = _.mapValues(char.dist, (pd, statName) =>
 		computePercentiles(pd, statName, char.stats[statName])
 	);
@@ -62,13 +73,14 @@ export function getCharReport(
 		charLevel: level,
 		charRealStats: char.stats,
 		classStatMods: gameClassData.statMods,
-		maxStats: gameCharData.maxStats,
+		maxStats: char.maxStats,
 		charGrowths: gameCharData.growths,
 		classGrowths: gameClassData.growths,
 		realGrowths: sumObjects(gameCharData.growths, gameClassData.growths),
 		statsDist: char.dist,
 		sdAverage,
 		sdMedian,
+		sdMedianDiff,
 		sdPercentiles,
 	};
 }
