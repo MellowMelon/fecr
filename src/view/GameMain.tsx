@@ -1,11 +1,17 @@
 import React, {useState} from "react";
 import {Button, Box, Heading, Layer, Markdown, Menu, Tabs, Tab} from "grommet";
-import {FormClose as FormCloseIcon, Menu as MenuIcon} from "grommet-icons";
+import {
+	FormClose as FormCloseIcon,
+	Menu as MenuIcon,
+	Undo as UndoIcon,
+	Redo as RedoIcon,
+} from "grommet-icons";
 
 import {Char} from "../types";
 import HelpTable from "../HelpTable";
-import {CharTab, ViewState, ViewAction} from "../state/types";
 import {createChar} from "../CharUtils";
+import {CharTab, ViewState, ViewAction} from "../state/types";
+import * as OpsUndoRedo from "../state/OpsUndoRedo";
 
 import CharSelectPanel from "./CharSelectPanel";
 import CharEditPanel from "./CharEditPanel";
@@ -85,10 +91,23 @@ const GameMain: React.FunctionComponent<Props> = function(props: Props) {
 		<CharReportPanel game={game} team={team} char={char} dispatch={dispatch} />
 	);
 
+	const canUndo = OpsUndoRedo.isUndoEnabled(state.ur);
+	const canRedo = OpsUndoRedo.isRedoEnabled(state.ur);
+
 	return (
 		<Box gap="medium">
 			<Box direction="row">
 				<Menu icon={<MenuIcon />} items={topMenuItems} />
+				<Button
+					icon={<UndoIcon />}
+					disabled={!canUndo}
+					onClick={() => dispatch({type: "undo"})}
+				/>
+				<Button
+					icon={<RedoIcon />}
+					disabled={!canRedo}
+					onClick={() => dispatch({type: "redo"})}
+				/>
 			</Box>
 			<Heading level={1} margin="none">
 				{game.name}

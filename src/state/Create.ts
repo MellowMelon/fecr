@@ -4,6 +4,7 @@ import {UnserializeResult, unserialize} from "../CharSerialize";
 import {fixTeam} from "../CharFix";
 
 import {LoadError, ViewState} from "./types";
+import * as OpsUndoRedo from "./OpsUndoRedo";
 
 export function createEmpty(): ViewState {
 	return {
@@ -13,6 +14,7 @@ export function createEmpty(): ViewState {
 		charName: null,
 		charTab: "select",
 		loadError: null,
+		ur: OpsUndoRedo.init({}),
 	};
 }
 
@@ -93,6 +95,7 @@ function loadStateFromUnser(unser: UnserializeResult): ViewState {
 		charTab,
 		loadError,
 		loadWarningOnly,
+		ur: OpsUndoRedo.init(team),
 	};
 }
 

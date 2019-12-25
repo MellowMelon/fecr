@@ -90,9 +90,10 @@ expand a panel of details with the following information:
 
 - **Current**: The stat's current value.
 - **Percentile Range**: The lower and upper percentile of the current value in
-	the distribution. For example, if this is 20-40%, then given the same history
-	of class changes and stat boosts, a character is 20% likely to do strictly
-	worse than yours did, and 60% (100% minus 40%) likely to do strictly better.
+	the distribution. For example, if your character is 20-40%, then given the
+	same history of class changes and stat boosts, a character is 20% likely to
+	do strictly worse than yours did, and 60% (100% minus 40%) likely to do
+	strictly better.
 - **Median**: The value of the stat at the 50th percentile. This is a good
 	measure of where a typical character would be.
 - **Ahead/behind**: The difference of the stat's current value and the median.

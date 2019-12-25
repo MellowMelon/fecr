@@ -7,6 +7,7 @@ import {
 	GameID,
 	GameData,
 } from "../types";
+import {UndoRedo} from "./OpsUndoRedo";
 
 export type CharTab = "select" | "edit" | "report";
 
@@ -20,6 +21,7 @@ export type ViewState = {
 	charTab: CharTab;
 	loadError: LoadError | null;
 	loadWarningOnly?: boolean;
+	ur: UndoRedo<Team>;
 };
 
 export type ViewActionLoad = {
@@ -48,6 +50,12 @@ export type ViewActionSelectChar = {
 	name: CharName;
 	forEditing?: boolean;
 	forReport?: boolean;
+};
+export type ViewActionUndo = {
+	type: "undo";
+};
+export type ViewActionRedo = {
+	type: "redo";
 };
 export type ViewActionUpdateCharResetBases = {
 	type: "updateCharResetBases";
@@ -101,6 +109,8 @@ export type ViewAction =
 	| ViewActionResetGame
 	| ViewActionSelectCharTab
 	| ViewActionSelectChar
+	| ViewActionUndo
+	| ViewActionRedo
 	| ViewActionUpdateCharResetBases
 	| ViewActionUpdateCharBaseClass
 	| ViewActionUpdateCharBaseLevel

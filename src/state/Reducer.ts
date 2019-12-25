@@ -5,6 +5,7 @@ import {serialize} from "../CharSerialize";
 
 import {CharTab, ViewState, ViewAction} from "./types";
 import {createEmpty, loadState} from "./Create";
+import * as OpsUndoRedo from "./OpsUndoRedo";
 
 function createFromGame(game: GameData): ViewState {
 	return {
@@ -57,6 +58,8 @@ function updateHistoryEntry(
 }
 
 function reduceActionMain(s: ViewState, a: ViewAction): ViewState {
+	let newUR: OpsUndoRedo.UndoRedo<Team>;
+
 	switch (a.type) {
 		case "load":
 			return loadState(a.urlHash);
@@ -102,7 +105,11 @@ function reduceActionMain(s: ViewState, a: ViewAction): ViewState {
 				console.error("Unexpected data shape while handling action", a);
 				return s;
 			}
-			return createFromGame(s.game);
+			const newS = createFromGame(s.game);
+			return {
+				...newS,
+				ur: s.ur,
+			};
 
 		case "selectCharTab":
 			if (s.charTab === a.tab) return s;
@@ -113,6 +120,14 @@ function reduceActionMain(s: ViewState, a: ViewAction): ViewState {
 			if (a.forEditing) newTab = "edit";
 			else if (a.forReport) newTab = "report";
 			return {...s, charTab: newTab, charName: a.name};
+
+		case "undo":
+			newUR = OpsUndoRedo.undo(s.ur);
+			return {...s, team: OpsUndoRedo.getCurrent(newUR), ur: newUR};
+
+		case "redo":
+			newUR = OpsUndoRedo.redo(s.ur);
+			return {...s, team: OpsUndoRedo.getCurrent(newUR), ur: newUR};
 
 		case "updateCharResetBases":
 			return updateChar(s, (game, oldChar) => {
@@ -223,11 +238,22 @@ function saveHash(hash: string) {
 	window.history.replaceState({}, "", "#" + hash);
 }
 
+function recordTeamInUndoRedo(s: ViewState): ViewState {
+	return {
+		...s,
+		ur: OpsUndoRedo.addEntry(s.ur, s.team),
+	};
+}
+
 export function reduceAction(s: ViewState, a: ViewAction): ViewState {
-	const newS = reduceActionMain(s, a);
+	let newS = reduceActionMain(s, a);
 	if (newS.game && newS.team !== s.team) {
 		const hash = serialize(newS.game, newS.team);
 		saveHash(hash);
+
+		if (a.type !== "undo" && a.type !== "redo") {
+			newS = recordTeamInUndoRedo(newS);
+		}
 	}
 	return newS;
 }

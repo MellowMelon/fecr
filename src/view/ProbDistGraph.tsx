@@ -6,6 +6,7 @@ export type GraphDims = {
 	labelFontSize: number;
 	labelHeight: number; // Only used if horizontal is false
 	labelWidth: number; // Only has minor use unless horizontal is true
+	labelAuxDivisor: number;
 	barSize: number;
 	barMaxLen: number;
 	barSpacing: number;
@@ -24,6 +25,7 @@ const defaultDims: GraphDims = {
 	labelFontSize: 12,
 	labelHeight: 13,
 	labelWidth: 16,
+	labelAuxDivisor: 5,
 	barSize: 14,
 	barMaxLen: 60,
 	barSpacing: 2,
@@ -96,6 +98,10 @@ function getCanvasSize(props: Props): [number, number] {
 	}
 }
 
+function getFloorMult(x: number, div: number): number {
+	return x - (((x % div) + div) % div);
+}
+
 function shouldLabel(
 	x: number,
 	curr: number,
@@ -103,13 +109,20 @@ function shouldLabel(
 	maxVal: number,
 	dims: GraphDims
 ): boolean {
+	const div = dims.labelAuxDivisor;
+	const wouldNotLabel =
+		minVal > getFloorMult(maxVal, div) && !(curr >= minVal && curr <= maxVal);
 	const omitCloseToCurr =
 		!dims.horizontal &&
 		curr >= minVal &&
 		curr <= maxVal &&
 		Math.abs(x - curr) <= 1 &&
 		dims.barSize + dims.barSpacing < dims.labelWidth;
-	return x === curr || (!omitCloseToCurr && x % 5 === 0);
+	return (
+		x === curr ||
+		(!omitCloseToCurr && x % div === 0) ||
+		(wouldNotLabel && x === minVal)
+	);
 }
 
 function drawCanvas(ctx: CanvasRenderingContext2D, props: Props) {
