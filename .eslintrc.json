@@ -77,8 +77,8 @@
 		"import/no-unresolved": 2,
 		"@typescript-eslint/adjacent-overload-signatures": 2,
 		"@typescript-eslint/await-thenable": 2,
+		"@typescript-eslint/consistent-type-assertions": 2,
 		"@typescript-eslint/member-delimiter-style": 2,
-		"@typescript-eslint/no-angle-bracket-type-assertion": 2,
 		"@typescript-eslint/no-inferrable-types": 2,
 		"@typescript-eslint/no-namespace": 2,
 		"@typescript-eslint/no-parameter-properties": 2

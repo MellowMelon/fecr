@@ -1,5 +1,6 @@
 import {HistoryEntry, Char, GameData} from "../types";
 import gameTable from "../GameTable";
+import {assertNever} from "../Utils";
 import {createChar, createHistoryEntry} from "../CharUtils";
 import {serialize} from "../CharSerialize";
 
@@ -31,7 +32,10 @@ function updateChar(
 		...team,
 		[charName]: newChar,
 	};
-	return {...s, team: newTeam};
+	return {
+		...s,
+		team: newTeam,
+	};
 }
 
 function updateHistoryEntry(
@@ -58,178 +62,174 @@ function updateHistoryEntry(
 }
 
 function reduceActionMain(s: ViewState, a: ViewAction): ViewState {
-	let newUR: OpsUndoRedo.UndoRedo<Team>;
+	if (a.type === "load") {
+		return loadState(a.urlHash);
+	} else if (a.type === "closeLoadError") {
+		return {
+			...s,
+			loadError: null,
+			loadWarningOnly: false,
+		};
+	} else if (a.type === "selectGame") {
+		const {gameID} = a;
+		if (s.game && s.game.id === gameID) {
+			return s.viewingGame
+				? s
+				: {
+						...s,
+						viewingGame: true,
+				  };
+		}
 
-	switch (a.type) {
-		case "load":
-			return loadState(a.urlHash);
+		const game = gameTable[gameID];
+		if (!game) {
+			console.log("Tried to set invalid game ID " + gameID);
+			return createEmpty();
+		}
 
-		case "closeLoadError":
+		return createFromGame(game);
+	} else if (a.type === "deselectGame") {
+		if (!s.viewingGame) {
+			console.error("Unexpected data shape while handling action", a);
+			return s;
+		}
+		return {
+			...s,
+			viewingGame: false,
+		};
+	} else if (a.type === "resetGame") {
+		if (!s.game) {
+			console.error("Unexpected data shape while handling action", a);
+			return s;
+		}
+		const newS = createFromGame(s.game);
+		return {
+			...newS,
+			ur: s.ur,
+		};
+	} else if (a.type === "selectCharTab") {
+		if (s.charTab === a.tab) return s;
+		return {
+			...s,
+			charTab: a.tab,
+		};
+	} else if (a.type === "selectChar") {
+		let newTab: CharTab = s.charTab;
+		if (a.forEditing) newTab = "edit";
+		else if (a.forReport) newTab = "report";
+		return {
+			...s,
+			charTab: newTab,
+			charName: a.name,
+		};
+	} else if (a.type === "undo") {
+		const newUR = OpsUndoRedo.undo(s.ur);
+		return {
+			...s,
+			team: OpsUndoRedo.getCurrent(newUR) || s.team,
+			ur: newUR,
+		};
+	} else if (a.type === "redo") {
+		const newUR = OpsUndoRedo.redo(s.ur);
+		return {
+			...s,
+			team: OpsUndoRedo.getCurrent(newUR) || s.team,
+			ur: newUR,
+		};
+	} else if (a.type === "updateCharResetBases") {
+		return updateChar(s, (game, oldChar) => {
+			const defaultChar = createChar(game, oldChar.name);
 			return {
-				...s,
-				loadError: null,
-				loadWarningOnly: false,
+				...oldChar,
+				baseClass: defaultChar.baseClass,
+				baseLevel: defaultChar.baseLevel,
+				baseStats: defaultChar.baseStats,
 			};
-
-		case "selectGame":
-			const {gameID} = a;
-			if (s.game && s.game.id === gameID) {
-				return s.viewingGame
-					? s
-					: {
-							...s,
-							viewingGame: true,
-					  };
-			}
-
-			const theGame = gameTable[gameID];
-			if (!theGame) {
-				console.log("Tried to set invalid game ID " + gameID);
-				return createEmpty();
-			}
-
-			return createFromGame(theGame);
-
-		case "deselectGame":
-			if (!s.viewingGame) {
+		});
+	} else if (a.type === "updateCharBaseClass") {
+		return updateChar(s, (game, oldChar) => {
+			return {
+				...oldChar,
+				baseClass: a.newClass,
+			};
+		});
+	} else if (a.type === "updateCharBaseLevel") {
+		return updateChar(s, (game, oldChar) => {
+			return {
+				...oldChar,
+				baseLevel: a.level,
+			};
+		});
+	} else if (a.type === "updateCharBaseStats") {
+		return updateChar(s, (game, oldChar) => {
+			return {
+				...oldChar,
+				baseStats: {...oldChar.baseStats, ...a.stats},
+			};
+		});
+	} else if (a.type === "updateCharHistoryAdd") {
+		return updateChar(s, (game, oldChar) => {
+			const newEntry = createHistoryEntry(game, oldChar, a.entryType);
+			const newHistory = [...oldChar.history, newEntry];
+			return {
+				...oldChar,
+				history: newHistory,
+			};
+		});
+	} else if (a.type === "updateCharHistoryMove") {
+		return updateChar(s, (game, oldChar) => {
+			const {histIndex, dir} = a;
+			const n = oldChar.history.length;
+			if (histIndex + dir < 0 || histIndex + dir >= n) return oldChar;
+			const newHistory = oldChar.history.slice(0);
+			newHistory[histIndex + dir] = oldChar.history[histIndex];
+			newHistory[histIndex] = oldChar.history[histIndex + dir];
+			return {
+				...oldChar,
+				history: newHistory,
+			};
+		});
+	} else if (a.type === "updateCharHistoryDelete") {
+		return updateChar(s, (game, oldChar) => {
+			const newHistory = oldChar.history
+				.slice(0, a.histIndex)
+				.concat(oldChar.history.slice(a.histIndex + 1));
+			return {
+				...oldChar,
+				history: newHistory,
+			};
+		});
+	} else if (a.type === "updateCharHistoryLevel") {
+		return updateHistoryEntry(s, a.histIndex, (game, oldChar, oldEntry) => {
+			return {
+				...oldEntry,
+				level: a.level,
+			};
+		});
+	} else if (a.type === "updateCharHistoryClass") {
+		return updateHistoryEntry(s, a.histIndex, (game, oldChar, oldEntry) => {
+			if (!("newClass" in oldEntry)) {
 				console.error("Unexpected data shape while handling action", a);
-				return s;
+				return oldEntry;
 			}
 			return {
-				...s,
-				viewingGame: false,
+				...oldEntry,
+				newClass: a.newClass,
 			};
-
-		case "resetGame":
-			if (!s.game) {
+		});
+	} else if (a.type === "updateCharHistoryStats") {
+		return updateHistoryEntry(s, a.histIndex, (game, oldChar, oldEntry) => {
+			if (!("stats" in oldEntry)) {
 				console.error("Unexpected data shape while handling action", a);
-				return s;
+				return oldEntry;
 			}
-			const newS = createFromGame(s.game);
 			return {
-				...newS,
-				ur: s.ur,
+				...oldEntry,
+				stats: {...oldEntry.stats, ...a.stats},
 			};
-
-		case "selectCharTab":
-			if (s.charTab === a.tab) return s;
-			return {...s, charTab: a.tab};
-
-		case "selectChar":
-			let newTab: CharTab = s.charTab;
-			if (a.forEditing) newTab = "edit";
-			else if (a.forReport) newTab = "report";
-			return {...s, charTab: newTab, charName: a.name};
-
-		case "undo":
-			newUR = OpsUndoRedo.undo(s.ur);
-			return {...s, team: OpsUndoRedo.getCurrent(newUR), ur: newUR};
-
-		case "redo":
-			newUR = OpsUndoRedo.redo(s.ur);
-			return {...s, team: OpsUndoRedo.getCurrent(newUR), ur: newUR};
-
-		case "updateCharResetBases":
-			return updateChar(s, (game, oldChar) => {
-				const defaultChar = createChar(game, oldChar.name);
-				return {
-					...oldChar,
-					baseClass: defaultChar.baseClass,
-					baseLevel: defaultChar.baseLevel,
-					baseStats: defaultChar.baseStats,
-				};
-			});
-
-		case "updateCharBaseClass":
-			return updateChar(s, (game, oldChar) => {
-				return {
-					...oldChar,
-					baseClass: a.newClass,
-				};
-			});
-
-		case "updateCharBaseLevel":
-			return updateChar(s, (game, oldChar) => {
-				return {
-					...oldChar,
-					baseLevel: a.level,
-				};
-			});
-
-		case "updateCharBaseStats":
-			return updateChar(s, (game, oldChar) => {
-				return {
-					...oldChar,
-					baseStats: {...oldChar.baseStats, ...a.stats},
-				};
-			});
-
-		case "updateCharHistoryAdd":
-			return updateChar(s, (game, oldChar) => {
-				const newEntry = createHistoryEntry(game, oldChar, a.entryType);
-				const newHistory = [...oldChar.history, newEntry];
-				return {
-					...oldChar,
-					history: newHistory,
-				};
-			});
-
-		case "updateCharHistoryMove":
-			return updateChar(s, (game, oldChar) => {
-				const {histIndex, dir} = a;
-				const n = oldChar.history.length;
-				if (histIndex + dir < 0 || histIndex + dir >= n) return oldChar;
-				const newHistory = oldChar.history.slice(0);
-				newHistory[histIndex + dir] = oldChar.history[histIndex];
-				newHistory[histIndex] = oldChar.history[histIndex + dir];
-				return {
-					...oldChar,
-					history: newHistory,
-				};
-			});
-
-		case "updateCharHistoryDelete":
-			return updateChar(s, (game, oldChar) => {
-				const newHistory = oldChar.history
-					.slice(0, a.histIndex)
-					.concat(oldChar.history.slice(a.histIndex + 1));
-				return {
-					...oldChar,
-					history: newHistory,
-				};
-			});
-
-		case "updateCharHistoryLevel":
-			return updateHistoryEntry(s, a.histIndex, (game, oldChar, oldEntry) => {
-				return {
-					...oldEntry,
-					level: a.level,
-				};
-			});
-
-		case "updateCharHistoryClass":
-			return updateHistoryEntry(s, a.histIndex, (game, oldChar, oldEntry) => {
-				if (!("newClass" in oldEntry)) {
-					console.error("Unexpected data shape while handling action", a);
-					return oldEntry;
-				}
-				return {
-					...oldEntry,
-					newClass: a.newClass,
-				};
-			});
-
-		case "updateCharHistoryStats":
-			return updateHistoryEntry(s, a.histIndex, (game, oldChar, oldEntry) => {
-				if (!("stats" in oldEntry)) {
-					console.error("Unexpected data shape while handling action", a);
-					return oldEntry;
-				}
-				return {
-					...oldEntry,
-					stats: {...oldEntry.stats, ...a.stats},
-				};
-			});
+		});
+	} else {
+		return assertNever(a);
 	}
 }
 

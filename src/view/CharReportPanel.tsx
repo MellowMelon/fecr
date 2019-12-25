@@ -10,8 +10,8 @@ import {
 } from "grommet";
 import {Table, TableBody, TableCell, TableRow} from "grommet";
 
-import {Stat, Char, CharCheckpoint, Team, GameData} from "../types";
-import {computeChar} from "../CharAdvance";
+import {Stat, Char, Team, GameData} from "../types";
+import {CharCheckpoint, computeChar} from "../CharAdvance";
 import {CharReport, getCharReport} from "../CharReport";
 import HelpTable from "../HelpTable";
 import {ViewAction} from "../state/types";

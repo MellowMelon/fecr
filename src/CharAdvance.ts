@@ -8,7 +8,6 @@ import {
 	CharClass,
 	CharName,
 	Char,
-	CharCheckpoint,
 	HistoryEntryCheckpoint,
 	HistoryEntryClass,
 	HistoryEntryBoost,
@@ -18,16 +17,27 @@ import {
 	GameData,
 } from "./types";
 
+type GrowthHistory = {[stat: string]: number[]};
+
+// Character at a specific point in time
+export type CharCheckpoint = {
+	name: CharName;
+	charClass: CharClass;
+	level: number;
+	stats: StatsTable;
+	dist: StatsDist;
+	distNB: StatsDist;
+	maxStats: StatsTable;
+	min: StatsTable;
+	boosts: StatsTable;
+	growthList: GrowthHistory;
+};
+
 type AdvanceEntry = HistoryEntry | {type: "level"; count: number};
 type AdvanceError = {histIndex: number; error: string};
 
 type AdvanceChar = {
-	name: CharName;
-	charClass: CharClass;
-	level: number;
-	dist: StatsDist;
-	distNB: StatsDist;
-	maxStats: StatsTable;
+	curr: CharCheckpoint;
 	base: CharCheckpoint;
 	checkpoints: CharCheckpoint[];
 };
@@ -48,17 +58,27 @@ function getBaseDist(stats: StatsTable): StatsDist {
 	return _.mapValues(stats, val => ProbDist.initAtValue(val));
 }
 
+function modifyCurrent(
+	char: AdvanceChar,
+	updates: Partial<CharCheckpoint>
+): AdvanceChar {
+	return {
+		...char,
+		curr: {
+			...char.curr,
+			...updates,
+		},
+	};
+}
+
 function modifyBothDists(
 	char: AdvanceChar,
 	f: (dist: StatsDist) => StatsDist
 ): AdvanceChar {
-	const newDist = f(char.dist);
-	const newDistNB = f(char.distNB);
-	return {
-		...char,
-		dist: newDist,
-		distNB: newDistNB,
-	};
+	return modifyCurrent(char, {
+		dist: f(char.curr.dist),
+		distNB: f(char.curr.distNB),
+	});
 }
 
 function modifyBothDistsMV(
@@ -88,6 +108,9 @@ export function getBaseGameChar(
 		dist,
 		distNB: dist,
 		maxStats: gameCharData.maxStats,
+		min: stats,
+		boosts: _.mapValues(stats, () => 0),
+		growthList: _.mapValues(stats, () => []),
 	};
 }
 
@@ -98,6 +121,7 @@ export function getBaseChar(game: GameData, char: Char): CharCheckpoint {
 	baseChar.stats = char.baseStats || baseChar.stats;
 	baseChar.dist = getBaseDist(baseChar.stats);
 	baseChar.distNB = baseChar.dist;
+	baseChar.min = baseChar.stats;
 	return baseChar;
 }
 
@@ -107,13 +131,8 @@ export function getCharPlan(game: GameData, char: Char): AdvancePlan {
 
 	const baseChar = getBaseChar(game, char);
 	const init = {
-		name: baseChar.name,
-		charClass: baseChar.charClass,
-		level: baseChar.level,
-		dist: baseChar.dist,
-		distNB: baseChar.dist,
-		maxStats: baseChar.maxStats,
 		base: baseChar,
+		curr: baseChar,
 		checkpoints: [],
 	};
 
@@ -148,18 +167,13 @@ function addCheckpoint(
 	entry: HistoryEntryCheckpoint
 ): AdvanceChar {
 	const realChar = modifyBothDistsMV(char, (pd, statName) => {
-		const max = char.maxStats[statName];
+		const max = char.curr.maxStats[statName];
 		pd = ProbDist.applyMax(pd, max);
 		return pd;
 	});
 	const newCP = {
-		name: char.name,
-		charClass: char.charClass,
-		level: entry.level,
+		...realChar.curr,
 		stats: entry.stats,
-		dist: realChar.dist,
-		distNB: realChar.distNB,
-		maxStats: char.maxStats,
 	};
 	return {...char, checkpoints: [...char.checkpoints, newCP]};
 }
@@ -214,22 +228,28 @@ function simulateClass(
 ): AdvanceChar {
 	const {newClass, newLevel, ignoreMins} = entry;
 	const {classChangeGetsAtLeast1HP} = game.globals;
-	const newMins = game.classes[entry.newClass].statMins;
-	const oldMods = game.classes[char.charClass].statMods;
+	const newClassMins = game.classes[entry.newClass].statMins;
+	const oldMods = game.classes[char.curr.charClass].statMods;
 	const newMods = game.classes[entry.newClass].statMods;
-	let newChar = {
-		...char,
+	const newMins = ignoreMins
+		? char.curr.min
+		: _.mapValues(char.curr.min, (oldMin, statName) => {
+				return Math.max(oldMin, newClassMins[statName]);
+		  });
+	let newChar = char;
+	newChar = modifyCurrent(newChar, {
 		charClass: newClass,
-		level: newLevel || char.level,
-	};
+		level: newLevel || char.curr.level,
+		min: newMins,
+	});
 	newChar = modifyBothDistsMV(newChar, (pd, statName) => {
 		pd = ProbDist.applyIncrease(pd, -oldMods[statName]);
 		if (!ignoreMins) {
 			if (statName === "hp" && classChangeGetsAtLeast1HP) {
-				const chanceOf1HP = getChanceOf1HP(game, newMins, char.dist);
-				pd = simulatePromotionHP(pd, newMins.hp, chanceOf1HP);
+				const chanceOf1HP = getChanceOf1HP(game, newClassMins, char.curr.dist);
+				pd = simulatePromotionHP(pd, newClassMins.hp, chanceOf1HP);
 			} else {
-				pd = ProbDist.applyMin(pd, newMins[statName]);
+				pd = ProbDist.applyMin(pd, newClassMins[statName]);
 			}
 		}
 		pd = ProbDist.applyIncrease(pd, newMods[statName]);
@@ -245,13 +265,19 @@ function simulateBoosts(
 ): AdvanceChar {
 	const {stats} = entry;
 	// The whole point of distNB is to not use modifyBothDists here.
-	const newDist = _.mapValues(char.dist, (pd, statName) => {
+	const newDist = _.mapValues(char.curr.dist, (pd, statName) => {
 		if (!stats[statName]) return pd;
-		const max = char.maxStats[statName];
+		const max = char.curr.maxStats[statName];
 		pd = ProbDist.applyIncrease(pd, stats[statName], max);
 		return pd;
 	});
-	return {...char, dist: newDist};
+	const newBoosts = _.mapValues(char.curr.boosts, (old, statName) => {
+		return old + (entry.stats[statName] || 0);
+	});
+	return modifyCurrent(char, {
+		dist: newDist,
+		boosts: newBoosts,
+	});
 }
 
 function simulateMaxBoosts(
@@ -260,10 +286,10 @@ function simulateMaxBoosts(
 	entry: HistoryEntryMaxBoost
 ): AdvanceChar {
 	const {stats} = entry;
-	const newMax = _.mapValues(char.maxStats, (val, statName) => {
+	const newMax = _.mapValues(char.curr.maxStats, (val, statName) => {
 		return val + stats[statName];
 	});
-	return {...char, maxStats: newMax};
+	return modifyCurrent(char, {maxStats: newMax});
 }
 
 function simulateLevels(
@@ -271,19 +297,27 @@ function simulateLevels(
 	char: AdvanceChar,
 	count: number
 ): AdvanceChar {
-	const gameCharData = game.chars[char.name];
-	const gameClassData = game.classes[char.charClass];
+	const gameCharData = game.chars[char.curr.name];
+	const gameClassData = game.classes[char.curr.charClass];
 	const realGrowths = sumObjects(gameCharData.growths, gameClassData.growths);
-	let newChar = {
-		...char,
-		level: char.level + count,
-	};
+	let newChar = char;
 	newChar = modifyBothDistsMV(newChar, (pd, statName) => {
-		const max = char.maxStats[statName];
+		const max = char.curr.maxStats[statName];
+		const growth = realGrowths[statName];
 		for (let i = 0; i < count; i += 1) {
-			pd = ProbDist.applyGrowthRate(pd, realGrowths[statName] / 100, max);
+			pd = ProbDist.applyGrowthRate(pd, growth / 100, max);
 		}
 		return pd;
+	});
+	const newGrowthList = _.mapValues(
+		char.curr.growthList,
+		(oldList, statName) => {
+			return oldList.concat(_.range(count).map(() => realGrowths[statName]));
+		}
+	);
+	newChar = modifyCurrent(newChar, {
+		level: char.curr.level + count,
+		growthList: newGrowthList,
 	});
 	return newChar;
 }

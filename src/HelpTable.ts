@@ -90,34 +90,40 @@ expand a panel of details with the following information:
 
 - **Current**: The stat's current value.
 - **Percentile Range**: The lower and upper percentile of the current value in
-	the distribution. For example, if your character is 20-40%, then given the
-	same history of class changes and stat boosts, a character is 20% likely to
-	do strictly worse than yours did, and 60% (100% minus 40%) likely to do
-	strictly better.
+  the distribution. For example, if your character is 20-40%, then given the
+  same history of class changes and stat boosts, a character is 20% likely to
+  do strictly worse than yours did, and 60% (100% minus 40%) likely to do
+  strictly better.
 - **Median**: The value of the stat at the 50th percentile. This is a good
-	measure of where a typical character would be.
+  measure of where a typical character would be.
 - **Ahead/behind**: The difference of the stat's current value and the median.
 - **Average**: The weighted average of all values in the distribution. The
-	author of this tool believes percentiles and medians are better to compare
-	to, since they have a more direct interpretation. However, the average is
-	much more feasible to compute by hand, so it has seen more widespread use.
+  author of this tool believes percentiles and medians are better to compare
+  to, since they have a more direct interpretation. However, the average is
+  much more feasible to compute by hand, so it has seen more widespread use.
+- **Boost**: The total amount of stat boosts applied, regardless of the effects
+  of minimums and maximums.
 - **Percentile Range NB**: The percentile range, with stat boosts ignored.
-	These and the other NB measurements tell you if your stat boosts made the
-	character superhuman or just got a poor performer to normal. If the stat's
-	maximum matters, the NB measurements may also tell you how wasted those stat
-	boosts were in the long run.
+  These and the other NB measurements tell you if your stat boosts made the
+  character superhuman or just got a poor performer to normal. If the stat's
+  maximum matters, the NB measurements may also tell you how wasted those stat
+  boosts were in the long run.
 - **Median NB**: The median, with stat boosts ignored.
 - **Ahead/behind NB**: The ahead/behind value, with stat boosts ignored.
 - **Average NB**: The average, with stat boosts ignored.
-- **Class Modifier**: The modifier for this stat from the character's current
-	class.
+- **Minimum**: The highest value among the base stat and all class minimums for
+  classes the character has been in.
 - **Maximum**: The current maximum of this stat, taking into account the base
-	maximum and any effects that increased it.
-- **Real Growth**: The percent chance this stat will increase each level. The
-	sum of the character and class growths.
-- **Char. Growth**: The base chance this stat will increase each level for this
-	character.
-- **Class Growth**: The growth modifier from the character's current class.
+  maximum and any effects that increased it.
+- **Total Levels**: The total number of levels this character has gained.
+- **Average Growth**: The weighted average of the growths across all this
+  character's levels.
+- **Base Growth**: The base chance this stat will increase each level for this
+  character.
+- **Current Growth**: The percent chance this stat will increase each level in
+  the character's current class.
+- **Current Modifier**: The modifier for this stat from the character's current
+  class.
 `,
 };
 

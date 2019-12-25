@@ -1,11 +1,6 @@
 import _ from "lodash";
-import {
-	CharClass,
-	CharCheckpoint,
-	StatsTable,
-	StatsDist,
-	GameData,
-} from "./types";
+import {CharClass, StatsTable, StatsDist, GameData} from "./types";
+import {CharCheckpoint} from "./CharAdvance";
 import {sumObjects} from "./Utils";
 import * as ProbDist from "./ProbDist";
 

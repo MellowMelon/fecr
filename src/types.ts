@@ -52,17 +52,6 @@ export type Char = {
 	baseStats: StatsTable;
 };
 
-// Character at a specific point in time
-export type CharCheckpoint = {
-	name: CharName;
-	charClass: CharClass;
-	level: number;
-	stats: StatsTable;
-	dist: StatsDist;
-	distNB: StatsDist;
-	maxStats: StatsTable;
-};
-
 // Group of characters in a playthrough
 export type Team = {[name: string]: Char};
 
