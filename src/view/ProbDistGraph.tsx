@@ -32,7 +32,7 @@ const defaultDims: GraphDims = {
 	horizontal: false,
 	bgColor: "#FFFFFF",
 	barColor: "#4477FF",
-	barFocusColor: "#FF7744",
+	barFocusColor: "#FF6633",
 	lightFocusColor: "#FFDDBB",
 	labelLightColor: "#AAAAAA",
 	labelFocusColor: "#444444",

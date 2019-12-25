@@ -6,42 +6,42 @@ import {
 	Trash as TrashIcon,
 } from "grommet-icons";
 
-import {GameData} from "../common";
+import {GameData} from "../types";
 
 import InputLevel from "./InputLevel";
 
 type Props = {
 	game: GameData;
-	canRearrange: boolean;
-	isFirst?: boolean;
-	isLast?: boolean;
 	level: number;
+	index: number;
+	count: number; // -1 means bases panel; no rearranging
+	error?: string;
 	children: React.ReactNode;
-	onMove?: (dir: number) => void;
-	onDelete?: () => void;
-	onSetLevel: (l: number) => void;
+	onSetLevel: (newLevel: number) => void;
+	onMove: (dir: number) => void;
+	onDelete: () => void;
 };
 
 const HistoryBase: React.FunctionComponent<Props> = function(props: Props) {
-	const {onDelete, onMove} = props;
+	const {level, index, count, error, onSetLevel, onMove, onDelete} = props;
 
 	const btnDelProps: any = {
 		icon: <TrashIcon />,
 		plain: true,
-		onClick: onDelete && (() => onDelete()),
+		onClick: onDelete,
 	};
 	const btnUpProps: any = {
 		icon: <UpIcon />,
 		plain: true,
-		onClick: onMove && (() => onMove(-1)),
+		onClick: () => onMove(-1),
 	};
 	const btnDownProps: any = {
 		icon: <DownIcon />,
 		plain: true,
-		onClick: onMove && (() => onMove(1)),
+		onClick: () => onMove(1),
 	};
 
-	if (!props.canRearrange) {
+	if (count < 0) {
 		btnDelProps.disabled = true;
 		btnDelProps.style = {visibility: "hidden"};
 		btnUpProps.disabled = true;
@@ -49,8 +49,8 @@ const HistoryBase: React.FunctionComponent<Props> = function(props: Props) {
 		btnDownProps.disabled = true;
 		btnDownProps.style = {visibility: "hidden"};
 	} else {
-		btnUpProps.disabled = props.isFirst;
-		btnDownProps.disabled = props.isLast;
+		btnUpProps.disabled = index === 0;
+		btnDownProps.disabled = index === count - 1;
 	}
 
 	const divider = (
@@ -60,12 +60,20 @@ const HistoryBase: React.FunctionComponent<Props> = function(props: Props) {
 		/>
 	);
 
+	// No-error border same as background, which gives an invisible border
+	// without changing the overall size of this element.
+	const border = {
+		color: error ? "status-error" : "light-4",
+		size: "small",
+	};
+
 	return (
 		<Box
 			direction="row"
 			align="center"
 			pad="small"
 			gap="small"
+			border={border}
 			background="light-4"
 			round="8px"
 		>
@@ -78,11 +86,7 @@ const HistoryBase: React.FunctionComponent<Props> = function(props: Props) {
 				<Text size="large" weight="bold">
 					Lv
 				</Text>
-				<InputLevel
-					game={props.game}
-					value={props.level}
-					onChange={props.onSetLevel}
-				/>
+				<InputLevel game={props.game} value={level} onChange={onSetLevel} />
 			</Box>
 			{divider}
 			<Box flex align="stretch">

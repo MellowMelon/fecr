@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useMemo} from "react";
 import {
 	Accordion,
 	AccordionPanel,
@@ -10,10 +10,11 @@ import {
 } from "grommet";
 import {Table, TableBody, TableCell, TableRow} from "grommet";
 
-import {Stat, CharName, Char, CharCheckpoint, Team, GameData} from "../common";
+import {Stat, Char, CharCheckpoint, Team, GameData} from "../types";
 import {computeChar} from "../CharAdvance";
 import {CharReport, getCharReport} from "../CharReport";
 import HelpTable from "../HelpTable";
+import {ViewAction} from "../state/types";
 
 import CharHeader from "./CharHeader";
 import ProbDistGraph, {GraphDims} from "./ProbDistGraph";
@@ -23,7 +24,7 @@ type Props = {
 	game: GameData;
 	team: Team;
 	char: Char | null;
-	onSelectChar: (name: CharName) => void;
+	dispatch: (a: ViewAction) => void;
 };
 
 const pdgSmallDims: Partial<GraphDims> = {
@@ -136,16 +137,17 @@ function renderStatPanel(cr: CharReport, statName: Stat, screenSize: string) {
 
 	const perc = cr.sdPercentiles[statName];
 	const percColor = getPercColor(perc);
+	const percTextSize = isXSmall ? "medium" : "large";
 	const percBox: React.ReactNode = (
 		<Box background={percColor} width="xsmall" align="center">
-			<Text textAlign="center" size="large">
+			<Text textAlign="center" size={percTextSize}>
 				{renderPercentRange(perc)}
 			</Text>
 		</Box>
 	);
 
 	const label = (
-		<Box direction="row" flex align="center" gap="medium" pad="small">
+		<Box direction="row" flex align="center" gap="small" pad="small">
 			<Box width="xsmall" align="center">
 				<Text size="large" weight="bold">
 					{statName}
@@ -190,7 +192,7 @@ function renderStatPanel(cr: CharReport, statName: Stat, screenSize: string) {
 }
 
 const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
-	const {game, team, char, onSelectChar} = props;
+	const {game, team, char, dispatch} = props;
 	if (!char) return null;
 
 	const charHeader = (
@@ -198,13 +200,13 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 			game={game}
 			team={team}
 			charName={char.name}
-			onSelectChar={onSelectChar}
+			dispatch={dispatch}
 		/>
 	);
 
 	let computed;
 	try {
-		computed = computeChar(game, char);
+		computed = useMemo(() => computeChar(game, char), [game, char]);
 	} catch (ex) {
 		// TODO: where to report bugs?
 		return (

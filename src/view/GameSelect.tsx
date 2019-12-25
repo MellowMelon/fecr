@@ -1,16 +1,21 @@
 import React from "react";
 import {Box, Button, Heading, Image, Text} from "grommet";
 
-import {GameID} from "../common";
+import {GameID} from "../types";
 import gameTable from "../GameTable";
+import {ViewAction} from "../state/types";
 
 type Props = {
 	initialID: GameID | null;
-	onSelect: (id: GameID) => void;
+	dispatch: (a: ViewAction) => void;
 };
 
 const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 	const gameEls: React.ReactElement[] = [];
+
+	function onSelect(gameID: GameID) {
+		props.dispatch({type: "selectGame", gameID});
+	}
 
 	Object.keys(gameTable).map(gameID => {
 		const game = gameTable[gameID];
@@ -25,7 +30,7 @@ const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 		);
 		gameEls.push(
 			<Box key={gameID}>
-				<Button label={el} onClick={() => props.onSelect(gameID)} />
+				<Button label={el} onClick={() => onSelect(gameID)} />
 			</Box>
 		);
 	});

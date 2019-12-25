@@ -1,5 +1,5 @@
 import React from "react";
-import {CharClass, GameData} from "../common";
+import {CharClass, GameData} from "../types";
 
 import {Select} from "grommet";
 

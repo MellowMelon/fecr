@@ -1,4 +1,4 @@
-import {CharName, Team, GameID, GameData} from "./common";
+import {CharName, Team, GameID, GameData} from "./types";
 import gameTable from "./GameTable";
 import {getTeamCharList} from "./CharUtils";
 import {UnserializeResult, unserialize} from "./CharSerialize";

@@ -1,4 +1,3 @@
-import _ from "lodash";
 import {ProbDist} from "./ProbDist";
 
 export type Gender = "M" | "F";
@@ -101,10 +100,3 @@ export type GameData = {
 	chars: {[name: string]: CharData};
 	classes: {[charClass: string]: ClassData};
 };
-
-export function sumObjects(
-	t1: {[k: string]: number},
-	t2: {[k: string]: number}
-) {
-	return _.mapValues(t1, (v, k) => v + t2[k]);
-}

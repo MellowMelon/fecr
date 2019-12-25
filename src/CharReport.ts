@@ -5,8 +5,8 @@ import {
 	StatsTable,
 	StatsDist,
 	GameData,
-	sumObjects,
-} from "./common";
+} from "./types";
+import {sumObjects} from "./Utils";
 import * as ProbDist from "./ProbDist";
 
 export type CharReport = {
@@ -63,9 +63,9 @@ function computeDistDerived(stats: StatsTable, dist: StatsDist): DistAgg {
 	const sdMedianDisp = _.mapValues(sdMedian, halfIntToString);
 	const sdMedianDiff = _.mapValues(sdMedian, (med, statName) => {
 		const curr = stats[statName];
-		let diff = halfIntToString(curr - med);
+		const diff = halfIntToString(curr - med);
 		if (curr > med) return "+" + diff;
-		if (curr < med) return String(diff);
+		if (curr < med) return diff;
 		return "0";
 	});
 	const sdPercentiles = _.mapValues(dist, (pd, statName) =>

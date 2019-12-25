@@ -1,4 +1,4 @@
-import {GameData} from "./common";
+import {GameData} from "./types";
 
 import Game3H from "../data/3h.json";
 

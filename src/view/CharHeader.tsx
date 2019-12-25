@@ -2,19 +2,21 @@ import React from "react";
 import {Box, Button, Heading, Image} from "grommet";
 import {Previous as PreviousIcon, Next as NextIcon} from "grommet-icons";
 
-import {CharName, Team, GameData} from "../common";
+import {CharName, Team, GameData} from "../types";
 import {getTeamCharList} from "../CharUtils";
+import {ViewAction} from "../state/types";
 
 type Props = {
 	game: GameData;
 	team: Team | null;
 	charName: CharName;
-	onSelectChar?: (name: CharName) => void;
+	dispatch: (a: ViewAction) => void;
 };
 
 const CharHeader: React.FunctionComponent<Props> = function(props: Props) {
-	const {game, team, charName, onSelectChar} = props;
+	const {game, team, charName, dispatch} = props;
 	const teamCharList = getTeamCharList(game, team, charName);
+	const teamCount = teamCharList.chars.length;
 
 	const src = "images/chars/" + game.id + "-" + charName.toLowerCase() + ".jpg";
 	const img = (
@@ -24,27 +26,26 @@ const CharHeader: React.FunctionComponent<Props> = function(props: Props) {
 	);
 
 	const onNavigate = function(dir: number) {
-		const n = teamCharList.chars.length;
 		let newIndex = teamCharList.index + dir;
 		if (newIndex < 0) {
-			newIndex = n - 1;
-		} else if (newIndex >= n) {
+			newIndex = teamCount - 1;
+		} else if (newIndex >= teamCount) {
 			newIndex = 0;
 		}
-		onSelectChar && onSelectChar(teamCharList.chars[newIndex]);
+		dispatch({type: "selectChar", name: teamCharList.chars[newIndex]});
 	};
 
-	const prevButton = onSelectChar && (
+	const prevButton = (
 		<Button
 			icon={<PreviousIcon />}
-			disabled={teamCharList.chars.length === 1}
+			disabled={teamCount === 1}
 			onClick={() => onNavigate(-1)}
 		/>
 	);
-	const nextButton = onSelectChar && (
+	const nextButton = (
 		<Button
 			icon={<NextIcon />}
-			disabled={teamCharList.chars.length === 1}
+			disabled={teamCount === 1}
 			onClick={() => onNavigate(1)}
 		/>
 	);

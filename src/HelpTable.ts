@@ -3,8 +3,8 @@ passed a new certification or reclassed. This will apply the minimum stats,
 modifiers, and growths of that class until the next class change.`;
 
 const statBoostBlurb = `A **Stat Boost** entry is for when a character had a
-stat permanently increased, such as from an Energy Drop, Talisman, or tea time.
-Don't input modifiers from classes, abilities, cooking, or equipment here.`;
+stat permanently increased, such as from an Energy Drop or tea time. Don't
+input modifiers from classes, abilities, cooking, or equipment here.`;
 
 const maxStatBlurb = `A **Max Stat Increase** entry is for when a Saint
 Statue was fully restored and increased the maximum stats for a character.
@@ -39,7 +39,7 @@ these bases for characters that were recruited later in the game.
 
 ${inputStatsBlurb}
 
-Use the Reset button if you want to put back the game's defaults.
+Use the Reset Initial button if you want to put back the game's defaults.
 `,
 	histCheckpoint: `
 ${checkpointBlurb}
@@ -55,18 +55,13 @@ accurate report, since classes affect growth rates.
 	histStatBoost: `
 ${statBoostBlurb}
 
-Input the modifier, not the value of the stat after the increase. Stats that
-were unaffected should be left as 0.
-
-A guessed or approximate level is okay. The calculations are largely unaffected
-by when a stat increase occurs. The main exception is when a Class Change's
+A guessed or approximate level is okay. Changing when a stat boost occurs
+rarely affects the calculations. The main exception is when a Class Change's
 minimum stats are significant, in which case it matters whether a stat boost
 came before or after.
 `,
 	histMaxStat: `
 ${maxStatBlurb}
-
-Input the modifier, not the new maximum stats.
 `,
 	histAdd: `
 For the simulator to correctly determine the likelihood of the character's
@@ -81,11 +76,6 @@ ${classChangeBlurb}
 ${statBoostBlurb}
 
 ${maxStatBlurb}
-
-Currently, the simulator does not do checks that entries are ordered by level
-and that class changes are allowed by the rules, so check your data when you
-are done. There are no plans to add such checks; there are enough exceptional
-cases in the games that we'd risk denying valid data.
 `,
 	report: `
 The Report tab is the payoff of using this tool; it gives a visual

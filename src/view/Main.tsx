@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useReducer} from "react";
 import {Box, Grommet, Layer} from "grommet";
 
-import {GameID} from "../common";
-import * as ViewState from "../ViewState";
-import {serialize} from "../CharSerialize";
+import {ViewState, ViewAction} from "../state/types";
+import {reduceAction} from "../state/Reducer";
+import {loadState} from "../state/Create";
 
 import LoadErrorModal from "./LoadErrorModal";
 import GameSelect from "./GameSelect";
@@ -13,8 +13,14 @@ type Props = {
 	urlHash: string | null;
 };
 
+type ReducerType = (s: ViewState, a: ViewAction) => ViewState;
+
 const grommetTheme: any = {
 	global: {
+		colors: {
+			brand: "#FF6633",
+			"neutral-1": "#4477FF",
+		},
 		focus: {
 			border: {
 				color: "none",
@@ -32,6 +38,23 @@ const grommetTheme: any = {
 			},
 		},
 	},
+	paragraph: {
+		small: {
+			maxWidth: "none",
+		},
+		medium: {
+			maxWidth: "none",
+		},
+		large: {
+			maxWidth: "none",
+		},
+		xlarge: {
+			maxWidth: "none",
+		},
+		xxlarge: {
+			maxWidth: "none",
+		},
+	},
 	select: {
 		control: {
 			extend: {
@@ -41,20 +64,17 @@ const grommetTheme: any = {
 	},
 };
 
-function saveHash(hash: string) {
-	window.localStorage.setItem("autosave", hash);
-	window.history.replaceState({}, "", "#" + hash);
-}
-
 const Main: React.FunctionComponent<Props> = function(props: Props) {
-	const [viewState, setState] = useState<ViewState.State>(
-		ViewState.createState(props.urlHash)
+	const [viewState, dispatch] = useReducer<ReducerType, string | null>(
+		reduceAction,
+		props.urlHash,
+		loadState
 	);
 
 	let errorModal = null;
 	if (viewState.loadError) {
 		const onClose = () => {
-			setState(ViewState.closeLoadError(viewState));
+			dispatch({type: "closeLoadError"});
 		};
 		errorModal = (
 			<Layer onEsc={onClose} onClickOutside={onClose}>
@@ -69,29 +89,10 @@ const Main: React.FunctionComponent<Props> = function(props: Props) {
 
 	let mainView;
 	if (viewState.game && viewState.viewingGame) {
-		const onGameSelect = () => {
-			setState(ViewState.goToGameSelect(viewState));
-		};
-		const onUpdateState = (newState: ViewState.State) => {
-			if (newState.game && newState.team !== viewState.team) {
-				const hash = serialize(newState.game, newState.team);
-				saveHash(hash);
-			}
-			setState(newState);
-		};
-		mainView = (
-			<GameMain
-				state={viewState}
-				onGameSelect={onGameSelect}
-				onUpdateState={onUpdateState}
-			/>
-		);
+		mainView = <GameMain state={viewState} dispatch={dispatch} />;
 	} else {
 		const initialID = viewState.game && viewState.game.id;
-		const onSelect = (gameID: GameID) => {
-			setState(ViewState.setGameID(viewState, gameID));
-		};
-		mainView = <GameSelect initialID={initialID} onSelect={onSelect} />;
+		mainView = <GameSelect initialID={initialID} dispatch={dispatch} />;
 	}
 
 	return (

@@ -1,6 +1,6 @@
 import test, {ExecutionContext} from "ava";
 
-import {StatsDist, Char, GameData} from "../src/common";
+import {StatsDist, Char, GameData} from "../src/types";
 import {AdvanceFinal, computeChar} from "../src/CharAdvance";
 
 const TOLERANCE = 0.000001;
@@ -251,6 +251,41 @@ test("computeChar, leveling", t => {
 			},
 		],
 		errors: [],
+	});
+});
+
+test("computeChar, low level error", t => {
+	const c: Char = {
+		name: "Bob",
+		history: [
+			{type: "checkpoint", id: 1, level: 5, stats: {hp: 32, mp: 11}},
+			{type: "checkpoint", id: 2, level: 3, stats: {hp: 31, mp: 11}},
+		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
+		baseStats: game1.chars.Bob.baseStats,
+	};
+	const final = computeChar(game1, c);
+	checkFinal(t, final, {
+		base: defaultBase,
+		checkpoints: [
+			{
+				name: "Bob",
+				charClass: "weak",
+				level: 5,
+				stats: {hp: 32, mp: 11},
+				dist: {
+					hp: {30: 0.125, 31: 0.375, 32: 0.375, 33: 0.125},
+					mp: {10: 0.512, 11: 0.384, 12: 0.096, 13: 0.008},
+				},
+				distNB: {
+					hp: {30: 0.125, 31: 0.375, 32: 0.375, 33: 0.125},
+					mp: {10: 0.512, 11: 0.384, 12: 0.096, 13: 0.008},
+				},
+				maxStats: game1.chars.Bob.maxStats,
+			},
+		],
+		errors: [{histIndex: 1, error: "Level would decrease"}],
 	});
 });
 

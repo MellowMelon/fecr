@@ -1,19 +1,19 @@
-import React from "react";
-import {Box, Heading} from "grommet";
+import React, {memo} from "react";
+import {Box, DropButton, Heading, Text} from "grommet";
+import {Alert as AlertIcon} from "grommet-icons";
 
 import {
 	Stat,
 	CharClass,
-	Char,
 	HistoryEntryCheckpoint,
 	HistoryEntryClass,
 	HistoryEntryBoost,
 	HistoryEntryMaxBoost,
 	HistoryEntry,
-	History,
 	GameData,
-} from "../common";
+} from "../types";
 import HelpTable from "../HelpTable";
+import {ViewAction} from "../state/types";
 
 import HistoryBase from "./HistoryBase";
 import InputStats from "./InputStats";
@@ -22,21 +22,45 @@ import HelpButton from "./HelpButton";
 
 type Props = {
 	game: GameData;
-	char: Char;
-	index: number;
-	onUpdateHistory: (h: History) => void;
+	histIndex: number;
+	histEntry: HistoryEntry;
+	histCount: number;
+	error?: string;
+	dispatch: (a: ViewAction) => void;
 };
 
-function renderHistoryHeader(title: string, helpMD: string): React.ReactNode {
+function renderHistoryHeader(
+	title: string,
+	helpMD: string,
+	error?: string
+): React.ReactNode {
 	const helpButton = helpMD ? (
-		<HelpButton title={"Help - " + title} md={helpMD} />
+		<HelpButton plain title={"Help - " + title} md={helpMD} />
 	) : null;
+	let errorButton: React.ReactNode = null;
+	if (error) {
+		const errorContent = (
+			<Box background="status-error" margin="small" pad="small">
+				<Text>{error}</Text>
+			</Box>
+		);
+		errorButton = (
+			<DropButton
+				plain
+				icon={<AlertIcon color="status-error" />}
+				dropAlign={{top: "bottom", left: "left"}}
+				dropProps={{plain: true}}
+				dropContent={errorContent}
+			/>
+		);
+	}
 	return (
-		<Box direction="row" align="center">
+		<Box direction="row" align="center" gap="small" pad={{vertical: "small"}}>
 			<Heading level={3} margin="none">
 				{title}
 			</Heading>
 			{helpButton}
+			{errorButton}
 		</Box>
 	);
 }
@@ -44,49 +68,42 @@ function renderHistoryHeader(title: string, helpMD: string): React.ReactNode {
 const HistoryEntryView: React.FunctionComponent<Props> = function(
 	props: Props
 ) {
-	const {game, char, index, onUpdateHistory} = props;
+	const {game, histIndex, histEntry, histCount, error, dispatch} = props;
 
-	const thisEntry = char.history[index];
-
-	const updateThisEntry = function(e: HistoryEntry) {
-		const newHistory = char.history.slice(0);
-		newHistory[index] = e;
-		onUpdateHistory(newHistory);
+	const onChangeStats = function(statName: Stat, value: number) {
+		const stats = {[statName]: value};
+		dispatch({type: "updateCharHistoryStats", histIndex, stats});
 	};
+
+	const onSelectClass = function(c: CharClass) {
+		dispatch({type: "updateCharHistoryClass", histIndex, newClass: c});
+	};
+
+	const errorStr = error
+		? `This entry is invalid and will be ignored by the report. (${error})`
+		: undefined;
 
 	const entryRenderers = {
 		checkpoint(h: HistoryEntryCheckpoint) {
-			const onChangeStats = function(statName: Stat, value: number) {
-				const newStats = {
-					...h.stats,
-					[statName]: value,
-				};
-				const newEntry = {
-					...h,
-					stats: newStats,
-				};
-				updateThisEntry(newEntry);
-			};
-
 			return (
 				<Box gap="small">
-					{renderHistoryHeader("Checkpoint", HelpTable.histCheckpoint)}
+					{renderHistoryHeader(
+						"Checkpoint",
+						HelpTable.histCheckpoint,
+						errorStr
+					)}
 					<InputStats game={game} value={h.stats} onChange={onChangeStats} />
 				</Box>
 			);
 		},
 		["class"](h: HistoryEntryClass) {
-			const onSelectClass = function(c: CharClass) {
-				const newEntry = {
-					...h,
-					newClass: c,
-				};
-				updateThisEntry(newEntry);
-			};
-
 			return (
 				<Box gap="small">
-					{renderHistoryHeader("Class Change", HelpTable.histClassChange)}
+					{renderHistoryHeader(
+						"Class Change",
+						HelpTable.histClassChange,
+						errorStr
+					)}
 					<Box direction="row">
 						<InputClass
 							game={game}
@@ -98,21 +115,9 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 			);
 		},
 		boost(h: HistoryEntryBoost) {
-			const onChangeStats = function(statName: Stat, value: number) {
-				const newStats = {
-					...h.stats,
-					[statName]: value,
-				};
-				const newEntry = {
-					...h,
-					stats: newStats,
-				};
-				updateThisEntry(newEntry);
-			};
-
 			return (
 				<Box gap="small">
-					{renderHistoryHeader("Stat Boost", HelpTable.histStatBoost)}
+					{renderHistoryHeader("Stat Boost", HelpTable.histStatBoost, errorStr)}
 					<InputStats
 						game={game}
 						value={h.stats}
@@ -123,21 +128,13 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 			);
 		},
 		maxboost(h: HistoryEntryMaxBoost) {
-			const onChangeStats = function(statName: Stat, value: number) {
-				const newStats = {
-					...h.stats,
-					[statName]: value,
-				};
-				const newEntry = {
-					...h,
-					stats: newStats,
-				};
-				updateThisEntry(newEntry);
-			};
-
 			return (
 				<Box gap="small">
-					{renderHistoryHeader("Max Stat Increase", HelpTable.histMaxStat)}
+					{renderHistoryHeader(
+						"Max Stat Increase",
+						HelpTable.histMaxStat,
+						errorStr
+					)}
 					<InputStats
 						game={game}
 						value={h.stats}
@@ -150,36 +147,26 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 	};
 
 	const onChangeLevel = function(l: number) {
-		updateThisEntry({
-			...thisEntry,
-			level: l,
-		});
+		dispatch({type: "updateCharHistoryLevel", histIndex, level: l});
 	};
 
 	const onMove = function(dir: number) {
-		if (index + dir < 0 || index + dir >= char.history.length) return;
-		const newHistory = char.history.slice(0);
-		newHistory[index + dir] = char.history[index];
-		newHistory[index] = char.history[index + dir];
-		onUpdateHistory(newHistory);
+		dispatch({type: "updateCharHistoryMove", histIndex, dir});
 	};
 
 	const onDelete = function() {
-		const newHistory = char.history
-			.slice(0, index)
-			.concat(char.history.slice(index + 1));
-		onUpdateHistory(newHistory);
+		dispatch({type: "updateCharHistoryDelete", histIndex});
 	};
 
-	const mainEl = entryRenderers[thisEntry.type](thisEntry as any);
+	const mainEl = entryRenderers[histEntry.type](histEntry as any);
 
 	return (
 		<HistoryBase
 			game={game}
-			canRearrange={true}
-			isFirst={index === 0}
-			isLast={index === char.history.length - 1}
-			level={thisEntry.level}
+			index={histIndex}
+			count={histCount}
+			level={histEntry.level}
+			error={error}
 			onMove={onMove}
 			onDelete={onDelete}
 			onSetLevel={onChangeLevel}
@@ -188,4 +175,4 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 		</HistoryBase>
 	);
 };
-export default HistoryEntryView;
+export default memo(HistoryEntryView);

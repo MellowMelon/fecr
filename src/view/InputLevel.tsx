@@ -1,6 +1,6 @@
 import React from "react";
 
-import {GameData} from "../common";
+import {GameData} from "../types";
 
 import InputNumber from "./InputNumber";
 

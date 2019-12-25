@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, ResponsiveContext, Text} from "grommet";
 
-import {Stat, StatsTable, GameData} from "../common";
+import {Stat, StatsTable, GameData} from "../types";
 
 import InputNumber from "./InputNumber";
 
@@ -39,6 +39,7 @@ const InputStats: React.FunctionComponent<Props> = function(props: Props) {
 					value={value[statName]}
 					min={min}
 					max={max}
+					rel={rel}
 					onChange={v => onChange(statName, v)}
 				/>
 			</Box>

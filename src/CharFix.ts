@@ -7,7 +7,7 @@ import {
 	Team,
 	GameID,
 	GameData,
-} from "./common";
+} from "./types";
 import gameTable from "./GameTable";
 import {makeZeroStats} from "./CharUtils";
 
@@ -128,7 +128,7 @@ function fixHistoryEntry(
 		errors.push(...res.errors);
 		return res.value;
 	}
-	const type: string = String(data.type);
+	const type = String(data.type);
 	const level = extract(fixLevel(game, `${where} level`, data.level));
 	if (type === "checkpoint") {
 		const e: HistoryEntry = {

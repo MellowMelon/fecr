@@ -6,6 +6,7 @@ import {
 } from "grommet-icons";
 
 type Props = {
+	plain?: boolean;
 	title: string;
 	md: string;
 };
@@ -38,7 +39,11 @@ const HelpButton: React.FunctionComponent<Props> = function(props: Props) {
 	}
 
 	const helpButton = (
-		<Button icon={<CircleQuestionIcon />} onClick={() => setShow(true)} />
+		<Button
+			plain={props.plain}
+			icon={<CircleQuestionIcon />}
+			onClick={() => setShow(true)}
+		/>
 	);
 
 	return (

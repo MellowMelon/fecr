@@ -1,6 +1,6 @@
 import _ from "lodash";
 import Jsonpack from "jsonpack";
-import {Team, GameID, GameData} from "./common";
+import {Team, GameID, GameData} from "./types";
 
 const FORMAT_VERSION = 2;
 

@@ -8,7 +8,7 @@ import {
 	HistoryEntry,
 	Team,
 	GameData,
-} from "./common";
+} from "./types";
 
 export type TeamCharList = {
 	index: number;

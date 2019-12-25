@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import * as ProbDist from "./ProbDist";
-import {sumObjects} from "./common";
+import {sumObjects} from "./Utils";
 import {
 	Stat,
 	StatsTable,
@@ -16,10 +16,10 @@ import {
 	HistoryEntry,
 	StatsDist,
 	GameData,
-} from "./common";
+} from "./types";
 
-type AdvanceEntry = HistoryEntry | {type: "level"};
-type AdvanceError = {historyIndex: number; error: string};
+type AdvanceEntry = HistoryEntry | {type: "level"; count: number};
+type AdvanceError = {histIndex: number; error: string};
 
 type AdvanceChar = {
 	name: CharName;
@@ -117,26 +117,26 @@ export function getCharPlan(game: GameData, char: Char): AdvancePlan {
 		checkpoints: [],
 	};
 
-	let historyIndex = 0;
+	let histIndex = 0;
 	let currLevel = baseChar.level;
-	while (historyIndex < char.history.length) {
-		const nextH = char.history[historyIndex];
-		while (nextH.level > currLevel) {
-			entries.push({type: "level"});
-			currLevel += 1;
+	while (histIndex < char.history.length) {
+		const nextH = char.history[histIndex];
+		if (nextH.level > currLevel) {
+			entries.push({type: "level", count: nextH.level - currLevel});
+			currLevel = nextH.level;
 		}
 		if (nextH.level < currLevel) {
 			errors.push({
-				historyIndex,
-				error: "Level is lower than the previous entry",
+				histIndex,
+				error: "Level would decrease",
 			});
-			historyIndex += 1;
+			histIndex += 1;
 		} else {
 			if (nextH.type === "class") {
 				currLevel = nextH.newLevel || currLevel;
 			}
 			entries.push(nextH);
-			historyIndex += 1;
+			histIndex += 1;
 		}
 	}
 	return {init, entries, errors};
@@ -266,17 +266,23 @@ function simulateMaxBoosts(
 	return {...char, maxStats: newMax};
 }
 
-function simulateLevel(game: GameData, char: AdvanceChar): AdvanceChar {
+function simulateLevels(
+	game: GameData,
+	char: AdvanceChar,
+	count: number
+): AdvanceChar {
 	const gameCharData = game.chars[char.name];
 	const gameClassData = game.classes[char.charClass];
 	const realGrowths = sumObjects(gameCharData.growths, gameClassData.growths);
 	let newChar = {
 		...char,
-		level: char.level + 1,
+		level: char.level + count,
 	};
 	newChar = modifyBothDistsMV(newChar, (pd, statName) => {
 		const max = char.maxStats[statName];
-		pd = ProbDist.applyGrowthRate(pd, realGrowths[statName] / 100, max);
+		for (let i = 0; i < count; i += 1) {
+			pd = ProbDist.applyGrowthRate(pd, realGrowths[statName] / 100, max);
+		}
 		return pd;
 	});
 	return newChar;
@@ -288,7 +294,7 @@ export function reduceChar(
 	entry: AdvanceEntry
 ): AdvanceChar {
 	if (entry.type === "level") {
-		return simulateLevel(game, char);
+		return simulateLevels(game, char, entry.count);
 	} else if (entry.type === "checkpoint") {
 		return addCheckpoint(game, char, entry);
 	} else if (entry.type === "class") {
