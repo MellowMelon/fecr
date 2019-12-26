@@ -1,6 +1,5 @@
 import React from "react";
 import {Box, Button} from "grommet";
-import FlipMove from "react-flip-move";
 
 import {Char, Team, GameData} from "../types";
 import {getCharPlan} from "../CharAdvance";
@@ -9,7 +8,7 @@ import {ViewAction} from "../state/types";
 import CharHeader from "./CharHeader";
 import CharEditBases from "./CharEditBases";
 import HistoryAdd from "./HistoryAdd";
-import HistoryEntryView from "./HistoryEntryView";
+import HistoryEntryList from "./HistoryEntryList";
 
 type Props = {
 	game: GameData;
@@ -27,22 +26,6 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 	const histErrorTable: {[histIndex: number]: string} = {};
 	plan.errors.forEach(e => {
 		histErrorTable[e.histIndex] = e.error;
-	});
-
-	const histCount = char.history.length;
-	const historyEntries = char.history.map((h, i) => {
-		return (
-			<Box key={h.id} margin={{bottom: "small"}}>
-				<HistoryEntryView
-					game={game}
-					histIndex={i}
-					histEntry={h}
-					histCount={histCount}
-					error={histErrorTable[i]}
-					dispatch={dispatch}
-				/>
-			</Box>
-		);
 	});
 
 	function onResetCharacter() {
@@ -64,14 +47,13 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 				baseStats={char.baseStats}
 				dispatch={dispatch}
 			/>
-			<FlipMove
+			<HistoryEntryList
 				key={char.name}
-				duration={200}
-				enterAnimation="accordionVertical"
-				leaveAnimation="accordionVertical"
-			>
-				{historyEntries}
-			</FlipMove>
+				game={game}
+				char={char}
+				histErrorTable={histErrorTable}
+				dispatch={dispatch}
+			/>
 			<Box alignSelf="center">
 				<Button label="Reset Character" onClick={onResetCharacter} />
 			</Box>

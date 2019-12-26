@@ -16,6 +16,7 @@ type Props = {
 	index: number;
 	count: number; // -1 means bases panel; no rearranging
 	error?: string;
+	stub?: boolean;
 	children: React.ReactNode;
 	onSetLevel: (newLevel: number) => void;
 	onMove: (dir: number) => void;
@@ -23,7 +24,16 @@ type Props = {
 };
 
 const HistoryBase: React.FunctionComponent<Props> = function(props: Props) {
-	const {level, index, count, error, onSetLevel, onMove, onDelete} = props;
+	const {
+		level,
+		index,
+		count,
+		error,
+		stub,
+		onSetLevel,
+		onMove,
+		onDelete,
+	} = props;
 
 	const btnDelProps: any = {
 		icon: <TrashIcon />,
@@ -67,6 +77,10 @@ const HistoryBase: React.FunctionComponent<Props> = function(props: Props) {
 		size: "small",
 	};
 
+	const lvInput: React.ReactNode = stub ? null : (
+		<InputLevel game={props.game} value={level} onChange={onSetLevel} />
+	);
+
 	return (
 		<Box
 			direction="row"
@@ -86,11 +100,11 @@ const HistoryBase: React.FunctionComponent<Props> = function(props: Props) {
 				<Text size="large" weight="bold">
 					Lv
 				</Text>
-				<InputLevel game={props.game} value={level} onChange={onSetLevel} />
+				{lvInput}
 			</Box>
 			{divider}
 			<Box flex align="stretch" margin={{bottom: "small"}}>
-				{props.children}
+				{stub ? null : props.children}
 			</Box>
 		</Box>
 	);
