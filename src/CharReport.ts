@@ -2,7 +2,7 @@ import _ from "lodash";
 import {Stat, CharClass, StatsTable, StatsDist, GameData} from "./types";
 import {CharCheckpoint} from "./CharAdvance";
 import {makeZeroStats} from "./CharUtils";
-import {sumObjects} from "./Utils";
+import {assertNever, filterNonempty, sumObjects} from "./Utils";
 import * as ProbDist from "./ProbDist";
 
 type StatsStrTable = {[stat: string]: string};
@@ -34,7 +34,7 @@ export type CharReport = {
 	sdNBPercentiles: StatsPercTable;
 };
 
-const reportDetailsLabels: {[key: string]: string} = {
+const reportDetailsLabels = {
 	current: "Current",
 	classMod: "Class Modifier",
 	percentiles: "Percentile Range",
@@ -56,6 +56,8 @@ const reportDetailsLabels: {[key: string]: string} = {
 	classGrowth: "Class Growth",
 	equipGrowth: "Equip Growth",
 };
+
+type ReportDetailKey = keyof typeof reportDetailsLabels;
 
 function computePercentiles(
 	pd: ProbDist.ProbDist,
@@ -198,11 +200,11 @@ export function renderPercentRange([lo, hi]: [number, number]): string {
 	return loDisp + "\u2011" + hiDisp + "%";
 }
 
-export function getReportDetailsRows(game: GameData): string[] {
+export function getReportDetailsRows(game: GameData): ReportDetailKey[] {
 	const g = game.globals;
-	return [
+	const base: (ReportDetailKey | null)[] = [
 		"current",
-		g.enableClassMods ? "classMod" : "",
+		g.enableClassMods ? "classMod" : null,
 		"percentiles",
 		"median",
 		"medianDiff",
@@ -220,11 +222,15 @@ export function getReportDetailsRows(game: GameData): string[] {
 		"realGrowth",
 		"charGrowth",
 		"classGrowth",
-		g.enableEquipment ? "equipGrowth" : "",
-	].filter(Boolean);
+		g.enableEquipment ? "equipGrowth" : null,
+	];
+	return filterNonempty(base);
 }
 
-export function getReportDetailsLabel(game: GameData, key: string): string {
+export function getReportDetailsLabel(
+	game: GameData,
+	key: ReportDetailKey
+): string {
 	return reportDetailsLabels[key] || `(Missing label for report row ${key})`;
 }
 
@@ -232,7 +238,7 @@ export function getReportDetailsValue(
 	game: GameData,
 	cr: CharReport,
 	statName: Stat,
-	key: string
+	key: ReportDetailKey
 ): number | string {
 	if (key === "current") {
 		return cr.charRealStats[statName];
@@ -275,5 +281,5 @@ export function getReportDetailsValue(
 	} else if (key === "equipGrowth") {
 		return cr.equipGrowths[statName];
 	}
-	return `(Missing value computation)`;
+	return assertNever(key);
 }
