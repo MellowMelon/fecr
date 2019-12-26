@@ -4,24 +4,32 @@ import {CharCheckpoint} from "./CharAdvance";
 import {sumObjects} from "./Utils";
 import * as ProbDist from "./ProbDist";
 
+type StatsStrTable = {[stat: string]: string};
+type StatsPercTable = {[stat: string]: [number, number]};
+
 export type CharReport = {
 	charClass: CharClass;
 	charLevel: number;
 	charRealStats: StatsTable;
 	classStatMods: StatsTable;
+	minStats: StatsTable;
 	maxStats: StatsTable;
+	totalLevels: number;
+	effLevels: StatsStrTable;
+	averageGrowths: StatsStrTable;
 	charGrowths: StatsTable;
 	classGrowths: StatsTable;
 	realGrowths: StatsTable;
+	boosts: StatsTable;
 	statsDist: StatsDist;
-	sdAverage: {[stat: string]: string};
-	sdMedian: {[stat: string]: string};
-	sdMedianDiff: {[stat: string]: string};
-	sdPercentiles: {[stat: string]: [number, number]};
-	sdNBAverage: {[stat: string]: string};
-	sdNBMedian: {[stat: string]: string};
-	sdNBMedianDiff: {[stat: string]: string};
-	sdNBPercentiles: {[stat: string]: [number, number]};
+	sdAverage: StatsStrTable;
+	sdMedian: StatsStrTable;
+	sdMedianDiff: StatsStrTable;
+	sdPercentiles: StatsPercTable;
+	sdNBAverage: StatsStrTable;
+	sdNBMedian: StatsStrTable;
+	sdNBMedianDiff: StatsStrTable;
+	sdNBPercentiles: StatsPercTable;
 };
 
 function computePercentiles(
@@ -38,10 +46,11 @@ function computePercentiles(
 }
 
 type DistAgg = {
-	sdAverage: {[stat: string]: string};
-	sdMedian: {[stat: string]: string};
-	sdMedianDiff: {[stat: string]: string};
-	sdPercentiles: {[stat: string]: [number, number]};
+	sdAverageNum: StatsTable;
+	sdAverage: StatsStrTable;
+	sdMedian: StatsStrTable;
+	sdMedianDiff: StatsStrTable;
+	sdPercentiles: StatsPercTable;
 };
 
 function halfIntToString(halfInt: number): string {
@@ -53,7 +62,8 @@ function halfIntToString(halfInt: number): string {
 }
 
 function computeDistDerived(stats: StatsTable, dist: StatsDist): DistAgg {
-	const sdAverage = _.mapValues(dist, pd => ProbDist.getAverage(pd).toFixed(2));
+	const sdAverageNum = _.mapValues(dist, pd => ProbDist.getAverage(pd));
+	const sdAverage = _.mapValues(sdAverageNum, x => x.toFixed(2));
 	const sdMedian = _.mapValues(dist, ProbDist.getMedian);
 	const sdMedianDisp = _.mapValues(sdMedian, halfIntToString);
 	const sdMedianDiff = _.mapValues(sdMedian, (med, statName) => {
@@ -66,7 +76,13 @@ function computeDistDerived(stats: StatsTable, dist: StatsDist): DistAgg {
 	const sdPercentiles = _.mapValues(dist, (pd, statName) =>
 		computePercentiles(pd, statName, stats[statName])
 	);
-	return {sdAverage, sdMedian: sdMedianDisp, sdMedianDiff, sdPercentiles};
+	return {
+		sdAverageNum,
+		sdAverage,
+		sdMedian: sdMedianDisp,
+		sdMedianDiff,
+		sdPercentiles,
+	};
 }
 
 export function getCharReport(
@@ -86,15 +102,37 @@ export function getCharReport(
 	const distAgg = computeDistDerived(char.stats, char.dist);
 	const distNBAgg = computeDistDerived(char.stats, char.distNB);
 
+	const someStat = game.stats[0];
+	const totalLevels = (char.growthList[someStat] || []).length;
+
+	const averageGrowths = _.mapValues(char.growthList, (gl, statName) => {
+		return _.sum(gl) / gl.length;
+	});
+
+	const averageGrowthsStr = _.mapValues(averageGrowths, x => x.toFixed(2));
+
+	const effLevels = _.mapValues(distNBAgg.sdAverageNum, (avg, statName) => {
+		const min = char.min[statName] + gameClassData.statMods[statName];
+		const avgGrowth = averageGrowths[statName];
+		return ((avg - min) / avgGrowth) * 100;
+	});
+
+	const effLevelsStr = _.mapValues(effLevels, x => x.toFixed(2));
+
 	return {
 		charClass,
 		charLevel: level,
 		charRealStats: char.stats,
 		classStatMods: gameClassData.statMods,
+		minStats: char.min,
 		maxStats: char.maxStats,
+		totalLevels,
+		effLevels: effLevelsStr,
+		averageGrowths: averageGrowthsStr,
 		charGrowths: gameCharData.growths,
 		classGrowths: gameClassData.growths,
 		realGrowths: sumObjects(gameCharData.growths, gameClassData.growths),
+		boosts: char.boosts,
 		statsDist: char.dist,
 		sdAverage: distAgg.sdAverage,
 		sdMedian: distAgg.sdMedian,

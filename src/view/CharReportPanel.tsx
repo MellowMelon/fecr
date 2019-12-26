@@ -167,19 +167,23 @@ function renderStatPanel(cr: CharReport, statName: Stat, screenSize: string) {
 
 	const details: [string, React.ReactNode][] = [
 		["Current", cr.charRealStats[statName]],
+		["Class Modifier", cr.classStatMods[statName]],
 		["Percentile Range", renderPercentRange(perc)],
 		["Median", cr.sdMedian[statName]],
 		["Ahead/behind", cr.sdMedianDiff[statName]],
 		["Average", cr.sdAverage[statName]],
+		["Boost", cr.boosts[statName]],
 		["Percentile Range NB", renderPercentRange(cr.sdNBPercentiles[statName])],
 		["Median NB", cr.sdNBMedian[statName]],
 		["Ahead/behind NB", cr.sdNBMedianDiff[statName]],
 		["Average NB", cr.sdNBAverage[statName]],
-		["Class Modifier", cr.classStatMods[statName]],
+		["Minimum", cr.minStats[statName]],
 		["Maximum", cr.maxStats[statName]],
-		["Real Growth", cr.realGrowths[statName]],
-		["Char. Growth", cr.charGrowths[statName]],
-		["Class Growth", cr.classGrowths[statName]],
+		["Total Levels", cr.totalLevels],
+		["Eff. Levels", cr.effLevels[statName]],
+		["Average Growth", cr.averageGrowths[statName]],
+		["Current Growth", cr.realGrowths[statName]],
+		["Base Growth", cr.charGrowths[statName]],
 	];
 
 	return (
