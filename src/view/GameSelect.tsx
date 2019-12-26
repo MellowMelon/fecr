@@ -37,7 +37,9 @@ const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 
 	return (
 		<Box align="center">
-			<Heading level={1}>Select Game</Heading>
+			<Heading truncate level={1}>
+				Fire Emblem Character Reports
+			</Heading>
 			{gameEls}
 		</Box>
 	);

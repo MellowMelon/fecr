@@ -25,7 +25,7 @@ these effects.`;
 const HelpTable = {
 	saveLoad: `
 To **save**, copy the URL in your address bar. This URL updates after
-everything you do.
+every change.
 
 To **load**, paste a URL saved previously.
 
@@ -55,10 +55,10 @@ accurate report, since classes affect growth rates.
 	histStatBoost: `
 ${statBoostBlurb}
 
-A guessed or approximate level is okay. Changing when a stat boost occurs
-rarely affects the calculations. The main exception is when a Class Change's
-minimum stats are significant, in which case it matters whether a stat boost
-came before or after.
+Changing the timing of a stat boost rarely affects the calculations, so a
+guessed or approximate level is okay. The main exception is when a Class
+Change's minimum stats are significant, in which case it matters whether a stat
+boost came before or after.
 `,
 	histMaxStat: `
 ${maxStatBlurb}
@@ -83,10 +83,14 @@ representation of how likely each stat was to take each value and how your
 character compares. You can view this report for any checkpoint you specified
 in the Edit tab.
 
-Each stat has a summary showing the current value, how good that value is as a
-percentile range, and a graph of the stat's distribution. (On smaller devices,
-some items may not be visible in the summary.) Click or tap the summary to
-expand a panel of details with the following information:
+Each stat has a summary showing the current value, how ahead or behind it is,
+how good that value is as a percentile range, and a graph of the stat's
+probability distribution. (On smaller devices, some items may not be visible in
+the summary.) The bars on the graph represent the probabilities of the stat
+assuming each value.
+
+Click or tap the summary to expand a panel of details with the following
+information:
 
 - **Current**: The stat's current value.
 - **Class Modifier**: The modifier for this stat from the character's current
@@ -120,8 +124,8 @@ expand a panel of details with the following information:
 - **Total Levels**: The total number of levels this character has gained.
 - **Eff. Levels**: The number of levels this character would need to gain for
   their minimum to reach their average if each level had the average growth
-  rate, ignoring stat boosts. This is a rough measure of how many levels were
-  wasted by the effects of class minimums and the maximum.
+  rate, ignoring stat boosts. This is a rough measure of how important the
+  character's growth rates are for explaining their stats.
 - **Average Growth**: The weighted average of the growths across all this
   character's levels.
 - **Current Growth**: The percent chance this stat will increase each level in

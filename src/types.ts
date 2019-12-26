@@ -79,6 +79,7 @@ export type GameID = string;
 export type GameData = {
 	id: GameID;
 	name: string;
+	shortName: string;
 	globals: {
 		maxLevel: number;
 		maxStat: number;

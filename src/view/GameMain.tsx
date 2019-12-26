@@ -1,5 +1,15 @@
 import React, {useState} from "react";
-import {Button, Box, Heading, Layer, Markdown, Menu, Tabs, Tab} from "grommet";
+import {
+	Button,
+	Box,
+	Heading,
+	Layer,
+	Markdown,
+	Menu,
+	Tabs,
+	Tab,
+	Text,
+} from "grommet";
 import {
 	FormClose as FormCloseIcon,
 	Menu as MenuIcon,
@@ -109,9 +119,18 @@ const GameMain: React.FunctionComponent<Props> = function(props: Props) {
 					onClick={() => dispatch({type: "redo"})}
 				/>
 			</Box>
-			<Heading level={1} margin="none">
-				{game.name}
+			<Heading margin="none" truncate level={1}>
+				Fire Emblem Character Reports
 			</Heading>
+			<Box direction="row" align="center" wrap>
+				<Box margin={{right: "large"}}>
+					<Text weight="bold">Current Game: {game.shortName}</Text>
+				</Box>
+				<Button
+					label="Change Game"
+					onClick={() => dispatch({type: "deselectGame"})}
+				/>
+			</Box>
 			<Tabs activeIndex={tabIndex} onActive={onSelectTab}>
 				<Tab title="Select">{selectTabBody}</Tab>
 				<Tab title="Edit" disabled={!charName}>

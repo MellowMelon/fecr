@@ -41,6 +41,9 @@ export type ViewActionDeselectGame = {
 export type ViewActionResetGame = {
 	type: "resetGame";
 };
+export type ViewActionResetChar = {
+	type: "resetChar";
+};
 export type ViewActionSelectCharTab = {
 	type: "selectCharTab";
 	tab: CharTab;
@@ -107,6 +110,7 @@ export type ViewAction =
 	| ViewActionSelectGame
 	| ViewActionDeselectGame
 	| ViewActionResetGame
+	| ViewActionResetChar
 	| ViewActionSelectCharTab
 	| ViewActionSelectChar
 	| ViewActionUndo

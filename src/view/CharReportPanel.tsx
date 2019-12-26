@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from "react";
+import React, {useState, useEffect, useRef, useMemo} from "react";
 import {
 	Accordion,
 	AccordionPanel,
@@ -30,12 +30,17 @@ type Props = {
 const pdgSmallDims: Partial<GraphDims> = {
 	barSize: 12,
 	barSpacing: 2,
-	barMaxCount: 12,
+	barMinCount: 10,
+	barMaxCount: 10,
 };
 const pdgXXSmallDims: Partial<GraphDims> = {
 	barSize: 8,
 	barSpacing: 1,
+	barMinCount: 10,
 	barMaxCount: 10,
+	axisMarkLabelFontSize: 10,
+	axisMarkLabelWidth: 18,
+	axisMarkLabelHeight: 11,
 };
 
 function renderCPLabel(cp: CharCheckpoint, index: number): string {
@@ -81,6 +86,12 @@ function getPercColor([lo, hi]: [number, number]): string {
 	return `hsl(${hue}, 80%, 80%)`;
 }
 
+function getMedDiffColor(medDiff: number): string {
+	if (medDiff > 0) return `hsl(110, 80%, 40%)`;
+	if (medDiff < 0) return `hsl(10, 80%, 60%)`;
+	return `hsl(60, 80%, 40%)`;
+}
+
 function renderPercentRange([lo, hi]: [number, number]): React.ReactNode {
 	if (lo < -0.0001) {
 		return <Text color="status-error">Too low</Text>;
@@ -117,8 +128,9 @@ function renderDetailsTable(
 }
 
 function renderStatPanel(cr: CharReport, statName: Stat, screenSize: string) {
-	const isXSmall = screenSize === "xxsmall" || screenSize === "xsmall";
 	const isXXSmall = screenSize === "xxsmall";
+	const isXSmall = isXXSmall || screenSize === "xsmall";
+	const isSmall = isXSmall || screenSize === "small";
 	let pdgDims;
 	if (isXXSmall) {
 		pdgDims = pdgXXSmallDims;
@@ -146,15 +158,32 @@ function renderStatPanel(cr: CharReport, statName: Stat, screenSize: string) {
 		</Box>
 	);
 
+	const medDiff = cr.sdMedianDiff[statName];
+	const medDiffColor = getMedDiffColor(parseFloat(medDiff));
+	// Use endash for negative sign.
+	const medDiffDisp = medDiff.replace("-", "\u2013");
+	let medDiffBox: React.ReactNode = (
+		<Box width="xsmall" align="center">
+			<Text color={medDiffColor} size="large" weight="bold">
+				{medDiffDisp}
+			</Text>
+		</Box>
+	);
+	if (isSmall) {
+		medDiffBox = null;
+	}
+
 	const label = (
-		<Box direction="row" flex align="center" gap="small" pad="small">
+		<Box direction="row" flex align="center" pad="small">
 			<Box width="xsmall" align="center">
 				<Text size="large" weight="bold">
 					{statName}
 				</Text>
 			</Box>
 			{realStatBox}
+			{medDiffBox}
 			{percBox}
+			<Box flex />
 			<Box flex={false} margin={{left: "medium"}}>
 				<ProbDistGraph
 					dist={cr.statsDist[statName]}
@@ -199,6 +228,12 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 	const {game, team, char, dispatch} = props;
 	if (!char) return null;
 
+	const prevNameRef = useRef<string>();
+	useEffect(() => {
+		prevNameRef.current = char.name;
+	});
+	const prevName = prevNameRef.current;
+
 	const charHeader = (
 		<CharHeader
 			game={game}
@@ -239,6 +274,13 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 
 	const initCPIndex = computed.checkpoints.length - 1;
 	const [cpIndex, setCPIndex] = useState<number>(initCPIndex);
+	if (
+		initCPIndex !== cpIndex &&
+		(prevName !== char.name || cpIndex >= computed.checkpoints.length)
+	) {
+		setCPIndex(initCPIndex);
+		return null;
+	}
 
 	const cpSelect = renderCPSelect(computed.checkpoints, cpIndex, setCPIndex);
 	const cp = computed.checkpoints[cpIndex];

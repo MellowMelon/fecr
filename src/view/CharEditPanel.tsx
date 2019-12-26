@@ -1,5 +1,5 @@
 import React from "react";
-import {Box} from "grommet";
+import {Box, Button} from "grommet";
 import FlipMove from "react-flip-move";
 
 import {Char, Team, GameData} from "../types";
@@ -45,6 +45,10 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 		);
 	});
 
+	function onResetCharacter() {
+		dispatch({type: "resetChar"});
+	}
+
 	return (
 		<Box gap="small">
 			<CharHeader
@@ -68,6 +72,9 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 			>
 				{historyEntries}
 			</FlipMove>
+			<Box alignSelf="center">
+				<Button label="Reset Character" onClick={onResetCharacter} />
+			</Box>
 			<HistoryAdd game={game} dispatch={dispatch} />
 		</Box>
 	);

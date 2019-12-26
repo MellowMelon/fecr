@@ -107,6 +107,16 @@ function reduceActionMain(s: ViewState, a: ViewAction): ViewState {
 			...newS,
 			ur: s.ur,
 		};
+	} else if (a.type === "resetChar") {
+		if (!s.game || !s.charName) {
+			console.error("Unexpected data shape while handling action", a);
+			return s;
+		}
+		if (!s.team[s.charName]) return s;
+		return {
+			...s,
+			team: _.omit(s.team, [s.charName]),
+		};
 	} else if (a.type === "selectCharTab") {
 		if (s.charTab === a.tab) return s;
 		return {
@@ -228,9 +238,8 @@ function reduceActionMain(s: ViewState, a: ViewAction): ViewState {
 				stats: {...oldEntry.stats, ...a.stats},
 			};
 		});
-	} else {
-		return assertNever(a);
 	}
+	return assertNever(a);
 }
 
 function saveHash(hash: string) {

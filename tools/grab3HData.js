@@ -327,6 +327,7 @@ async function main() {
 	const finalJSON = {
 		id: "16",
 		name: "Fire Emblem: Three Houses",
+		shortName: "Three Houses",
 		globals: {
 			maxLevel: 99,
 			maxStat: 999,

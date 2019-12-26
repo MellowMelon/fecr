@@ -89,7 +89,7 @@ const HistoryBase: React.FunctionComponent<Props> = function(props: Props) {
 				<InputLevel game={props.game} value={level} onChange={onSetLevel} />
 			</Box>
 			{divider}
-			<Box flex align="stretch">
+			<Box flex align="stretch" margin={{bottom: "small"}}>
 				{props.children}
 			</Box>
 		</Box>

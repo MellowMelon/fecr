@@ -1,5 +1,5 @@
 import React, {memo} from "react";
-import {Box, Button, Heading, Text} from "grommet";
+import {Box, Button, Heading, ResponsiveContext, Text} from "grommet";
 
 import {Stat, CharClass, StatsTable, GameData} from "../types";
 import HelpTable from "../HelpTable";
@@ -21,6 +21,8 @@ type Props = {
 const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 	const {game, baseLevel, baseClass, baseStats, dispatch} = props;
 
+	const screenSize = React.useContext(ResponsiveContext);
+
 	const onResetBases = function() {
 		dispatch({type: "updateCharResetBases"});
 	};
@@ -36,6 +38,18 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 	const onChangeBaseStats = function(statName: Stat, value: number) {
 		dispatch({type: "updateCharBaseStats", stats: {[statName]: value}});
 	};
+
+	const resetButton = <Button label="Reset Initial" onClick={onResetBases} />;
+	let resetTopRight: React.ReactNode = <Box width="small">{resetButton}</Box>;
+	let resetSepRow: React.ReactNode = null;
+	if (screenSize === "xxsmall") {
+		resetTopRight = null;
+		resetSepRow = (
+			<Box direction="row" alignSelf="start">
+				{resetButton}
+			</Box>
+		);
+	}
 
 	return (
 		<HistoryBase
@@ -54,10 +68,9 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 					</Heading>
 					<HelpButton title="Help - Initial Stats" md={HelpTable.bases} />
 					<Box flex />
-					<Box width="small">
-						<Button label="Reset Initial" onClick={onResetBases} />
-					</Box>
+					{resetTopRight}
 				</Box>
+				{resetSepRow}
 				<Box direction="row" align="center" gap="small">
 					<Text weight="bold">Class</Text>
 					<InputClass

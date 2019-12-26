@@ -1,5 +1,5 @@
 import React, {useReducer} from "react";
-import {Box, Grommet, Layer} from "grommet";
+import {Box, Grommet, Layer, Text} from "grommet";
 
 import {ViewState, ViewAction} from "../state/types";
 import {reduceAction} from "../state/Reducer";
@@ -100,6 +100,13 @@ const Main: React.FunctionComponent<Props> = function(props: Props) {
 			<Box fill align="center">
 				<Box width="large">
 					{mainView}
+					<Box fill />
+					<Box margin={{top: "medium"}}>
+						<Text size="xsmall" color="dark-4">
+							<em>Fire Emblem</em> is copyrighted by Nintendo and Intelligent
+							Systems. This site has no affiliation with the copyright holders.
+						</Text>
+					</Box>
 					{errorModal}
 				</Box>
 			</Box>
