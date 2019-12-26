@@ -8,6 +8,7 @@ const TOLERANCE = 0.000001;
 const game1: GameData = {
 	id: "test",
 	name: "test",
+	shortName: "test",
 	globals: {
 		maxLevel: 99,
 		maxStat: 99,

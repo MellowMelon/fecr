@@ -17,7 +17,7 @@ type Props = {
 	count: number; // -1 means bases panel; no rearranging
 	error?: string;
 	stub?: boolean;
-	children: React.ReactNode;
+	children?: React.ReactNode;
 	onSetLevel: (newLevel: number) => void;
 	onMove: (dir: number) => void;
 	onDelete: () => void;

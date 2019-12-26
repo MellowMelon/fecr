@@ -48,7 +48,6 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 				dispatch={dispatch}
 			/>
 			<HistoryEntryList
-				key={char.name}
 				game={game}
 				char={char}
 				histErrorTable={histErrorTable}

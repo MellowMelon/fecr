@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useMemo} from "react";
+import React, {useState, useMemo} from "react";
 import {
 	Accordion,
 	AccordionPanel,
@@ -231,11 +231,13 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 	const {game, team, char, dispatch} = props;
 	if (!char) return null;
 
-	const prevNameRef = useRef<string>();
-	useEffect(() => {
-		prevNameRef.current = char.name;
-	});
-	const prevName = prevNameRef.current;
+	// Properly initialized later. Defined up here to avoid hook errors.
+	const [cpIndex, setCPIndex] = useState<number>(-1);
+
+	// Set to char.name, but must be unset first render to get cpIndex right.
+	const [prevName, setPrevName] = useState<string>("");
+
+	const screenSize = React.useContext(ResponsiveContext);
 
 	const charHeader = (
 		<CharHeader
@@ -276,20 +278,21 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 	}
 
 	const initCPIndex = computed.checkpoints.length - 1;
-	const [cpIndex, setCPIndex] = useState<number>(initCPIndex);
 	if (
 		initCPIndex !== cpIndex &&
 		(prevName !== char.name || cpIndex >= computed.checkpoints.length)
 	) {
+		setPrevName(char.name);
 		setCPIndex(initCPIndex);
 		return null;
 	}
 
 	const cpSelect = renderCPSelect(computed.checkpoints, cpIndex, setCPIndex);
 	const cp = computed.checkpoints[cpIndex];
+	if (!cp) {
+		return null;
+	}
 	const cr = getCharReport(game, cp);
-
-	const screenSize = React.useContext(ResponsiveContext);
 
 	return (
 		<Box>
