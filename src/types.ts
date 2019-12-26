@@ -7,6 +7,7 @@ export type StatsTable = {[stat: string]: number};
 
 export type CharName = string;
 export type CharClass = string;
+export type EquipName = string;
 
 export type HistoryEntryClass = {
 	type: "class";
@@ -22,14 +23,20 @@ export type HistoryEntryBoost = {
 	level: number;
 	stats: StatsTable;
 };
-export type HistoryEntryCheckpoint = {
-	type: "checkpoint";
+export type HistoryEntryMaxBoost = {
+	type: "maxboost";
 	id: number;
 	level: number;
 	stats: StatsTable;
 };
-export type HistoryEntryMaxBoost = {
-	type: "maxboost";
+export type HistoryEntryEquipChange = {
+	type: "equipchange";
+	id: number;
+	level: number;
+	equip: EquipName | null;
+};
+export type HistoryEntryCheckpoint = {
+	type: "checkpoint";
 	id: number;
 	level: number;
 	stats: StatsTable;
@@ -38,6 +45,7 @@ export type HistoryEntry =
 	| HistoryEntryClass
 	| HistoryEntryBoost
 	| HistoryEntryMaxBoost
+	| HistoryEntryEquipChange
 	| HistoryEntryCheckpoint;
 export type History = HistoryEntry[];
 
@@ -74,6 +82,11 @@ export type ClassData = {
 	growths: StatsTable;
 };
 
+export type EquipmentData = {
+	name: EquipName;
+	growths: StatsTable;
+};
+
 export type GameID = string;
 
 export type GameData = {
@@ -85,8 +98,13 @@ export type GameData = {
 		maxStat: number;
 		classChangeResetsLevel: boolean;
 		classChangeGetsAtLeast1HP: boolean;
+		enableEquipment: boolean;
+		enableMaxIncrease: boolean;
+		enableClassMins: boolean;
+		enableClassMods: boolean;
 	};
 	stats: Stat[];
 	chars: {[name: string]: CharData};
 	classes: {[charClass: string]: ClassData};
+	equipment: {[name: string]: EquipmentData};
 };

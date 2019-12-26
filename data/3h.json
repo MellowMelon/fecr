@@ -6,7 +6,11 @@
 		"maxLevel": 99,
 		"maxStat": 999,
 		"classChangeResetsLevel": false,
-		"classChangeGetsAtLeast1HP": false
+		"classChangeGetsAtLeast1HP": false,
+		"enableEquipment": false,
+		"enableMaxIncrease": true,
+		"enableClassMins": true,
+		"enableClassMods": true
 	},
 	"stats": ["HP", "Str", "Mag", "Dex", "Spd", "Lck", "Def", "Res", "Cha"],
 	"chars": {
@@ -3194,5 +3198,6 @@
 				"Cha": 0
 			}
 		}
-	}
+	},
+	"equipment": {}
 }

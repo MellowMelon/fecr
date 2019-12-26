@@ -239,6 +239,17 @@ function reduceActionMain(s: ViewState, a: ViewAction): ViewState {
 				stats: {...oldEntry.stats, ...a.stats},
 			};
 		});
+	} else if (a.type === "updateCharHistoryEquip") {
+		return updateHistoryEntry(s, a.histIndex, (game, oldChar, oldEntry) => {
+			if (!("equip" in oldEntry)) {
+				console.error("Unexpected data shape while handling action", a);
+				return oldEntry;
+			}
+			return {
+				...oldEntry,
+				equip: a.newEquip,
+			};
+		});
 	}
 	return assertNever(a);
 }
@@ -261,7 +272,7 @@ export function reduceAction(s: ViewState, a: ViewAction): ViewState {
 		const hash = serialize(newS.game, newS.team);
 		saveHash(hash);
 
-		if (a.type !== "undo" && a.type !== "redo") {
+		if (a.type !== "undo" && a.type !== "redo" && a.type !== "selectGame") {
 			newS = recordTeamInUndoRedo(newS);
 		}
 	}

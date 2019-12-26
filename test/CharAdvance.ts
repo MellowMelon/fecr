@@ -14,6 +14,10 @@ const game1: GameData = {
 		maxStat: 99,
 		classChangeResetsLevel: false,
 		classChangeGetsAtLeast1HP: false,
+		enableEquipment: true,
+		enableMaxIncrease: true,
+		enableClassMins: true,
+		enableClassMods: true,
 	},
 	stats: ["hp", "mp"],
 	chars: {
@@ -41,6 +45,12 @@ const game1: GameData = {
 			statMins: {hp: 20, mp: 20},
 			statMods: {hp: 10, mp: 10},
 			growths: {hp: 30, mp: 20},
+		},
+	},
+	equipment: {
+		super: {
+			name: "super",
+			growths: {hp: 100, mp: 30},
 		},
 	},
 };
@@ -128,6 +138,7 @@ const defaultBase: CharCheckpoint = {
 	min: {hp: 30, mp: 10},
 	boosts: {hp: 0, mp: 0},
 	growthList: {hp: [], mp: []},
+	equip: null,
 };
 
 test("computeChar, base default", t => {
@@ -159,6 +170,7 @@ test("computeChar, base default", t => {
 				min: {hp: 30, mp: 10},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [], mp: []},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -192,6 +204,7 @@ test("computeChar, base custom", t => {
 			min: {hp: 35, mp: 15},
 			boosts: {hp: 0, mp: 0},
 			growthList: {hp: [], mp: []},
+			equip: null,
 		},
 		checkpoints: [
 			{
@@ -211,6 +224,7 @@ test("computeChar, base custom", t => {
 				min: {hp: 35, mp: 15},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [], mp: []},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -249,6 +263,7 @@ test("computeChar, leveling", t => {
 				min: {hp: 30, mp: 10},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50], mp: [20]},
+				equip: null,
 			},
 			{
 				name: "Bob",
@@ -267,6 +282,7 @@ test("computeChar, leveling", t => {
 				min: {hp: 30, mp: 10},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 50, 50], mp: [20, 20, 20]},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -305,6 +321,7 @@ test("computeChar, low level error", t => {
 				min: {hp: 30, mp: 10},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 50, 50], mp: [20, 20, 20]},
+				equip: null,
 			},
 		],
 		errors: [{histIndex: 1, error: "Level would decrease"}],
@@ -345,6 +362,7 @@ test("computeChar, boosts", t => {
 				min: {hp: 30, mp: 10},
 				boosts: {hp: 5, mp: 0},
 				growthList: {hp: [], mp: []},
+				equip: null,
 			},
 			{
 				name: "Bob",
@@ -363,6 +381,7 @@ test("computeChar, boosts", t => {
 				min: {hp: 30, mp: 10},
 				boosts: {hp: 5, mp: 2},
 				growthList: {hp: [], mp: []},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -417,6 +436,7 @@ test("computeChar, class change min and mods", t => {
 				min: {hp: 30, mp: 20},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [], mp: []},
+				equip: null,
 			},
 			{
 				name: "Bob",
@@ -435,6 +455,7 @@ test("computeChar, class change min and mods", t => {
 				min: {hp: 30, mp: 20},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [], mp: []},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -489,6 +510,7 @@ test("computeChar, class change ignoreMins", t => {
 				min: {hp: 30, mp: 10},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [], mp: []},
+				equip: null,
 			},
 			{
 				name: "Bob",
@@ -507,6 +529,7 @@ test("computeChar, class change ignoreMins", t => {
 				min: {hp: 30, mp: 10},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [], mp: []},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -553,6 +576,7 @@ test("computeChar, class change growths", t => {
 				min: {hp: 30, mp: 20},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50], mp: [20]},
+				equip: null,
 			},
 			{
 				name: "Bob",
@@ -571,6 +595,7 @@ test("computeChar, class change growths", t => {
 				min: {hp: 30, mp: 20},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 80], mp: [20, 50]},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -616,6 +641,7 @@ test("computeChar, class change level reset", t => {
 				min: {hp: 30, mp: 20},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 80], mp: [20, 50]},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -649,6 +675,7 @@ test("computeChar, caps", t => {
 			min: {hp: 49, mp: 48},
 			boosts: {hp: 0, mp: 0},
 			growthList: {hp: [], mp: []},
+			equip: null,
 		},
 		checkpoints: [
 			{
@@ -668,6 +695,7 @@ test("computeChar, caps", t => {
 				min: {hp: 49, mp: 48},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 50, 50], mp: [20, 20, 20]},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -704,6 +732,7 @@ test("computeChar, boosts hitting a cap", t => {
 			min: {hp: 49, mp: 48},
 			boosts: {hp: 0, mp: 0},
 			growthList: {hp: [], mp: []},
+			equip: null,
 		},
 		checkpoints: [
 			{
@@ -723,6 +752,7 @@ test("computeChar, boosts hitting a cap", t => {
 				min: {hp: 49, mp: 48},
 				boosts: {hp: 10, mp: 0},
 				growthList: {hp: [], mp: []},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -775,6 +805,7 @@ test("computeChar, real stats remembered when class mods go over cap", t => {
 			min: {hp: 49, mp: 48},
 			boosts: {hp: 0, mp: 0},
 			growthList: {hp: [], mp: []},
+			equip: null,
 		},
 		checkpoints: [
 			{
@@ -794,6 +825,7 @@ test("computeChar, real stats remembered when class mods go over cap", t => {
 				min: {hp: 49, mp: 48},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [80, 80], mp: [50, 50]},
+				equip: null,
 			},
 			{
 				name: "Bob",
@@ -812,6 +844,7 @@ test("computeChar, real stats remembered when class mods go over cap", t => {
 				min: {hp: 49, mp: 48},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [80, 80, 50], mp: [50, 50, 20]},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -855,6 +888,7 @@ test("computeChar, class change hp up 1 when all mins met", t => {
 			min: {hp: 30, mp: 30},
 			boosts: {hp: 0, mp: 0},
 			growthList: {hp: [], mp: []},
+			equip: null,
 		},
 		checkpoints: [
 			{
@@ -874,6 +908,7 @@ test("computeChar, class change hp up 1 when all mins met", t => {
 				min: {hp: 30, mp: 30},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [], mp: []},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -917,6 +952,7 @@ test("computeChar, class change hp up 1 skipped with ignoreMins", t => {
 			min: {hp: 30, mp: 30},
 			boosts: {hp: 0, mp: 0},
 			growthList: {hp: [], mp: []},
+			equip: null,
 		},
 		checkpoints: [
 			{
@@ -936,6 +972,7 @@ test("computeChar, class change hp up 1 skipped with ignoreMins", t => {
 				min: {hp: 30, mp: 30},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [], mp: []},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -980,6 +1017,7 @@ test("computeChar, class change hp up 1 respects other stat chances", t => {
 			min: {hp: 30, mp: 19},
 			boosts: {hp: 0, mp: 0},
 			growthList: {hp: [], mp: []},
+			equip: null,
 		},
 		checkpoints: [
 			{
@@ -999,6 +1037,7 @@ test("computeChar, class change hp up 1 respects other stat chances", t => {
 				min: {hp: 30, mp: 19},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 50], mp: [20, 20]},
+				equip: null,
 			},
 			{
 				name: "Bob",
@@ -1017,6 +1056,7 @@ test("computeChar, class change hp up 1 respects other stat chances", t => {
 				min: {hp: 30, mp: 20},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 50], mp: [20, 20]},
+				equip: null,
 			},
 		],
 		errors: [],
@@ -1061,6 +1101,7 @@ test("computeChar, class change hp up 1 respects own stat chances", t => {
 			min: {hp: 19, mp: 19},
 			boosts: {hp: 0, mp: 0},
 			growthList: {hp: [], mp: []},
+			equip: null,
 		},
 		checkpoints: [
 			{
@@ -1080,6 +1121,7 @@ test("computeChar, class change hp up 1 respects own stat chances", t => {
 				min: {hp: 19, mp: 19},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50], mp: [20]},
+				equip: null,
 			},
 			{
 				name: "Bob",
@@ -1098,6 +1140,48 @@ test("computeChar, class change hp up 1 respects own stat chances", t => {
 				min: {hp: 20, mp: 20},
 				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50], mp: [20]},
+				equip: null,
+			},
+		],
+		errors: [],
+	});
+});
+
+test("computeChar, equipment", t => {
+	const c: Char = {
+		name: "Bob",
+		history: [
+			{type: "equipchange", id: 1, level: 2, equip: "super"},
+			{type: "equipchange", id: 2, level: 3, equip: null},
+			{type: "equipchange", id: 3, level: 4, equip: "super"},
+			{type: "checkpoint", id: 4, level: 4, stats: {hp: 32, mp: 11}},
+		],
+		baseClass: game1.chars.Bob.baseClass,
+		baseLevel: game1.chars.Bob.baseLevel,
+		baseStats: game1.chars.Bob.baseStats,
+	};
+	const final = computeChar(game1, c);
+	checkFinal(t, final, {
+		base: defaultBase,
+		checkpoints: [
+			{
+				name: "Bob",
+				charClass: "weak",
+				level: 4,
+				stats: {hp: 32, mp: 11},
+				dist: {
+					hp: {31: 0.25, 32: 0.5, 33: 0.25},
+					mp: {10: 0.4, 11: 0.5, 12: 0.1},
+				},
+				distNB: {
+					hp: {31: 0.25, 32: 0.5, 33: 0.25},
+					mp: {10: 0.4, 11: 0.5, 12: 0.1},
+				},
+				maxStats: game1.chars.Bob.maxStats,
+				min: {hp: 30, mp: 10},
+				boosts: {hp: 0, mp: 0},
+				growthList: {hp: [150, 50], mp: [50, 20]},
+				equip: "super",
 			},
 		],
 		errors: [],

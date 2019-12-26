@@ -1,17 +1,19 @@
 import _ from "lodash";
 
 import * as ProbDist from "./ProbDist";
-import {sumObjects} from "./Utils";
+import {assertNever, sumObjects} from "./Utils";
 import {
 	Stat,
 	StatsTable,
 	CharClass,
 	CharName,
+	EquipName,
 	Char,
 	HistoryEntryCheckpoint,
 	HistoryEntryClass,
 	HistoryEntryBoost,
 	HistoryEntryMaxBoost,
+	HistoryEntryEquipChange,
 	HistoryEntry,
 	StatsDist,
 	GameData,
@@ -31,6 +33,7 @@ export type CharCheckpoint = {
 	min: StatsTable;
 	boosts: StatsTable;
 	growthList: GrowthHistory;
+	equip: EquipName | null;
 };
 
 type AdvanceEntry = HistoryEntry | {type: "level"; count: number};
@@ -111,6 +114,7 @@ export function getBaseGameChar(
 		min: stats,
 		boosts: _.mapValues(stats, () => 0),
 		growthList: _.mapValues(stats, () => []),
+		equip: null,
 	};
 }
 
@@ -227,7 +231,11 @@ function simulateClass(
 	entry: HistoryEntryClass
 ): AdvanceChar {
 	const {newClass, newLevel, ignoreMins} = entry;
-	const {classChangeGetsAtLeast1HP} = game.globals;
+	const {
+		classChangeGetsAtLeast1HP,
+		enableClassMins,
+		enableClassMods,
+	} = game.globals;
 	const newClassMins = game.classes[entry.newClass].statMins;
 	const oldMods = game.classes[char.curr.charClass].statMods;
 	const newMods = game.classes[entry.newClass].statMods;
@@ -243,8 +251,10 @@ function simulateClass(
 		min: newMins,
 	});
 	newChar = modifyBothDistsMV(newChar, (pd, statName) => {
-		pd = ProbDist.applyIncrease(pd, -oldMods[statName]);
-		if (!ignoreMins) {
+		if (enableClassMods) {
+			pd = ProbDist.applyIncrease(pd, -oldMods[statName]);
+		}
+		if (enableClassMins && !ignoreMins) {
 			if (statName === "hp" && classChangeGetsAtLeast1HP) {
 				const chanceOf1HP = getChanceOf1HP(game, newClassMins, char.curr.dist);
 				pd = simulatePromotionHP(pd, newClassMins.hp, chanceOf1HP);
@@ -252,7 +262,9 @@ function simulateClass(
 				pd = ProbDist.applyMin(pd, newClassMins[statName]);
 			}
 		}
-		pd = ProbDist.applyIncrease(pd, newMods[statName]);
+		if (enableClassMods) {
+			pd = ProbDist.applyIncrease(pd, newMods[statName]);
+		}
 		return pd;
 	});
 	return newChar;
@@ -292,6 +304,15 @@ function simulateMaxBoosts(
 	return modifyCurrent(char, {maxStats: newMax});
 }
 
+function simulateEquipChange(
+	game: GameData,
+	char: AdvanceChar,
+	entry: HistoryEntryEquipChange
+) {
+	const {equip} = entry;
+	return modifyCurrent(char, {equip: equip});
+}
+
 function simulateLevels(
 	game: GameData,
 	char: AdvanceChar,
@@ -299,7 +320,14 @@ function simulateLevels(
 ): AdvanceChar {
 	const gameCharData = game.chars[char.curr.name];
 	const gameClassData = game.classes[char.curr.charClass];
-	const realGrowths = sumObjects(gameCharData.growths, gameClassData.growths);
+	const equipGrowths = char.curr.equip
+		? game.equipment[char.curr.equip].growths
+		: {};
+	const realGrowths = sumObjects(
+		gameCharData.growths,
+		gameClassData.growths,
+		equipGrowths
+	);
 	let newChar = char;
 	newChar = modifyBothDistsMV(newChar, (pd, statName) => {
 		const max = char.curr.maxStats[statName];
@@ -337,8 +365,10 @@ export function reduceChar(
 		return simulateBoosts(game, char, entry);
 	} else if (entry.type === "maxboost") {
 		return simulateMaxBoosts(game, char, entry);
+	} else if (entry.type === "equipchange") {
+		return simulateEquipChange(game, char, entry);
 	}
-	throw new Error("Unrecognized AdvanceEntry");
+	return assertNever(entry);
 }
 
 export function computeChar(game: GameData, char: Char): AdvanceFinal {

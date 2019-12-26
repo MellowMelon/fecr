@@ -18,10 +18,12 @@ const labelTable = {
 	class: "Add Class Change",
 	boost: "Add Stat Boost",
 	maxboost: "Add Max Stat Increase",
+	equipchange: "Add Equipment Change",
 };
 
-const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
-	const {dispatch} = props;
+const HistoryAdd: React.FunctionComponent<Props> = function(props: Props) {
+	const {game, dispatch} = props;
+	const {enableMaxIncrease, enableEquipment} = game.globals;
 
 	const screenSize = React.useContext(ResponsiveContext);
 
@@ -38,8 +40,18 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 
 	let buttonLayout: HistoryEntry["type"][][] = [
 		["checkpoint", "class"],
-		["boost", "maxboost"],
+		["boost", "maxboost", "equipchange"],
 	];
+	buttonLayout = buttonLayout.map(row => {
+		return row.filter(histType => {
+			if (histType === "maxboost" && !enableMaxIncrease) {
+				return false;
+			} else if (histType === "equipchange" && !enableEquipment) {
+				return false;
+			}
+			return true;
+		});
+	});
 
 	if (screenSize === "xxsmall") {
 		buttonLayout = _.flatten(buttonLayout).map(x => [x]);
@@ -63,4 +75,4 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 		</Box>
 	);
 };
-export default CharEditPanel;
+export default HistoryAdd;

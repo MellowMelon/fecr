@@ -1,0 +1,2385 @@
+{
+	"id": "15",
+	"name": "Fire Emblem Echoes: Shadows of Valentia",
+	"shortName": "Echoes",
+	"globals": {
+		"maxLevel": 20,
+		"maxStat": 52,
+		"classChangeResetsLevel": true,
+		"classChangeGetsAtLeast1HP": true,
+		"enableEquipment": true,
+		"enableMaxIncrease": false,
+		"enableClassMins": true,
+		"enableClassMods": false
+	},
+	"stats": ["HP", "Atk", "Skl", "Spd", "Lck", "Def", "Res"],
+	"chars": {
+		"Alm": {
+			"name": "Alm",
+			"gender": "M",
+			"baseClass": "Fighter",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 28,
+				"Atk": 10,
+				"Skl": 7,
+				"Spd": 6,
+				"Lck": 7,
+				"Def": 5,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 60,
+				"Atk": 50,
+				"Skl": 55,
+				"Spd": 45,
+				"Lck": 35,
+				"Def": 50,
+				"Res": 3
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 41,
+				"Skl": 41,
+				"Spd": 39,
+				"Lck": 39,
+				"Def": 41,
+				"Res": 40
+			}
+		},
+		"Lukas": {
+			"name": "Lukas",
+			"gender": "M",
+			"baseClass": "Soldier",
+			"baseLevel": 2,
+			"baseStats": {
+				"HP": 22,
+				"Atk": 10,
+				"Skl": 4,
+				"Spd": 4,
+				"Lck": 2,
+				"Def": 5,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 50,
+				"Atk": 30,
+				"Skl": 40,
+				"Spd": 25,
+				"Lck": 30,
+				"Def": 45,
+				"Res": 2
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 40,
+				"Skl": 40,
+				"Spd": 38,
+				"Lck": 40,
+				"Def": 42,
+				"Res": 40
+			}
+		},
+		"Gray": {
+			"name": "Gray",
+			"gender": "M",
+			"baseClass": "Villager",
+			"baseLevel": 5,
+			"baseStats": {
+				"HP": 24,
+				"Atk": 9,
+				"Skl": 4,
+				"Spd": 4,
+				"Lck": 2,
+				"Def": 4,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 45,
+				"Atk": 40,
+				"Skl": 30,
+				"Spd": 30,
+				"Lck": 25,
+				"Def": 25,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 42,
+				"Skl": 39,
+				"Spd": 40,
+				"Lck": 40,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Tobin": {
+			"name": "Tobin",
+			"gender": "M",
+			"baseClass": "Villager",
+			"baseLevel": 2,
+			"baseStats": {
+				"HP": 22,
+				"Atk": 7,
+				"Skl": 2,
+				"Spd": 6,
+				"Lck": 4,
+				"Def": 3,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 40,
+				"Atk": 30,
+				"Skl": 50,
+				"Spd": 25,
+				"Lck": 30,
+				"Def": 30,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 39,
+				"Skl": 42,
+				"Spd": 39,
+				"Lck": 40,
+				"Def": 40,
+				"Res": 40
+			}
+		},
+		"Kliff": {
+			"name": "Kliff",
+			"gender": "M",
+			"baseClass": "Villager",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 20,
+				"Atk": 7,
+				"Skl": 1,
+				"Spd": 2,
+				"Lck": 10,
+				"Def": 3,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 35,
+				"Atk": 30,
+				"Skl": 45,
+				"Spd": 60,
+				"Lck": 20,
+				"Def": 40,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 40,
+				"Skl": 39,
+				"Spd": 41,
+				"Lck": 39,
+				"Def": 41,
+				"Res": 40
+			}
+		},
+		"Silque": {
+			"name": "Silque",
+			"gender": "F",
+			"baseClass": "Cleric",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 18,
+				"Atk": 8,
+				"Skl": 3,
+				"Spd": 4,
+				"Lck": 4,
+				"Def": 1,
+				"Res": 11
+			},
+			"growths": {
+				"HP": 45,
+				"Atk": 40,
+				"Skl": 35,
+				"Spd": 30,
+				"Lck": 60,
+				"Def": 40,
+				"Res": 2
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 40,
+				"Skl": 40,
+				"Spd": 39,
+				"Lck": 41,
+				"Def": 40,
+				"Res": 40
+			}
+		},
+		"Clair": {
+			"name": "Clair",
+			"gender": "F",
+			"baseClass": "Pegasus Knight",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 20,
+				"Atk": 8,
+				"Skl": 4,
+				"Spd": 7,
+				"Lck": 11,
+				"Def": 4,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 35,
+				"Atk": 40,
+				"Skl": 55,
+				"Spd": 70,
+				"Lck": 50,
+				"Def": 30,
+				"Res": 2
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 40,
+				"Skl": 40,
+				"Spd": 41,
+				"Lck": 41,
+				"Def": 38,
+				"Res": 40
+			}
+		},
+		"Clive": {
+			"name": "Clive",
+			"gender": "M",
+			"baseClass": "Cavalier",
+			"baseLevel": 6,
+			"baseStats": {
+				"HP": 26,
+				"Atk": 12,
+				"Skl": 7,
+				"Spd": 7,
+				"Lck": 6,
+				"Def": 7,
+				"Res": 1
+			},
+			"growths": {
+				"HP": 55,
+				"Atk": 40,
+				"Skl": 35,
+				"Spd": 25,
+				"Lck": 25,
+				"Def": 30,
+				"Res": 2
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 42,
+				"Skl": 40,
+				"Spd": 39,
+				"Lck": 40,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Forsyth": {
+			"name": "Forsyth",
+			"gender": "M",
+			"baseClass": "Soldier",
+			"baseLevel": 4,
+			"baseStats": {
+				"HP": 28,
+				"Atk": 11,
+				"Skl": 4,
+				"Spd": 5,
+				"Lck": 3,
+				"Def": 7,
+				"Res": 5
+			},
+			"growths": {
+				"HP": 40,
+				"Atk": 40,
+				"Skl": 30,
+				"Spd": 40,
+				"Lck": 40,
+				"Def": 30,
+				"Res": 3
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 40,
+				"Skl": 39,
+				"Spd": 41,
+				"Lck": 40,
+				"Def": 40,
+				"Res": 40
+			}
+		},
+		"Python": {
+			"name": "Python",
+			"gender": "M",
+			"baseClass": "Archer",
+			"baseLevel": 3,
+			"baseStats": {
+				"HP": 24,
+				"Atk": 10,
+				"Skl": 3,
+				"Spd": 4,
+				"Lck": 2,
+				"Def": 5,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 45,
+				"Atk": 40,
+				"Skl": 25,
+				"Spd": 55,
+				"Lck": 20,
+				"Def": 25,
+				"Res": 4
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 40,
+				"Skl": 39,
+				"Spd": 42,
+				"Lck": 39,
+				"Def": 40,
+				"Res": 40
+			}
+		},
+		"Luthier": {
+			"name": "Luthier",
+			"gender": "M",
+			"baseClass": "Mage (M)",
+			"baseLevel": 7,
+			"baseStats": {
+				"HP": 28,
+				"Atk": 12,
+				"Skl": 9,
+				"Spd": 7,
+				"Lck": 2,
+				"Def": 5,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 50,
+				"Atk": 30,
+				"Skl": 75,
+				"Spd": 40,
+				"Lck": 50,
+				"Def": 35,
+				"Res": 2
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 38,
+				"Skl": 43,
+				"Spd": 40,
+				"Lck": 40,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Mathilda": {
+			"name": "Mathilda",
+			"gender": "F",
+			"baseClass": "Paladin",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 26,
+				"Atk": 12,
+				"Skl": 14,
+				"Spd": 12,
+				"Lck": 13,
+				"Def": 7,
+				"Res": 10
+			},
+			"growths": {
+				"HP": 40,
+				"Atk": 50,
+				"Skl": 45,
+				"Spd": 55,
+				"Lck": 45,
+				"Def": 40,
+				"Res": 4
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 39,
+				"Skl": 40,
+				"Spd": 41,
+				"Lck": 41,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Delthea": {
+			"name": "Delthea",
+			"gender": "F",
+			"baseClass": "Mage (F)",
+			"baseLevel": 3,
+			"baseStats": {
+				"HP": 22,
+				"Atk": 11,
+				"Skl": 8,
+				"Spd": 10,
+				"Lck": 15,
+				"Def": 3,
+				"Res": 15
+			},
+			"growths": {
+				"HP": 30,
+				"Atk": 70,
+				"Skl": 35,
+				"Spd": 55,
+				"Lck": 40,
+				"Def": 20,
+				"Res": 4
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 43,
+				"Skl": 38,
+				"Spd": 41,
+				"Lck": 40,
+				"Def": 37,
+				"Res": 40
+			}
+		},
+		"Tatiana": {
+			"name": "Tatiana",
+			"gender": "F",
+			"baseClass": "Saint",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 28,
+				"Atk": 14,
+				"Skl": 12,
+				"Spd": 10,
+				"Lck": 2,
+				"Def": 3,
+				"Res": 18
+			},
+			"growths": {
+				"HP": 30,
+				"Atk": 50,
+				"Skl": 45,
+				"Spd": 40,
+				"Lck": 35,
+				"Def": 30,
+				"Res": 4
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 42,
+				"Skl": 40,
+				"Spd": 40,
+				"Lck": 37,
+				"Def": 41,
+				"Res": 40
+			}
+		},
+		"Zeke": {
+			"name": "Zeke",
+			"gender": "M",
+			"baseClass": "Gold Knight",
+			"baseLevel": 3,
+			"baseStats": {
+				"HP": 40,
+				"Atk": 20,
+				"Skl": 13,
+				"Spd": 14,
+				"Lck": 4,
+				"Def": 14,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 60,
+				"Atk": 45,
+				"Skl": 55,
+				"Spd": 55,
+				"Lck": 40,
+				"Def": 45,
+				"Res": 1
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 41,
+				"Skl": 40,
+				"Spd": 41,
+				"Lck": 40,
+				"Def": 38,
+				"Res": 40
+			}
+		},
+		"Mycen": {
+			"name": "Mycen",
+			"gender": "M",
+			"baseClass": "Gold Knight",
+			"baseLevel": 7,
+			"baseStats": {
+				"HP": 44,
+				"Atk": 22,
+				"Skl": 14,
+				"Spd": 11,
+				"Lck": 3,
+				"Def": 18,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 20,
+				"Atk": 10,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 5,
+				"Def": 10,
+				"Res": 3
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 41,
+				"Skl": 41,
+				"Spd": 39,
+				"Lck": 39,
+				"Def": 41,
+				"Res": 40
+			}
+		},
+		"Faye": {
+			"name": "Faye",
+			"gender": "F",
+			"baseClass": "Villager",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 19,
+				"Atk": 8,
+				"Skl": 1,
+				"Spd": 2,
+				"Lck": 6,
+				"Def": 3,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 40,
+				"Atk": 40,
+				"Skl": 30,
+				"Spd": 30,
+				"Lck": 30,
+				"Def": 40,
+				"Res": 3
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 41,
+				"Skl": 39,
+				"Spd": 40,
+				"Lck": 39,
+				"Def": 41,
+				"Res": 40
+			}
+		},
+		"Celica": {
+			"name": "Celica",
+			"gender": "F",
+			"baseClass": "Priestess (Celica)",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 20,
+				"Atk": 8,
+				"Skl": 6,
+				"Spd": 6,
+				"Lck": 8,
+				"Def": 4,
+				"Res": 7
+			},
+			"growths": {
+				"HP": 50,
+				"Atk": 60,
+				"Skl": 50,
+				"Spd": 50,
+				"Lck": 45,
+				"Def": 35,
+				"Res": 4
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 42,
+				"Skl": 40,
+				"Spd": 40,
+				"Lck": 39,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Mae": {
+			"name": "Mae",
+			"gender": "F",
+			"baseClass": "Mage (F)",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 20,
+				"Atk": 9,
+				"Skl": 1,
+				"Spd": 7,
+				"Lck": 5,
+				"Def": 2,
+				"Res": 10
+			},
+			"growths": {
+				"HP": 35,
+				"Atk": 60,
+				"Skl": 35,
+				"Spd": 40,
+				"Lck": 40,
+				"Def": 30,
+				"Res": 2
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 42,
+				"Skl": 40,
+				"Spd": 40,
+				"Lck": 40,
+				"Def": 38,
+				"Res": 40
+			}
+		},
+		"Boey": {
+			"name": "Boey",
+			"gender": "M",
+			"baseClass": "Mage (M)",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 22,
+				"Atk": 8,
+				"Skl": 2,
+				"Spd": 4,
+				"Lck": 9,
+				"Def": 4,
+				"Res": 7
+			},
+			"growths": {
+				"HP": 55,
+				"Atk": 45,
+				"Skl": 55,
+				"Spd": 30,
+				"Lck": 25,
+				"Def": 45,
+				"Res": 1
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 40,
+				"Skl": 41,
+				"Spd": 40,
+				"Lck": 39,
+				"Def": 40,
+				"Res": 40
+			}
+		},
+		"Genny": {
+			"name": "Genny",
+			"gender": "F",
+			"baseClass": "Cleric",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 18,
+				"Atk": 7,
+				"Skl": 2,
+				"Spd": 5,
+				"Lck": 7,
+				"Def": 1,
+				"Res": 13
+			},
+			"growths": {
+				"HP": 30,
+				"Atk": 60,
+				"Skl": 50,
+				"Spd": 30,
+				"Lck": 35,
+				"Def": 20,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 41,
+				"Skl": 41,
+				"Spd": 39,
+				"Lck": 40,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Saber": {
+			"name": "Saber",
+			"gender": "M",
+			"baseClass": "Mercenary",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 22,
+				"Atk": 9,
+				"Skl": 9,
+				"Spd": 10,
+				"Lck": 6,
+				"Def": 4,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 60,
+				"Atk": 35,
+				"Skl": 30,
+				"Spd": 35,
+				"Lck": 25,
+				"Def": 45,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 40,
+				"Skl": 40,
+				"Spd": 40,
+				"Lck": 39,
+				"Def": 41,
+				"Res": 40
+			}
+		},
+		"Valbar": {
+			"name": "Valbar",
+			"gender": "M",
+			"baseClass": "Knight",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 30,
+				"Atk": 14,
+				"Skl": 5,
+				"Spd": 2,
+				"Lck": 1,
+				"Def": 12,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 60,
+				"Atk": 40,
+				"Skl": 40,
+				"Spd": 30,
+				"Lck": 25,
+				"Def": 50,
+				"Res": 1
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 41,
+				"Skl": 40,
+				"Spd": 38,
+				"Lck": 38,
+				"Def": 42,
+				"Res": 40
+			}
+		},
+		"Kamui": {
+			"name": "Kamui",
+			"gender": "M",
+			"baseClass": "Mercenary",
+			"baseLevel": 3,
+			"baseStats": {
+				"HP": 24,
+				"Atk": 10,
+				"Skl": 5,
+				"Spd": 8,
+				"Lck": 2,
+				"Def": 6,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 50,
+				"Atk": 40,
+				"Skl": 30,
+				"Spd": 40,
+				"Lck": 25,
+				"Def": 30,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 41,
+				"Skl": 39,
+				"Spd": 41,
+				"Lck": 39,
+				"Def": 40,
+				"Res": 40
+			}
+		},
+		"Leon": {
+			"name": "Leon",
+			"gender": "M",
+			"baseClass": "Archer",
+			"baseLevel": 4,
+			"baseStats": {
+				"HP": 23,
+				"Atk": 11,
+				"Skl": 5,
+				"Spd": 6,
+				"Lck": 5,
+				"Def": 4,
+				"Res": 1
+			},
+			"growths": {
+				"HP": 45,
+				"Atk": 30,
+				"Skl": 50,
+				"Spd": 30,
+				"Lck": 30,
+				"Def": 30,
+				"Res": 4
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 39,
+				"Skl": 42,
+				"Spd": 40,
+				"Lck": 40,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Palla": {
+			"name": "Palla",
+			"gender": "F",
+			"baseClass": "Pegasus Knight",
+			"baseLevel": 8,
+			"baseStats": {
+				"HP": 28,
+				"Atk": 12,
+				"Skl": 9,
+				"Spd": 10,
+				"Lck": 4,
+				"Def": 6,
+				"Res": 5
+			},
+			"growths": {
+				"HP": 50,
+				"Atk": 60,
+				"Skl": 50,
+				"Spd": 30,
+				"Lck": 25,
+				"Def": 45,
+				"Res": 1
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 41,
+				"Skl": 41,
+				"Spd": 39,
+				"Lck": 39,
+				"Def": 40,
+				"Res": 40
+			}
+		},
+		"Catria": {
+			"name": "Catria",
+			"gender": "F",
+			"baseClass": "Pegasus Knight",
+			"baseLevel": 5,
+			"baseStats": {
+				"HP": 24,
+				"Atk": 11,
+				"Skl": 12,
+				"Spd": 12,
+				"Lck": 12,
+				"Def": 5,
+				"Res": 9
+			},
+			"growths": {
+				"HP": 40,
+				"Atk": 40,
+				"Skl": 45,
+				"Spd": 55,
+				"Lck": 30,
+				"Def": 35,
+				"Res": 2
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 40,
+				"Skl": 41,
+				"Spd": 41,
+				"Lck": 39,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Atlas": {
+			"name": "Atlas",
+			"gender": "M",
+			"baseClass": "Villager",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 30,
+				"Atk": 14,
+				"Skl": 3,
+				"Spd": 3,
+				"Lck": 4,
+				"Def": 5,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 45,
+				"Atk": 50,
+				"Skl": 30,
+				"Spd": 25,
+				"Lck": 25,
+				"Def": 25,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 42,
+				"Skl": 40,
+				"Spd": 39,
+				"Lck": 40,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Jesse": {
+			"name": "Jesse",
+			"gender": "M",
+			"baseClass": "Mercenary",
+			"baseLevel": 6,
+			"baseStats": {
+				"HP": 28,
+				"Atk": 11,
+				"Skl": 10,
+				"Spd": 12,
+				"Lck": 9,
+				"Def": 5,
+				"Res": 7
+			},
+			"growths": {
+				"HP": 40,
+				"Atk": 35,
+				"Skl": 40,
+				"Spd": 45,
+				"Lck": 55,
+				"Def": 30,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 39,
+				"Skl": 40,
+				"Spd": 40,
+				"Lck": 43,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Sonya": {
+			"name": "Sonya",
+			"gender": "F",
+			"baseClass": "Mage (F)",
+			"baseLevel": 5,
+			"baseStats": {
+				"HP": 24,
+				"Atk": 13,
+				"Skl": 11,
+				"Spd": 12,
+				"Lck": 4,
+				"Def": 5,
+				"Res": 12
+			},
+			"growths": {
+				"HP": 40,
+				"Atk": 45,
+				"Skl": 50,
+				"Spd": 35,
+				"Lck": 30,
+				"Def": 40,
+				"Res": 4
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 41,
+				"Skl": 42,
+				"Spd": 39,
+				"Lck": 38,
+				"Def": 40,
+				"Res": 40
+			}
+		},
+		"Deen": {
+			"name": "Deen",
+			"gender": "M",
+			"baseClass": "Myrmidon",
+			"baseLevel": 5,
+			"baseStats": {
+				"HP": 32,
+				"Atk": 13,
+				"Skl": 17,
+				"Spd": 17,
+				"Lck": 6,
+				"Def": 9,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 60,
+				"Atk": 45,
+				"Skl": 35,
+				"Spd": 40,
+				"Lck": 15,
+				"Def": 40,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 41,
+				"Skl": 40,
+				"Spd": 39,
+				"Lck": 38,
+				"Def": 41,
+				"Res": 40
+			}
+		},
+		"Est": {
+			"name": "Est",
+			"gender": "F",
+			"baseClass": "Pegasus Knight",
+			"baseLevel": 3,
+			"baseStats": {
+				"HP": 20,
+				"Atk": 9,
+				"Skl": 5,
+				"Spd": 11,
+				"Lck": 5,
+				"Def": 4,
+				"Res": 12
+			},
+			"growths": {
+				"HP": 35,
+				"Atk": 55,
+				"Skl": 50,
+				"Spd": 40,
+				"Lck": 55,
+				"Def": 50,
+				"Res": 3
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 41,
+				"Skl": 40,
+				"Spd": 39,
+				"Lck": 41,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Nomah": {
+			"name": "Nomah",
+			"gender": "M",
+			"baseClass": "Sage",
+			"baseLevel": 7,
+			"baseStats": {
+				"HP": 28,
+				"Atk": 12,
+				"Skl": 16,
+				"Spd": 8,
+				"Lck": 1,
+				"Def": 6,
+				"Res": 14
+			},
+			"growths": {
+				"HP": 15,
+				"Atk": 20,
+				"Skl": 25,
+				"Spd": 15,
+				"Lck": 10,
+				"Def": 10,
+				"Res": 1
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 42,
+				"Skl": 40,
+				"Spd": 40,
+				"Lck": 39,
+				"Def": 39,
+				"Res": 40
+			}
+		},
+		"Conrad": {
+			"name": "Conrad",
+			"gender": "M",
+			"baseClass": "Paladin",
+			"baseLevel": 7,
+			"baseStats": {
+				"HP": 32,
+				"Atk": 15,
+				"Skl": 18,
+				"Spd": 16,
+				"Lck": 8,
+				"Def": 10,
+				"Res": 12
+			},
+			"growths": {
+				"HP": 50,
+				"Atk": 30,
+				"Skl": 60,
+				"Spd": 45,
+				"Lck": 40,
+				"Def": 50,
+				"Res": 8
+			},
+			"maxStats": {
+				"HP": 52,
+				"Atk": 37,
+				"Skl": 43,
+				"Spd": 39,
+				"Lck": 39,
+				"Def": 42,
+				"Res": 40
+			}
+		}
+	},
+	"classes": {
+		"Villager": {
+			"name": ["Villager"],
+			"requiredGender": "",
+			"statMins": {
+				"HP": 26,
+				"Atk": 7,
+				"Skl": 1,
+				"Spd": 2,
+				"Lck": 0,
+				"Def": 2,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Cavalier": {
+			"name": ["Cavalier"],
+			"requiredGender": "",
+			"statMins": {
+				"HP": 24,
+				"Atk": 9,
+				"Skl": 3,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Paladin": {
+			"name": ["Paladin"],
+			"requiredGender": "",
+			"statMins": {
+				"HP": 28,
+				"Atk": 12,
+				"Skl": 5,
+				"Spd": 8,
+				"Lck": 0,
+				"Def": 8,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Gold Knight": {
+			"name": ["Gold Knight"],
+			"requiredGender": "",
+			"statMins": {
+				"HP": 40,
+				"Atk": 18,
+				"Skl": 7,
+				"Spd": 12,
+				"Lck": 0,
+				"Def": 13,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Skogul": {
+			"name": ["Skogul"],
+			"requiredGender": "",
+			"statMins": {
+				"HP": 46,
+				"Atk": 22,
+				"Skl": 10,
+				"Spd": 15,
+				"Lck": 0,
+				"Def": 16,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 5,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Soldier": {
+			"name": ["Soldier"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 26,
+				"Atk": 10,
+				"Skl": 1,
+				"Spd": 3,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 5,
+				"Atk": 5,
+				"Skl": 0,
+				"Spd": -10,
+				"Lck": -5,
+				"Def": 5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Knight": {
+			"name": ["Knight"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 34,
+				"Atk": 16,
+				"Skl": 2,
+				"Spd": 2,
+				"Lck": 0,
+				"Def": 12,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 5,
+				"Atk": 5,
+				"Skl": 0,
+				"Spd": -10,
+				"Lck": -5,
+				"Def": 5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Baron": {
+			"name": ["Baron"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 40,
+				"Atk": 22,
+				"Skl": 6,
+				"Spd": 4,
+				"Lck": 0,
+				"Def": 18,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 5,
+				"Atk": 5,
+				"Skl": 0,
+				"Spd": -10,
+				"Lck": -5,
+				"Def": 5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Spartan": {
+			"name": ["Spartan"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 46,
+				"Atk": 26,
+				"Skl": 8,
+				"Spd": 6,
+				"Lck": 0,
+				"Def": 22,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 10,
+				"Atk": 5,
+				"Skl": 0,
+				"Spd": -5,
+				"Lck": -5,
+				"Def": 10,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Mercenary": {
+			"name": ["Mercenary"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 24,
+				"Atk": 8,
+				"Skl": 8,
+				"Spd": 10,
+				"Lck": 0,
+				"Def": 4,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": -5,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": -5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Myrmidon": {
+			"name": ["Myrmidon"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 30,
+				"Atk": 11,
+				"Skl": 11,
+				"Spd": 14,
+				"Lck": 0,
+				"Def": 7,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": -5,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": -5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Dread Fighter": {
+			"name": ["Dread Fighter"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 36,
+				"Atk": 15,
+				"Skl": 16,
+				"Spd": 18,
+				"Lck": 0,
+				"Def": 11,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": -5,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": -5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Yasha": {
+			"name": ["Yasha"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 40,
+				"Atk": 18,
+				"Skl": 20,
+				"Spd": 22,
+				"Lck": 0,
+				"Def": 14,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 5,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Archer": {
+			"name": ["Archer"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 24,
+				"Atk": 9,
+				"Skl": 1,
+				"Spd": 2,
+				"Lck": 0,
+				"Def": 3,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -5,
+				"Atk": 0,
+				"Skl": 10,
+				"Spd": -5,
+				"Lck": 0,
+				"Def": -5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Sniper": {
+			"name": ["Sniper"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 30,
+				"Atk": 12,
+				"Skl": 6,
+				"Spd": 6,
+				"Lck": 0,
+				"Def": 6,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -5,
+				"Atk": 0,
+				"Skl": 10,
+				"Spd": -5,
+				"Lck": 0,
+				"Def": -5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Bow Knight": {
+			"name": ["Bow Knight"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 40,
+				"Atk": 16,
+				"Skl": 8,
+				"Spd": 8,
+				"Lck": 0,
+				"Def": 10,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -5,
+				"Atk": 0,
+				"Skl": 10,
+				"Spd": -5,
+				"Lck": 0,
+				"Def": -5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Oliphantier": {
+			"name": ["Oliphantier"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 43,
+				"Atk": 18,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 0,
+				"Def": 12,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 5,
+				"Skl": 10,
+				"Spd": -5,
+				"Lck": 0,
+				"Def": -5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Fighter": {
+			"name": ["Fighter"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 28,
+				"Atk": 10,
+				"Skl": 7,
+				"Spd": 6,
+				"Lck": 7,
+				"Def": 6,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Hero": {
+			"name": ["Hero"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 36,
+				"Atk": 16,
+				"Skl": 14,
+				"Spd": 14,
+				"Lck": 10,
+				"Def": 10,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Conqueror": {
+			"name": ["Conqueror"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 42,
+				"Atk": 20,
+				"Skl": 17,
+				"Spd": 16,
+				"Lck": 10,
+				"Def": 10,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 5,
+				"Atk": 5,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 3
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Mage (M)": {
+			"name": ["Mage (M)"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 28,
+				"Atk": 8,
+				"Skl": 3,
+				"Spd": 4,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 5,
+				"Skl": 5,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": -10,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Sage": {
+			"name": ["Sage"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 32,
+				"Atk": 12,
+				"Skl": 8,
+				"Spd": 7,
+				"Lck": 0,
+				"Def": 6,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 5,
+				"Skl": 5,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": -10,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Guru": {
+			"name": ["Guru"],
+			"requiredGender": "M",
+			"statMins": {
+				"HP": 37,
+				"Atk": 15,
+				"Skl": 11,
+				"Spd": 10,
+				"Lck": 0,
+				"Def": 9,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 10,
+				"Skl": 5,
+				"Spd": 0,
+				"Lck": 5,
+				"Def": -5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Pegasus Knight": {
+			"name": ["Pegasus Knight"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 20,
+				"Atk": 8,
+				"Skl": 4,
+				"Spd": 7,
+				"Lck": 6,
+				"Def": 4,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -5,
+				"Atk": -5,
+				"Skl": 0,
+				"Spd": 5,
+				"Lck": 5,
+				"Def": -5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Falcon Knight": {
+			"name": ["Falcon Knight"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 34,
+				"Atk": 10,
+				"Skl": 7,
+				"Spd": 12,
+				"Lck": 0,
+				"Def": 10,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -5,
+				"Atk": -5,
+				"Skl": 0,
+				"Spd": 5,
+				"Lck": 5,
+				"Def": -5,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Harrier": {
+			"name": ["Harrier"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 38,
+				"Atk": 13,
+				"Skl": 10,
+				"Spd": 14,
+				"Lck": 0,
+				"Def": 12,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -5,
+				"Atk": -5,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 5,
+				"Def": 0,
+				"Res": 1
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Cleric": {
+			"name": ["Cleric"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 18,
+				"Atk": 7,
+				"Skl": 2,
+				"Spd": 4,
+				"Lck": 4,
+				"Def": 1,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -10,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 5,
+				"Def": -10,
+				"Res": 2
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Saint": {
+			"name": ["Saint"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 30,
+				"Atk": 10,
+				"Skl": 7,
+				"Spd": 8,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -10,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 5,
+				"Def": -10,
+				"Res": 2
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Exemplar": {
+			"name": ["Exemplar"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 35,
+				"Atk": 12,
+				"Skl": 9,
+				"Spd": 10,
+				"Lck": 0,
+				"Def": 6,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -5,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 5,
+				"Def": -5,
+				"Res": 3
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Mage (F)": {
+			"name": ["Mage (F)"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 20,
+				"Atk": 9,
+				"Skl": 1,
+				"Spd": 7,
+				"Lck": 5,
+				"Def": 2,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -10,
+				"Atk": 5,
+				"Skl": -5,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": -5,
+				"Res": 1
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Priestess": {
+			"name": ["Priestess"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 32,
+				"Atk": 12,
+				"Skl": 8,
+				"Spd": 9,
+				"Lck": 0,
+				"Def": 6,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -10,
+				"Atk": 5,
+				"Skl": -5,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": -5,
+				"Res": 1
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Enchantress": {
+			"name": ["Enchantress"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 36,
+				"Atk": 14,
+				"Skl": 10,
+				"Spd": 11,
+				"Lck": 0,
+				"Def": 8,
+				"Res": 0
+			},
+			"growths": {
+				"HP": -5,
+				"Atk": 5,
+				"Skl": -5,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": -5,
+				"Res": 3
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Priestess (Celica)": {
+			"name": ["Priestess (Celica)"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 24,
+				"Atk": 5,
+				"Skl": 1,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": 1,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Princess": {
+			"name": ["Princess"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 32,
+				"Atk": 13,
+				"Skl": 10,
+				"Spd": 12,
+				"Lck": 0,
+				"Def": 6,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Rigain": {
+			"name": ["Rigain"],
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 38,
+				"Atk": 16,
+				"Skl": 12,
+				"Spd": 16,
+				"Lck": 0,
+				"Def": 10,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 5,
+				"Def": 0,
+				"Res": 3
+			},
+			"statMods": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		}
+	},
+	"equipment": {
+		"Aquarius Shard": {
+			"name": "Aquarius Shard",
+			"growths": {
+				"HP": 0,
+				"Atk": 15,
+				"Skl": 15,
+				"Spd": 10,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Pisces Shard": {
+			"name": "Pisces Shard",
+			"growths": {
+				"HP": 10,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 10,
+				"Def": 10,
+				"Res": 2
+			}
+		},
+		"Aries Shard": {
+			"name": "Aries Shard",
+			"growths": {
+				"HP": 0,
+				"Atk": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 40,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Taurus Shard": {
+			"name": "Taurus Shard",
+			"growths": {
+				"HP": 5,
+				"Atk": 5,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 5,
+				"Def": 5,
+				"Res": 2
+			}
+		},
+		"Gemini Shard": {
+			"name": "Gemini Shard",
+			"growths": {
+				"HP": 0,
+				"Atk": 25,
+				"Skl": -5,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 20,
+				"Res": 0
+			}
+		},
+		"Cancer Shard": {
+			"name": "Cancer Shard",
+			"growths": {
+				"HP": 0,
+				"Atk": -10,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 50,
+				"Res": 0
+			}
+		},
+		"Leo Shard": {
+			"name": "Leo Shard",
+			"growths": {
+				"HP": 0,
+				"Atk": 50,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": -10,
+				"Res": 0
+			}
+		},
+		"Virgo Shard": {
+			"name": "Virgo Shard",
+			"growths": {
+				"HP": 0,
+				"Atk": 10,
+				"Skl": 10,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": -10,
+				"Res": 5
+			}
+		},
+		"Libra Shard": {
+			"name": "Libra Shard",
+			"growths": {
+				"HP": -10,
+				"Atk": 5,
+				"Skl": 5,
+				"Spd": 40,
+				"Lck": 10,
+				"Def": 0,
+				"Res": -2
+			}
+		},
+		"Scorpio Shard": {
+			"name": "Scorpio Shard",
+			"growths": {
+				"HP": 0,
+				"Atk": 20,
+				"Skl": 20,
+				"Spd": 10,
+				"Lck": -10,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Sagittarius Shard": {
+			"name": "Sagittarius Shard",
+			"growths": {
+				"HP": -10,
+				"Atk": 0,
+				"Skl": 40,
+				"Spd": 10,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Capricorn Shard": {
+			"name": "Capricorn Shard",
+			"growths": {
+				"HP": 20,
+				"Atk": 15,
+				"Skl": 5,
+				"Spd": -10,
+				"Lck": 0,
+				"Def": 10,
+				"Res": 0
+			}
+		},
+		"Star Jacinth": {
+			"name": "Star Jacinth",
+			"growths": {
+				"HP": 30,
+				"Atk": 30,
+				"Skl": 30,
+				"Spd": 30,
+				"Lck": 30,
+				"Def": 30,
+				"Res": 5
+			}
+		}
+	}
+}

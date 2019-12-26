@@ -102,8 +102,8 @@ function renderPercentRange([lo, hi]: [number, number]): React.ReactNode {
 	const hiDisp = Math.round(hi * 100);
 	if (loDisp === hiDisp) {
 		let prec = Math.round(((lo + hi) / 2) * 10000) / 100;
-		if (prec <= 0.001) prec = 0.01;
-		if (prec >= 99.999) prec = 99.99;
+		if (prec <= 0.001 && lo > 0) prec = 0.01;
+		if (prec >= 99.999 && hi < 1) prec = 99.99;
 		return <Text>{prec.toFixed(2) + "%"}</Text>;
 	}
 	// u2011 is a nonbreaking dash

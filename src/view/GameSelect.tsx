@@ -21,11 +21,11 @@ const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 		const game = gameTable[gameID];
 		const src = "images/" + gameID + "-banner.jpg";
 		const el = (
-			<Box gap="small" pad="small">
+			<Box width="medium" gap="small" pad="small" align="center">
 				<Text size="large" weight="bold">
 					{game.name}
 				</Text>
-				<Image src={src} />
+				<Image src={src} fit="contain" />
 			</Box>
 		);
 		gameEls.push(
@@ -36,10 +36,11 @@ const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 	});
 
 	return (
-		<Box align="center">
+		<Box align="center" gap="small">
 			<Heading truncate level={1}>
 				Fire Emblem Character Reports
 			</Heading>
+			<Text>Select the game for which you want to input characters.</Text>
 			{gameEls}
 		</Box>
 	);

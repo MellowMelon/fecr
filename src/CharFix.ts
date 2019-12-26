@@ -1,6 +1,7 @@
 import {
 	CharName,
 	CharClass,
+	EquipName,
 	HistoryEntry,
 	Char,
 	StatsTable,
@@ -78,6 +79,28 @@ function fixClass(
 		};
 	}
 	return {value: c, errors: []};
+}
+
+function fixEquip(
+	game: GameData,
+	where: string,
+	e: unknown
+): FixRes<EquipName | null> {
+	if (e == null) {
+		return {value: null, errors: []};
+	} else if (typeof e !== "string") {
+		return {
+			value: null,
+			errors: [`${where}: Not a string (typeof: ${typeof e})`],
+		};
+	}
+	if (!game.equipment[e]) {
+		return {
+			value: null,
+			errors: [`${where}: Equipment ${e} not in game ${game.id}`],
+		};
+	}
+	return {value: e, errors: []};
 }
 
 function fixStats(
@@ -158,6 +181,14 @@ function fixHistoryEntry(
 			id: index + 1,
 			level,
 			stats: extract(fixStats(game, `${where} stats`, true, data.stats)),
+		};
+		return {value: e, errors};
+	} else if (type === "equipchange") {
+		const e: HistoryEntry = {
+			type,
+			id: index + 1,
+			level,
+			equip: extract(fixEquip(game, `${where} equip`, data.equip)),
 		};
 		return {value: e, errors};
 	} else {

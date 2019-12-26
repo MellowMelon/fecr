@@ -5,10 +5,12 @@ import {Alert as AlertIcon} from "grommet-icons";
 import {
 	Stat,
 	CharClass,
+	EquipName,
 	HistoryEntryCheckpoint,
 	HistoryEntryClass,
 	HistoryEntryBoost,
 	HistoryEntryMaxBoost,
+	HistoryEntryEquipChange,
 	HistoryEntry,
 	GameData,
 } from "../types";
@@ -18,6 +20,7 @@ import {ViewAction} from "../state/types";
 import HistoryBase from "./HistoryBase";
 import InputStats from "./InputStats";
 import InputClass from "./InputClass";
+import InputEquip from "./InputEquip";
 import HelpButton from "./HelpButton";
 
 type Props = {
@@ -77,6 +80,10 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 
 	const onSelectClass = function(c: CharClass) {
 		dispatch({type: "updateCharHistoryClass", histIndex, newClass: c});
+	};
+
+	const onSelectEquip = function(e: EquipName | null) {
+		dispatch({type: "updateCharHistoryEquip", histIndex, newEquip: e});
 	};
 
 	const errorStr = error
@@ -141,6 +148,18 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 						rel
 						onChange={onChangeStats}
 					/>
+				</Box>
+			);
+		},
+		equipchange(h: HistoryEntryEquipChange) {
+			return (
+				<Box gap="small">
+					{renderHistoryHeader(
+						"Equip Change",
+						HelpTable.histEquipChange,
+						errorStr
+					)}
+					<InputEquip game={game} value={h.equip} onSelect={onSelectEquip} />
 				</Box>
 			);
 		},

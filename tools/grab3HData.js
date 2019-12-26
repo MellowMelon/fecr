@@ -4,6 +4,8 @@ const Path = require("path");
 const FS = require("fs");
 const Mkdirp = require("mkdirp");
 
+const Utils = require("./Utils.js");
+
 const FETCH_CACHE_DIR = Path.resolve(__dirname, ".cache");
 
 const urlFetchList = [
@@ -45,6 +47,11 @@ const statsList = [
 	"Res",
 	"Cha",
 ];
+const makeStatsZeroes = () =>
+	_.zipObject(
+		statsList,
+		statsList.map(() => 0)
+	);
 
 const charMappingRaw = [
 	["Protagonist", "BylethM"],
@@ -148,100 +155,30 @@ classMappingRaw.forEach(n => {
 	classMapping[n[0]].push(n[1] || n[0]);
 });
 
-function parseCell(value) {
-	const re = /^(-?[0-9]*) ?(?:\(([+-][0-9]*)\))?$/;
-	const m = re.exec(value);
-	if (m) {
-		return parseInt(m[1] || 0) + parseInt(m[2] || 0);
-	}
-	return 0;
-}
-
-function scrapeTRs(body) {
-	const trs = [];
-	const reStart = /\s*<tr[a-zA-Z0-9 =":;]*>\n/g;
-	const reEnd = /\s*<\/tr>\n/g;
-	const reContents = /\s*<td[^>]*>(.*)$/;
-	let m = reStart.exec(body);
-	while (m) {
-		const startIndex = m.index + m[0].length;
-		m = reStart.exec(body);
-		reEnd.lastIndex = startIndex;
-		const mEnd = reEnd.exec(body);
-		if (!mEnd) continue;
-		const trLines = body
-			.slice(startIndex, mEnd.index)
-			.split("\n")
-			.filter(Boolean);
-		const trCells = [];
-		trLines.forEach(line => {
-			if (line.endsWith("</td>")) {
-				line = line.slice(0, -5);
-			}
-			const mContents = reContents.exec(line);
-			if (mContents) {
-				trCells.push(mContents[1]);
-			}
-		});
-		if (trCells.length) {
-			trs.push(trCells);
-		}
-	}
-	return trs;
-}
-
 function turnTRsToCharStats(trs) {
+	const rawStats = Utils.turnTRsToStats(statsList, trs);
 	const charStats = {};
-	trs.forEach(tr => {
-		const toNames = charMapping[tr[0]];
+	_.each(rawStats, (stats, rawName) => {
+		const toNames = charMapping[rawName];
 		if (!toNames) return;
-		const stats = _.zipObject(statsList, tr.slice(1).map(parseCell));
 		toNames.forEach(n => {
-			if (!charStats[n]) {
-				charStats[n] = stats;
-			}
+			charStats[n] = charStats[n] || stats;
 		});
 	});
 	return charStats;
 }
 
 function turnTRsToClassStats(trs) {
+	const rawStats = Utils.turnTRsToStats(statsList, trs);
 	const classStats = {};
-	trs.forEach(tr => {
-		const toNames = classMapping[tr[0]];
+	_.each(rawStats, (stats, rawName) => {
+		const toNames = classMapping[rawName];
 		if (!toNames) return;
-		const stats = _.zipObject(statsList, tr.slice(1).map(parseCell));
 		toNames.forEach(n => {
-			if (!classStats[n]) {
-				classStats[n] = stats;
-			}
+			classStats[n] = classStats[n] || stats;
 		});
 	});
 	return classStats;
-}
-
-async function fetchURL(url) {
-	return new Promise((resolve, reject) => {
-		const urlEntry = urlFetchTable[url];
-		if (!urlEntry) reject("Unrecognized URL " + url);
-		const cacheName = `${urlEntry.name}.html`;
-		const cachePath = Path.join(FETCH_CACHE_DIR, cacheName);
-		if (FS.existsSync(cachePath)) {
-			const contents = FS.readFileSync(cachePath, "utf8");
-			resolve(contents);
-		} else {
-			request(url, function(error, response, body) {
-				if (error || !response) {
-					reject(error || new Error("No response"));
-				} else if (response.statusCode >= 300) {
-					reject(new Error("Status code " + response.statusCode));
-				} else {
-					FS.writeFileSync(cachePath, body, "utf8");
-					resolve(body);
-				}
-			});
-		}
-	});
 }
 
 function applyAptitude(charGrowths) {
@@ -251,39 +188,17 @@ function applyAptitude(charGrowths) {
 }
 
 async function processAll(finalJSON) {
-	const charBaseHTML = await fetchURL(
-		"https://serenesforest.net/three-houses/characters/base-stats/"
-	);
-	const charBaseStats = turnTRsToCharStats(scrapeTRs(charBaseHTML));
-
-	const charGrowthHTML = await fetchURL(
-		"https://serenesforest.net/three-houses/characters/growth-rates/"
-	);
-	const charGrowths = turnTRsToCharStats(scrapeTRs(charGrowthHTML));
-
-	const charMaxHTML = await fetchURL(
-		"https://serenesforest.net/three-houses/characters/maximum-stats/"
-	);
-	const charMaxStats = turnTRsToCharStats(scrapeTRs(charMaxHTML));
-
-	const classMinHTML = await fetchURL(
-		"https://serenesforest.net/three-houses/classes/base-stats/"
-	);
-	const classMinStats = turnTRsToClassStats(scrapeTRs(classMinHTML));
-
-	const classModHTML = await fetchURL(
-		"https://serenesforest.net/three-houses/classes/stat-boosts/"
-	);
-	const classMods = turnTRsToClassStats(scrapeTRs(classModHTML));
-
-	const classGrowthHTML = await fetchURL(
-		"https://serenesforest.net/three-houses/classes/growth-rates/"
-	);
-	const classGrowths = turnTRsToClassStats(scrapeTRs(classGrowthHTML));
+	const fetched = await Utils.fetchAllAndScrapeTRs(urlFetchTable);
+	const charBases = turnTRsToCharStats(fetched["3h_char_bases"]);
+	const charGrowths = turnTRsToCharStats(fetched["3h_char_growths"]);
+	const charMax = turnTRsToCharStats(fetched["3h_char_max"]);
+	const classMins = turnTRsToClassStats(fetched["3h_class_mins"]);
+	const classMods = turnTRsToClassStats(fetched["3h_class_mods"]);
+	const classGrowths = turnTRsToClassStats(fetched["3h_class_growths"]);
 
 	_.each(finalJSON.chars, (c, name) => {
-		if (charBaseStats[name]) {
-			c.baseStats = charBaseStats[name];
+		if (charBases[name]) {
+			c.baseStats = charBases[name];
 		} else {
 			console.error("No base stats found for character " + name);
 		}
@@ -295,16 +210,16 @@ async function processAll(finalJSON) {
 		} else {
 			console.error("No growths found for character " + name);
 		}
-		if (charMaxStats[name]) {
-			c.maxStats = charMaxStats[name];
+		if (charMax[name]) {
+			c.maxStats = charMax[name];
 		} else {
 			console.error("No max stats found for character " + name);
 		}
 	});
 
 	_.each(finalJSON.classes, (c, name) => {
-		if (classMinStats[name]) {
-			c.statMins = classMinStats[name];
+		if (classMins[name]) {
+			c.statMins = classMins[name];
 		} else {
 			console.error("No min stats found for class " + name);
 		}
@@ -322,8 +237,6 @@ async function processAll(finalJSON) {
 }
 
 async function main() {
-	Mkdirp.sync(FETCH_CACHE_DIR);
-
 	const finalJSON = {
 		id: "16",
 		name: "Fire Emblem: Three Houses",
@@ -333,6 +246,10 @@ async function main() {
 			maxStat: 999,
 			classChangeResetsLevel: false,
 			classChangeGetsAtLeast1HP: false,
+			enableEquipment: false,
+			enableMaxIncrease: true,
+			enableClassMins: true,
+			enableClassMods: true,
 		},
 		stats: statsList,
 		chars: {
@@ -608,6 +525,7 @@ async function main() {
 			Barbarossa: {name: "Barbarossa", requiredGender: ""},
 			"Death Knight": {name: "Death Knight", requiredGender: ""},
 		},
+		equipment: {},
 	};
 
 	await processAll(finalJSON);

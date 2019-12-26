@@ -11,6 +11,10 @@ Statue was fully restored and increased the maximum stats for a character.
 Don't worry about this if the character's stats are not high enough to be at
 risk of hitting the maximum.`;
 
+const equipChangeBlurb = `An **Equipment Change** entry is for when the
+character equips or unequips something that affects growths or maximum stats.
+Equipping a new item is considered to unequip the old one by the simulator.`;
+
 const checkpointBlurb = `A **Checkpoint** entry is your chance to tell the
 simulator what the character's stats were at any given point in time. The
 Report tab will let you compare these actual values to the expected ones for
@@ -62,6 +66,9 @@ boost came before or after.
 `,
 	histMaxStat: `
 ${maxStatBlurb}
+`,
+	histEquipChange: `
+${equipChangeBlurb}
 `,
 	histAdd: `
 For the simulator to correctly determine the likelihood of the character's
@@ -128,10 +135,14 @@ information:
   character's growth rates are for explaining their stats.
 - **Average Growth**: The weighted average of the growths across all this
   character's levels.
-- **Current Growth**: The percent chance this stat will increase each level in
-  the character's current class.
+- **Current Growth**: The percent chance this stat will increase each level
+  with the character's current class and equipment.
 - **Base Growth**: The base chance this stat will increase each level for this
   character.
+- **Class Growth**: The growth modifier on the character's current class,
+  if any.
+- **Equip Growth**: The growth modifier on the character's current equipment,
+  if any.
 `,
 };
 

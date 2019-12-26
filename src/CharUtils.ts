@@ -98,6 +98,13 @@ export function createHistoryEntry(
 			level,
 			stats: makeZeroStats(game),
 		};
+	} else if (type === "equipchange") {
+		return {
+			type: "equipchange",
+			id,
+			level,
+			equip: null,
+		};
 	} else {
 		const lastCPI = lastIndexOfCheckpoint(game, char);
 		let stats = char.baseStats || gameCharData.baseStats;
