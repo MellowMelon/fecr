@@ -102,9 +102,13 @@ function fixStats(
 
 	const ret: StatsTable = {};
 	game.stats.forEach(statName => {
-		ret[statName] = extract(
-			fixOneStat(game, `${where} ${statName}`, rel, data[statName])
-		);
+		if (!data.hasOwnProperty(statName)) {
+			ret[statName] = 0;
+		} else {
+			ret[statName] = extract(
+				fixOneStat(game, `${where} ${statName}`, rel, data[statName])
+			);
+		}
 	});
 
 	return {value: ret, errors};
