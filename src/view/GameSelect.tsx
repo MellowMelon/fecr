@@ -40,6 +40,10 @@ const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 			<Heading truncate level={1}>
 				Fire Emblem Character Reports
 			</Heading>
+			<Text>
+				A tool to definitively gauge whether Fire Emblem's random level ups have
+				been kind to you.
+			</Text>
 			<Text>Select the game for which you want to input characters.</Text>
 			{gameEls}
 		</Box>
