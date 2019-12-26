@@ -12,8 +12,14 @@ import {Table, TableBody, TableCell, TableRow} from "grommet";
 
 import {Stat, Char, Team, GameData} from "../types";
 import {CharCheckpoint, computeChar} from "../CharAdvance";
-import {CharReport, getCharReport} from "../CharReport";
-import HelpTable from "../HelpTable";
+import {
+	CharReport,
+	getCharReport,
+	getReportDetailsRows,
+	getReportDetailsLabel,
+	getReportDetailsValue,
+} from "../CharReport";
+import getHelp from "../HelpTable";
 import {ViewAction} from "../state/types";
 
 import CharHeader from "./CharHeader";
@@ -92,22 +98,11 @@ function getMedDiffColor(medDiff: number): string {
 	return `hsl(60, 80%, 40%)`;
 }
 
-function renderPercentRange([lo, hi]: [number, number]): React.ReactNode {
-	if (lo < -0.0001) {
-		return <Text color="status-error">Too low</Text>;
-	} else if (hi > 1.0001) {
-		return <Text color="status-error">Too high</Text>;
+function postprocessPercentRange(str: string): React.ReactNode {
+	if (str.startsWith("ERROR:")) {
+		return <Text color="status-error">{str.slice(6)}</Text>;
 	}
-	const loDisp = Math.round(lo * 100);
-	const hiDisp = Math.round(hi * 100);
-	if (loDisp === hiDisp) {
-		let prec = Math.round(((lo + hi) / 2) * 10000) / 100;
-		if (prec <= 0.001 && lo > 0) prec = 0.01;
-		if (prec >= 99.999 && hi < 1) prec = 99.99;
-		return <Text>{prec.toFixed(2) + "%"}</Text>;
-	}
-	// u2011 is a nonbreaking dash
-	return <Text>{loDisp + "\u2011" + hiDisp + "%"}</Text>;
+	return <Text>{str}</Text>;
 }
 
 function renderDetailsTable(
@@ -130,7 +125,12 @@ function renderDetailsTable(
 	);
 }
 
-function renderStatPanel(cr: CharReport, statName: Stat, screenSize: string) {
+function renderStatPanel(
+	game: GameData,
+	cr: CharReport,
+	statName: Stat,
+	screenSize: string
+) {
 	const isXXSmall = screenSize === "xxsmall";
 	const isXSmall = isXXSmall || screenSize === "xsmall";
 	const isSmall = isXSmall || screenSize === "small";
@@ -150,13 +150,15 @@ function renderStatPanel(cr: CharReport, statName: Stat, screenSize: string) {
 		realStatBox = null;
 	}
 
-	const perc = cr.sdPercentiles[statName];
-	const percColor = getPercColor(perc);
+	const perc = postprocessPercentRange(
+		String(getReportDetailsValue(game, cr, statName, "percentiles"))
+	);
+	const percColor = getPercColor(cr.sdPercentiles[statName]);
 	const percTextSize = isXSmall ? "medium" : "large";
 	const percBox: React.ReactNode = (
 		<Box background={percColor} width="xsmall" align="center">
 			<Text textAlign="center" size={percTextSize}>
-				{renderPercentRange(perc)}
+				{perc}
 			</Text>
 		</Box>
 	);
@@ -176,7 +178,7 @@ function renderStatPanel(cr: CharReport, statName: Stat, screenSize: string) {
 		medDiffBox = null;
 	}
 
-	const label = (
+	const accordionLabel = (
 		<Box direction="row" flex align="center" pad="small">
 			<Box width="xsmall" align="center">
 				<Text size="large" weight="bold">
@@ -197,29 +199,40 @@ function renderStatPanel(cr: CharReport, statName: Stat, screenSize: string) {
 		</Box>
 	);
 
-	const details: [string, React.ReactNode][] = [
-		["Current", cr.charRealStats[statName]],
-		["Class Modifier", cr.classStatMods[statName]],
-		["Percentile Range", renderPercentRange(perc)],
-		["Median", cr.sdMedian[statName]],
-		["Ahead/behind", cr.sdMedianDiff[statName]],
-		["Average", cr.sdAverage[statName]],
-		["Boost", cr.boosts[statName]],
-		["Percentile Range NB", renderPercentRange(cr.sdNBPercentiles[statName])],
-		["Median NB", cr.sdNBMedian[statName]],
-		["Ahead/behind NB", cr.sdNBMedianDiff[statName]],
-		["Average NB", cr.sdNBAverage[statName]],
-		["Minimum", cr.minStats[statName]],
-		["Maximum", cr.maxStats[statName]],
-		["Total Levels", cr.totalLevels],
-		["Eff. Levels", cr.effLevels[statName]],
-		["Average Growth", cr.averageGrowths[statName]],
-		["Current Growth", cr.realGrowths[statName]],
-		["Base Growth", cr.charGrowths[statName]],
-	];
+	const detailsRowKeys = getReportDetailsRows(game);
+	const details: [string, React.ReactNode][] = detailsRowKeys.map(k => {
+		const rowLabel = getReportDetailsLabel(game, k);
+		let value: React.ReactNode = getReportDetailsValue(game, cr, statName, k);
+		if (k === "percentiles" || k === "percentilesNB") {
+			// value should already be a string, but Typescript doesn't know.
+			value = postprocessPercentRange(String(value));
+		}
+		return [rowLabel, value];
+	});
+
+	// const details: [string, React.ReactNode][] = [
+	// 	["Current", cr.charRealStats[statName]],
+	// 	["Class Modifier", cr.classStatMods[statName]],
+	// 	["Percentile Range", renderPercentRange(perc)],
+	// 	["Median", cr.sdMedian[statName]],
+	// 	["Ahead/behind", cr.sdMedianDiff[statName]],
+	// 	["Average", cr.sdAverage[statName]],
+	// 	["Boost", cr.boosts[statName]],
+	// 	["Percentile Range NB", renderPercentRange(cr.sdNBPercentiles[statName])],
+	// 	["Median NB", cr.sdNBMedian[statName]],
+	// 	["Ahead/behind NB", cr.sdNBMedianDiff[statName]],
+	// 	["Average NB", cr.sdNBAverage[statName]],
+	// 	["Minimum", cr.minStats[statName]],
+	// 	["Maximum", cr.maxStats[statName]],
+	// 	["Total Levels", cr.totalLevels],
+	// 	["Eff. Levels", cr.effLevels[statName]],
+	// 	["Average Growth", cr.averageGrowths[statName]],
+	// 	["Current Growth", cr.realGrowths[statName]],
+	// 	["Base Growth", cr.charGrowths[statName]],
+	// ];
 
 	return (
-		<AccordionPanel key={statName} label={label}>
+		<AccordionPanel key={statName} label={accordionLabel}>
 			<Box margin="small" pad="small" background="light-4">
 				{renderDetailsTable(details)}
 			</Box>
@@ -298,7 +311,7 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 		<Box>
 			{charHeader}
 			<Box pad={{horizontal: "large"}} alignSelf="end">
-				<HelpButton title="Help - Report" md={HelpTable.report} />
+				<HelpButton title="Help - Report" md={getHelp(game, "report")} />
 			</Box>
 			<Box direction="row" pad={{horizontal: "large"}} wrap>
 				<Box margin={{right: "medium"}}>
@@ -307,7 +320,7 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 				<Box width="medium">{cpSelect}</Box>
 			</Box>
 			<Accordion>
-				{game.stats.map(s => renderStatPanel(cr, s, screenSize))}
+				{game.stats.map(s => renderStatPanel(game, cr, s, screenSize))}
 			</Accordion>
 		</Box>
 	);

@@ -14,7 +14,7 @@ import {
 	HistoryEntry,
 	GameData,
 } from "../types";
-import HelpTable from "../HelpTable";
+import getHelp from "../HelpTable";
 import {ViewAction} from "../state/types";
 
 import HistoryBase from "./HistoryBase";
@@ -96,7 +96,7 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 				<Box gap="small">
 					{renderHistoryHeader(
 						"Checkpoint",
-						HelpTable.histCheckpoint,
+						getHelp(game, "hist_checkpoint"),
 						errorStr
 					)}
 					<InputStats game={game} value={h.stats} onChange={onChangeStats} />
@@ -108,7 +108,7 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 				<Box gap="small">
 					{renderHistoryHeader(
 						"Class Change",
-						HelpTable.histClassChange,
+						getHelp(game, "hist_class"),
 						errorStr
 					)}
 					<Box direction="row">
@@ -124,7 +124,11 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 		boost(h: HistoryEntryBoost) {
 			return (
 				<Box gap="small">
-					{renderHistoryHeader("Stat Boost", HelpTable.histStatBoost, errorStr)}
+					{renderHistoryHeader(
+						"Stat Boost",
+						getHelp(game, "hist_boost"),
+						errorStr
+					)}
 					<InputStats
 						game={game}
 						value={h.stats}
@@ -139,7 +143,7 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 				<Box gap="small">
 					{renderHistoryHeader(
 						"Max Stat Increase",
-						HelpTable.histMaxStat,
+						getHelp(game, "hist_maxboost"),
 						errorStr
 					)}
 					<InputStats
@@ -155,8 +159,8 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 			return (
 				<Box gap="small">
 					{renderHistoryHeader(
-						"Equip Change",
-						HelpTable.histEquipChange,
+						"Equipment Change",
+						getHelp(game, "hist_equipchange"),
 						errorStr
 					)}
 					<InputEquip game={game} value={h.equip} onSelect={onSelectEquip} />

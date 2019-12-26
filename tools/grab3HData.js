@@ -250,6 +250,10 @@ async function main() {
 			enableMaxIncrease: true,
 			enableClassMins: true,
 			enableClassMods: true,
+			histAddLayout: [
+				["checkpoint", "class"],
+				["boost", "maxboost"],
+			],
 		},
 		stats: statsList,
 		chars: {

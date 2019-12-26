@@ -18,6 +18,7 @@ const game1: GameData = {
 		enableMaxIncrease: true,
 		enableClassMins: true,
 		enableClassMods: true,
+		histAddLayout: [],
 	},
 	stats: ["hp", "mp"],
 	chars: {

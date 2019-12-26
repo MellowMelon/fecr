@@ -3,7 +3,7 @@ import React from "react";
 import {Box, Button, Heading, ResponsiveContext} from "grommet";
 
 import {HistoryEntry, GameData} from "../types";
-import HelpTable from "../HelpTable";
+import getHelp from "../HelpTable";
 import {ViewAction} from "../state/types";
 
 import HelpButton from "./HelpButton";
@@ -23,7 +23,6 @@ const labelTable = {
 
 const HistoryAdd: React.FunctionComponent<Props> = function(props: Props) {
 	const {game, dispatch} = props;
-	const {enableMaxIncrease, enableEquipment} = game.globals;
 
 	const screenSize = React.useContext(ResponsiveContext);
 
@@ -38,21 +37,7 @@ const HistoryAdd: React.FunctionComponent<Props> = function(props: Props) {
 		);
 	};
 
-	let buttonLayout: HistoryEntry["type"][][] = [
-		["checkpoint", "class"],
-		["boost", "maxboost", "equipchange"],
-	];
-	buttonLayout = buttonLayout.map(row => {
-		return row.filter(histType => {
-			if (histType === "maxboost" && !enableMaxIncrease) {
-				return false;
-			} else if (histType === "equipchange" && !enableEquipment) {
-				return false;
-			}
-			return true;
-		});
-	});
-
+	let buttonLayout = game.globals.histAddLayout;
 	if (screenSize === "xxsmall") {
 		buttonLayout = _.flatten(buttonLayout).map(x => [x]);
 	}
@@ -69,7 +54,7 @@ const HistoryAdd: React.FunctionComponent<Props> = function(props: Props) {
 		<Box pad="medium" gap="small">
 			<Box direction="row">
 				<Heading level={3}>Add History</Heading>
-				<HelpButton title="Help - Add History" md={HelpTable.histAdd} />
+				<HelpButton title="Help - Add History" md={getHelp(game, "histAdd")} />
 			</Box>
 			{buttonEls}
 		</Box>

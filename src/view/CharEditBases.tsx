@@ -2,7 +2,7 @@ import React, {memo} from "react";
 import {Box, Button, Heading, ResponsiveContext, Text} from "grommet";
 
 import {Stat, CharClass, StatsTable, GameData} from "../types";
-import HelpTable from "../HelpTable";
+import getHelp from "../HelpTable";
 import {ViewAction} from "../state/types";
 
 import InputClass from "./InputClass";
@@ -66,7 +66,10 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 					<Heading level={3} margin="none">
 						Initial Stats
 					</Heading>
-					<HelpButton title="Help - Initial Stats" md={HelpTable.bases} />
+					<HelpButton
+						title="Help - Initial Stats"
+						md={getHelp(game, "bases")}
+					/>
 					<Box flex />
 					{resetTopRight}
 				</Box>

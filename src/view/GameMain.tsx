@@ -18,7 +18,7 @@ import {
 } from "grommet-icons";
 
 import {Char} from "../types";
-import HelpTable from "../HelpTable";
+import getHelp from "../HelpTable";
 import {createChar} from "../CharUtils";
 import {CharTab, ViewState, ViewAction} from "../state/types";
 import * as OpsUndoRedo from "../state/OpsUndoRedo";
@@ -65,7 +65,7 @@ const GameMain: React.FunctionComponent<Props> = function(props: Props) {
 						<Box flex />
 						<Button icon={<FormCloseIcon />} onClick={onClose} />
 					</Box>
-					<Markdown>{HelpTable.saveLoad}</Markdown>
+					<Markdown>{getHelp(game, "saveLoad")}</Markdown>
 					<Button label="Reset" onClick={onReset} />
 				</Box>
 			</Layer>

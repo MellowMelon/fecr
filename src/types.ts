@@ -102,6 +102,7 @@ export type GameData = {
 		enableMaxIncrease: boolean;
 		enableClassMins: boolean;
 		enableClassMods: boolean;
+		histAddLayout: HistoryEntry["type"][][];
 	};
 	stats: Stat[];
 	chars: {[name: string]: CharData};

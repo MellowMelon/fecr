@@ -10,7 +10,11 @@
 		"enableEquipment": false,
 		"enableMaxIncrease": true,
 		"enableClassMins": true,
-		"enableClassMods": true
+		"enableClassMods": true,
+		"histAddLayout": [
+			["checkpoint", "class"],
+			["boost", "maxboost"]
+		]
 	},
 	"stats": ["HP", "Str", "Mag", "Dex", "Spd", "Lck", "Def", "Res", "Cha"],
 	"chars": {
