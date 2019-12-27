@@ -245,11 +245,11 @@ async function main() {
 			maxLevel: 99,
 			maxStat: 999,
 			classChangeResetsLevel: false,
-			classChangeGetsAtLeast1HP: false,
 			enableEquipment: false,
 			enableMaxIncrease: true,
 			enableClassMins: true,
 			enableClassMods: true,
+			hideNewLevel: true,
 			histAddLayout: [
 				["checkpoint", "class"],
 				["boost", "maxboost"],

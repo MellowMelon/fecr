@@ -21,7 +21,7 @@ const CharHeader: React.FunctionComponent<Props> = function(props: Props) {
 	const src = "images/chars/" + game.id + "-" + charName.toLowerCase() + ".jpg";
 	const img = (
 		<Box flex={false} height="64px" width="64px">
-			<Image src={src} height="100%" />
+			<Image src={src} alt={charName} height="100%" />
 		</Box>
 	);
 

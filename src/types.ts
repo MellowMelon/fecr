@@ -97,11 +97,12 @@ export type GameData = {
 		maxLevel: number;
 		maxStat: number;
 		classChangeResetsLevel: boolean;
-		classChangeGetsAtLeast1HP: boolean;
 		enableEquipment: boolean;
 		enableMaxIncrease: boolean;
 		enableClassMins: boolean;
 		enableClassMods: boolean;
+		hideNewLevel?: boolean;
+		classChangeGetsAtLeast1HP?: boolean;
 		histAddLayout: HistoryEntry["type"][][];
 	};
 	stats: Stat[];

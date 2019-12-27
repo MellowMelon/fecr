@@ -1,16 +1,18 @@
 const Path = require("path");
 const Webpack = require("webpack");
 
-const production = false;
+const production = process.env.NODE_ENV === "production";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
-const cacheLoader = {
-	loader: "cache-loader",
-	options: {
-		cacheDirectory: Path.resolve(__dirname, ".cache-loader"),
-	},
-};
+const cacheLoader = production
+	? null
+	: {
+			loader: "cache-loader",
+			options: {
+				cacheDirectory: Path.resolve(__dirname, ".cache-loader"),
+			},
+	  };
 
 const babelLoader = {
 	loader: "babel-loader",
@@ -25,13 +27,6 @@ const babelLoader = {
 	},
 };
 
-// const tsLoader = {
-// 	loader: "ts-loader",
-// 	options: {
-// 		transpileOnly: true,
-// 	},
-// };
-
 module.exports = {
 	entry: "./src/main.ts",
 	output: {
@@ -44,7 +39,9 @@ module.exports = {
 	mode: production ? "production" : "development",
 	devtool: production ? false : "cheap-module-source-map",
 	module: {
-		rules: [{test: /\.(j|t)sx?$/, use: [cacheLoader, babelLoader]}],
+		rules: [
+			{test: /\.(j|t)sx?$/, use: [cacheLoader, babelLoader].filter(Boolean)},
+		],
 	},
 	plugins: [
 		new Webpack.DefinePlugin({

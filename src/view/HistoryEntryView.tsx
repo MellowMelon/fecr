@@ -104,6 +104,9 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 			);
 		},
 		["class"](h: HistoryEntryClass) {
+			const newLevelEl = game.globals.hideNewLevel ? null : (
+				<Text>New Level: {h.newLevel || h.level}</Text>
+			);
 			return (
 				<Box gap="small">
 					{renderHistoryHeader(
@@ -118,6 +121,7 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 							onSelect={onSelectClass}
 						/>
 					</Box>
+					{newLevelEl}
 				</Box>
 			);
 		},

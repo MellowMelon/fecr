@@ -25,7 +25,7 @@ const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 				<Text size="large" weight="bold">
 					{game.name}
 				</Text>
-				<Image src={src} fit="contain" />
+				<Image src={src} alt={game.shortName + " banner"} fit="contain" />
 			</Box>
 		);
 		gameEls.push(

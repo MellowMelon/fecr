@@ -103,7 +103,7 @@ const Main: React.FunctionComponent<Props> = function(props: Props) {
 					{errorModal}
 				</Box>
 				<Box width="medium" margin={{top: "medium"}}>
-					<Text size="xsmall" color="dark-4">
+					<Text size="9px" color="dark-1">
 						<em>Fire Emblem</em> is copyrighted by Nintendo and Intelligent
 						Systems. This site has no affiliation with the copyright holders.
 					</Text>
