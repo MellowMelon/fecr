@@ -81,7 +81,6 @@ export function createHistoryEntry(
 			id,
 			level,
 			newClass: Object.keys(game.classes)[0]!,
-			newLevel: game.globals.classChangeResetsLevel ? 1 : null,
 			ignoreMins: false,
 		};
 	} else if (type === "boost") {

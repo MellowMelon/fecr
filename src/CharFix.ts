@@ -60,17 +60,6 @@ function fixLevel(game: GameData, where: string, l: unknown): FixRes<number> {
 	return {value: l, errors: []};
 }
 
-function fixLevelNullable(
-	game: GameData,
-	where: string,
-	l: unknown
-): FixRes<number | null> {
-	if (l === null || l === undefined) {
-		return {value: null, errors: []};
-	}
-	return fixLevel(game, where, l);
-}
-
 function fixClass(
 	game: GameData,
 	where: string,
@@ -182,9 +171,6 @@ function fixHistoryEntry(
 			id: index + 1,
 			level,
 			newClass: extract(fixClass(game, `${where} class`, data.newClass)),
-			newLevel: extract(
-				fixLevelNullable(game, `${where} new level`, data.newLevel)
-			),
 			ignoreMins: !!data.ignoreMins,
 		};
 		return {value: e, errors};

@@ -14,7 +14,7 @@ export type CharReport = {
 	charRealStats: StatsTable;
 	classStatMods: StatsTable;
 	minStats: StatsTable;
-	maxStats: StatsTable;
+	boosts: StatsTable;
 	totalLevels: number;
 	effLevels: StatsStrTable;
 	averageGrowths: StatsStrTable;
@@ -22,7 +22,9 @@ export type CharReport = {
 	classGrowths: StatsTable;
 	equipGrowths: StatsTable;
 	realGrowths: StatsTable;
-	boosts: StatsTable;
+	maxStats: StatsTable;
+	charMax: StatsTable;
+	classMax: StatsTable;
 	statsDist: StatsDist;
 	sdAverage: StatsStrTable;
 	sdMedian: StatsStrTable;
@@ -48,6 +50,8 @@ const reportDetailsLabels = {
 	averageNB: "Average NB",
 	minimum: "Minimum",
 	maximum: "Maximum",
+	charMax: "Base Maximum",
+	classMax: "Class Maximum",
 	totalLevels: "Total Levels",
 	effLevels: "Eff. Levels",
 	averageGrowth: "Average Growth",
@@ -114,13 +118,10 @@ function computeDistDerived(stats: StatsTable, dist: StatsDist): DistAgg {
 
 export function getCharReport(
 	game: GameData,
-	char: CharCheckpoint
+	char: CharCheckpoint,
+	base: CharCheckpoint
 ): CharReport {
-	const {name, charClass, equip, level} = char;
-	const gameCharData = game.chars[name];
-	if (!gameCharData) {
-		throw new Error("No character named " + name + " in game " + game.id);
-	}
+	const {charClass, equip, level} = char;
 	const gameClassData = game.classes[charClass];
 	if (!gameClassData) {
 		throw new Error("No class named " + charClass + " in game " + game.id);
@@ -140,7 +141,7 @@ export function getCharReport(
 	const totalLevels = (char.growthList[someStat] || []).length;
 
 	const averageGrowths = _.mapValues(char.growthList, (gl, statName) => {
-		return _.sum(gl) / gl.length;
+		return gl.length ? _.sum(gl) / gl.length : char.growths[statName];
 	});
 
 	const averageGrowthsStr = _.mapValues(averageGrowths, x => x.toFixed(2));
@@ -148,6 +149,8 @@ export function getCharReport(
 	const effLevels = _.mapValues(distNBAgg.sdAverageNum, (avg, statName) => {
 		const min = char.min[statName] + gameClassData.statMods[statName];
 		const avgGrowth = averageGrowths[statName];
+		if (avg - min < 0.001) return 0;
+		if (!avgGrowth) return Infinity;
 		return ((avg - min) / avgGrowth) * 100;
 	});
 
@@ -159,15 +162,17 @@ export function getCharReport(
 		charRealStats: char.stats,
 		classStatMods: gameClassData.statMods,
 		minStats: char.min,
-		maxStats: char.maxStats,
+		boosts: char.boosts,
 		totalLevels,
 		effLevels: effLevelsStr,
 		averageGrowths: averageGrowthsStr,
-		charGrowths: gameCharData.growths,
+		charGrowths: char.growths,
 		classGrowths: gameClassData.growths,
 		equipGrowths: gameEquipData.growths,
-		realGrowths: sumObjects(gameCharData.growths, gameClassData.growths),
-		boosts: char.boosts,
+		realGrowths: sumObjects(char.growths, gameClassData.growths),
+		maxStats: char.maxStats,
+		charMax: base.maxStats,
+		classMax: gameClassData.maxStats,
 		statsDist: char.dist,
 		sdAverage: distAgg.sdAverage,
 		sdMedian: distAgg.sdMedian,
@@ -202,6 +207,11 @@ export function renderPercentRange([lo, hi]: [number, number]): string {
 
 export function getReportDetailsRows(game: GameData): ReportDetailKey[] {
 	const g = game.globals;
+	const showCharMax =
+		g.enableCharMax && (g.enableClassMax || g.enableMaxIncrease);
+	const showClassMax =
+		g.enableClassMax && (g.enableCharMax || g.enableMaxIncrease);
+
 	const base: (ReportDetailKey | null)[] = [
 		"current",
 		g.enableClassMods ? "classMod" : null,
@@ -216,6 +226,8 @@ export function getReportDetailsRows(game: GameData): ReportDetailKey[] {
 		"averageNB",
 		"minimum",
 		"maximum",
+		showCharMax ? "charMax" : null,
+		showClassMax ? "classMax" : null,
 		"totalLevels",
 		"effLevels",
 		"averageGrowth",
@@ -266,6 +278,10 @@ export function getReportDetailsValue(
 		return cr.minStats[statName];
 	} else if (key === "maximum") {
 		return cr.maxStats[statName];
+	} else if (key === "charMax") {
+		return cr.charMax[statName];
+	} else if (key === "classMax") {
+		return cr.classMax[statName];
 	} else if (key === "totalLevels") {
 		return cr.totalLevels;
 	} else if (key === "effLevels") {

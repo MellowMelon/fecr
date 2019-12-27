@@ -305,7 +305,7 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 	if (!cp) {
 		return null;
 	}
-	const cr = getCharReport(game, cp);
+	const cr = getCharReport(game, cp, computed.base);
 
 	return (
 		<Box>

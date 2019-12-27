@@ -29,6 +29,7 @@ export type CharCheckpoint = {
 	stats: StatsTable;
 	dist: StatsDist;
 	distNB: StatsDist;
+	growths: StatsTable;
 	maxStats: StatsTable;
 	min: StatsTable;
 	boosts: StatsTable;
@@ -93,6 +94,33 @@ function modifyBothDistsMV(
 	});
 }
 
+function getNewLevelInt(
+	game: GameData,
+	histEntry: HistoryEntry,
+	oldClass: CharClass
+): number {
+	if (histEntry.type !== "class") return histEntry.level;
+	if (game.globals.classChangeResetsLevel) return 1;
+	const oldMod = game.classes[oldClass].levelMod || 0;
+	const newMod = game.classes[histEntry.newClass].levelMod || 0;
+	return Math.max(histEntry.level + oldMod - newMod, 1);
+}
+
+export function getNewLevel(
+	game: GameData,
+	char: Char,
+	histIndex: number
+): number {
+	const currH = char.history[histIndex] || _.last(char.history);
+	if (!currH) return char.baseLevel;
+	let oldClass = char.baseClass;
+	for (let i = 0; i < histIndex; i += 1) {
+		const prevH = char.history[i];
+		if (prevH.type === "class") oldClass = prevH.newClass;
+	}
+	return getNewLevelInt(game, currH, oldClass);
+}
+
 export function getBaseGameChar(
 	game: GameData,
 	name: CharName
@@ -110,6 +138,7 @@ export function getBaseGameChar(
 		stats,
 		dist,
 		distNB: dist,
+		growths: gameCharData.growths,
 		maxStats: gameCharData.maxStats,
 		min: stats,
 		boosts: _.mapValues(stats, () => 0),
@@ -142,6 +171,7 @@ export function getCharPlan(game: GameData, char: Char): AdvancePlan {
 
 	let histIndex = 0;
 	let currLevel = baseChar.level;
+	let currClass = baseChar.charClass;
 	while (histIndex < char.history.length) {
 		const nextH = char.history[histIndex];
 		if (nextH.level > currLevel) {
@@ -155,8 +185,9 @@ export function getCharPlan(game: GameData, char: Char): AdvancePlan {
 			});
 			histIndex += 1;
 		} else {
+			currLevel = getNewLevelInt(game, nextH, currClass);
 			if (nextH.type === "class") {
-				currLevel = nextH.newLevel || currLevel;
+				currClass = nextH.newClass;
 			}
 			entries.push(nextH);
 			histIndex += 1;
@@ -230,14 +261,15 @@ function simulateClass(
 	char: AdvanceChar,
 	entry: HistoryEntryClass
 ): AdvanceChar {
-	const {newClass, newLevel, ignoreMins} = entry;
+	const {newClass, ignoreMins} = entry;
+	const oldClass = char.curr.charClass;
 	const {
 		classChangeGetsAtLeast1HP,
 		enableClassMins,
 		enableClassMods,
 	} = game.globals;
 	const newClassMins = game.classes[entry.newClass].statMins;
-	const oldMods = game.classes[char.curr.charClass].statMods;
+	const oldMods = game.classes[oldClass].statMods;
 	const newMods = game.classes[entry.newClass].statMods;
 	const newMins = ignoreMins
 		? char.curr.min
@@ -247,7 +279,7 @@ function simulateClass(
 	let newChar = char;
 	newChar = modifyCurrent(newChar, {
 		charClass: newClass,
-		level: newLevel || char.curr.level,
+		level: getNewLevelInt(game, entry, oldClass),
 		min: newMins,
 	});
 	newChar = modifyBothDistsMV(newChar, (pd, statName) => {
@@ -318,13 +350,13 @@ function simulateLevels(
 	char: AdvanceChar,
 	count: number
 ): AdvanceChar {
-	const gameCharData = game.chars[char.curr.name];
 	const gameClassData = game.classes[char.curr.charClass];
+	const charGrowths = char.curr.growths;
 	const equipGrowths = char.curr.equip
 		? game.equipment[char.curr.equip].growths
 		: {};
 	const realGrowths = sumObjects(
-		gameCharData.growths,
+		charGrowths,
 		gameClassData.growths,
 		equipGrowths
 	);

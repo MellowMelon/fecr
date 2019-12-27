@@ -4,6 +4,7 @@ import FlipMove from "react-flip-move";
 
 import {Char, GameData} from "../types";
 import {ViewAction} from "../state/types";
+import {getNewLevel} from "../CharAdvance";
 
 import HistoryBase from "./HistoryBase";
 import HistoryEntryView from "./HistoryEntryView";
@@ -63,6 +64,7 @@ const HistoryEntryList: React.FunctionComponent<Props> = function(
 				</Box>
 			);
 		}
+		const newLevel = getNewLevel(game, char, i);
 		return (
 			<Box key={h.id} margin={{bottom: "small"}}>
 				<HistoryEntryView
@@ -70,6 +72,7 @@ const HistoryEntryList: React.FunctionComponent<Props> = function(
 					histIndex={i}
 					histEntry={h}
 					histCount={histCount}
+					newLevel={newLevel}
 					error={histErrorTable[i]}
 					dispatch={dispatch}
 				/>

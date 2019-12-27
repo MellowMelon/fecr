@@ -47,11 +47,6 @@ const statsList = [
 	"Res",
 	"Cha",
 ];
-const makeStatsZeroes = () =>
-	_.zipObject(
-		statsList,
-		statsList.map(() => 0)
-	);
 
 const charMappingRaw = [
 	["Protagonist", "BylethM"],
@@ -233,6 +228,7 @@ async function processAll(finalJSON) {
 		} else {
 			console.error("No growths found for class " + name);
 		}
+		c.maxStats = Utils.makeStatsZeroes(statsList);
 	});
 }
 
@@ -245,10 +241,12 @@ async function main() {
 			maxLevel: 99,
 			maxStat: 999,
 			classChangeResetsLevel: false,
-			enableEquipment: false,
-			enableMaxIncrease: true,
+			enableCharMax: true,
 			enableClassMins: true,
 			enableClassMods: true,
+			enableClassMax: false,
+			enableEquipment: false,
+			enableMaxIncrease: true,
 			hideNewLevel: true,
 			histAddLayout: [
 				["checkpoint", "class"],
@@ -534,7 +532,7 @@ async function main() {
 
 	await processAll(finalJSON);
 
-	process.stdout.write(JSON.stringify(finalJSON, null, 2));
+	process.stdout.write(Utils.outputJSON(finalJSON));
 }
 
 main();

@@ -14,7 +14,6 @@ export type HistoryEntryClass = {
 	id: number;
 	level: number;
 	newClass: CharClass;
-	newLevel: number | null;
 	ignoreMins: boolean;
 };
 export type HistoryEntryBoost = {
@@ -80,6 +79,8 @@ export type ClassData = {
 	statMins: StatsTable;
 	statMods: StatsTable;
 	growths: StatsTable;
+	maxStats: StatsTable;
+	levelMod?: number;
 };
 
 export type EquipmentData = {
@@ -97,10 +98,12 @@ export type GameData = {
 		maxLevel: number;
 		maxStat: number;
 		classChangeResetsLevel: boolean;
-		enableEquipment: boolean;
-		enableMaxIncrease: boolean;
+		enableCharMax: boolean;
 		enableClassMins: boolean;
 		enableClassMods: boolean;
+		enableClassMax: boolean;
+		enableEquipment: boolean;
+		enableMaxIncrease: boolean;
 		hideNewLevel?: boolean;
 		classChangeGetsAtLeast1HP?: boolean;
 		histAddLayout: HistoryEntry["type"][][];

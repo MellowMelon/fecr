@@ -4,8 +4,20 @@ const request = require("request");
 const Path = require("path");
 const FS = require("fs");
 const Mkdirp = require("mkdirp");
+const Prettier = require("prettier");
 
 const FETCH_CACHE_DIR = Path.resolve(__dirname, ".cache");
+
+const prettierOptions = Prettier.resolveConfig.sync(
+	Path.resolve(__dirname, "..", "data")
+);
+
+function makeStatsZeroes(statsList) {
+	return _.zipObject(
+		statsList,
+		statsList.map(() => 0)
+	);
+}
 
 function parseCell(value) {
 	const re = /^\+?(-?[0-9]*)%? ?(?:\(\+?(-?[0-9]+)\))?$/;
@@ -99,9 +111,18 @@ async function fetchAllAndScrapeTRs(urlFetchTable) {
 	return ret;
 }
 
+// Turns a JSONable value into a prettier'd string
+function outputJSON(finalJSON) {
+	let out = JSON.stringify(finalJSON);
+	out = Prettier.format(out, {...prettierOptions, parser: "json"});
+	return out;
+}
+
 module.exports = {
+	makeStatsZeroes,
 	scrapeTRs,
 	turnTRsToStats,
 	fetchURL,
 	fetchAllAndScrapeTRs,
+	outputJSON,
 };

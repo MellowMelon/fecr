@@ -135,9 +135,15 @@ were in the long run.`,
 	report_minimum: `The highest value among the base stat and all class minimums
 for classes the character has been in.`,
 	report_maximum: {
-		all: `The maximum value of this stat for the character or class.`,
+		all: `The maximum value of this stat for the character.`,
 		16: `The current maximum of this stat, taking into account the
 base maximum and any effects that increased it.`,
+	},
+	report_charMax: {
+		all: `The base maximum value of this stat for the character.`,
+	},
+	report_classMax: {
+		all: `The maximum value of this stat for the current class.`,
 	},
 	report_totalLevels: `The total number of levels this character has gained.`,
 	report_effLevels: `The number of levels this character would need to gain for
@@ -266,8 +272,16 @@ function resolvePreFragments(
 	} else if (typeof entry === "function") {
 		return entry(game);
 	} else {
+		// Games like Fates (14) with multiple versions have another fallback.
+		let auxID = "all";
+		if (game.id.startsWith("14")) {
+			auxID = "14";
+		}
 		return (
-			entry[game.id] || entry.all || `(Missing help entry for ${cacheKey})`
+			entry[game.id] ||
+			entry[auxID] ||
+			entry.all ||
+			`(Missing help entry for ${cacheKey})`
 		);
 	}
 }

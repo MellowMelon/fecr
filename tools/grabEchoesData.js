@@ -3,10 +3,7 @@ const request = require("request");
 const Path = require("path");
 const FS = require("fs");
 const Mkdirp = require("mkdirp");
-
 const Utils = require("./Utils.js");
-
-const FETCH_CACHE_DIR = Path.resolve(__dirname, ".cache");
 
 const urlFetchList = [
 	{
@@ -43,11 +40,6 @@ const urlFetchList = [
 const urlFetchTable = _.keyBy(urlFetchList, "url");
 
 const statsList = ["HP", "Atk", "Skl", "Spd", "Lck", "Def", "Res"];
-const makeStatsZeroes = () =>
-	_.zipObject(
-		statsList,
-		statsList.map(() => 0)
-	);
 
 const charMappingRaw = [
 	["Alm"],
@@ -241,7 +233,8 @@ async function processAll(finalJSON) {
 		} else {
 			console.error("No growths found for class " + name);
 		}
-		c.statMods = makeStatsZeroes();
+		c.statMods = Utils.makeStatsZeroes(statsList);
+		c.maxStats = Utils.makeStatsZeroes(statsList);
 	});
 
 	_.each(starGrowths, (g, name) => {
@@ -259,10 +252,12 @@ async function main() {
 			maxStat: 52,
 			classChangeResetsLevel: true,
 			classChangeGetsAtLeast1HP: true,
+			enableCharMax: true,
 			enableEquipment: true,
 			enableMaxIncrease: false,
 			enableClassMins: true,
 			enableClassMods: false,
+			enableClassMax: false,
 			histAddLayout: [
 				["checkpoint", "class"],
 				["boost", "equipchange"],
@@ -347,7 +342,7 @@ async function main() {
 
 	await processAll(finalJSON);
 
-	process.stdout.write(JSON.stringify(finalJSON, null, 2));
+	process.stdout.write(Utils.outputJSON(finalJSON));
 }
 
 main();

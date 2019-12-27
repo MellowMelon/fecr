@@ -28,6 +28,7 @@ type Props = {
 	histIndex: number;
 	histEntry: HistoryEntry;
 	histCount: number;
+	newLevel: number;
 	error?: string;
 	dispatch: (a: ViewAction) => void;
 };
@@ -71,7 +72,15 @@ function renderHistoryHeader(
 const HistoryEntryView: React.FunctionComponent<Props> = function(
 	props: Props
 ) {
-	const {game, histIndex, histEntry, histCount, error, dispatch} = props;
+	const {
+		game,
+		histIndex,
+		histEntry,
+		histCount,
+		newLevel,
+		error,
+		dispatch,
+	} = props;
 
 	const onChangeStats = function(statName: Stat, value: number) {
 		const stats = {[statName]: value};
@@ -105,7 +114,7 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 		},
 		["class"](h: HistoryEntryClass) {
 			const newLevelEl = game.globals.hideNewLevel ? null : (
-				<Text>New Level: {h.newLevel || h.level}</Text>
+				<Text>New Level: {newLevel}</Text>
 			);
 			return (
 				<Box gap="small">

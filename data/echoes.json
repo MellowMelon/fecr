@@ -7,10 +7,12 @@
 		"maxStat": 52,
 		"classChangeResetsLevel": true,
 		"classChangeGetsAtLeast1HP": true,
+		"enableCharMax": true,
 		"enableEquipment": true,
 		"enableMaxIncrease": false,
 		"enableClassMins": true,
 		"enableClassMods": false,
+		"enableClassMax": false,
 		"histAddLayout": [
 			["checkpoint", "class"],
 			["boost", "equipchange"]
