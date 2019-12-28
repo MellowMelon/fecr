@@ -102,7 +102,7 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 	}
 
 	let parentBox: React.ReactNode = null;
-	if (gameCharData.hasBoonBane) {
+	if (gameCharData.hasParent) {
 		parentBox = (
 			<React.Fragment>
 				<Box direction="row" align="center" gap="small">
@@ -114,6 +114,17 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 					/>
 				</Box>
 			</React.Fragment>
+		);
+	}
+
+	let abilityBox: React.ReactNode = null;
+	if (gameCharData.initialAbilities) {
+		abilityBox = (
+			<Box>
+				<Text>
+					Initial Abilities: {gameCharData.initialAbilities.join(", ")}
+				</Text>
+			</Box>
 		);
 	}
 
@@ -154,6 +165,7 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 					value={baseStats}
 					onChange={onChangeBaseStats}
 				/>
+				{abilityBox}
 			</Box>
 		</HistoryBase>
 	);

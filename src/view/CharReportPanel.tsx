@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from "react";
+import React, {memo, useState, useMemo} from "react";
 import {
 	Accordion,
 	AccordionPanel,
@@ -210,27 +210,6 @@ function renderStatPanel(
 		return [rowLabel, value];
 	});
 
-	// const details: [string, React.ReactNode][] = [
-	// 	["Current", cr.charRealStats[statName]],
-	// 	["Class Modifier", cr.classStatMods[statName]],
-	// 	["Percentile Range", renderPercentRange(perc)],
-	// 	["Median", cr.sdMedian[statName]],
-	// 	["Ahead/behind", cr.sdMedianDiff[statName]],
-	// 	["Average", cr.sdAverage[statName]],
-	// 	["Boost", cr.boosts[statName]],
-	// 	["Percentile Range NB", renderPercentRange(cr.sdNBPercentiles[statName])],
-	// 	["Median NB", cr.sdNBMedian[statName]],
-	// 	["Ahead/behind NB", cr.sdNBMedianDiff[statName]],
-	// 	["Average NB", cr.sdNBAverage[statName]],
-	// 	["Minimum", cr.minStats[statName]],
-	// 	["Maximum", cr.maxStats[statName]],
-	// 	["Total Levels", cr.totalLevels],
-	// 	["Eff. Levels", cr.effLevels[statName]],
-	// 	["Average Growth", cr.averageGrowths[statName]],
-	// 	["Current Growth", cr.realGrowths[statName]],
-	// 	["Base Growth", cr.charGrowths[statName]],
-	// ];
-
 	return (
 		<AccordionPanel key={statName} label={accordionLabel}>
 			<Box margin="small" pad="small" background="light-4">
@@ -308,6 +287,8 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 	}
 	const cr = getCharReport(game, cp, computed.base);
 
+	console.log("Report showing", cp);
+
 	return (
 		<Box>
 			{charHeader}
@@ -326,4 +307,4 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 		</Box>
 	);
 };
-export default CharReportPanel;
+export default memo(CharReportPanel);

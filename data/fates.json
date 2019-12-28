@@ -137,13 +137,14 @@
 				"Res": 35
 			},
 			"maxStats": {
-				"HP": -2,
-				"Str": 2,
-				"Mag": 0,
-				"Skl": 1,
-				"Spd": 0,
-				"Lck": -1,
-				"Def": 1
+				"HP": 0,
+				"Str": -2,
+				"Mag": 2,
+				"Skl": 0,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": -1,
+				"Res": 1
 			}
 		},
 		"Jakob": {
@@ -190,13 +191,14 @@
 				"Res": 25
 			},
 			"maxStats": {
-				"HP": 2,
-				"Str": -2,
-				"Mag": 2,
-				"Skl": 0,
-				"Spd": -1,
-				"Lck": 0,
-				"Def": -1
+				"HP": 0,
+				"Str": 2,
+				"Mag": -2,
+				"Skl": 2,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 0,
+				"Res": -1
 			}
 		},
 		"Kaze": {
@@ -258,13 +260,14 @@
 				"Res": 35
 			},
 			"maxStats": {
-				"HP": -2,
-				"Str": 0,
-				"Mag": 2,
-				"Skl": 3,
-				"Spd": -2,
-				"Lck": -1,
-				"Def": 1
+				"HP": 0,
+				"Str": -2,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": 3,
+				"Lck": -2,
+				"Def": -1,
+				"Res": 1
 			}
 		},
 		"Azura": {
@@ -295,11 +298,12 @@
 			"maxStats": {
 				"HP": 0,
 				"Str": 0,
-				"Mag": 1,
-				"Skl": 3,
-				"Spd": 0,
-				"Lck": -3,
-				"Def": 0
+				"Mag": 0,
+				"Skl": 1,
+				"Spd": 3,
+				"Lck": 0,
+				"Def": -3,
+				"Res": 0
 			}
 		},
 		"Silas": {
@@ -361,13 +365,14 @@
 				"Res": 25
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 2,
-				"Skl": 0,
-				"Spd": -1,
-				"Lck": 0,
-				"Def": -1
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 0,
+				"Res": -1
 			}
 		},
 		"Shura": {
@@ -429,13 +434,14 @@
 				"Res": 35
 			},
 			"maxStats": {
-				"HP": -1,
-				"Str": 0,
-				"Mag": -1,
-				"Skl": 3,
-				"Spd": -1,
-				"Lck": -2,
-				"Def": 2
+				"HP": 0,
+				"Str": -1,
+				"Mag": 0,
+				"Skl": -1,
+				"Spd": 3,
+				"Lck": -1,
+				"Def": -2,
+				"Res": 2
 			}
 		},
 		"Izana": {
@@ -465,12 +471,13 @@
 			},
 			"maxStats": {
 				"HP": 0,
-				"Str": 1,
+				"Str": 0,
 				"Mag": 1,
-				"Skl": -2,
-				"Spd": 0,
+				"Skl": 1,
+				"Spd": -2,
 				"Lck": 0,
-				"Def": 1
+				"Def": 0,
+				"Res": 1
 			}
 		},
 		"Mozu": {
@@ -502,11 +509,12 @@
 			"maxStats": {
 				"HP": 0,
 				"Str": 0,
-				"Mag": 1,
+				"Mag": 0,
 				"Skl": 1,
 				"Spd": 1,
-				"Lck": 0,
-				"Def": -2
+				"Lck": 1,
+				"Def": 0,
+				"Res": -2
 			}
 		},
 		"Rinkah": {
@@ -535,13 +543,14 @@
 				"Res": 20
 			},
 			"maxStats": {
-				"HP": -1,
-				"Str": 0,
-				"Mag": -2,
-				"Skl": 1,
-				"Spd": 0,
-				"Lck": 2,
-				"Def": 0
+				"HP": 0,
+				"Str": -1,
+				"Mag": 0,
+				"Skl": -2,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": 2,
+				"Res": 0
 			}
 		},
 		"Sakura": {
@@ -589,12 +598,13 @@
 			},
 			"maxStats": {
 				"HP": 0,
-				"Str": 2,
-				"Mag": -1,
-				"Skl": 1,
-				"Spd": 0,
-				"Lck": -1,
-				"Def": 0
+				"Str": 0,
+				"Mag": 2,
+				"Skl": -1,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": -1,
+				"Res": 0
 			}
 		},
 		"Hana": {
@@ -641,13 +651,14 @@
 				"Res": 30
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 1,
-				"Skl": 2,
-				"Spd": -1,
-				"Lck": -3,
-				"Def": 1
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 1,
+				"Spd": 2,
+				"Lck": -1,
+				"Def": -3,
+				"Res": 1
 			}
 		},
 		"Subaki": {
@@ -676,13 +687,14 @@
 				"Res": 5
 			},
 			"maxStats": {
-				"HP": -1,
-				"Str": 0,
-				"Mag": 2,
-				"Skl": -2,
-				"Spd": -1,
-				"Lck": 3,
-				"Def": -1
+				"HP": 0,
+				"Str": -1,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": -2,
+				"Lck": -1,
+				"Def": 3,
+				"Res": -1
 			}
 		},
 		"Saizo": {
@@ -711,13 +723,14 @@
 				"Res": 10
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 3,
-				"Skl": -2,
-				"Spd": 0,
-				"Lck": 1,
-				"Def": -2
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 3,
+				"Spd": -2,
+				"Lck": 0,
+				"Def": 1,
+				"Res": -2
 			}
 		},
 		"Orochi": {
@@ -765,12 +778,13 @@
 			},
 			"maxStats": {
 				"HP": 0,
-				"Str": 3,
-				"Mag": 2,
-				"Skl": -2,
-				"Spd": -1,
-				"Lck": -2,
-				"Def": 1
+				"Str": 0,
+				"Mag": 3,
+				"Skl": 2,
+				"Spd": -2,
+				"Lck": -1,
+				"Def": -2,
+				"Res": 1
 			}
 		},
 		"Hinoka": {
@@ -817,13 +831,14 @@
 				"Res": 40
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": -1,
+				"HP": 0,
+				"Str": 1,
 				"Mag": -1,
-				"Skl": 1,
-				"Spd": 0,
-				"Lck": -1,
-				"Def": 2
+				"Skl": -1,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": -1,
+				"Res": 2
 			}
 		},
 		"Azama": {
@@ -870,13 +885,14 @@
 				"Res": 20
 			},
 			"maxStats": {
-				"HP": 2,
-				"Str": -3,
-				"Mag": 0,
-				"Skl": 1,
-				"Spd": 0,
-				"Lck": 1,
-				"Def": 0
+				"HP": 0,
+				"Str": 2,
+				"Mag": -3,
+				"Skl": 0,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": 1,
+				"Res": 0
 			}
 		},
 		"Setsuna": {
@@ -925,11 +941,12 @@
 			"maxStats": {
 				"HP": 0,
 				"Str": 0,
-				"Mag": 1,
-				"Skl": 3,
-				"Spd": -1,
+				"Mag": 0,
+				"Skl": 1,
+				"Spd": 3,
 				"Lck": -1,
-				"Def": -1
+				"Def": -1,
+				"Res": -1
 			}
 		},
 		"Hayato": {
@@ -977,12 +994,13 @@
 			},
 			"maxStats": {
 				"HP": 0,
-				"Str": 1,
-				"Mag": -1,
-				"Skl": 2,
-				"Spd": 1,
-				"Lck": -1,
-				"Def": -1
+				"Str": 0,
+				"Mag": 1,
+				"Skl": -1,
+				"Spd": 2,
+				"Lck": 1,
+				"Def": -1,
+				"Res": -1
 			}
 		},
 		"Oboro": {
@@ -1011,13 +1029,14 @@
 				"Res": 30
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": -1,
-				"Mag": 1,
+				"HP": 0,
+				"Str": 1,
+				"Mag": -1,
 				"Skl": 1,
-				"Spd": -1,
-				"Lck": 1,
-				"Def": -1
+				"Spd": 1,
+				"Lck": -1,
+				"Def": 1,
+				"Res": -1
 			}
 		},
 		"Hinata": {
@@ -1046,13 +1065,14 @@
 				"Res": 15
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": -1,
-				"Skl": -2,
-				"Spd": 0,
-				"Lck": 2,
-				"Def": 0
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": -1,
+				"Spd": -2,
+				"Lck": 0,
+				"Def": 2,
+				"Res": 0
 			}
 		},
 		"Takumi": {
@@ -1081,13 +1101,14 @@
 				"Res": 20
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 3,
-				"Skl": -2,
-				"Spd": 1,
-				"Lck": 0,
-				"Def": -2
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 3,
+				"Spd": -2,
+				"Lck": 1,
+				"Def": 0,
+				"Res": -2
 			}
 		},
 		"Kagero": {
@@ -1116,13 +1137,14 @@
 				"Res": 40
 			},
 			"maxStats": {
-				"HP": 3,
-				"Str": 0,
-				"Mag": -1,
+				"HP": 0,
+				"Str": 3,
+				"Mag": 0,
 				"Skl": -1,
-				"Spd": 0,
-				"Lck": -1,
-				"Def": 1
+				"Spd": -1,
+				"Lck": 0,
+				"Def": -1,
+				"Res": 1
 			}
 		},
 		"Reina": {
@@ -1169,13 +1191,14 @@
 				"Res": 10
 			},
 			"maxStats": {
-				"HP": 2,
-				"Str": 0,
+				"HP": 0,
+				"Str": 2,
 				"Mag": 0,
-				"Skl": 2,
-				"Spd": -1,
-				"Lck": -2,
-				"Def": -1
+				"Skl": 0,
+				"Spd": 2,
+				"Lck": -1,
+				"Def": -2,
+				"Res": -1
 			}
 		},
 		"Kaden": {
@@ -1204,13 +1227,14 @@
 				"Res": 40
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": -3,
-				"Skl": 2,
-				"Spd": 1,
-				"Lck": -2,
-				"Def": 2
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": -3,
+				"Spd": 2,
+				"Lck": 1,
+				"Def": -2,
+				"Res": 2
 			}
 		},
 		"Ryoma": {
@@ -1239,13 +1263,14 @@
 				"Res": 25
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 2,
-				"Skl": 1,
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 2,
 				"Spd": 1,
-				"Lck": -2,
-				"Def": -2
+				"Lck": 1,
+				"Def": -2,
+				"Res": -2
 			}
 		},
 		"Scarlet": {
@@ -1292,13 +1317,14 @@
 				"Res": 20
 			},
 			"maxStats": {
-				"HP": 2,
-				"Str": 0,
+				"HP": 0,
+				"Str": 2,
 				"Mag": 0,
-				"Skl": 1,
-				"Spd": -1,
-				"Lck": 0,
-				"Def": -2
+				"Skl": 0,
+				"Spd": 1,
+				"Lck": -1,
+				"Def": 0,
+				"Res": -2
 			}
 		},
 		"Yukimura": {
@@ -1327,13 +1353,14 @@
 				"Res": 30
 			},
 			"maxStats": {
-				"HP": -1,
-				"Str": 0,
-				"Mag": 3,
-				"Skl": -1,
-				"Spd": 0,
-				"Lck": -1,
-				"Def": 0
+				"HP": 0,
+				"Str": -1,
+				"Mag": 0,
+				"Skl": 3,
+				"Spd": -1,
+				"Lck": 0,
+				"Def": -1,
+				"Res": 0
 			}
 		},
 		"Gunter": {
@@ -1380,13 +1407,14 @@
 				"Res": 5
 			},
 			"maxStats": {
-				"HP": 2,
-				"Str": 0,
-				"Mag": 1,
-				"Skl": -2,
-				"Spd": 0,
-				"Lck": 2,
-				"Def": -2
+				"HP": 0,
+				"Str": 2,
+				"Mag": 0,
+				"Skl": 1,
+				"Spd": -2,
+				"Lck": 0,
+				"Def": 2,
+				"Res": -2
 			}
 		},
 		"Elise": {
@@ -1433,13 +1461,14 @@
 				"Res": 40
 			},
 			"maxStats": {
-				"HP": -1,
-				"Str": 3,
-				"Mag": -2,
-				"Skl": 1,
+				"HP": 0,
+				"Str": -1,
+				"Mag": 3,
+				"Skl": -2,
 				"Spd": 1,
-				"Lck": -3,
-				"Def": 1
+				"Lck": 1,
+				"Def": -3,
+				"Res": 1
 			}
 		},
 		"Arthur": {
@@ -1486,13 +1515,14 @@
 				"Res": 20
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 3,
-				"Skl": 0,
-				"Spd": -3,
-				"Lck": 1,
-				"Def": -1
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 3,
+				"Spd": 0,
+				"Lck": -3,
+				"Def": 1,
+				"Res": -1
 			}
 		},
 		"Effie": {
@@ -1539,13 +1569,14 @@
 				"Res": 30
 			},
 			"maxStats": {
-				"HP": 3,
-				"Str": 0,
-				"Mag": -1,
-				"Skl": 1,
-				"Spd": 0,
-				"Lck": -1,
-				"Def": -1
+				"HP": 0,
+				"Str": 3,
+				"Mag": 0,
+				"Skl": -1,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": -1,
+				"Res": -1
 			}
 		},
 		"Odin": {
@@ -1593,12 +1624,13 @@
 			},
 			"maxStats": {
 				"HP": 0,
-				"Str": 1,
+				"Str": 0,
 				"Mag": 1,
-				"Skl": -1,
-				"Spd": 1,
-				"Lck": 0,
-				"Def": -1
+				"Skl": 1,
+				"Spd": -1,
+				"Lck": 1,
+				"Def": 0,
+				"Res": -1
 			}
 		},
 		"Niles": {
@@ -1645,13 +1677,14 @@
 				"Res": 40
 			},
 			"maxStats": {
-				"HP": -2,
-				"Str": 0,
-				"Mag": -1,
-				"Skl": 3,
-				"Spd": 0,
+				"HP": 0,
+				"Str": -2,
+				"Mag": 0,
+				"Skl": -1,
+				"Spd": 3,
 				"Lck": 0,
-				"Def": 1
+				"Def": 0,
+				"Res": 1
 			}
 		},
 		"Nyx": {
@@ -1681,12 +1714,13 @@
 			},
 			"maxStats": {
 				"HP": 0,
-				"Str": 3,
-				"Mag": -2,
-				"Skl": 2,
-				"Spd": -1,
-				"Lck": -2,
-				"Def": 1
+				"Str": 0,
+				"Mag": 3,
+				"Skl": -2,
+				"Spd": 2,
+				"Lck": -1,
+				"Def": -2,
+				"Res": 1
 			}
 		},
 		"Camilla": {
@@ -1715,13 +1749,14 @@
 				"Res": 45
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": -1,
-				"Mag": 1,
+				"HP": 0,
+				"Str": 1,
+				"Mag": -1,
 				"Skl": 1,
-				"Spd": -2,
-				"Lck": 1,
-				"Def": 0
+				"Spd": 1,
+				"Lck": -2,
+				"Def": 1,
+				"Res": 0
 			}
 		},
 		"Selena": {
@@ -1750,13 +1785,14 @@
 				"Res": 30
 			},
 			"maxStats": {
-				"HP": -1,
-				"Str": 0,
-				"Mag": -1,
-				"Skl": 2,
-				"Spd": 0,
-				"Lck": 1,
-				"Def": 0
+				"HP": 0,
+				"Str": -1,
+				"Mag": 0,
+				"Skl": -1,
+				"Spd": 2,
+				"Lck": 0,
+				"Def": 1,
+				"Res": 0
 			}
 		},
 		"Beruka": {
@@ -1785,13 +1821,14 @@
 				"Res": 25
 			},
 			"maxStats": {
-				"HP": -1,
-				"Str": 0,
-				"Mag": 2,
-				"Skl": -2,
-				"Spd": 0,
-				"Lck": 2,
-				"Def": -1
+				"HP": 0,
+				"Str": -1,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": -2,
+				"Lck": 0,
+				"Def": 2,
+				"Res": -1
 			}
 		},
 		"Laslow": {
@@ -1838,13 +1875,14 @@
 				"Res": 25
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 2,
-				"Skl": -1,
-				"Spd": 1,
-				"Lck": -1,
-				"Def": -1
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": -1,
+				"Lck": 1,
+				"Def": -1,
+				"Res": -1
 			}
 		},
 		"Peri": {
@@ -1891,13 +1929,14 @@
 				"Res": 45
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": -1,
-				"Skl": 1,
-				"Spd": 0,
-				"Lck": -2,
-				"Def": 2
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": -1,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": -2,
+				"Res": 2
 			}
 		},
 		"Benny": {
@@ -1929,10 +1968,11 @@
 				"HP": 0,
 				"Str": 0,
 				"Mag": 0,
-				"Skl": -3,
-				"Spd": 0,
-				"Lck": 3,
-				"Def": 1
+				"Skl": 0,
+				"Spd": -3,
+				"Lck": 0,
+				"Def": 3,
+				"Res": 1
 			}
 		},
 		"Charlotte": {
@@ -1961,13 +2001,14 @@
 				"Res": 5
 			},
 			"maxStats": {
-				"HP": 3,
-				"Str": 0,
+				"HP": 0,
+				"Str": 3,
 				"Mag": 0,
-				"Skl": 2,
-				"Spd": 0,
-				"Lck": -2,
-				"Def": -2
+				"Skl": 0,
+				"Spd": 2,
+				"Lck": 0,
+				"Def": -2,
+				"Res": -2
 			}
 		},
 		"Leo": {
@@ -1996,13 +2037,14 @@
 				"Res": 45
 			},
 			"maxStats": {
-				"HP": -2,
-				"Str": 2,
-				"Mag": 0,
-				"Skl": -2,
-				"Spd": 0,
+				"HP": 0,
+				"Str": -2,
+				"Mag": 2,
+				"Skl": 0,
+				"Spd": -2,
 				"Lck": 0,
-				"Def": 2
+				"Def": 0,
+				"Res": 2
 			}
 		},
 		"Keaton": {
@@ -2031,13 +2073,14 @@
 				"Res": 25
 			},
 			"maxStats": {
-				"HP": 3,
-				"Str": 0,
-				"Mag": -2,
-				"Skl": -1,
-				"Spd": 0,
-				"Lck": 2,
-				"Def": -1
+				"HP": 0,
+				"Str": 3,
+				"Mag": 0,
+				"Skl": -2,
+				"Spd": -1,
+				"Lck": 0,
+				"Def": 2,
+				"Res": -1
 			}
 		},
 		"Xander": {
@@ -2066,13 +2109,14 @@
 				"Res": 15
 			},
 			"maxStats": {
-				"HP": 2,
-				"Str": -1,
+				"HP": 0,
+				"Str": 2,
 				"Mag": -1,
 				"Skl": -1,
-				"Spd": 2,
-				"Lck": 1,
-				"Def": -2
+				"Spd": -1,
+				"Lck": 2,
+				"Def": 1,
+				"Res": -2
 			}
 		},
 		"Flora": {
@@ -2101,13 +2145,14 @@
 				"Res": 30
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": -1,
-				"Mag": 2,
-				"Skl": 0,
-				"Spd": -1,
-				"Lck": 1,
-				"Def": -1
+				"HP": 0,
+				"Str": 1,
+				"Mag": -1,
+				"Skl": 2,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 1,
+				"Res": -1
 			}
 		},
 		"Fuga": {
@@ -2136,13 +2181,14 @@
 				"Res": 10
 			},
 			"maxStats": {
-				"HP": 2,
-				"Str": -1,
-				"Mag": 1,
-				"Skl": 0,
-				"Spd": -1,
-				"Lck": 2,
-				"Def": -2
+				"HP": 0,
+				"Str": 2,
+				"Mag": -1,
+				"Skl": 1,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 2,
+				"Res": -2
 			}
 		},
 		"KanaM": {
@@ -2238,11 +2284,12 @@
 			"maxStats": {
 				"HP": 0,
 				"Str": 0,
-				"Mag": 1,
-				"Skl": 3,
-				"Spd": 0,
-				"Lck": -3,
-				"Def": 0
+				"Mag": 0,
+				"Skl": 1,
+				"Spd": 3,
+				"Lck": 0,
+				"Def": -3,
+				"Res": 0
 			},
 			"growths": {
 				"HP": 35,
@@ -2272,13 +2319,14 @@
 				"Res": 11
 			},
 			"maxStats": {
-				"HP": 2,
-				"Str": -2,
-				"Mag": 2,
-				"Skl": 0,
-				"Spd": -1,
-				"Lck": 0,
-				"Def": -1
+				"HP": 0,
+				"Str": 2,
+				"Mag": -2,
+				"Skl": 2,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 0,
+				"Res": -1
 			},
 			"growths": {
 				"HP": 45,
@@ -2308,13 +2356,14 @@
 				"Res": 9
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 2,
-				"Skl": 0,
-				"Spd": -1,
-				"Lck": 0,
-				"Def": -1
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 0,
+				"Res": -1
 			},
 			"growths": {
 				"HP": 35,
@@ -2344,13 +2393,14 @@
 				"Res": 4
 			},
 			"maxStats": {
-				"HP": -2,
-				"Str": 0,
-				"Mag": 2,
-				"Skl": 3,
-				"Spd": -2,
-				"Lck": -1,
-				"Def": 1
+				"HP": 0,
+				"Str": -2,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": 3,
+				"Lck": -2,
+				"Def": -1,
+				"Res": 1
 			},
 			"growths": {
 				"HP": 45,
@@ -2380,13 +2430,14 @@
 				"Res": 7
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 2,
-				"Skl": 1,
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 2,
 				"Spd": 1,
-				"Lck": -2,
-				"Def": -2
+				"Lck": 1,
+				"Def": -2,
+				"Res": -2
 			},
 			"growths": {
 				"HP": 50,
@@ -2416,13 +2467,14 @@
 				"Res": 2
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 3,
-				"Skl": -2,
-				"Spd": 1,
-				"Lck": 0,
-				"Def": -2
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 3,
+				"Spd": -2,
+				"Lck": 1,
+				"Def": 0,
+				"Res": -2
 			},
 			"growths": {
 				"HP": 45,
@@ -2452,13 +2504,14 @@
 				"Res": 12
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 3,
-				"Skl": -2,
-				"Spd": 0,
-				"Lck": 1,
-				"Def": -2
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 3,
+				"Spd": -2,
+				"Lck": 0,
+				"Def": 1,
+				"Res": -2
 			},
 			"growths": {
 				"HP": 40,
@@ -2488,13 +2541,14 @@
 				"Res": 15
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": -3,
-				"Skl": 2,
-				"Spd": 1,
-				"Lck": -2,
-				"Def": 2
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": -3,
+				"Spd": 2,
+				"Lck": 1,
+				"Def": -2,
+				"Res": 2
 			},
 			"growths": {
 				"HP": 35,
@@ -2524,13 +2578,14 @@
 				"Res": 7
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": -1,
-				"Skl": -2,
-				"Spd": 0,
-				"Lck": 2,
-				"Def": 0
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": -1,
+				"Spd": -2,
+				"Lck": 0,
+				"Def": 2,
+				"Res": 0
 			},
 			"growths": {
 				"HP": 50,
@@ -2560,13 +2615,14 @@
 				"Res": 10
 			},
 			"maxStats": {
-				"HP": 2,
-				"Str": -3,
-				"Mag": 0,
-				"Skl": 1,
-				"Spd": 0,
-				"Lck": 1,
-				"Def": 0
+				"HP": 0,
+				"Str": 2,
+				"Mag": -3,
+				"Skl": 0,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": 1,
+				"Res": 0
 			},
 			"growths": {
 				"HP": 45,
@@ -2596,13 +2652,14 @@
 				"Res": 12
 			},
 			"maxStats": {
-				"HP": -1,
-				"Str": 0,
-				"Mag": 2,
-				"Skl": -2,
-				"Spd": -1,
-				"Lck": 3,
-				"Def": -1
+				"HP": 0,
+				"Str": -1,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": -2,
+				"Lck": -1,
+				"Def": 3,
+				"Res": -1
 			},
 			"growths": {
 				"HP": 55,
@@ -2633,12 +2690,13 @@
 			},
 			"maxStats": {
 				"HP": 0,
-				"Str": 1,
-				"Mag": -1,
-				"Skl": 2,
-				"Spd": 1,
-				"Lck": -1,
-				"Def": -1
+				"Str": 0,
+				"Mag": 1,
+				"Skl": -1,
+				"Spd": 2,
+				"Lck": 1,
+				"Def": -1,
+				"Res": -1
 			},
 			"growths": {
 				"HP": 40,
@@ -2668,13 +2726,14 @@
 				"Res": 6
 			},
 			"maxStats": {
-				"HP": 2,
-				"Str": -1,
+				"HP": 0,
+				"Str": 2,
 				"Mag": -1,
 				"Skl": -1,
-				"Spd": 2,
-				"Lck": 1,
-				"Def": -2
+				"Spd": -1,
+				"Lck": 2,
+				"Def": 1,
+				"Res": -2
 			},
 			"growths": {
 				"HP": 40,
@@ -2704,13 +2763,14 @@
 				"Res": 17
 			},
 			"maxStats": {
-				"HP": -2,
-				"Str": 2,
-				"Mag": 0,
-				"Skl": -2,
-				"Spd": 0,
+				"HP": 0,
+				"Str": -2,
+				"Mag": 2,
+				"Skl": 0,
+				"Spd": -2,
 				"Lck": 0,
-				"Def": 2
+				"Def": 0,
+				"Res": 2
 			},
 			"growths": {
 				"HP": 55,
@@ -2743,10 +2803,11 @@
 				"HP": 0,
 				"Str": 0,
 				"Mag": 0,
-				"Skl": -3,
-				"Spd": 0,
-				"Lck": 3,
-				"Def": 1
+				"Skl": 0,
+				"Spd": -3,
+				"Lck": 0,
+				"Def": 3,
+				"Res": 1
 			},
 			"growths": {
 				"HP": 40,
@@ -2776,13 +2837,14 @@
 				"Res": 8
 			},
 			"maxStats": {
-				"HP": 3,
-				"Str": 0,
-				"Mag": -2,
-				"Skl": -1,
-				"Spd": 0,
-				"Lck": 2,
-				"Def": -1
+				"HP": 0,
+				"Str": 3,
+				"Mag": 0,
+				"Skl": -2,
+				"Spd": -1,
+				"Lck": 0,
+				"Def": 2,
+				"Res": -1
 			},
 			"growths": {
 				"HP": 50,
@@ -2812,13 +2874,14 @@
 				"Res": 4
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 3,
-				"Skl": 0,
-				"Spd": -3,
-				"Lck": 1,
-				"Def": -1
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 3,
+				"Spd": 0,
+				"Lck": -3,
+				"Def": 1,
+				"Res": -1
 			},
 			"growths": {
 				"HP": 30,
@@ -2849,12 +2912,13 @@
 			},
 			"maxStats": {
 				"HP": 0,
-				"Str": 1,
+				"Str": 0,
 				"Mag": 1,
-				"Skl": -1,
-				"Spd": 1,
-				"Lck": 0,
-				"Def": -1
+				"Skl": 1,
+				"Spd": -1,
+				"Lck": 1,
+				"Def": 0,
+				"Res": -1
 			},
 			"growths": {
 				"HP": 45,
@@ -2884,13 +2948,14 @@
 				"Res": 8
 			},
 			"maxStats": {
-				"HP": 1,
-				"Str": 0,
-				"Mag": 2,
-				"Skl": -1,
-				"Spd": 1,
-				"Lck": -1,
-				"Def": -1
+				"HP": 0,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": -1,
+				"Lck": 1,
+				"Def": -1,
+				"Res": -1
 			},
 			"growths": {
 				"HP": 25,
@@ -2920,13 +2985,14 @@
 				"Res": 14
 			},
 			"maxStats": {
-				"HP": -2,
-				"Str": 0,
-				"Mag": -1,
-				"Skl": 3,
-				"Spd": 0,
+				"HP": 0,
+				"Str": -2,
+				"Mag": 0,
+				"Skl": -1,
+				"Spd": 3,
 				"Lck": 0,
-				"Def": 1
+				"Def": 0,
+				"Res": 1
 			},
 			"growths": {
 				"HP": 30,
@@ -2965,13 +3031,14 @@
 				"Res": 45
 			},
 			"maxStats": {
-				"HP": -1,
-				"Str": 1,
-				"Mag": 0,
-				"Skl": -1,
-				"Spd": 2,
-				"Lck": -2,
-				"Def": 2
+				"HP": 0,
+				"Str": -1,
+				"Mag": 1,
+				"Skl": 0,
+				"Spd": -1,
+				"Lck": 2,
+				"Def": -2,
+				"Res": 2
 			}
 		},
 		"Marth": {
@@ -3000,13 +3067,14 @@
 				"Res": 20
 			},
 			"maxStats": {
-				"HP": -1,
-				"Str": 0,
-				"Mag": 1,
+				"HP": 0,
+				"Str": -1,
+				"Mag": 0,
 				"Skl": 1,
 				"Spd": 1,
-				"Lck": 0,
-				"Def": -1
+				"Lck": 1,
+				"Def": 0,
+				"Res": -1
 			}
 		},
 		"Ike": {
@@ -3035,13 +3103,14 @@
 				"Res": 10
 			},
 			"maxStats": {
-				"HP": 2,
-				"Str": 0,
+				"HP": 0,
+				"Str": 2,
 				"Mag": 0,
-				"Skl": -1,
-				"Spd": 0,
-				"Lck": 1,
-				"Def": -1
+				"Skl": 0,
+				"Spd": -1,
+				"Lck": 0,
+				"Def": 1,
+				"Res": -1
 			}
 		},
 		"Lucina": {
@@ -3073,10 +3142,11 @@
 				"HP": 0,
 				"Str": 0,
 				"Mag": 0,
-				"Skl": 2,
-				"Spd": 0,
-				"Lck": -1,
-				"Def": 0
+				"Skl": 0,
+				"Spd": 2,
+				"Lck": 0,
+				"Def": -1,
+				"Res": 0
 			}
 		},
 		"Robin": {
@@ -3106,12 +3176,13 @@
 			},
 			"maxStats": {
 				"HP": 0,
-				"Str": 2,
-				"Mag": 0,
+				"Str": 0,
+				"Mag": 2,
 				"Skl": 0,
-				"Spd": -1,
+				"Spd": 0,
 				"Lck": -1,
-				"Def": 1
+				"Def": -1,
+				"Res": 1
 			}
 		}
 	},

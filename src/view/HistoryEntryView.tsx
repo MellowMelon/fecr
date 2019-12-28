@@ -192,18 +192,24 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 			);
 		},
 		ability(h: HistoryEntryAbilityChange) {
+			const multipleAbilities = Object.keys(game.abilities || {}).length !== 1;
+			const abilityInput = multipleAbilities ? (
+				<InputAbility
+					game={game}
+					value={h.ability}
+					onSelect={onSelectAbility}
+				/>
+			) : (
+				<Text weight="bold">{Object.keys(game.abilities || {})[0]}</Text>
+			);
 			return (
 				<Box gap="small">
 					{renderHistoryHeader(
 						"Ability Change",
-						getHelp(game, "hist_abilitychange"),
+						getHelp(game, "hist_ability"),
 						errorStr
 					)}
-					<InputAbility
-						game={game}
-						value={h.ability}
-						onSelect={onSelectAbility}
-					/>
+					{abilityInput}
 					<CheckBox
 						checked={h.active}
 						label="Active"

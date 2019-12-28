@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import {Box, Button, Heading, Image, Text} from "grommet";
 
@@ -17,7 +18,10 @@ const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 		props.dispatch({type: "selectGame", gameID});
 	}
 
-	Object.keys(gameTable).map(gameID => {
+	const ids = Object.keys(gameTable);
+	_.reverse(ids);
+
+	ids.map(gameID => {
 		const game = gameTable[gameID];
 		const src = "images/" + gameID + "-banner.jpg";
 		const el = (

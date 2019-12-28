@@ -148,6 +148,7 @@ export type GameData = {
 		enableClassMax?: boolean;
 		enableEquipment?: boolean;
 		enableAbilities?: boolean;
+		enableAbilitiesMax?: boolean;
 		enableMaxIncrease?: boolean;
 		hideNewLevel?: boolean;
 		classChangeGetsAtLeast1HP?: boolean;

@@ -255,43 +255,6 @@ export function getCharPlan(
 	return {init, entries, errors};
 }
 
-function addCheckpoint(
-	game: GameData,
-	char: AdvanceChar,
-	entry: HistoryEntryCheckpoint
-): AdvanceChar {
-	const realChar = modifyBothDistsMV(char, (pd, statName) => {
-		const max = char.curr.maxStats[statName];
-		pd = ProbDist.applyMax(pd, max);
-		return pd;
-	});
-	const newCP = {
-		...realChar.curr,
-		stats: entry.stats,
-	};
-	return {...char, checkpoints: [...char.checkpoints, newCP]};
-}
-
-// Helper for dealing with special 1hp promotion bonus when no stats would
-// increase. Returned chance is probability that all stats except HP are above
-// the class minimums. HP chance dealt with separately.
-function getChanceOf1HP(
-	game: GameData,
-	classMins: StatsTable,
-	statsDist: StatsDist
-): number {
-	let p = 1;
-	game.stats.forEach(stat => {
-		if (stat === "hp") {
-			return;
-		}
-		p *=
-			1 -
-			ProbDist.getPercentileRangeOfValue(statsDist[stat], classMins[stat])[0];
-	});
-	return p;
-}
-
 export function getRealMax(game: GameData, curr: CharCheckpoint): StatsTable {
 	const gameClassData = game.classes[curr.charClass];
 	const charMax = curr.maxStats;
@@ -326,6 +289,44 @@ export function getRealGrowths(
 		...abilityGrowthsList,
 	]);
 	return sumObjects(...objs);
+}
+
+function addCheckpoint(
+	game: GameData,
+	char: AdvanceChar,
+	entry: HistoryEntryCheckpoint
+): AdvanceChar {
+	const realMax = getRealMax(game, char.curr);
+	const realChar = modifyBothDistsMV(char, (pd, statName) => {
+		const max = realMax[statName];
+		pd = ProbDist.applyMax(pd, max);
+		return pd;
+	});
+	const newCP = {
+		...realChar.curr,
+		stats: entry.stats,
+	};
+	return {...char, checkpoints: [...char.checkpoints, newCP]};
+}
+
+// Helper for dealing with special 1hp promotion bonus when no stats would
+// increase. Returned chance is probability that all stats except HP are above
+// the class minimums. HP chance dealt with separately.
+function getChanceOf1HP(
+	game: GameData,
+	classMins: StatsTable,
+	statsDist: StatsDist
+): number {
+	let p = 1;
+	game.stats.forEach(stat => {
+		if (stat === "hp") {
+			return;
+		}
+		p *=
+			1 -
+			ProbDist.getPercentileRangeOfValue(statsDist[stat], classMins[stat])[0];
+	});
+	return p;
 }
 
 // Pass the HP distribution, the minimum HP of the class being promoted to, and

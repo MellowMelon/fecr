@@ -77,8 +77,8 @@ function pruneDist(
 	dims: GraphDims
 ): [ProbDist.ProbDist, number, number] {
 	const {dist} = props;
-	let minVal = ProbDist.getMin(dist);
-	let maxVal = ProbDist.getMax(dist);
+	let minVal = ProbDist.getMin(dist) || 0;
+	let maxVal = ProbDist.getMax(dist) || 0;
 	const maxP = ProbDist.getMaxDensity(dist);
 	const newDist = _.clone(dist);
 	const cutoff = (dims.barPruneLen * maxP) / dims.barMaxLen;

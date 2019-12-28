@@ -20,6 +20,9 @@ type HelpEntry =
 
 type HelpTable = {[name: string]: HelpEntry};
 
+// If any of these need to be empty, enter a single space so that the value is
+// not mistaken for missing by hte code.
+
 const fragments: HelpTable = {
 	histAddBlurb: `For the simulator to correctly determine the likelihood of the
 character's stats obtaining each value, it needs to know everything that could
@@ -32,6 +35,20 @@ conditions.`,
 		16: `This panel specifies the character's initial level, class, and stats.
 You will likely need to alter them for characters that were recruited after
 choosing a house.`,
+	},
+	basesBoonBane: {
+		all: ` `,
+		14: `For the avatar, you should just set the boon and bane and leave
+everything else alone. The boon and bane effects on bases will be applied for
+you.`,
+	},
+	basesChildren: {
+		all: ` `,
+		14: `The simulator does not attempt to autocompute bases for child
+characters, so you will need to enter their base stats manually. Use any
+Offspring Seals first before entering them. If the child unit has a capped base
+stat, the simulator will want to know the true value of that stat for doing
+class changes correctly; good luck.`,
 	},
 	inputStatsBlurb: {
 		all: `When inputting stats, use the numbers from the unit's profile outside
@@ -86,9 +103,9 @@ increased, such as from an Energy Drop or tea time.`,
 		all: `A **Max Stat Increase** entry is for noting anything that affected
 a character's maximum stats.`,
 		14: `A **Max Stat Increase** entry is for when a character's max stats
-increased due to My Castle statues. Unfortunately, the simulation does get more
-accurate if you provide the exact times of these increases, which is onerous.
-It's up to you how meticulously to keep track of it all.`,
+increased due to My Castle statues. Unfortunately, the simulation does get a
+bit more accurate if you provide the exact times of these increases, which is
+onerous. It's up to you how meticulously to keep track of it all.`,
 		16: `A **Max Stat Increase** entry is for when a Saint
 Statue was fully restored and increased the maximum stats for a character.`,
 	},
@@ -100,15 +117,15 @@ is considered to unequip the old one by the simulator.`,
 astral shard from the DLC. These items affect growth rates. Equipping a new
 item is considered to unequip the old one by the simulator.`,
 	},
-	histIntro_abilitychange: {
+	histIntro_ability: {
 		all: `An **Ability Change** entry is for when the character equips or
 unequips an ability. Multiple abilities can be equipped at once`,
 		14: `An **Ability Change** entry is for when the character equips or
 unequips Aptitude, which increases growths.`,
 	},
-	histIntro_checkpoint: `An **Actual Stats** entry is your chance to tell the
-simulator what the character's stats were at any point in time. The
-Report tab can view each of these entries.`,
+	histIntro_checkpoint: `An **Actual Stats** entry is where you enter the stats
+your character had in the game. The Report tab can view each entry you add.
+The simulation itself is unaffected by the values here.`,
 	report_current: `The stat's actual value.`,
 	report_classMod: `The modifier for this stat from the character's current
 class.`,
@@ -146,6 +163,10 @@ base maximum and any effects that increased it.`,
 	report_classMax: {
 		all: `The maximum value of this stat for the current class.`,
 	},
+	report_abiMax: {
+		all: `The maximum modifier of this stat from the character's current
+abilities, if any.`,
+	},
 	report_totalLevels: `The total number of levels this character has gained.`,
 	report_effLevels: `The number of levels this character would need to gain for
 their minimum to reach their average if each level had the average growth rate,
@@ -161,6 +182,10 @@ this character.`,
 any.`,
 	report_equipGrowth: `The growth modifier on the character's current
 equipment, if any.`,
+	report_abiGrowth: {
+		all: `The growth modifier from the character's current abilties, if any.`,
+		14: `The growth modifier from aptitude.`,
+	},
 };
 
 // We define this type explicitly so that this file's exported function can
@@ -172,7 +197,7 @@ type MainHelpTable = {
 	hist_class: HelpEntry;
 	hist_boost: HelpEntry;
 	hist_maxboost: HelpEntry;
-	hist_abilitychange: HelpEntry;
+	hist_ability: HelpEntry;
 	hist_equipchange: HelpEntry;
 	histAdd: HelpEntry;
 	report: HelpEntry;
@@ -194,6 +219,10 @@ current team at all, copy the current URL before clicking this.
 {{basesBlurb}}
 
 {{inputStatsBlurb}}
+
+{{basesBoonBane}}
+
+{{basesChildren}}
 `,
 	hist_checkpoint: `
 {{histIntro_checkpoint}}
@@ -213,8 +242,8 @@ current team at all, copy the current URL before clicking this.
 	hist_maxboost: `
 {{histIntro_maxboost}}
 `,
-	hist_abilitychange: `
-{{histIntro_abilitychange}}
+	hist_ability: `
+{{histIntro_ability}}
 `,
 	hist_equipchange: `
 {{histIntro_equipchange}}

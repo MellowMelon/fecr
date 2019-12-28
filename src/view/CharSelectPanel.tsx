@@ -44,6 +44,7 @@ const CharSelectPanel: React.FunctionComponent<Props> = function(props: Props) {
 		const imageProps = {
 			src,
 			alt: name,
+			title: name,
 			width: 48,
 			height: 48,
 		};

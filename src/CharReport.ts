@@ -21,10 +21,12 @@ export type CharReport = {
 	charGrowths: StatsTable;
 	classGrowths: StatsTable;
 	equipGrowths: StatsTable;
+	abiGrowths: StatsTable;
 	realGrowths: StatsTable;
 	maxStats: StatsTable;
 	charMax: StatsTable;
 	classMax: StatsTable;
+	abiMax: StatsTable;
 	statsDist: StatsDist;
 	sdAverage: StatsStrTable;
 	sdMedian: StatsStrTable;
@@ -52,6 +54,7 @@ const reportDetailsLabels = {
 	maximum: "Maximum",
 	charMax: "Base Maximum",
 	classMax: "Class Maximum",
+	abiMax: "Ability Maximum",
 	totalLevels: "Total Levels",
 	effLevels: "Eff. Levels",
 	averageGrowth: "Average Growth",
@@ -59,6 +62,7 @@ const reportDetailsLabels = {
 	charGrowth: "Base Growth",
 	classGrowth: "Class Growth",
 	equipGrowth: "Equip Growth",
+	abiGrowth: "Ability Growth",
 };
 
 type ReportDetailKey = keyof typeof reportDetailsLabels;
@@ -134,6 +138,23 @@ export function getCharReport(
 		throw new Error("No equipment named " + equip + " in game " + game.id);
 	}
 
+	const abiGrowths: StatsTable = makeZeroStats(game);
+	const abiMax: StatsTable = makeZeroStats(game);
+	char.abilities.forEach(abi => {
+		const gameAbiData = game.abilities && game.abilities[abi];
+		if (!gameAbiData) {
+			throw new Error("No ability named " + abi + " in game " + game.id);
+		}
+		game.stats.forEach(statName => {
+			if (gameAbiData.growths) {
+				abiGrowths[statName] += gameAbiData.growths[statName] || 0;
+			}
+			if (gameAbiData.maxStats) {
+				abiMax[statName] += gameAbiData.maxStats[statName] || 0;
+			}
+		});
+	});
+
 	const distAgg = computeDistDerived(char.stats, char.dist);
 	const distNBAgg = computeDistDerived(char.stats, char.distNB);
 
@@ -172,10 +193,12 @@ export function getCharReport(
 		charGrowths: char.growths,
 		classGrowths: gameClassData.growths,
 		equipGrowths: gameEquipData.growths,
+		abiGrowths,
 		realGrowths,
 		maxStats: realMax,
 		charMax: base.maxStats,
 		classMax: gameClassData.maxStats,
+		abiMax,
 		statsDist: char.dist,
 		sdAverage: distAgg.sdAverage,
 		sdMedian: distAgg.sdMedian,
@@ -231,6 +254,7 @@ export function getReportDetailsRows(game: GameData): ReportDetailKey[] {
 		"maximum",
 		showCharMax ? "charMax" : null,
 		showClassMax ? "classMax" : null,
+		g.enableAbilities && g.enableAbilitiesMax ? "abiMax" : null,
 		"totalLevels",
 		"effLevels",
 		"averageGrowth",
@@ -238,6 +262,7 @@ export function getReportDetailsRows(game: GameData): ReportDetailKey[] {
 		"charGrowth",
 		"classGrowth",
 		g.enableEquipment ? "equipGrowth" : null,
+		g.enableAbilities ? "abiGrowth" : null,
 	];
 	return filterNonempty(base);
 }
@@ -285,6 +310,8 @@ export function getReportDetailsValue(
 		return cr.charMax[statName];
 	} else if (key === "classMax") {
 		return cr.classMax[statName];
+	} else if (key === "abiMax") {
+		return cr.abiMax[statName];
 	} else if (key === "totalLevels") {
 		return cr.totalLevels;
 	} else if (key === "effLevels") {
@@ -299,6 +326,8 @@ export function getReportDetailsValue(
 		return cr.classGrowths[statName];
 	} else if (key === "equipGrowth") {
 		return cr.equipGrowths[statName];
+	} else if (key === "abiGrowth") {
+		return cr.abiGrowths[statName];
 	}
 	return assertNever(key);
 }

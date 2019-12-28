@@ -387,19 +387,19 @@ function processCharBaseTRs(trs) {
 async function processAll(finalJSON) {
 	const fetched = await Utils.fetchAllAndScrapeTRs(urlFetchTable);
 
-	const combineChar = nameSuffix =>
+	const combineChar = (nameSuffix, options) =>
 		_.extend(
 			{},
-			turnTRsToCharStats(fetched[`fates_b_${nameSuffix}`]),
-			turnTRsToCharStats(fetched[`fates_c_${nameSuffix}`]),
-			turnTRsToCharStats(fetched[`fates_o_${nameSuffix}`])
+			turnTRsToCharStats(fetched[`fates_b_${nameSuffix}`], options),
+			turnTRsToCharStats(fetched[`fates_c_${nameSuffix}`], options),
+			turnTRsToCharStats(fetched[`fates_o_${nameSuffix}`], options)
 		);
-	const combineClass = nameSuffix =>
+	const combineClass = (nameSuffix, options) =>
 		_.extend(
 			{},
-			turnTRsToClassStats(fetched[`fates_b_${nameSuffix}`]),
-			turnTRsToClassStats(fetched[`fates_c_${nameSuffix}`]),
-			turnTRsToClassStats(fetched[`fates_o_${nameSuffix}`])
+			turnTRsToClassStats(fetched[`fates_b_${nameSuffix}`], options),
+			turnTRsToClassStats(fetched[`fates_c_${nameSuffix}`], options),
+			turnTRsToClassStats(fetched[`fates_o_${nameSuffix}`], options)
 		);
 
 	processCharBaseTRs(fetched["fates_b_char_bases"]);
@@ -436,7 +436,7 @@ async function processAll(finalJSON) {
 	};
 
 	const charGrowths = combineChar("char_growths");
-	const charMax = combineChar("char_max");
+	const charMax = combineChar("char_max", {insertAtFront: ["0"]});
 	const classMods = combineClass("class_mods");
 	const classGrowths = combineClass("class_growths");
 	const classMax = combineClass("class_max");

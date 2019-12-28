@@ -67,15 +67,13 @@ function scrapeTRs(body) {
 }
 
 function turnTRsToStats(statsList, trs, options = {}) {
-	const {statsStartIndex = 1} = options;
+	const {statsStartIndex = 1, insertAtFront = []} = options;
 
 	const stats = {};
 	trs.forEach(tr => {
 		if (!stats[tr[0]]) {
-			stats[tr[0]] = _.zipObject(
-				statsList,
-				tr.slice(statsStartIndex).map(parseCell)
-			);
+			const data = [...insertAtFront, ...tr.slice(statsStartIndex)];
+			stats[tr[0]] = _.zipObject(statsList, data.map(parseCell));
 		}
 	});
 	return stats;

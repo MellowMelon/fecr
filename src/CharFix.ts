@@ -1,7 +1,9 @@
 import {
+	Stat,
 	CharName,
 	CharClass,
 	EquipName,
+	AbilityName,
 	HistoryEntry,
 	Char,
 	StatsTable,
@@ -46,6 +48,23 @@ function fixOneStat(
 	return {value: v, errors: []};
 }
 
+function fixStatName(game: GameData, where: string, s: unknown): FixRes<Stat> {
+	const defaultStat = game.stats[0];
+	if (typeof s !== "string" || !s) {
+		return {
+			value: defaultStat,
+			errors: [`${where}: Not a string (typeof: ${typeof s})`],
+		};
+	}
+	if (game.stats.indexOf(s) === -1) {
+		return {
+			value: defaultStat,
+			errors: [`${where}: Stat ${s} not in game ${game.id}`],
+		};
+	}
+	return {value: s, errors: []};
+}
+
 function fixLevel(game: GameData, where: string, l: unknown): FixRes<number> {
 	if (typeof l !== "number" || !isFinite(l) || Math.floor(l) !== l) {
 		return {value: 1, errors: [`${where}: Bad level ${l}`]};
@@ -58,6 +77,27 @@ function fixLevel(game: GameData, where: string, l: unknown): FixRes<number> {
 		};
 	}
 	return {value: l, errors: []};
+}
+
+function fixCharName(
+	game: GameData,
+	where: string,
+	c: unknown
+): FixRes<CharName> {
+	const defaultCharName = Object.keys(game.chars)[0];
+	if (typeof c !== "string" || !c) {
+		return {
+			value: defaultCharName,
+			errors: [`${where}: Not a string (typeof: ${typeof c})`],
+		};
+	}
+	if (!game.chars[c]) {
+		return {
+			value: defaultCharName,
+			errors: [`${where}: Character ${c} not in game ${game.id}`],
+		};
+	}
+	return {value: c, errors: []};
 }
 
 function fixClass(
@@ -79,6 +119,27 @@ function fixClass(
 		};
 	}
 	return {value: c, errors: []};
+}
+
+function fixAbility(
+	game: GameData,
+	where: string,
+	a: unknown
+): FixRes<AbilityName> {
+	const defaultAbility = Object.keys(game.abilities!)[0];
+	if (!a || typeof a !== "string") {
+		return {
+			value: defaultAbility,
+			errors: [`${where}: Not a string (typeof: ${typeof a})`],
+		};
+	}
+	if (!game.abilities || !game.abilities[a]) {
+		return {
+			value: defaultAbility,
+			errors: [`${where}: Equipment ${a} not in game ${game.id}`],
+		};
+	}
+	return {value: a, errors: []};
 }
 
 function fixEquip(
@@ -190,6 +251,15 @@ function fixHistoryEntry(
 			equip: extract(fixEquip(game, `${where} equip`, data.equip)),
 		};
 		return {value: e, errors};
+	} else if (type === "ability") {
+		const e: HistoryEntry = {
+			type,
+			id: index + 1,
+			level,
+			ability: extract(fixAbility(game, `${where} ability`, data.ability)),
+			active: !!data.active,
+		};
+		return {value: e, errors};
 	} else {
 		return {value: null, errors: [`${where}: Bad type ${type}`]};
 	}
@@ -201,7 +271,8 @@ function fixChar(
 	data: any
 ): FixRes<Char | null> {
 	const where = `Char ${name}`;
-	if (!game.chars[name]) {
+	const gameCharData = game.chars[name];
+	if (!gameCharData) {
 		return {value: null, errors: [`${where}: Not in game ${game.id}`]};
 	}
 
@@ -230,6 +301,15 @@ function fixChar(
 		fixStats(game, `${where} base stats`, false, data.baseStats)
 	);
 	char.history = [];
+
+	if (gameCharData.hasBoonBane) {
+		char.boon = extract(fixStatName(game, `${where} boon`, data.boon));
+		char.bane = extract(fixStatName(game, `${where} bane`, data.bane));
+	}
+
+	if (gameCharData.hasParent) {
+		char.parent = extract(fixCharName(game, `${where} parent`, data.parent));
+	}
 
 	if (!Array.isArray(data.history)) {
 		errors.push(
