@@ -64,6 +64,7 @@ export type ViewActionRedo = {
 };
 export type ViewActionUpdateCharResetBases = {
 	type: "updateCharResetBases";
+	altIndex?: number;
 };
 export type ViewActionUpdateCharBaseClass = {
 	type: "updateCharBaseClass";

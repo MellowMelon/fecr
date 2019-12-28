@@ -27,25 +27,19 @@ affect the stats, growths, or maximum stats. These events should be provided in
 chronological order.`,
 	basesBlurb: {
 		all: `This panel specifies the character's initial level, class, and stats.
-The game's default bases are filled in from the start. You should only need to
-alter them if the character has unusual recruitment conditions.`,
+You should only need to alter them if the character has unusual recruitment
+conditions.`,
 		16: `This panel specifies the character's initial level, class, and stats.
-The game's default bases are filled in from the start, but you may need to
-alter these bases for characters that were recruited after choosing a house.`,
+You will likely need to alter them for characters that were recruited after
+choosing a house.`,
 	},
 	inputStatsBlurb: {
 		all: `When inputting stats, use the numbers from the unit's profile outside
-of battle. If you see blue or red stats on that screen, there are abilities or
-equipment altering the stats, and you need to enter the value the stat would
-have without these effects.`,
-		15: `When inputting stats, use the numbers from the unit's profile outside
-of battle. If you see blue or red stats on that screen, there are abilities or
-equipment altering the stats, and you need to enter the value the stat would
-have without these effects.`,
+of battle. If the stats are modified (blue or red numbers), enter the value the
+stat would have without those modifiers.`,
 		16: `When inputting stats, use the black numbers shown in the game's Roster
-menu, which includes the class modifiers. If you see blue or red stats on that
-screen, there are abilities, cooking effects, or equipment altering the stats,
-and you need to enter the value the stat would have without these effects.`,
+menu. If the stats are modified (blue or red numbers), enter the value the stat
+would have without those modifiers.`,
 	},
 	classCorrectnessBlurb: {
 		all: `You must provide every class change at its correct level if you want
@@ -191,8 +185,6 @@ current team at all, copy the current URL before clicking this.
 {{basesBlurb}}
 
 {{inputStatsBlurb}}
-
-Use the Reset Initial button if you want to put back the game's defaults.
 `,
 	hist_checkpoint: `
 {{histIntro_checkpoint}}

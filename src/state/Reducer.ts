@@ -1,5 +1,5 @@
 import _ from "lodash";
-import {HistoryEntry, Char, GameData} from "../types";
+import {HistoryEntry, Char, CharDataBasesAlt, GameData} from "../types";
 import gameTable from "../GameTable";
 import {assertNever} from "../Utils";
 import {createChar, createHistoryEntry} from "../CharUtils";
@@ -150,11 +150,21 @@ function reduceActionMain(s: ViewState, a: ViewAction): ViewState {
 	} else if (a.type === "updateCharResetBases") {
 		return updateChar(s, (game, oldChar) => {
 			const defaultChar = createChar(game, oldChar.name);
+			const {basesAlts} = game.chars[oldChar.name];
+			let alt: CharDataBasesAlt = {name: ""};
+			if (
+				basesAlts &&
+				basesAlts.length &&
+				a.altIndex !== undefined &&
+				a.altIndex >= 0
+			) {
+				alt = basesAlts[a.altIndex];
+			}
 			return {
 				...oldChar,
-				baseClass: defaultChar.baseClass,
-				baseLevel: defaultChar.baseLevel,
-				baseStats: defaultChar.baseStats,
+				baseClass: alt.baseClass || defaultChar.baseClass,
+				baseLevel: alt.baseLevel || defaultChar.baseLevel,
+				baseStats: alt.baseStats || defaultChar.baseStats,
 			};
 		});
 	} else if (a.type === "updateCharBaseClass") {

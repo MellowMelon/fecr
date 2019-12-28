@@ -1,10 +1,11 @@
 import React, {memo} from "react";
-import {Box, Button, Heading, ResponsiveContext, Text} from "grommet";
+import {Box, Heading, Text} from "grommet";
 
 import {Stat, CharClass, CharName, StatsTable, GameData} from "../types";
 import getHelp from "../HelpTable";
 import {ViewAction} from "../state/types";
 
+import ButtonMaybeMenu from "./ButtonMaybeMenu";
 import InputClass from "./InputClass";
 import InputStats from "./InputStats";
 import InputStatName from "./InputStatName";
@@ -38,10 +39,8 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 	} = props;
 	const gameCharData = game.chars[name];
 
-	const screenSize = React.useContext(ResponsiveContext);
-
-	const onResetBases = function() {
-		dispatch({type: "updateCharResetBases"});
+	const onResetBases = function(altIndex: number) {
+		dispatch({type: "updateCharResetBases", altIndex});
 	};
 
 	const onChangeBaseLevel = function(level: number) {
@@ -68,17 +67,23 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 		dispatch({type: "updateCharBaseParent", name: newName});
 	};
 
-	const resetButton = <Button label="Reset Initial" onClick={onResetBases} />;
-	let resetTopRight: React.ReactNode = <Box width="small">{resetButton}</Box>;
-	let resetSepRow: React.ReactNode = null;
-	if (screenSize === "xxsmall") {
-		resetTopRight = null;
-		resetSepRow = (
-			<Box direction="row" alignSelf="start">
-				{resetButton}
-			</Box>
-		);
-	}
+	const basesAlts = gameCharData.basesAlts || [];
+	const resetOptions = [
+		gameCharData.defaultAltName || "Default",
+		...basesAlts.map(alt => alt.name),
+	];
+	const resetButton: React.ReactNode = (
+		<ButtonMaybeMenu
+			label="Set to Game Defaults"
+			options={resetOptions}
+			onClick={i => onResetBases(i - 1)}
+		/>
+	);
+	const resetRow: React.ReactNode = (
+		<Box direction="row" alignSelf="start">
+			{resetButton}
+		</Box>
+	);
 
 	let boonBaneBox: React.ReactNode = null;
 	if (gameCharData.hasBoonBane) {
@@ -132,9 +137,8 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 						md={getHelp(game, "bases")}
 					/>
 					<Box flex />
-					{resetTopRight}
 				</Box>
-				{resetSepRow}
+				{resetRow}
 				<Box direction="row" align="center" gap="small">
 					<Text weight="bold">Class</Text>
 					<InputClass
