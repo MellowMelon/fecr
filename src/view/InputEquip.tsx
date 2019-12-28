@@ -1,7 +1,7 @@
 import React from "react";
 import {EquipName, GameData} from "../types";
 
-import {Select} from "grommet";
+import InputSelect from "./InputSelect";
 
 type Props = {
 	game: GameData;
@@ -12,11 +12,12 @@ type Props = {
 const InputEquip: React.FunctionComponent<Props> = function(props: Props) {
 	const {game, value, onSelect} = props;
 	return (
-		<Select
+		<InputSelect
 			name="charequip"
-			options={["(none)", ...Object.keys(game.equipment)]}
-			value={value || "(none)"}
-			onChange={evt => onSelect(evt.option)}
+			options={Object.keys(game.equipment || {})}
+			value={value}
+			allowNull={true}
+			onSelect={onSelect}
 		/>
 	);
 };

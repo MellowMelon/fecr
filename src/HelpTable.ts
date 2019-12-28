@@ -119,9 +119,8 @@ better.`,
 measure of where a typical character would be.`,
 	report_medianDiff: `The difference of the stat's current value and the median.`,
 	report_average: `The weighted average of all values in the distribution.
-While the author of this tool believes percentiles and medians are better to
-compare to, since they have a more direct interpretation, the average is easier
-to compute and still useful.`,
+While this tool puts more emphasis on the percentiles and median, the average
+is easier to compute and still useful.`,
 	report_boost: `The total amount of stat boosts applied, regardless of the
 effects of minimums and maximums.`,
 	report_percentilesNB: `The percentile range, with stat boosts ignored. These

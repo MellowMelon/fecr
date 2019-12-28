@@ -20,6 +20,11 @@ function makeStatsZeroes(statsList) {
 }
 
 function parseCell(value) {
+	if (value.startsWith("<span")) {
+		const re = /^<span style="color: #[0-9a-zA-Z]+;">(.*)<\/span>$/;
+		const m = re.exec(value);
+		value = m[1];
+	}
 	const re = /^\+?(-?[0-9]*)%? ?(?:\(\+?(-?[0-9]+)\))?$/;
 	const m = re.exec(value);
 	if (m) {

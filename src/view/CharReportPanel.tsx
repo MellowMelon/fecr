@@ -263,7 +263,7 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 
 	let computed;
 	try {
-		computed = useMemo(() => computeChar(game, char), [game, char]);
+		computed = useMemo(() => computeChar(game, team, char), [game, team, char]);
 	} catch (ex) {
 		// TODO: where to report bugs?
 		return (

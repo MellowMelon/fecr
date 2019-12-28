@@ -178,6 +178,27 @@ function reduceActionMain(s: ViewState, a: ViewAction): ViewState {
 				baseStats: {...oldChar.baseStats, ...a.stats},
 			};
 		});
+	} else if (a.type === "updateCharBaseBoon") {
+		return updateChar(s, (game, oldChar) => {
+			return {
+				...oldChar,
+				boon: a.value,
+			};
+		});
+	} else if (a.type === "updateCharBaseBane") {
+		return updateChar(s, (game, oldChar) => {
+			return {
+				...oldChar,
+				bane: a.value,
+			};
+		});
+	} else if (a.type === "updateCharBaseParent") {
+		return updateChar(s, (game, oldChar) => {
+			return {
+				...oldChar,
+				parent: a.name,
+			};
+		});
 	} else if (a.type === "updateCharHistoryAdd") {
 		return updateChar(s, (game, oldChar) => {
 			const newEntry = createHistoryEntry(game, oldChar, a.entryType);

@@ -8,7 +8,6 @@ import {
 	CharClass,
 	CharName,
 	EquipName,
-	Char,
 	HistoryEntryCheckpoint,
 	HistoryEntryClass,
 	HistoryEntryBoost,
@@ -16,6 +15,8 @@ import {
 	HistoryEntryEquipChange,
 	HistoryEntry,
 	StatsDist,
+	Char,
+	Team,
 	GameData,
 } from "./types";
 
@@ -121,10 +122,7 @@ export function getNewLevel(
 	return getNewLevelInt(game, currH, oldClass);
 }
 
-export function getBaseGameChar(
-	game: GameData,
-	name: CharName
-): CharCheckpoint {
+function getBaseGameChar(game: GameData, name: CharName): CharCheckpoint {
 	const gameCharData = game.chars[name];
 	if (!gameCharData) {
 		throw new Error("Char " + name + " not in game " + game.name);
@@ -147,22 +145,79 @@ export function getBaseGameChar(
 	};
 }
 
-export function getBaseChar(game: GameData, char: Char): CharCheckpoint {
+// Implementation of getBaseChar, with some protection against recursive
+// parent loops since we don't validate the parent.
+function getBaseCharRec(
+	game: GameData,
+	team: Team,
+	char: Char,
+	parentChain: Set<CharName>
+): CharCheckpoint {
 	const baseChar = getBaseGameChar(game, char.name);
 	baseChar.charClass = char.baseClass || baseChar.charClass;
 	baseChar.level = char.baseLevel || baseChar.level;
 	baseChar.stats = char.baseStats || baseChar.stats;
+
+	// Boon/bane
+	if (char.boon || char.bane) {
+		const boonData = _.get(game, ["boonBane", char.boon || "", "boon"], {});
+		const baneData = _.get(game, ["boonBane", char.bane || "", "bane"], {});
+		baseChar.stats = sumObjects(
+			baseChar.stats,
+			boonData.baseStats || {},
+			baneData.baseStats || {}
+		);
+		baseChar.growths = sumObjects(
+			baseChar.growths,
+			boonData.growths || {},
+			baneData.growths || {}
+		);
+		baseChar.maxStats = sumObjects(
+			baseChar.maxStats,
+			boonData.maxStats || {},
+			baneData.maxStats || {}
+		);
+	}
+
 	baseChar.dist = getBaseDist(baseChar.stats);
 	baseChar.distNB = baseChar.dist;
 	baseChar.min = baseChar.stats;
+
+	// Parent, with a recursive call that protects against loops
+	if (!parentChain.has(char.name) && char.parent) {
+		parentChain.add(char.name);
+		const parentOnTeam = team[char.parent];
+		const parentBase = parentOnTeam
+			? getBaseCharRec(game, team, parentOnTeam, parentChain)
+			: getBaseGameChar(game, char.parent);
+		// Currently applies Fates rules, since that's the only parent game now.
+		// Base stats have to be input manually, so not handled here.
+		baseChar.growths = _.mapValues(baseChar.growths, (gr, statName) => {
+			return Math.floor((gr + parentBase.growths[statName]) / 2);
+		});
+		const maxStatExtra = parentOnTeam && parentOnTeam.parent ? 0 : 1;
+		baseChar.maxStats = _.mapValues(baseChar.maxStats, (max, statName) => {
+			return max + parentBase.maxStats[statName] + maxStatExtra;
+		});
+	}
+
 	return baseChar;
 }
 
-export function getCharPlan(game: GameData, char: Char): AdvancePlan {
+function getBaseChar(game: GameData, team: Team, char: Char): CharCheckpoint {
+	const parentChain: Set<CharName> = new Set();
+	return getBaseCharRec(game, team, char, parentChain);
+}
+
+export function getCharPlan(
+	game: GameData,
+	team: Team,
+	char: Char
+): AdvancePlan {
 	const entries: AdvanceEntry[] = [];
 	const errors: AdvanceError[] = [];
 
-	const baseChar = getBaseChar(game, char);
+	const baseChar = getBaseChar(game, team, char);
 	const init = {
 		base: baseChar,
 		curr: baseChar,
@@ -352,9 +407,10 @@ function simulateLevels(
 ): AdvanceChar {
 	const gameClassData = game.classes[char.curr.charClass];
 	const charGrowths = char.curr.growths;
-	const equipGrowths = char.curr.equip
-		? game.equipment[char.curr.equip].growths
-		: {};
+	const equipGrowths =
+		char.curr.equip && game.equipment
+			? game.equipment[char.curr.equip].growths
+			: {};
 	const realGrowths = sumObjects(
 		charGrowths,
 		gameClassData.growths,
@@ -403,8 +459,12 @@ export function reduceChar(
 	return assertNever(entry);
 }
 
-export function computeChar(game: GameData, char: Char): AdvanceFinal {
-	const plan = getCharPlan(game, char);
+export function computeChar(
+	game: GameData,
+	team: Team,
+	char: Char
+): AdvanceFinal {
+	const plan = getCharPlan(game, team, char);
 	const final = plan.entries.reduce(
 		(c, e) => reduceChar(game, c, e),
 		plan.init

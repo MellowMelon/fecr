@@ -1,25 +1,42 @@
 import React, {memo} from "react";
 import {Box, Button, Heading, ResponsiveContext, Text} from "grommet";
 
-import {Stat, CharClass, StatsTable, GameData} from "../types";
+import {Stat, CharClass, CharName, StatsTable, GameData} from "../types";
 import getHelp from "../HelpTable";
 import {ViewAction} from "../state/types";
 
 import InputClass from "./InputClass";
 import InputStats from "./InputStats";
+import InputStatName from "./InputStatName";
+import InputCharName from "./InputCharName";
 import HistoryBase from "./HistoryBase";
 import HelpButton from "./HelpButton";
 
 type Props = {
 	game: GameData;
+	name: CharName;
 	baseLevel: number;
 	baseClass: CharClass;
 	baseStats: StatsTable;
+	boon?: Stat;
+	bane?: Stat;
+	parent?: CharName;
 	dispatch: (a: ViewAction) => void;
 };
 
 const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
-	const {game, baseLevel, baseClass, baseStats, dispatch} = props;
+	const {
+		game,
+		name,
+		baseLevel,
+		baseClass,
+		baseStats,
+		boon,
+		bane,
+		parent,
+		dispatch,
+	} = props;
+	const gameCharData = game.chars[name];
 
 	const screenSize = React.useContext(ResponsiveContext);
 
@@ -39,6 +56,18 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 		dispatch({type: "updateCharBaseStats", stats: {[statName]: value}});
 	};
 
+	const onSelectBoon = function(newStat: Stat) {
+		dispatch({type: "updateCharBaseBoon", value: newStat});
+	};
+
+	const onSelectBane = function(newStat: Stat) {
+		dispatch({type: "updateCharBaseBane", value: newStat});
+	};
+
+	const onSelectParent = function(newName: CharName) {
+		dispatch({type: "updateCharBaseParent", name: newName});
+	};
+
 	const resetButton = <Button label="Reset Initial" onClick={onResetBases} />;
 	let resetTopRight: React.ReactNode = <Box width="small">{resetButton}</Box>;
 	let resetSepRow: React.ReactNode = null;
@@ -48,6 +77,38 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 			<Box direction="row" alignSelf="start">
 				{resetButton}
 			</Box>
+		);
+	}
+
+	let boonBaneBox: React.ReactNode = null;
+	if (gameCharData.hasBoonBane) {
+		boonBaneBox = (
+			<React.Fragment>
+				<Box direction="row" align="center" gap="small">
+					<Text weight="bold">Boon</Text>
+					<InputStatName game={game} value={boon!} onSelect={onSelectBoon} />
+				</Box>
+				<Box direction="row" align="center" gap="small">
+					<Text weight="bold">Bane</Text>
+					<InputStatName game={game} value={bane!} onSelect={onSelectBane} />
+				</Box>
+			</React.Fragment>
+		);
+	}
+
+	let parentBox: React.ReactNode = null;
+	if (gameCharData.hasBoonBane) {
+		parentBox = (
+			<React.Fragment>
+				<Box direction="row" align="center" gap="small">
+					<Text weight="bold">Parent</Text>
+					<InputCharName
+						game={game}
+						value={parent!}
+						onSelect={onSelectParent}
+					/>
+				</Box>
+			</React.Fragment>
 		);
 	}
 
@@ -82,6 +143,8 @@ const CharEditBases: React.FunctionComponent<Props> = function(props: Props) {
 						onSelect={onSelectBaseClass}
 					/>
 				</Box>
+				{boonBaneBox}
+				{parentBox}
 				<InputStats
 					game={game}
 					value={baseStats}

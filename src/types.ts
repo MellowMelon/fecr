@@ -57,10 +57,20 @@ export type Char = {
 	baseClass: CharClass;
 	baseLevel: number;
 	baseStats: StatsTable;
+	boon?: Stat;
+	bane?: Stat;
+	parent?: CharName;
 };
 
 // Group of characters in a playthrough
 export type Team = {[name: string]: Char};
+
+export type CharDataBasesAlt = {
+	name: string;
+	baseClass?: CharClass;
+	baseLevel?: number;
+	baseStats?: StatsTable;
+};
 
 // Data for character in game
 export type CharData = {
@@ -71,6 +81,10 @@ export type CharData = {
 	baseStats: StatsTable;
 	growths: StatsTable;
 	maxStats: StatsTable;
+	hasBoonBane?: boolean;
+	hasParent?: boolean;
+	defaultAltName?: string;
+	basesAlts?: CharDataBasesAlt[];
 };
 
 export type ClassData = {
@@ -86,6 +100,20 @@ export type ClassData = {
 export type EquipmentData = {
 	name: EquipName;
 	growths: StatsTable;
+};
+
+export type BoonBaneData = {
+	name: Stat;
+	boon: {
+		baseStats: StatsTable;
+		growths: StatsTable;
+		maxStats: StatsTable;
+	};
+	bane: {
+		baseStats: StatsTable;
+		growths: StatsTable;
+		maxStats: StatsTable;
+	};
 };
 
 export type GameID = string;
@@ -111,5 +139,6 @@ export type GameData = {
 	stats: Stat[];
 	chars: {[name: string]: CharData};
 	classes: {[charClass: string]: ClassData};
-	equipment: {[name: string]: EquipmentData};
+	equipment?: {[name: string]: EquipmentData};
+	boonBane?: {[stat: string]: BoonBaneData};
 };

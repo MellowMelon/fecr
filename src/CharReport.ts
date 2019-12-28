@@ -128,7 +128,7 @@ export function getCharReport(
 	}
 
 	const gameEquipData = equip
-		? game.equipment[equip]
+		? game.equipment && game.equipment[equip]
 		: {growths: makeZeroStats(game)};
 	if (!gameEquipData) {
 		throw new Error("No equipment named " + equip + " in game " + game.id);

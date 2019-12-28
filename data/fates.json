@@ -1,0 +1,6418 @@
+{
+	"id": "14",
+	"name": "Fire Emblem: Fates",
+	"shortName": "Fates",
+	"globals": {
+		"maxLevel": 99,
+		"maxStat": 99,
+		"classChangeResetsLevel": false,
+		"enableCharMax": true,
+		"enableClassMins": true,
+		"enableClassMods": true,
+		"enableClassMax": true,
+		"enableEquipment": false,
+		"enableMaxIncrease": true,
+		"hideNewLevel": false,
+		"histAddLayout": [
+			["checkpoint", "class"],
+			["boost", "maxboost"]
+		]
+	},
+	"stats": ["HP", "Str", "Mag", "Skl", "Spd", "Lck", "Def", "Res"],
+	"chars": {
+		"CorrinM": {
+			"name": "CorrinM",
+			"gender": "M",
+			"hasBoonBane": true,
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"baseClass": "Nohr Prince(ss)",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 19,
+				"Str": 7,
+				"Mag": 4,
+				"Skl": 7,
+				"Spd": 6,
+				"Lck": 5,
+				"Def": 6,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 45,
+				"Mag": 30,
+				"Skl": 40,
+				"Spd": 45,
+				"Lck": 45,
+				"Def": 35,
+				"Res": 25
+			}
+		},
+		"CorrinF": {
+			"name": "CorrinF",
+			"gender": "F",
+			"hasBoonBane": true,
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"baseClass": "Nohr Prince(ss)",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 19,
+				"Str": 7,
+				"Mag": 4,
+				"Skl": 7,
+				"Spd": 6,
+				"Lck": 5,
+				"Def": 6,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 45,
+				"Mag": 30,
+				"Skl": 40,
+				"Spd": 45,
+				"Lck": 45,
+				"Def": 35,
+				"Res": 25
+			}
+		},
+		"Felicia": {
+			"name": "Felicia",
+			"gender": "F",
+			"baseClass": "Maid/Butler",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 19,
+				"Str": 5,
+				"Mag": 9,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 12,
+				"Def": 5,
+				"Res": 9
+			},
+			"defaultAltName": "Chapter 1",
+			"basesAlts": [
+				{
+					"name": "Chapter 16",
+					"baseClass": "Maid/Butler",
+					"baseLevel": 13,
+					"baseStats": {
+						"HP": 24,
+						"Str": 7,
+						"Mag": 14,
+						"Skl": 15,
+						"Spd": 17,
+						"Lck": 20,
+						"Def": 7,
+						"Res": 14
+					}
+				}
+			],
+			"growths": {
+				"HP": 40,
+				"Str": 10,
+				"Mag": 35,
+				"Skl": 30,
+				"Spd": 40,
+				"Lck": 55,
+				"Def": 15,
+				"Res": 35
+			},
+			"maxStats": {
+				"HP": -2,
+				"Str": 2,
+				"Mag": 0,
+				"Skl": 1,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 1
+			}
+		},
+		"Jakob": {
+			"name": "Jakob",
+			"gender": "M",
+			"baseClass": "Maid/Butler",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 21,
+				"Str": 8,
+				"Mag": 6,
+				"Skl": 12,
+				"Spd": 9,
+				"Lck": 10,
+				"Def": 7,
+				"Res": 6
+			},
+			"defaultAltName": "Chapter 1",
+			"basesAlts": [
+				{
+					"name": "Chapter 16",
+					"baseClass": "Maid/Butler",
+					"baseLevel": 13,
+					"baseStats": {
+						"HP": 27,
+						"Str": 13,
+						"Mag": 9,
+						"Skl": 19,
+						"Spd": 15,
+						"Lck": 17,
+						"Def": 11,
+						"Res": 10
+					}
+				}
+			],
+			"growths": {
+				"HP": 50,
+				"Str": 30,
+				"Mag": 15,
+				"Skl": 40,
+				"Spd": 35,
+				"Lck": 45,
+				"Def": 25,
+				"Res": 25
+			},
+			"maxStats": {
+				"HP": 2,
+				"Str": -2,
+				"Mag": 2,
+				"Skl": 0,
+				"Spd": -1,
+				"Lck": 0,
+				"Def": -1
+			}
+		},
+		"Kaze": {
+			"name": "Kaze",
+			"gender": "M",
+			"baseClass": "Ninja",
+			"baseLevel": 3,
+			"baseStats": {
+				"HP": 19,
+				"Str": 7,
+				"Mag": 0,
+				"Skl": 9,
+				"Spd": 12,
+				"Lck": 4,
+				"Def": 5,
+				"Res": 10
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Conquest",
+					"baseClass": "Ninja",
+					"baseLevel": 9,
+					"baseStats": {
+						"HP": 22,
+						"Str": 9,
+						"Mag": 0,
+						"Skl": 12,
+						"Spd": 16,
+						"Lck": 6,
+						"Def": 7,
+						"Res": 13
+					}
+				},
+				{
+					"name": "Revelation",
+					"baseClass": "Ninja",
+					"baseLevel": 3,
+					"baseStats": {
+						"HP": 19,
+						"Str": 7,
+						"Mag": 0,
+						"Skl": 9,
+						"Spd": 12,
+						"Lck": 4,
+						"Def": 5,
+						"Res": 10
+					}
+				}
+			],
+			"growths": {
+				"HP": 55,
+				"Str": 40,
+				"Mag": 0,
+				"Skl": 45,
+				"Spd": 65,
+				"Lck": 20,
+				"Def": 20,
+				"Res": 35
+			},
+			"maxStats": {
+				"HP": -2,
+				"Str": 0,
+				"Mag": 2,
+				"Skl": 3,
+				"Spd": -2,
+				"Lck": -1,
+				"Def": 1
+			}
+		},
+		"Azura": {
+			"name": "Azura",
+			"gender": "F",
+			"baseClass": "Songstress",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 16,
+				"Str": 5,
+				"Mag": 2,
+				"Skl": 8,
+				"Spd": 8,
+				"Lck": 6,
+				"Def": 4,
+				"Res": 7
+			},
+			"growths": {
+				"HP": 25,
+				"Str": 50,
+				"Mag": 25,
+				"Skl": 60,
+				"Spd": 60,
+				"Lck": 40,
+				"Def": 15,
+				"Res": 35
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 1,
+				"Skl": 3,
+				"Spd": 0,
+				"Lck": -3,
+				"Def": 0
+			}
+		},
+		"Silas": {
+			"name": "Silas",
+			"gender": "M",
+			"baseClass": "Cavalier",
+			"baseLevel": 6,
+			"baseStats": {
+				"HP": 22,
+				"Str": 11,
+				"Mag": 0,
+				"Skl": 9,
+				"Spd": 8,
+				"Lck": 7,
+				"Def": 10,
+				"Res": 5
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Conquest",
+					"baseClass": "Cavalier",
+					"baseLevel": 6,
+					"baseStats": {
+						"HP": 22,
+						"Str": 11,
+						"Mag": 0,
+						"Skl": 9,
+						"Spd": 8,
+						"Lck": 7,
+						"Def": 10,
+						"Res": 5
+					}
+				},
+				{
+					"name": "Revelation",
+					"baseClass": "Cavalier",
+					"baseLevel": 18,
+					"baseStats": {
+						"HP": 39,
+						"Str": 19,
+						"Mag": 3,
+						"Skl": 16,
+						"Spd": 12,
+						"Lck": 11,
+						"Def": 19,
+						"Res": 14
+					}
+				}
+			],
+			"growths": {
+				"HP": 40,
+				"Str": 45,
+				"Mag": 5,
+				"Skl": 50,
+				"Spd": 40,
+				"Lck": 40,
+				"Def": 40,
+				"Res": 25
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 2,
+				"Skl": 0,
+				"Spd": -1,
+				"Lck": 0,
+				"Def": -1
+			}
+		},
+		"Shura": {
+			"name": "Shura",
+			"gender": "M",
+			"baseClass": "Adventurer",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 34,
+				"Str": 20,
+				"Mag": 11,
+				"Skl": 23,
+				"Spd": 27,
+				"Lck": 15,
+				"Def": 14,
+				"Res": 24
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Conquest",
+					"baseClass": "Adventurer",
+					"baseLevel": 2,
+					"baseStats": {
+						"HP": 31,
+						"Str": 18,
+						"Mag": 10,
+						"Skl": 21,
+						"Spd": 24,
+						"Lck": 13,
+						"Def": 13,
+						"Res": 21
+					}
+				},
+				{
+					"name": "Revelation",
+					"baseClass": "Adventurer",
+					"baseLevel": 10,
+					"baseStats": {
+						"HP": 34,
+						"Str": 20,
+						"Mag": 11,
+						"Skl": 23,
+						"Spd": 27,
+						"Lck": 15,
+						"Def": 14,
+						"Res": 24
+					}
+				}
+			],
+			"growths": {
+				"HP": 30,
+				"Str": 25,
+				"Mag": 10,
+				"Skl": 20,
+				"Spd": 35,
+				"Lck": 30,
+				"Def": 15,
+				"Res": 35
+			},
+			"maxStats": {
+				"HP": -1,
+				"Str": 0,
+				"Mag": -1,
+				"Skl": 3,
+				"Spd": -1,
+				"Lck": -2,
+				"Def": 2
+			}
+		},
+		"Izana": {
+			"name": "Izana",
+			"gender": "M",
+			"baseClass": "Onmyoji",
+			"baseLevel": 5,
+			"baseStats": {
+				"HP": 31,
+				"Str": 8,
+				"Mag": 23,
+				"Skl": 25,
+				"Spd": 18,
+				"Lck": 17,
+				"Def": 14,
+				"Res": 24
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 15,
+				"Mag": 35,
+				"Skl": 55,
+				"Spd": 30,
+				"Lck": 45,
+				"Def": 35,
+				"Res": 35
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 1,
+				"Mag": 1,
+				"Skl": -2,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 1
+			}
+		},
+		"Mozu": {
+			"name": "Mozu",
+			"gender": "F",
+			"baseClass": "Villager",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 16,
+				"Str": 6,
+				"Mag": 0,
+				"Skl": 5,
+				"Spd": 7,
+				"Lck": 3,
+				"Def": 4,
+				"Res": 1
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 40,
+				"Mag": 5,
+				"Skl": 50,
+				"Spd": 55,
+				"Lck": 45,
+				"Def": 35,
+				"Res": 30
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 1,
+				"Skl": 1,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": -2
+			}
+		},
+		"Rinkah": {
+			"name": "Rinkah",
+			"gender": "F",
+			"baseClass": "Oni Savage",
+			"baseLevel": 4,
+			"baseStats": {
+				"HP": 20,
+				"Str": 8,
+				"Mag": 2,
+				"Skl": 6,
+				"Spd": 8,
+				"Lck": 5,
+				"Def": 10,
+				"Res": 3
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 25,
+				"Mag": 15,
+				"Skl": 50,
+				"Spd": 45,
+				"Lck": 35,
+				"Def": 45,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": -1,
+				"Str": 0,
+				"Mag": -2,
+				"Skl": 1,
+				"Spd": 0,
+				"Lck": 2,
+				"Def": 0
+			}
+		},
+		"Sakura": {
+			"name": "Sakura",
+			"gender": "F",
+			"baseClass": "Monk/Shrine Maiden",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 16,
+				"Str": 3,
+				"Mag": 6,
+				"Skl": 5,
+				"Spd": 7,
+				"Lck": 9,
+				"Def": 5,
+				"Res": 7
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Monk/Shrine Maiden",
+					"baseLevel": 4,
+					"baseStats": {
+						"HP": 19,
+						"Str": 4,
+						"Mag": 8,
+						"Skl": 6,
+						"Spd": 10,
+						"Lck": 11,
+						"Def": 7,
+						"Res": 8
+					}
+				}
+			],
+			"growths": {
+				"HP": 45,
+				"Str": 30,
+				"Mag": 50,
+				"Skl": 40,
+				"Spd": 40,
+				"Lck": 55,
+				"Def": 30,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 2,
+				"Mag": -1,
+				"Skl": 1,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 0
+			}
+		},
+		"Hana": {
+			"name": "Hana",
+			"gender": "F",
+			"baseClass": "Samurai",
+			"baseLevel": 4,
+			"baseStats": {
+				"HP": 20,
+				"Str": 9,
+				"Mag": 0,
+				"Skl": 11,
+				"Spd": 11,
+				"Lck": 5,
+				"Def": 6,
+				"Res": 9
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Samurai",
+					"baseLevel": 4,
+					"baseStats": {
+						"HP": 20,
+						"Str": 7,
+						"Mag": 0,
+						"Skl": 9,
+						"Spd": 11,
+						"Lck": 5,
+						"Def": 6,
+						"Res": 9
+					}
+				}
+			],
+			"growths": {
+				"HP": 25,
+				"Str": 55,
+				"Mag": 10,
+				"Skl": 45,
+				"Spd": 55,
+				"Lck": 25,
+				"Def": 20,
+				"Res": 30
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 1,
+				"Skl": 2,
+				"Spd": -1,
+				"Lck": -3,
+				"Def": 1
+			}
+		},
+		"Subaki": {
+			"name": "Subaki",
+			"gender": "M",
+			"baseClass": "Sky Knight",
+			"baseLevel": 5,
+			"baseStats": {
+				"HP": 22,
+				"Str": 8,
+				"Mag": 0,
+				"Skl": 13,
+				"Spd": 10,
+				"Lck": 7,
+				"Def": 9,
+				"Res": 10
+			},
+			"growths": {
+				"HP": 55,
+				"Str": 30,
+				"Mag": 20,
+				"Skl": 50,
+				"Spd": 20,
+				"Lck": 25,
+				"Def": 45,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": -1,
+				"Str": 0,
+				"Mag": 2,
+				"Skl": -2,
+				"Spd": -1,
+				"Lck": 3,
+				"Def": -1
+			}
+		},
+		"Saizo": {
+			"name": "Saizo",
+			"gender": "M",
+			"baseClass": "Ninja",
+			"baseLevel": 7,
+			"baseStats": {
+				"HP": 23,
+				"Str": 11,
+				"Mag": 3,
+				"Skl": 14,
+				"Spd": 11,
+				"Lck": 9,
+				"Def": 9,
+				"Res": 7
+			},
+			"growths": {
+				"HP": 40,
+				"Str": 50,
+				"Mag": 45,
+				"Skl": 60,
+				"Spd": 30,
+				"Lck": 55,
+				"Def": 45,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 3,
+				"Skl": -2,
+				"Spd": 0,
+				"Lck": 1,
+				"Def": -2
+			}
+		},
+		"Orochi": {
+			"name": "Orochi",
+			"gender": "F",
+			"baseClass": "Diviner",
+			"baseLevel": 5,
+			"baseStats": {
+				"HP": 20,
+				"Str": 0,
+				"Mag": 9,
+				"Skl": 11,
+				"Spd": 7,
+				"Lck": 6,
+				"Def": 5,
+				"Res": 10
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Diviner",
+					"baseLevel": 7,
+					"baseStats": {
+						"HP": 20,
+						"Str": 1,
+						"Mag": 10,
+						"Skl": 12,
+						"Spd": 7,
+						"Lck": 6,
+						"Def": 5,
+						"Res": 10
+					}
+				}
+			],
+			"growths": {
+				"HP": 35,
+				"Str": 5,
+				"Mag": 65,
+				"Skl": 50,
+				"Spd": 15,
+				"Lck": 35,
+				"Def": 25,
+				"Res": 45
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 3,
+				"Mag": 2,
+				"Skl": -2,
+				"Spd": -1,
+				"Lck": -2,
+				"Def": 1
+			}
+		},
+		"Hinoka": {
+			"name": "Hinoka",
+			"gender": "F",
+			"baseClass": "Sky Knight",
+			"baseLevel": 8,
+			"baseStats": {
+				"HP": 23,
+				"Str": 9,
+				"Mag": 4,
+				"Skl": 13,
+				"Spd": 16,
+				"Lck": 12,
+				"Def": 9,
+				"Res": 15
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Sky Knight",
+					"baseLevel": 17,
+					"baseStats": {
+						"HP": 24,
+						"Str": 14,
+						"Mag": 5,
+						"Skl": 18,
+						"Spd": 23,
+						"Lck": 16,
+						"Def": 12,
+						"Res": 23
+					}
+				}
+			],
+			"growths": {
+				"HP": 45,
+				"Str": 45,
+				"Mag": 15,
+				"Skl": 40,
+				"Spd": 45,
+				"Lck": 40,
+				"Def": 35,
+				"Res": 40
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": -1,
+				"Mag": -1,
+				"Skl": 1,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 2
+			}
+		},
+		"Azama": {
+			"name": "Azama",
+			"gender": "M",
+			"baseClass": "Monk/Shrine Maiden",
+			"baseLevel": 7,
+			"baseStats": {
+				"HP": 24,
+				"Str": 9,
+				"Mag": 7,
+				"Skl": 9,
+				"Spd": 10,
+				"Lck": 12,
+				"Def": 10,
+				"Res": 8
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Monk/Shrine Maiden",
+					"baseLevel": 13,
+					"baseStats": {
+						"HP": 28,
+						"Str": 10,
+						"Mag": 8,
+						"Skl": 11,
+						"Spd": 13,
+						"Lck": 16,
+						"Def": 14,
+						"Res": 10
+					}
+				}
+			],
+			"growths": {
+				"HP": 55,
+				"Str": 50,
+				"Mag": 20,
+				"Skl": 40,
+				"Spd": 45,
+				"Lck": 40,
+				"Def": 40,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 2,
+				"Str": -3,
+				"Mag": 0,
+				"Skl": 1,
+				"Spd": 0,
+				"Lck": 1,
+				"Def": 0
+			}
+		},
+		"Setsuna": {
+			"name": "Setsuna",
+			"gender": "F",
+			"baseClass": "Archer",
+			"baseLevel": 3,
+			"baseStats": {
+				"HP": 19,
+				"Str": 8,
+				"Mag": 0,
+				"Skl": 9,
+				"Spd": 10,
+				"Lck": 6,
+				"Def": 5,
+				"Res": 3
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Archer",
+					"baseLevel": 11,
+					"baseStats": {
+						"HP": 25,
+						"Str": 12,
+						"Mag": 0,
+						"Skl": 15,
+						"Spd": 17,
+						"Lck": 11,
+						"Def": 8,
+						"Res": 10
+					}
+				}
+			],
+			"growths": {
+				"HP": 30,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 30,
+				"Spd": 60,
+				"Lck": 30,
+				"Def": 15,
+				"Res": 40
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 1,
+				"Skl": 3,
+				"Spd": -1,
+				"Lck": -1,
+				"Def": -1
+			}
+		},
+		"Hayato": {
+			"name": "Hayato",
+			"gender": "M",
+			"baseClass": "Diviner",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 16,
+				"Str": 1,
+				"Mag": 4,
+				"Skl": 5,
+				"Spd": 7,
+				"Lck": 8,
+				"Def": 4,
+				"Res": 5
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Diviner",
+					"baseLevel": 9,
+					"baseStats": {
+						"HP": 22,
+						"Str": 2,
+						"Mag": 9,
+						"Skl": 9,
+						"Spd": 13,
+						"Lck": 11,
+						"Def": 5,
+						"Res": 7
+					}
+				}
+			],
+			"growths": {
+				"HP": 50,
+				"Str": 30,
+				"Mag": 40,
+				"Skl": 30,
+				"Spd": 45,
+				"Lck": 60,
+				"Def": 40,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 1,
+				"Mag": -1,
+				"Skl": 2,
+				"Spd": 1,
+				"Lck": -1,
+				"Def": -1
+			}
+		},
+		"Oboro": {
+			"name": "Oboro",
+			"gender": "F",
+			"baseClass": "Spear Fighter",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 25,
+				"Str": 13,
+				"Mag": 0,
+				"Skl": 11,
+				"Spd": 12,
+				"Lck": 11,
+				"Def": 13,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 40,
+				"Mag": 20,
+				"Skl": 40,
+				"Spd": 40,
+				"Lck": 40,
+				"Def": 40,
+				"Res": 30
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": -1,
+				"Mag": 1,
+				"Skl": 1,
+				"Spd": -1,
+				"Lck": 1,
+				"Def": -1
+			}
+		},
+		"Hinata": {
+			"name": "Hinata",
+			"gender": "M",
+			"baseClass": "Samurai",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 26,
+				"Str": 11,
+				"Mag": 0,
+				"Skl": 9,
+				"Spd": 14,
+				"Lck": 10,
+				"Def": 12,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 55,
+				"Str": 35,
+				"Mag": 0,
+				"Skl": 25,
+				"Spd": 15,
+				"Lck": 45,
+				"Def": 45,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": -1,
+				"Skl": -2,
+				"Spd": 0,
+				"Lck": 2,
+				"Def": 0
+			}
+		},
+		"Takumi": {
+			"name": "Takumi",
+			"gender": "M",
+			"baseClass": "Archer",
+			"baseLevel": 11,
+			"baseStats": {
+				"HP": 26,
+				"Str": 13,
+				"Mag": 0,
+				"Skl": 17,
+				"Spd": 11,
+				"Lck": 13,
+				"Def": 10,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 50,
+				"Str": 35,
+				"Mag": 0,
+				"Skl": 60,
+				"Spd": 40,
+				"Lck": 45,
+				"Def": 35,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 3,
+				"Skl": -2,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": -2
+			}
+		},
+		"Kagero": {
+			"name": "Kagero",
+			"gender": "F",
+			"baseClass": "Ninja",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 22,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 12,
+				"Lck": 7,
+				"Def": 9,
+				"Res": 10
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 65,
+				"Mag": 0,
+				"Skl": 20,
+				"Spd": 50,
+				"Lck": 30,
+				"Def": 25,
+				"Res": 40
+			},
+			"maxStats": {
+				"HP": 3,
+				"Str": 0,
+				"Mag": -1,
+				"Skl": -1,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 1
+			}
+		},
+		"Reina": {
+			"name": "Reina",
+			"gender": "F",
+			"baseClass": "Kinshi Knight",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 28,
+				"Str": 17,
+				"Mag": 5,
+				"Skl": 14,
+				"Spd": 20,
+				"Lck": 14,
+				"Def": 10,
+				"Res": 13
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Kinshi Knight",
+					"baseLevel": 1,
+					"baseStats": {
+						"HP": 28,
+						"Str": 18,
+						"Mag": 4,
+						"Skl": 16,
+						"Spd": 21,
+						"Lck": 15,
+						"Def": 10,
+						"Res": 13
+					}
+				}
+			],
+			"growths": {
+				"HP": 40,
+				"Str": 45,
+				"Mag": 5,
+				"Skl": 20,
+				"Spd": 45,
+				"Lck": 10,
+				"Def": 20,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 2,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": -1,
+				"Lck": -2,
+				"Def": -1
+			}
+		},
+		"Kaden": {
+			"name": "Kaden",
+			"gender": "M",
+			"baseClass": "Kitsune",
+			"baseLevel": 14,
+			"baseStats": {
+				"HP": 30,
+				"Str": 15,
+				"Mag": 1,
+				"Skl": 12,
+				"Spd": 19,
+				"Lck": 14,
+				"Def": 9,
+				"Res": 14
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 40,
+				"Mag": 10,
+				"Skl": 25,
+				"Spd": 45,
+				"Lck": 50,
+				"Def": 35,
+				"Res": 40
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": -3,
+				"Skl": 2,
+				"Spd": 1,
+				"Lck": -2,
+				"Def": 2
+			}
+		},
+		"Ryoma": {
+			"name": "Ryoma",
+			"gender": "M",
+			"baseClass": "Swordmaster",
+			"baseLevel": 4,
+			"baseStats": {
+				"HP": 36,
+				"Str": 20,
+				"Mag": 2,
+				"Skl": 18,
+				"Spd": 24,
+				"Lck": 20,
+				"Def": 16,
+				"Res": 13
+			},
+			"growths": {
+				"HP": 50,
+				"Str": 45,
+				"Mag": 0,
+				"Skl": 50,
+				"Spd": 45,
+				"Lck": 40,
+				"Def": 35,
+				"Res": 25
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 2,
+				"Skl": 1,
+				"Spd": 1,
+				"Lck": -2,
+				"Def": -2
+			}
+		},
+		"Scarlet": {
+			"name": "Scarlet",
+			"gender": "F",
+			"baseClass": "Wyvern Lord",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 30,
+				"Str": 23,
+				"Mag": 4,
+				"Skl": 17,
+				"Spd": 19,
+				"Lck": 14,
+				"Def": 22,
+				"Res": 6
+			},
+			"defaultAltName": "Birthright",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Wyvern Lord",
+					"baseLevel": 3,
+					"baseStats": {
+						"HP": 32,
+						"Str": 22,
+						"Mag": 4,
+						"Skl": 18,
+						"Spd": 19,
+						"Lck": 14,
+						"Def": 23,
+						"Res": 7
+					}
+				}
+			],
+			"growths": {
+				"HP": 30,
+				"Str": 45,
+				"Mag": 20,
+				"Skl": 40,
+				"Spd": 50,
+				"Lck": 40,
+				"Def": 25,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 2,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 1,
+				"Spd": -1,
+				"Lck": 0,
+				"Def": -2
+			}
+		},
+		"Yukimura": {
+			"name": "Yukimura",
+			"gender": "M",
+			"baseClass": "Mechanist",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 38,
+				"Str": 25,
+				"Mag": 3,
+				"Skl": 29,
+				"Spd": 23,
+				"Lck": 18,
+				"Def": 21,
+				"Res": 22
+			},
+			"growths": {
+				"HP": 25,
+				"Str": 25,
+				"Mag": 5,
+				"Skl": 40,
+				"Spd": 15,
+				"Lck": 30,
+				"Def": 25,
+				"Res": 30
+			},
+			"maxStats": {
+				"HP": -1,
+				"Str": 0,
+				"Mag": 3,
+				"Skl": -1,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 0
+			}
+		},
+		"Gunter": {
+			"name": "Gunter",
+			"gender": "M",
+			"baseClass": "Great Knight",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 34,
+				"Str": 17,
+				"Mag": 0,
+				"Skl": 24,
+				"Spd": 10,
+				"Lck": 13,
+				"Def": 20,
+				"Res": 6
+			},
+			"defaultAltName": "Conquest",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Great Knight",
+					"baseLevel": 3,
+					"baseStats": {
+						"HP": 24,
+						"Str": 10,
+						"Mag": 0,
+						"Skl": 15,
+						"Spd": 8,
+						"Lck": 9,
+						"Def": 10,
+						"Res": 4
+					}
+				}
+			],
+			"growths": {
+				"HP": 15,
+				"Str": 5,
+				"Mag": 0,
+				"Skl": 5,
+				"Spd": 0,
+				"Lck": 15,
+				"Def": 5,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 2,
+				"Str": 0,
+				"Mag": 1,
+				"Skl": -2,
+				"Spd": 0,
+				"Lck": 2,
+				"Def": -2
+			}
+		},
+		"Elise": {
+			"name": "Elise",
+			"gender": "F",
+			"baseClass": "Troubadour",
+			"baseLevel": 5,
+			"baseStats": {
+				"HP": 19,
+				"Str": 2,
+				"Mag": 11,
+				"Skl": 5,
+				"Spd": 10,
+				"Lck": 14,
+				"Def": 4,
+				"Res": 11
+			},
+			"defaultAltName": "Conquest",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Troubadour",
+					"baseLevel": 7,
+					"baseStats": {
+						"HP": 20,
+						"Str": 2,
+						"Mag": 13,
+						"Skl": 7,
+						"Spd": 11,
+						"Lck": 16,
+						"Def": 4,
+						"Res": 13
+					}
+				}
+			],
+			"growths": {
+				"HP": 30,
+				"Str": 5,
+				"Mag": 65,
+				"Skl": 25,
+				"Spd": 55,
+				"Lck": 70,
+				"Def": 15,
+				"Res": 40
+			},
+			"maxStats": {
+				"HP": -1,
+				"Str": 3,
+				"Mag": -2,
+				"Skl": 1,
+				"Spd": 1,
+				"Lck": -3,
+				"Def": 1
+			}
+		},
+		"Arthur": {
+			"name": "Arthur",
+			"gender": "M",
+			"baseClass": "Fighter",
+			"baseLevel": 7,
+			"baseStats": {
+				"HP": 24,
+				"Str": 12,
+				"Mag": 0,
+				"Skl": 9,
+				"Spd": 8,
+				"Lck": 1,
+				"Def": 9,
+				"Res": 4
+			},
+			"defaultAltName": "Conquest",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Fighter",
+					"baseLevel": 9,
+					"baseStats": {
+						"HP": 26,
+						"Str": 13,
+						"Mag": 0,
+						"Skl": 10,
+						"Spd": 9,
+						"Lck": 1,
+						"Def": 9,
+						"Res": 4
+					}
+				}
+			],
+			"growths": {
+				"HP": 50,
+				"Str": 45,
+				"Mag": 0,
+				"Skl": 55,
+				"Spd": 35,
+				"Lck": 5,
+				"Def": 45,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 3,
+				"Skl": 0,
+				"Spd": -3,
+				"Lck": 1,
+				"Def": -1
+			}
+		},
+		"Effie": {
+			"name": "Effie",
+			"gender": "F",
+			"baseClass": "Knight",
+			"baseLevel": 6,
+			"baseStats": {
+				"HP": 23,
+				"Str": 13,
+				"Mag": 0,
+				"Skl": 8,
+				"Spd": 5,
+				"Lck": 10,
+				"Def": 12,
+				"Res": 4
+			},
+			"defaultAltName": "Conquest",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Knight",
+					"baseLevel": 8,
+					"baseStats": {
+						"HP": 24,
+						"Str": 14,
+						"Mag": 0,
+						"Skl": 9,
+						"Spd": 5,
+						"Lck": 11,
+						"Def": 13,
+						"Res": 4
+					}
+				}
+			],
+			"growths": {
+				"HP": 35,
+				"Str": 60,
+				"Mag": 0,
+				"Skl": 35,
+				"Spd": 50,
+				"Lck": 50,
+				"Def": 35,
+				"Res": 30
+			},
+			"maxStats": {
+				"HP": 3,
+				"Str": 0,
+				"Mag": -1,
+				"Skl": 1,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": -1
+			}
+		},
+		"Odin": {
+			"name": "Odin",
+			"gender": "M",
+			"baseClass": "Dark Mage",
+			"baseLevel": 5,
+			"baseStats": {
+				"HP": 21,
+				"Str": 5,
+				"Mag": 8,
+				"Skl": 10,
+				"Spd": 7,
+				"Lck": 9,
+				"Def": 6,
+				"Res": 7
+			},
+			"defaultAltName": "Conquest",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Dark Mage",
+					"baseLevel": 12,
+					"baseStats": {
+						"HP": 24,
+						"Str": 8,
+						"Mag": 12,
+						"Skl": 12,
+						"Spd": 10,
+						"Lck": 12,
+						"Def": 7,
+						"Res": 10
+					}
+				}
+			],
+			"growths": {
+				"HP": 55,
+				"Str": 35,
+				"Mag": 30,
+				"Skl": 55,
+				"Spd": 35,
+				"Lck": 60,
+				"Def": 40,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 1,
+				"Mag": 1,
+				"Skl": -1,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": -1
+			}
+		},
+		"Niles": {
+			"name": "Niles",
+			"gender": "M",
+			"baseClass": "Outlaw",
+			"baseLevel": 8,
+			"baseStats": {
+				"HP": 22,
+				"Str": 9,
+				"Mag": 5,
+				"Skl": 9,
+				"Spd": 15,
+				"Lck": 6,
+				"Def": 7,
+				"Res": 12
+			},
+			"defaultAltName": "Conquest",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Outlaw",
+					"baseLevel": 14,
+					"baseStats": {
+						"HP": 24,
+						"Str": 11,
+						"Mag": 6,
+						"Skl": 11,
+						"Spd": 17,
+						"Lck": 7,
+						"Def": 10,
+						"Res": 16
+					}
+				}
+			],
+			"growths": {
+				"HP": 40,
+				"Str": 35,
+				"Mag": 20,
+				"Skl": 40,
+				"Spd": 50,
+				"Lck": 30,
+				"Def": 30,
+				"Res": 40
+			},
+			"maxStats": {
+				"HP": -2,
+				"Str": 0,
+				"Mag": -1,
+				"Skl": 3,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 1
+			}
+		},
+		"Nyx": {
+			"name": "Nyx",
+			"gender": "F",
+			"baseClass": "Dark Mage",
+			"baseLevel": 9,
+			"baseStats": {
+				"HP": 20,
+				"Str": 1,
+				"Mag": 12,
+				"Skl": 5,
+				"Spd": 11,
+				"Lck": 3,
+				"Def": 4,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 5,
+				"Mag": 50,
+				"Skl": 35,
+				"Spd": 50,
+				"Lck": 20,
+				"Def": 15,
+				"Res": 30
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 3,
+				"Mag": -2,
+				"Skl": 2,
+				"Spd": -1,
+				"Lck": -2,
+				"Def": 1
+			}
+		},
+		"Camilla": {
+			"name": "Camilla",
+			"gender": "F",
+			"baseClass": "Malig Knight",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 30,
+				"Str": 19,
+				"Mag": 11,
+				"Skl": 15,
+				"Spd": 19,
+				"Lck": 12,
+				"Def": 18,
+				"Res": 15
+			},
+			"growths": {
+				"HP": 40,
+				"Str": 50,
+				"Mag": 25,
+				"Skl": 50,
+				"Spd": 55,
+				"Lck": 25,
+				"Def": 35,
+				"Res": 45
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": -1,
+				"Mag": 1,
+				"Skl": 1,
+				"Spd": -2,
+				"Lck": 1,
+				"Def": 0
+			}
+		},
+		"Selena": {
+			"name": "Selena",
+			"gender": "F",
+			"baseClass": "Mercenary",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 24,
+				"Str": 12,
+				"Mag": 3,
+				"Skl": 12,
+				"Spd": 15,
+				"Lck": 9,
+				"Def": 11,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 40,
+				"Str": 30,
+				"Mag": 5,
+				"Skl": 25,
+				"Spd": 45,
+				"Lck": 30,
+				"Def": 45,
+				"Res": 30
+			},
+			"maxStats": {
+				"HP": -1,
+				"Str": 0,
+				"Mag": -1,
+				"Skl": 2,
+				"Spd": 0,
+				"Lck": 1,
+				"Def": 0
+			}
+		},
+		"Beruka": {
+			"name": "Beruka",
+			"gender": "F",
+			"baseClass": "Wyvern Rider",
+			"baseLevel": 9,
+			"baseStats": {
+				"HP": 23,
+				"Str": 13,
+				"Mag": 0,
+				"Skl": 14,
+				"Spd": 9,
+				"Lck": 10,
+				"Def": 14,
+				"Res": 7
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 30,
+				"Mag": 10,
+				"Skl": 55,
+				"Spd": 30,
+				"Lck": 45,
+				"Def": 40,
+				"Res": 25
+			},
+			"maxStats": {
+				"HP": -1,
+				"Str": 0,
+				"Mag": 2,
+				"Skl": -2,
+				"Spd": 0,
+				"Lck": 2,
+				"Def": -1
+			}
+		},
+		"Laslow": {
+			"name": "Laslow",
+			"gender": "M",
+			"baseClass": "Mercenary",
+			"baseLevel": 12,
+			"baseStats": {
+				"HP": 28,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 16,
+				"Spd": 13,
+				"Lck": 14,
+				"Def": 10,
+				"Res": 7
+			},
+			"defaultAltName": "Conquest",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Mercenary",
+					"baseLevel": 16,
+					"baseStats": {
+						"HP": 30,
+						"Str": 17,
+						"Mag": 0,
+						"Skl": 19,
+						"Spd": 16,
+						"Lck": 16,
+						"Def": 12,
+						"Res": 8
+					}
+				}
+			],
+			"growths": {
+				"HP": 50,
+				"Str": 45,
+				"Mag": 0,
+				"Skl": 45,
+				"Spd": 30,
+				"Lck": 55,
+				"Def": 35,
+				"Res": 25
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 2,
+				"Skl": -1,
+				"Spd": 1,
+				"Lck": -1,
+				"Def": -1
+			}
+		},
+		"Peri": {
+			"name": "Peri",
+			"gender": "F",
+			"baseClass": "Cavalier",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 25,
+				"Str": 13,
+				"Mag": 0,
+				"Skl": 9,
+				"Spd": 13,
+				"Lck": 9,
+				"Def": 10,
+				"Res": 10
+			},
+			"defaultAltName": "Conquest",
+			"basesAlts": [
+				{
+					"name": "Revelation",
+					"baseClass": "Cavalier",
+					"baseLevel": 16,
+					"baseStats": {
+						"HP": 27,
+						"Str": 16,
+						"Mag": 0,
+						"Skl": 10,
+						"Spd": 15,
+						"Lck": 12,
+						"Def": 12,
+						"Res": 11
+					}
+				}
+			],
+			"growths": {
+				"HP": 30,
+				"Str": 50,
+				"Mag": 5,
+				"Skl": 30,
+				"Spd": 50,
+				"Lck": 35,
+				"Def": 25,
+				"Res": 45
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": -1,
+				"Skl": 1,
+				"Spd": 0,
+				"Lck": -2,
+				"Def": 2
+			}
+		},
+		"Benny": {
+			"name": "Benny",
+			"gender": "M",
+			"baseClass": "Knight",
+			"baseLevel": 15,
+			"baseStats": {
+				"HP": 31,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 6,
+				"Lck": 12,
+				"Def": 19,
+				"Res": 10
+			},
+			"growths": {
+				"HP": 50,
+				"Str": 40,
+				"Mag": 0,
+				"Skl": 50,
+				"Spd": 10,
+				"Lck": 35,
+				"Def": 55,
+				"Res": 45
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": -3,
+				"Spd": 0,
+				"Lck": 3,
+				"Def": 1
+			}
+		},
+		"Charlotte": {
+			"name": "Charlotte",
+			"gender": "F",
+			"baseClass": "Fighter",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 28,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 13,
+				"Lck": 9,
+				"Def": 8,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 65,
+				"Str": 55,
+				"Mag": 0,
+				"Skl": 35,
+				"Spd": 50,
+				"Lck": 45,
+				"Def": 20,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 3,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": 0,
+				"Lck": -2,
+				"Def": -2
+			}
+		},
+		"Leo": {
+			"name": "Leo",
+			"gender": "M",
+			"baseClass": "Dark Knight",
+			"baseLevel": 2,
+			"baseStats": {
+				"HP": 34,
+				"Str": 14,
+				"Mag": 20,
+				"Skl": 14,
+				"Spd": 15,
+				"Lck": 15,
+				"Def": 16,
+				"Res": 20
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 25,
+				"Mag": 55,
+				"Skl": 35,
+				"Spd": 45,
+				"Lck": 45,
+				"Def": 30,
+				"Res": 45
+			},
+			"maxStats": {
+				"HP": -2,
+				"Str": 2,
+				"Mag": 0,
+				"Skl": -2,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 2
+			}
+		},
+		"Keaton": {
+			"name": "Keaton",
+			"gender": "M",
+			"baseClass": "Wolfskin",
+			"baseLevel": 15,
+			"baseStats": {
+				"HP": 35,
+				"Str": 19,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 13,
+				"Lck": 9,
+				"Def": 16,
+				"Res": 7
+			},
+			"growths": {
+				"HP": 60,
+				"Str": 60,
+				"Mag": 0,
+				"Skl": 20,
+				"Spd": 35,
+				"Lck": 30,
+				"Def": 50,
+				"Res": 25
+			},
+			"maxStats": {
+				"HP": 3,
+				"Str": 0,
+				"Mag": -2,
+				"Skl": -1,
+				"Spd": 0,
+				"Lck": 2,
+				"Def": -1
+			}
+		},
+		"Xander": {
+			"name": "Xander",
+			"gender": "M",
+			"baseClass": "Paladin",
+			"baseLevel": 4,
+			"baseStats": {
+				"HP": 38,
+				"Str": 23,
+				"Mag": 4,
+				"Skl": 18,
+				"Spd": 15,
+				"Lck": 20,
+				"Def": 23,
+				"Res": 11
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 50,
+				"Mag": 5,
+				"Skl": 40,
+				"Spd": 35,
+				"Lck": 60,
+				"Def": 40,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 2,
+				"Str": -1,
+				"Mag": -1,
+				"Skl": -1,
+				"Spd": 2,
+				"Lck": 1,
+				"Def": -2
+			}
+		},
+		"Flora": {
+			"name": "Flora",
+			"gender": "F",
+			"baseClass": "Maid/Butler",
+			"baseLevel": 5,
+			"baseStats": {
+				"HP": 29,
+				"Str": 18,
+				"Mag": 16,
+				"Skl": 25,
+				"Spd": 15,
+				"Lck": 11,
+				"Def": 14,
+				"Res": 23
+			},
+			"growths": {
+				"HP": 35,
+				"Str": 40,
+				"Mag": 20,
+				"Skl": 45,
+				"Spd": 30,
+				"Lck": 35,
+				"Def": 30,
+				"Res": 30
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": -1,
+				"Mag": 2,
+				"Skl": 0,
+				"Spd": -1,
+				"Lck": 1,
+				"Def": -1
+			}
+		},
+		"Fuga": {
+			"name": "Fuga",
+			"gender": "M",
+			"baseClass": "Master of Arms",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 41,
+				"Str": 29,
+				"Mag": 0,
+				"Skl": 27,
+				"Spd": 25,
+				"Lck": 18,
+				"Def": 29,
+				"Res": 15
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 5,
+				"Lck": 20,
+				"Def": 10,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 2,
+				"Str": -1,
+				"Mag": 1,
+				"Skl": 0,
+				"Spd": -1,
+				"Lck": 2,
+				"Def": -2
+			}
+		},
+		"KanaM": {
+			"name": "KanaM",
+			"gender": "M",
+			"hasParent": true,
+			"baseClass": "Nohr Prince(ss)",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 24,
+				"Str": 10,
+				"Mag": 9,
+				"Skl": 12,
+				"Spd": 13,
+				"Lck": 11,
+				"Def": 10,
+				"Res": 7
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 35,
+				"Mag": 30,
+				"Skl": 40,
+				"Spd": 45,
+				"Lck": 45,
+				"Def": 25,
+				"Res": 25
+			}
+		},
+		"KanaF": {
+			"name": "KanaF",
+			"gender": "F",
+			"hasParent": true,
+			"baseClass": "Nohr Prince(ss)",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 24,
+				"Str": 10,
+				"Mag": 9,
+				"Skl": 12,
+				"Spd": 13,
+				"Lck": 11,
+				"Def": 10,
+				"Res": 7
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 35,
+				"Mag": 30,
+				"Skl": 40,
+				"Spd": 45,
+				"Lck": 45,
+				"Def": 25,
+				"Res": 25
+			}
+		},
+		"Shigure": {
+			"name": "Shigure",
+			"gender": "M",
+			"hasParent": true,
+			"baseClass": "Sky Knight",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 25,
+				"Str": 9,
+				"Mag": 1,
+				"Skl": 12,
+				"Spd": 14,
+				"Lck": 9,
+				"Def": 10,
+				"Res": 13
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 1,
+				"Skl": 3,
+				"Spd": 0,
+				"Lck": -3,
+				"Def": 0
+			},
+			"growths": {
+				"HP": 35,
+				"Str": 45,
+				"Mag": 5,
+				"Skl": 45,
+				"Spd": 35,
+				"Lck": 25,
+				"Def": 35,
+				"Res": 25
+			}
+		},
+		"Dwyer": {
+			"name": "Dwyer",
+			"gender": "M",
+			"hasParent": true,
+			"baseClass": "Troubadour",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 23,
+				"Str": 7,
+				"Mag": 10,
+				"Skl": 9,
+				"Spd": 11,
+				"Lck": 8,
+				"Def": 7,
+				"Res": 11
+			},
+			"maxStats": {
+				"HP": 2,
+				"Str": -2,
+				"Mag": 2,
+				"Skl": 0,
+				"Spd": -1,
+				"Lck": 0,
+				"Def": -1
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 45,
+				"Mag": 30,
+				"Skl": 20,
+				"Spd": 30,
+				"Lck": 30,
+				"Def": 30,
+				"Res": 35
+			}
+		},
+		"Sophie": {
+			"name": "Sophie",
+			"gender": "F",
+			"hasParent": true,
+			"baseClass": "Cavalier",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 25,
+				"Str": 12,
+				"Mag": 2,
+				"Skl": 12,
+				"Spd": 11,
+				"Lck": 10,
+				"Def": 9,
+				"Res": 9
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 2,
+				"Skl": 0,
+				"Spd": -1,
+				"Lck": 0,
+				"Def": -1
+			},
+			"growths": {
+				"HP": 35,
+				"Str": 35,
+				"Mag": 10,
+				"Skl": 55,
+				"Spd": 50,
+				"Lck": 35,
+				"Def": 25,
+				"Res": 35
+			}
+		},
+		"Midori": {
+			"name": "Midori",
+			"gender": "F",
+			"hasParent": true,
+			"baseClass": "Apothecary",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 26,
+				"Str": 12,
+				"Mag": 2,
+				"Skl": 14,
+				"Spd": 8,
+				"Lck": 12,
+				"Def": 10,
+				"Res": 4
+			},
+			"maxStats": {
+				"HP": -2,
+				"Str": 0,
+				"Mag": 2,
+				"Skl": 3,
+				"Spd": -2,
+				"Lck": -1,
+				"Def": 1
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 35,
+				"Mag": 5,
+				"Skl": 55,
+				"Spd": 35,
+				"Lck": 50,
+				"Def": 30,
+				"Res": 20
+			}
+		},
+		"Shiro": {
+			"name": "Shiro",
+			"gender": "M",
+			"hasParent": true,
+			"baseClass": "Spear Fighter",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 25,
+				"Str": 13,
+				"Mag": 0,
+				"Skl": 11,
+				"Spd": 9,
+				"Lck": 8,
+				"Def": 13,
+				"Res": 7
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 2,
+				"Skl": 1,
+				"Spd": 1,
+				"Lck": -2,
+				"Def": -2
+			},
+			"growths": {
+				"HP": 50,
+				"Str": 50,
+				"Mag": 0,
+				"Skl": 40,
+				"Spd": 35,
+				"Lck": 35,
+				"Def": 45,
+				"Res": 30
+			}
+		},
+		"Kiragi": {
+			"name": "Kiragi",
+			"gender": "M",
+			"hasParent": true,
+			"baseClass": "Archer",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 24,
+				"Str": 11,
+				"Mag": 0,
+				"Skl": 12,
+				"Spd": 11,
+				"Lck": 10,
+				"Def": 8,
+				"Res": 2
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 3,
+				"Skl": -2,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": -2
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 40,
+				"Mag": 0,
+				"Skl": 45,
+				"Spd": 50,
+				"Lck": 45,
+				"Def": 40,
+				"Res": 15
+			}
+		},
+		"Asugi": {
+			"name": "Asugi",
+			"gender": "M",
+			"hasParent": true,
+			"baseClass": "Ninja",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 22,
+				"Str": 10,
+				"Mag": 4,
+				"Skl": 15,
+				"Spd": 14,
+				"Lck": 10,
+				"Def": 7,
+				"Res": 12
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 3,
+				"Skl": -2,
+				"Spd": 0,
+				"Lck": 1,
+				"Def": -2
+			},
+			"growths": {
+				"HP": 40,
+				"Str": 45,
+				"Mag": 50,
+				"Skl": 55,
+				"Spd": 45,
+				"Lck": 50,
+				"Def": 30,
+				"Res": 20
+			}
+		},
+		"Selkie": {
+			"name": "Selkie",
+			"gender": "F",
+			"hasParent": true,
+			"baseClass": "Kitsune",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 23,
+				"Str": 9,
+				"Mag": 4,
+				"Skl": 12,
+				"Spd": 15,
+				"Lck": 14,
+				"Def": 7,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": -3,
+				"Skl": 2,
+				"Spd": 1,
+				"Lck": -2,
+				"Def": 2
+			},
+			"growths": {
+				"HP": 35,
+				"Str": 30,
+				"Mag": 15,
+				"Skl": 35,
+				"Spd": 55,
+				"Lck": 60,
+				"Def": 30,
+				"Res": 50
+			}
+		},
+		"Hisame": {
+			"name": "Hisame",
+			"gender": "M",
+			"hasParent": true,
+			"baseClass": "Samurai",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 23,
+				"Str": 10,
+				"Mag": 1,
+				"Skl": 12,
+				"Spd": 13,
+				"Lck": 7,
+				"Def": 8,
+				"Res": 7
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": -1,
+				"Skl": -2,
+				"Spd": 0,
+				"Lck": 2,
+				"Def": 0
+			},
+			"growths": {
+				"HP": 50,
+				"Str": 40,
+				"Mag": 0,
+				"Skl": 40,
+				"Spd": 40,
+				"Lck": 25,
+				"Def": 30,
+				"Res": 20
+			}
+		},
+		"Mitama": {
+			"name": "Mitama",
+			"gender": "F",
+			"hasParent": true,
+			"baseClass": "Monk/Shrine Maiden",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 22,
+				"Str": 7,
+				"Mag": 9,
+				"Skl": 11,
+				"Spd": 13,
+				"Lck": 14,
+				"Def": 5,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 2,
+				"Str": -3,
+				"Mag": 0,
+				"Skl": 1,
+				"Spd": 0,
+				"Lck": 1,
+				"Def": 0
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 40,
+				"Mag": 35,
+				"Skl": 45,
+				"Spd": 50,
+				"Lck": 50,
+				"Def": 30,
+				"Res": 20
+			}
+		},
+		"Caeldori": {
+			"name": "Caeldori",
+			"gender": "F",
+			"hasParent": true,
+			"baseClass": "Sky Knight",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 24,
+				"Str": 11,
+				"Mag": 3,
+				"Skl": 10,
+				"Spd": 13,
+				"Lck": 13,
+				"Def": 7,
+				"Res": 12
+			},
+			"maxStats": {
+				"HP": -1,
+				"Str": 0,
+				"Mag": 2,
+				"Skl": -2,
+				"Spd": -1,
+				"Lck": 3,
+				"Def": -1
+			},
+			"growths": {
+				"HP": 55,
+				"Str": 35,
+				"Mag": 15,
+				"Skl": 40,
+				"Spd": 40,
+				"Lck": 45,
+				"Def": 35,
+				"Res": 20
+			}
+		},
+		"Rhajat": {
+			"name": "Rhajat",
+			"gender": "F",
+			"hasParent": true,
+			"baseClass": "Diviner",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 23,
+				"Str": 1,
+				"Mag": 14,
+				"Skl": 5,
+				"Spd": 13,
+				"Lck": 7,
+				"Def": 6,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 1,
+				"Mag": -1,
+				"Skl": 2,
+				"Spd": 1,
+				"Lck": -1,
+				"Def": -1
+			},
+			"growths": {
+				"HP": 40,
+				"Str": 15,
+				"Mag": 60,
+				"Skl": 10,
+				"Spd": 50,
+				"Lck": 30,
+				"Def": 25,
+				"Res": 35
+			}
+		},
+		"Siegbert": {
+			"name": "Siegbert",
+			"gender": "M",
+			"hasParent": true,
+			"baseClass": "Cavalier",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 24,
+				"Str": 11,
+				"Mag": 2,
+				"Skl": 12,
+				"Spd": 11,
+				"Lck": 10,
+				"Def": 11,
+				"Res": 6
+			},
+			"maxStats": {
+				"HP": 2,
+				"Str": -1,
+				"Mag": -1,
+				"Skl": -1,
+				"Spd": 2,
+				"Lck": 1,
+				"Def": -2
+			},
+			"growths": {
+				"HP": 40,
+				"Str": 45,
+				"Mag": 5,
+				"Skl": 45,
+				"Spd": 45,
+				"Lck": 45,
+				"Def": 35,
+				"Res": 20
+			}
+		},
+		"Forrest": {
+			"name": "Forrest",
+			"gender": "M",
+			"hasParent": true,
+			"baseClass": "Troubadour",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 23,
+				"Str": 5,
+				"Mag": 12,
+				"Skl": 8,
+				"Spd": 9,
+				"Lck": 9,
+				"Def": 7,
+				"Res": 17
+			},
+			"maxStats": {
+				"HP": -2,
+				"Str": 2,
+				"Mag": 0,
+				"Skl": -2,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 2
+			},
+			"growths": {
+				"HP": 55,
+				"Str": 15,
+				"Mag": 65,
+				"Skl": 20,
+				"Spd": 35,
+				"Lck": 25,
+				"Def": 25,
+				"Res": 55
+			}
+		},
+		"Ignatius": {
+			"name": "Ignatius",
+			"gender": "M",
+			"hasParent": true,
+			"baseClass": "Knight",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 27,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 11,
+				"Spd": 7,
+				"Lck": 10,
+				"Def": 14,
+				"Res": 8
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": -3,
+				"Spd": 0,
+				"Lck": 3,
+				"Def": 1
+			},
+			"growths": {
+				"HP": 40,
+				"Str": 50,
+				"Mag": 0,
+				"Skl": 40,
+				"Spd": 30,
+				"Lck": 55,
+				"Def": 45,
+				"Res": 35
+			}
+		},
+		"Velouria": {
+			"name": "Velouria",
+			"gender": "F",
+			"hasParent": true,
+			"baseClass": "Wolfskin",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 26,
+				"Str": 14,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 12,
+				"Lck": 11,
+				"Def": 13,
+				"Res": 8
+			},
+			"maxStats": {
+				"HP": 3,
+				"Str": 0,
+				"Mag": -2,
+				"Skl": -1,
+				"Spd": 0,
+				"Lck": 2,
+				"Def": -1
+			},
+			"growths": {
+				"HP": 50,
+				"Str": 50,
+				"Mag": 0,
+				"Skl": 40,
+				"Spd": 40,
+				"Lck": 35,
+				"Def": 45,
+				"Res": 30
+			}
+		},
+		"Percy": {
+			"name": "Percy",
+			"gender": "M",
+			"hasParent": true,
+			"baseClass": "Wyvern Rider",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 23,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 11,
+				"Spd": 10,
+				"Lck": 17,
+				"Def": 15,
+				"Res": 4
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 3,
+				"Skl": 0,
+				"Spd": -3,
+				"Lck": 1,
+				"Def": -1
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 30,
+				"Mag": 5,
+				"Skl": 45,
+				"Spd": 40,
+				"Lck": 75,
+				"Def": 55,
+				"Res": 15
+			}
+		},
+		"Ophelia": {
+			"name": "Ophelia",
+			"gender": "F",
+			"hasParent": true,
+			"baseClass": "Dark Mage",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 23,
+				"Str": 3,
+				"Mag": 12,
+				"Skl": 9,
+				"Spd": 10,
+				"Lck": 13,
+				"Def": 5,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 1,
+				"Mag": 1,
+				"Skl": -1,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": -1
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 15,
+				"Mag": 45,
+				"Skl": 40,
+				"Spd": 45,
+				"Lck": 65,
+				"Def": 20,
+				"Res": 30
+			}
+		},
+		"Soleil": {
+			"name": "Soleil",
+			"gender": "F",
+			"hasParent": true,
+			"baseClass": "Mercenary",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 23,
+				"Str": 12,
+				"Mag": 1,
+				"Skl": 10,
+				"Spd": 12,
+				"Lck": 9,
+				"Def": 10,
+				"Res": 8
+			},
+			"maxStats": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 2,
+				"Skl": -1,
+				"Spd": 1,
+				"Lck": -1,
+				"Def": -1
+			},
+			"growths": {
+				"HP": 25,
+				"Str": 60,
+				"Mag": 0,
+				"Skl": 35,
+				"Spd": 35,
+				"Lck": 45,
+				"Def": 35,
+				"Res": 40
+			}
+		},
+		"Nina": {
+			"name": "Nina",
+			"gender": "F",
+			"hasParent": true,
+			"baseClass": "Outlaw",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 21,
+				"Str": 11,
+				"Mag": 6,
+				"Skl": 9,
+				"Spd": 13,
+				"Lck": 12,
+				"Def": 5,
+				"Res": 14
+			},
+			"maxStats": {
+				"HP": -2,
+				"Str": 0,
+				"Mag": -1,
+				"Skl": 3,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 1
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 45,
+				"Mag": 30,
+				"Skl": 35,
+				"Spd": 40,
+				"Lck": 50,
+				"Def": 25,
+				"Res": 45
+			}
+		},
+		"Anna": {
+			"name": "Anna",
+			"gender": "F",
+			"baseClass": "Outlaw",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 23,
+				"Str": 9,
+				"Mag": 11,
+				"Skl": 10,
+				"Spd": 14,
+				"Lck": 15,
+				"Def": 6,
+				"Res": 15
+			},
+			"growths": {
+				"HP": 35,
+				"Str": 30,
+				"Mag": 55,
+				"Skl": 30,
+				"Spd": 40,
+				"Lck": 70,
+				"Def": 20,
+				"Res": 45
+			},
+			"maxStats": {
+				"HP": -1,
+				"Str": 1,
+				"Mag": 0,
+				"Skl": -1,
+				"Spd": 2,
+				"Lck": -2,
+				"Def": 2
+			}
+		},
+		"Marth": {
+			"name": "Marth",
+			"gender": "M",
+			"baseClass": "Lodestar",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 29,
+				"Str": 15,
+				"Mag": 2,
+				"Skl": 23,
+				"Spd": 22,
+				"Lck": 24,
+				"Def": 15,
+				"Res": 10
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 30,
+				"Mag": 5,
+				"Skl": 50,
+				"Spd": 55,
+				"Lck": 60,
+				"Def": 35,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": -1,
+				"Str": 0,
+				"Mag": 1,
+				"Skl": 1,
+				"Spd": 1,
+				"Lck": 0,
+				"Def": -1
+			}
+		},
+		"Ike": {
+			"name": "Ike",
+			"gender": "M",
+			"baseClass": "Vanguard",
+			"baseLevel": 15,
+			"baseStats": {
+				"HP": 32,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 14,
+				"Lck": 16,
+				"Def": 18,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 50,
+				"Str": 45,
+				"Mag": 0,
+				"Skl": 40,
+				"Spd": 35,
+				"Lck": 45,
+				"Def": 40,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 2,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": -1,
+				"Spd": 0,
+				"Lck": 1,
+				"Def": -1
+			}
+		},
+		"Lucina": {
+			"name": "Lucina",
+			"gender": "F",
+			"baseClass": "Great Lord",
+			"baseLevel": 10,
+			"baseStats": {
+				"HP": 28,
+				"Str": 17,
+				"Mag": 3,
+				"Skl": 19,
+				"Spd": 21,
+				"Lck": 20,
+				"Def": 14,
+				"Res": 13
+			},
+			"growths": {
+				"HP": 40,
+				"Str": 35,
+				"Mag": 5,
+				"Skl": 45,
+				"Spd": 50,
+				"Lck": 50,
+				"Def": 25,
+				"Res": 35
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 2,
+				"Spd": 0,
+				"Lck": -1,
+				"Def": 0
+			}
+		},
+		"Robin": {
+			"name": "Robin",
+			"gender": "M",
+			"baseClass": "Grandmaster",
+			"baseLevel": 15,
+			"baseStats": {
+				"HP": 25,
+				"Str": 14,
+				"Mag": 17,
+				"Skl": 20,
+				"Spd": 13,
+				"Lck": 10,
+				"Def": 13,
+				"Res": 17
+			},
+			"growths": {
+				"HP": 35,
+				"Str": 30,
+				"Mag": 40,
+				"Skl": 45,
+				"Spd": 30,
+				"Lck": 25,
+				"Def": 25,
+				"Res": 40
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 2,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": -1,
+				"Lck": -1,
+				"Def": 1
+			}
+		}
+	},
+	"classes": {
+		"Nohr Prince(ss)": {
+			"name": "Nohr Prince(ss)",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 17,
+				"Str": 7,
+				"Mag": 3,
+				"Skl": 4,
+				"Spd": 5,
+				"Lck": 2,
+				"Def": 5,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 15,
+				"Str": 15,
+				"Mag": 10,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 10,
+				"Def": 10,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 40,
+				"Str": 23,
+				"Mag": 17,
+				"Skl": 19,
+				"Spd": 21,
+				"Lck": 22,
+				"Def": 21,
+				"Res": 19
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Hoshido Noble": {
+			"name": "Hoshido Noble",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 19,
+				"Str": 10,
+				"Mag": 4,
+				"Skl": 5,
+				"Spd": 6,
+				"Lck": 4,
+				"Def": 7,
+				"Res": 3
+			},
+			"growths": {
+				"HP": 15,
+				"Str": 15,
+				"Mag": 10,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 10,
+				"Def": 15,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 60,
+				"Str": 34,
+				"Mag": 28,
+				"Skl": 29,
+				"Spd": 30,
+				"Lck": 33,
+				"Def": 31,
+				"Res": 28
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Samurai": {
+			"name": "Samurai",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 17,
+				"Str": 4,
+				"Mag": 0,
+				"Skl": 5,
+				"Spd": 8,
+				"Lck": 3,
+				"Def": 3,
+				"Res": 3
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 20,
+				"Lck": 15,
+				"Def": 0,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 40,
+				"Str": 20,
+				"Mag": 16,
+				"Skl": 23,
+				"Spd": 25,
+				"Lck": 24,
+				"Def": 18,
+				"Res": 20
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Swordmaster": {
+			"name": "Swordmaster",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 18,
+				"Str": 6,
+				"Mag": 2,
+				"Skl": 7,
+				"Spd": 11,
+				"Lck": 4,
+				"Def": 5,
+				"Res": 5
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 10,
+				"Mag": 5,
+				"Skl": 15,
+				"Spd": 20,
+				"Lck": 15,
+				"Def": 0,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 30,
+				"Mag": 28,
+				"Skl": 32,
+				"Spd": 35,
+				"Lck": 33,
+				"Def": 27,
+				"Res": 31
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Master of Arms": {
+			"name": "Master of Arms",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 20,
+				"Str": 8,
+				"Mag": 0,
+				"Skl": 6,
+				"Spd": 9,
+				"Lck": 3,
+				"Def": 7,
+				"Res": 3
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 10,
+				"Def": 10,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 65,
+				"Str": 33,
+				"Mag": 25,
+				"Skl": 30,
+				"Spd": 30,
+				"Lck": 31,
+				"Def": 31,
+				"Res": 28
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Oni Savage": {
+			"name": "Oni Savage",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 18,
+				"Str": 6,
+				"Mag": 1,
+				"Skl": 2,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": 7,
+				"Res": 1
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 20,
+				"Mag": 10,
+				"Skl": 0,
+				"Spd": 10,
+				"Lck": 0,
+				"Def": 20,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 45,
+				"Str": 24,
+				"Mag": 19,
+				"Skl": 16,
+				"Spd": 20,
+				"Lck": 17,
+				"Def": 23,
+				"Res": 18
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Oni Chieftain": {
+			"name": "Oni Chieftain",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 19,
+				"Str": 9,
+				"Mag": 5,
+				"Skl": 2,
+				"Spd": 7,
+				"Lck": 0,
+				"Def": 10,
+				"Res": 5
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 20,
+				"Mag": 15,
+				"Skl": 0,
+				"Spd": 10,
+				"Lck": 0,
+				"Def": 20,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 60,
+				"Str": 34,
+				"Mag": 28,
+				"Skl": 25,
+				"Spd": 30,
+				"Lck": 25,
+				"Def": 36,
+				"Res": 31
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Blacksmith": {
+			"name": "Blacksmith",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 21,
+				"Str": 8,
+				"Mag": 0,
+				"Skl": 9,
+				"Spd": 8,
+				"Lck": 3,
+				"Def": 8,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 10,
+				"Lck": 5,
+				"Def": 15,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 65,
+				"Str": 33,
+				"Mag": 25,
+				"Skl": 32,
+				"Spd": 31,
+				"Lck": 30,
+				"Def": 32,
+				"Res": 27
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Spear Fighter": {
+			"name": "Spear Fighter",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 17,
+				"Str": 6,
+				"Mag": 0,
+				"Skl": 6,
+				"Spd": 6,
+				"Lck": 2,
+				"Def": 5,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 15,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 15,
+				"Lck": 5,
+				"Def": 10,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 40,
+				"Str": 22,
+				"Mag": 15,
+				"Skl": 23,
+				"Spd": 22,
+				"Lck": 21,
+				"Def": 22,
+				"Res": 21
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Spear Master": {
+			"name": "Spear Master",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 18,
+				"Str": 9,
+				"Mag": 0,
+				"Skl": 8,
+				"Spd": 8,
+				"Lck": 3,
+				"Def": 7,
+				"Res": 3
+			},
+			"growths": {
+				"HP": 15,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 15,
+				"Lck": 5,
+				"Def": 10,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 60,
+				"Str": 34,
+				"Mag": 25,
+				"Skl": 33,
+				"Spd": 32,
+				"Lck": 29,
+				"Def": 30,
+				"Res": 29
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Basara": {
+			"name": "Basara",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 20,
+				"Str": 7,
+				"Mag": 5,
+				"Skl": 7,
+				"Spd": 7,
+				"Lck": 5,
+				"Def": 7,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 10,
+				"Mag": 10,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 15,
+				"Def": 5,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 65,
+				"Str": 31,
+				"Mag": 30,
+				"Skl": 30,
+				"Spd": 31,
+				"Lck": 35,
+				"Def": 30,
+				"Res": 32
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Diviner": {
+			"name": "Diviner",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 15,
+				"Str": 0,
+				"Mag": 4,
+				"Skl": 5,
+				"Spd": 6,
+				"Lck": 1,
+				"Def": 1,
+				"Res": 3
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 5,
+				"Mag": 15,
+				"Skl": 10,
+				"Spd": 15,
+				"Lck": 5,
+				"Def": 0,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 35,
+				"Str": 17,
+				"Mag": 22,
+				"Skl": 20,
+				"Spd": 23,
+				"Lck": 19,
+				"Def": 16,
+				"Res": 20
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Onmyoji": {
+			"name": "Onmyoji",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 16,
+				"Str": 0,
+				"Mag": 7,
+				"Skl": 6,
+				"Spd": 7,
+				"Lck": 2,
+				"Def": 3,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 20,
+				"Skl": 10,
+				"Spd": 15,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 45,
+				"Str": 25,
+				"Mag": 33,
+				"Skl": 31,
+				"Spd": 32,
+				"Lck": 27,
+				"Def": 25,
+				"Res": 31
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Monk/Shrine Maiden": {
+			"name": "Monk/Shrine Maiden",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 16,
+				"Str": 0,
+				"Mag": 3,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 4,
+				"Def": 2,
+				"Res": 5
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 5,
+				"Mag": 10,
+				"Skl": 10,
+				"Spd": 15,
+				"Lck": 15,
+				"Def": 0,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 35,
+				"Str": 18,
+				"Mag": 21,
+				"Skl": 20,
+				"Spd": 22,
+				"Lck": 23,
+				"Def": 17,
+				"Res": 24
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Great Master": {
+			"name": "Great Master",
+			"requiredGender": "M",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 19,
+				"Str": 8,
+				"Mag": 6,
+				"Skl": 6,
+				"Spd": 8,
+				"Lck": 5,
+				"Def": 6,
+				"Res": 7
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 15,
+				"Mag": 5,
+				"Skl": 5,
+				"Spd": 15,
+				"Lck": 15,
+				"Def": 10,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 32,
+				"Mag": 30,
+				"Skl": 31,
+				"Spd": 33,
+				"Lck": 32,
+				"Def": 28,
+				"Res": 32
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Priestess": {
+			"name": "Priestess",
+			"requiredGender": "F",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 19,
+				"Str": 6,
+				"Mag": 7,
+				"Skl": 6,
+				"Spd": 9,
+				"Lck": 5,
+				"Def": 5,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 10,
+				"Mag": 10,
+				"Skl": 5,
+				"Spd": 15,
+				"Lck": 15,
+				"Def": 0,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 50,
+				"Str": 29,
+				"Mag": 32,
+				"Skl": 30,
+				"Spd": 33,
+				"Lck": 34,
+				"Def": 26,
+				"Res": 34
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Sky Knight": {
+			"name": "Sky Knight",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 16,
+				"Str": 3,
+				"Mag": 0,
+				"Skl": 5,
+				"Spd": 7,
+				"Lck": 4,
+				"Def": 2,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 15,
+				"Lck": 20,
+				"Def": 0,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 35,
+				"Str": 19,
+				"Mag": 16,
+				"Skl": 21,
+				"Spd": 23,
+				"Lck": 25,
+				"Def": 18,
+				"Res": 25
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Falcon Knight": {
+			"name": "Falcon Knight",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 18,
+				"Str": 5,
+				"Mag": 4,
+				"Skl": 6,
+				"Spd": 10,
+				"Lck": 5,
+				"Def": 5,
+				"Res": 9
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 10,
+				"Mag": 10,
+				"Skl": 10,
+				"Spd": 15,
+				"Lck": 20,
+				"Def": 0,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 28,
+				"Mag": 27,
+				"Skl": 30,
+				"Spd": 34,
+				"Lck": 35,
+				"Def": 27,
+				"Res": 35
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Kinshi Knight": {
+			"name": "Kinshi Knight",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 17,
+				"Str": 4,
+				"Mag": 1,
+				"Skl": 9,
+				"Spd": 8,
+				"Lck": 5,
+				"Def": 4,
+				"Res": 7
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 5,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 15,
+				"Lck": 15,
+				"Def": 0,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 50,
+				"Str": 27,
+				"Mag": 26,
+				"Skl": 33,
+				"Spd": 31,
+				"Lck": 34,
+				"Def": 25,
+				"Res": 31
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Archer": {
+			"name": "Archer",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 17,
+				"Str": 5,
+				"Mag": 0,
+				"Skl": 7,
+				"Spd": 5,
+				"Lck": 2,
+				"Def": 4,
+				"Res": 1
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 15,
+				"Lck": 5,
+				"Def": 10,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 40,
+				"Str": 21,
+				"Mag": 15,
+				"Skl": 23,
+				"Spd": 21,
+				"Lck": 20,
+				"Def": 20,
+				"Res": 17
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Sniper": {
+			"name": "Sniper",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 19,
+				"Str": 7,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 9,
+				"Lck": 3,
+				"Def": 6,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 20,
+				"Spd": 15,
+				"Lck": 5,
+				"Def": 10,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 31,
+				"Mag": 25,
+				"Skl": 35,
+				"Spd": 33,
+				"Lck": 30,
+				"Def": 31,
+				"Res": 28
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Ninja": {
+			"name": "Ninja",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 16,
+				"Str": 3,
+				"Mag": 0,
+				"Skl": 8,
+				"Spd": 8,
+				"Lck": 1,
+				"Def": 3,
+				"Res": 3
+			},
+			"growths": {
+				"HP": 5,
+				"Str": 5,
+				"Mag": 0,
+				"Skl": 20,
+				"Spd": 20,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 35,
+				"Str": 17,
+				"Mag": 15,
+				"Skl": 25,
+				"Spd": 25,
+				"Lck": 18,
+				"Def": 19,
+				"Res": 20
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Master Ninja": {
+			"name": "Master Ninja",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 17,
+				"Str": 5,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 11,
+				"Lck": 2,
+				"Def": 4,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 5,
+				"Str": 5,
+				"Mag": 0,
+				"Skl": 20,
+				"Spd": 20,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 27,
+				"Mag": 25,
+				"Skl": 35,
+				"Spd": 35,
+				"Lck": 28,
+				"Def": 26,
+				"Res": 34
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Mechanist": {
+			"name": "Mechanist",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 18,
+				"Str": 7,
+				"Mag": 0,
+				"Skl": 9,
+				"Spd": 7,
+				"Lck": 2,
+				"Def": 6,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 10,
+				"Lck": 5,
+				"Def": 5,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 60,
+				"Str": 30,
+				"Mag": 25,
+				"Skl": 33,
+				"Spd": 30,
+				"Lck": 30,
+				"Def": 31,
+				"Res": 31
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Apothecary": {
+			"name": "Apothecary",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 18,
+				"Str": 6,
+				"Mag": 0,
+				"Skl": 4,
+				"Spd": 4,
+				"Lck": 2,
+				"Def": 6,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 5,
+				"Def": 10,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 45,
+				"Str": 24,
+				"Mag": 15,
+				"Skl": 19,
+				"Spd": 19,
+				"Lck": 21,
+				"Def": 23,
+				"Res": 20
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Merchant": {
+			"name": "Merchant",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 20,
+				"Str": 8,
+				"Mag": 0,
+				"Skl": 6,
+				"Spd": 5,
+				"Lck": 4,
+				"Def": 8,
+				"Res": 5
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 5,
+				"Lck": 15,
+				"Def": 10,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 65,
+				"Str": 33,
+				"Mag": 25,
+				"Skl": 29,
+				"Spd": 28,
+				"Lck": 32,
+				"Def": 33,
+				"Res": 30
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Kitsune": {
+			"name": "Kitsune",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 16,
+				"Str": 5,
+				"Mag": 1,
+				"Skl": 6,
+				"Spd": 8,
+				"Lck": 4,
+				"Def": 1,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 20,
+				"Lck": 10,
+				"Def": 0,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 40,
+				"Str": 20,
+				"Mag": 18,
+				"Skl": 23,
+				"Spd": 24,
+				"Lck": 24,
+				"Def": 18,
+				"Res": 23
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Nine-Tails": {
+			"name": "Nine-Tails",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 19,
+				"Str": 6,
+				"Mag": 2,
+				"Skl": 9,
+				"Spd": 10,
+				"Lck": 5,
+				"Def": 2,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 20,
+				"Lck": 10,
+				"Def": 0,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 29,
+				"Mag": 29,
+				"Skl": 33,
+				"Spd": 34,
+				"Lck": 33,
+				"Def": 27,
+				"Res": 34
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Songstress": {
+			"name": "Songstress",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 16,
+				"Str": 3,
+				"Mag": 0,
+				"Skl": 6,
+				"Spd": 5,
+				"Lck": 3,
+				"Def": 2,
+				"Res": 3
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 20,
+				"Spd": 20,
+				"Lck": 20,
+				"Def": 0,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 45,
+				"Str": 28,
+				"Mag": 27,
+				"Skl": 31,
+				"Spd": 31,
+				"Lck": 35,
+				"Def": 27,
+				"Res": 28
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Villager": {
+			"name": "Villager",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 17,
+				"Str": 5,
+				"Mag": 0,
+				"Skl": 4,
+				"Spd": 5,
+				"Lck": 3,
+				"Def": 4,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 20,
+				"Def": 10,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 35,
+				"Str": 19,
+				"Mag": 15,
+				"Skl": 19,
+				"Spd": 19,
+				"Lck": 22,
+				"Def": 18,
+				"Res": 15
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Nohr Noble": {
+			"name": "Nohr Noble",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 18,
+				"Str": 8,
+				"Mag": 6,
+				"Skl": 4,
+				"Spd": 7,
+				"Lck": 2,
+				"Def": 6,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 15,
+				"Str": 10,
+				"Mag": 15,
+				"Skl": 5,
+				"Spd": 15,
+				"Lck": 5,
+				"Def": 5,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 60,
+				"Str": 32,
+				"Mag": 31,
+				"Skl": 28,
+				"Spd": 32,
+				"Lck": 27,
+				"Def": 29,
+				"Res": 32
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Cavalier": {
+			"name": "Cavalier",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 17,
+				"Str": 6,
+				"Mag": 0,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 3,
+				"Def": 5,
+				"Res": 3
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 15,
+				"Def": 10,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 40,
+				"Str": 22,
+				"Mag": 15,
+				"Skl": 21,
+				"Spd": 20,
+				"Lck": 24,
+				"Def": 22,
+				"Res": 21
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Paladin": {
+			"name": "Paladin",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 19,
+				"Str": 8,
+				"Mag": 1,
+				"Skl": 7,
+				"Spd": 7,
+				"Lck": 4,
+				"Def": 7,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 15,
+				"Def": 10,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 60,
+				"Str": 31,
+				"Mag": 26,
+				"Skl": 30,
+				"Spd": 30,
+				"Lck": 32,
+				"Def": 32,
+				"Res": 32
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Great Knight": {
+			"name": "Great Knight",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 21,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 6,
+				"Spd": 6,
+				"Lck": 3,
+				"Def": 10,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 5,
+				"Lck": 5,
+				"Def": 20,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 65,
+				"Str": 35,
+				"Mag": 25,
+				"Skl": 29,
+				"Spd": 27,
+				"Lck": 28,
+				"Def": 37,
+				"Res": 28
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Knight": {
+			"name": "Knight",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 19,
+				"Str": 8,
+				"Mag": 0,
+				"Skl": 5,
+				"Spd": 3,
+				"Lck": 3,
+				"Def": 8,
+				"Res": 1
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 5,
+				"Lck": 10,
+				"Def": 20,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 45,
+				"Str": 24,
+				"Mag": 15,
+				"Skl": 22,
+				"Spd": 17,
+				"Lck": 22,
+				"Def": 26,
+				"Res": 18
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"General": {
+			"name": "General",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 22,
+				"Str": 11,
+				"Mag": 0,
+				"Skl": 7,
+				"Spd": 3,
+				"Lck": 4,
+				"Def": 12,
+				"Res": 3
+			},
+			"growths": {
+				"HP": 25,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 0,
+				"Lck": 10,
+				"Def": 20,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 70,
+				"Str": 38,
+				"Mag": 25,
+				"Skl": 32,
+				"Spd": 25,
+				"Lck": 32,
+				"Def": 40,
+				"Res": 30
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Fighter": {
+			"name": "Fighter",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 19,
+				"Str": 7,
+				"Mag": 0,
+				"Skl": 6,
+				"Spd": 6,
+				"Lck": 2,
+				"Def": 4,
+				"Res": 1
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 15,
+				"Lck": 5,
+				"Def": 5,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 45,
+				"Str": 25,
+				"Mag": 15,
+				"Skl": 23,
+				"Spd": 22,
+				"Lck": 21,
+				"Def": 19,
+				"Res": 18
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Berserker": {
+			"name": "Berserker",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 24,
+				"Str": 12,
+				"Mag": 0,
+				"Skl": 8,
+				"Spd": 9,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 25,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 15,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 70,
+				"Str": 40,
+				"Mag": 25,
+				"Skl": 32,
+				"Spd": 33,
+				"Lck": 25,
+				"Def": 27,
+				"Res": 25
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Mercenary": {
+			"name": "Mercenary",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 17,
+				"Str": 5,
+				"Mag": 0,
+				"Skl": 7,
+				"Spd": 6,
+				"Lck": 2,
+				"Def": 5,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 20,
+				"Spd": 15,
+				"Lck": 5,
+				"Def": 10,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 40,
+				"Str": 22,
+				"Mag": 15,
+				"Skl": 24,
+				"Spd": 22,
+				"Lck": 20,
+				"Def": 21,
+				"Res": 19
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Hero": {
+			"name": "Hero",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 20,
+				"Str": 8,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 8,
+				"Lck": 3,
+				"Def": 7,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 20,
+				"Spd": 15,
+				"Lck": 5,
+				"Def": 10,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 60,
+				"Str": 32,
+				"Mag": 25,
+				"Skl": 35,
+				"Spd": 32,
+				"Lck": 31,
+				"Def": 30,
+				"Res": 27
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Bow Knight": {
+			"name": "Bow Knight",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 18,
+				"Str": 6,
+				"Mag": 0,
+				"Skl": 8,
+				"Spd": 9,
+				"Lck": 3,
+				"Def": 5,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 15,
+				"Lck": 10,
+				"Def": 0,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 29,
+				"Mag": 25,
+				"Skl": 32,
+				"Spd": 33,
+				"Lck": 30,
+				"Def": 27,
+				"Res": 32
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Outlaw": {
+			"name": "Outlaw",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 16,
+				"Str": 3,
+				"Mag": 1,
+				"Skl": 4,
+				"Spd": 8,
+				"Lck": 1,
+				"Def": 2,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 10,
+				"Mag": 5,
+				"Skl": 10,
+				"Spd": 20,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 35,
+				"Str": 19,
+				"Mag": 18,
+				"Skl": 20,
+				"Spd": 24,
+				"Lck": 18,
+				"Def": 17,
+				"Res": 22
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Adventurer": {
+			"name": "Adventurer",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 17,
+				"Str": 4,
+				"Mag": 6,
+				"Skl": 6,
+				"Spd": 10,
+				"Lck": 2,
+				"Def": 3,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 5,
+				"Mag": 15,
+				"Skl": 5,
+				"Spd": 20,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 50,
+				"Str": 27,
+				"Mag": 31,
+				"Skl": 27,
+				"Spd": 34,
+				"Lck": 27,
+				"Def": 25,
+				"Res": 34
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Wyvern Rider": {
+			"name": "Wyvern Rider",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 17,
+				"Str": 6,
+				"Mag": 0,
+				"Skl": 5,
+				"Spd": 4,
+				"Lck": 2,
+				"Def": 7,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 15,
+				"Mag": 5,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 5,
+				"Def": 20,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 40,
+				"Str": 22,
+				"Mag": 17,
+				"Skl": 21,
+				"Spd": 20,
+				"Lck": 19,
+				"Def": 24,
+				"Res": 15
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Wyvern Lord": {
+			"name": "Wyvern Lord",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 19,
+				"Str": 8,
+				"Mag": 0,
+				"Skl": 9,
+				"Spd": 6,
+				"Lck": 3,
+				"Def": 10,
+				"Res": 1
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 10,
+				"Lck": 5,
+				"Def": 20,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 60,
+				"Str": 33,
+				"Mag": 25,
+				"Skl": 33,
+				"Spd": 29,
+				"Lck": 28,
+				"Def": 35,
+				"Res": 26
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Malig Knight": {
+			"name": "Malig Knight",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 18,
+				"Str": 7,
+				"Mag": 6,
+				"Skl": 6,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": 8,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 15,
+				"Mag": 15,
+				"Skl": 10,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": 10,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 31,
+				"Mag": 30,
+				"Skl": 28,
+				"Spd": 27,
+				"Lck": 25,
+				"Def": 31,
+				"Res": 31
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Dark Mage": {
+			"name": "Dark Mage",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 16,
+				"Str": 0,
+				"Mag": 6,
+				"Skl": 3,
+				"Spd": 3,
+				"Lck": 1,
+				"Def": 3,
+				"Res": 5
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 10,
+				"Mag": 20,
+				"Skl": 0,
+				"Spd": 10,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 35,
+				"Str": 19,
+				"Mag": 24,
+				"Skl": 16,
+				"Spd": 19,
+				"Lck": 18,
+				"Def": 19,
+				"Res": 22
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Sorcerer": {
+			"name": "Sorcerer",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 17,
+				"Str": 0,
+				"Mag": 9,
+				"Skl": 4,
+				"Spd": 6,
+				"Lck": 1,
+				"Def": 5,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 25,
+				"Skl": 0,
+				"Spd": 10,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 50,
+				"Str": 25,
+				"Mag": 35,
+				"Skl": 26,
+				"Spd": 29,
+				"Lck": 26,
+				"Def": 29,
+				"Res": 33
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Dark Knight": {
+			"name": "Dark Knight",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 19,
+				"Str": 8,
+				"Mag": 6,
+				"Skl": 6,
+				"Spd": 5,
+				"Lck": 3,
+				"Def": 8,
+				"Res": 6
+			},
+			"growths": {
+				"HP": 15,
+				"Str": 20,
+				"Mag": 10,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 5,
+				"Def": 15,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 32,
+				"Mag": 31,
+				"Skl": 28,
+				"Spd": 27,
+				"Lck": 31,
+				"Def": 34,
+				"Res": 30
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Troubadour": {
+			"name": "Troubadour",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 15,
+				"Str": 0,
+				"Mag": 3,
+				"Skl": 7,
+				"Spd": 5,
+				"Lck": 4,
+				"Def": 1,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 10,
+				"Skl": 20,
+				"Spd": 10,
+				"Lck": 15,
+				"Def": 0,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 35,
+				"Str": 16,
+				"Mag": 19,
+				"Skl": 24,
+				"Spd": 20,
+				"Lck": 23,
+				"Def": 16,
+				"Res": 21
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Strategist": {
+			"name": "Strategist",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 16,
+				"Str": 0,
+				"Mag": 7,
+				"Skl": 6,
+				"Spd": 7,
+				"Lck": 5,
+				"Def": 2,
+				"Res": 7
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 15,
+				"Skl": 5,
+				"Spd": 10,
+				"Lck": 20,
+				"Def": 0,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 45,
+				"Str": 25,
+				"Mag": 33,
+				"Skl": 28,
+				"Spd": 31,
+				"Lck": 33,
+				"Def": 25,
+				"Res": 32
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Maid/Butler": {
+			"name": "Maid/Butler",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 18,
+				"Str": 4,
+				"Mag": 5,
+				"Skl": 9,
+				"Spd": 8,
+				"Lck": 4,
+				"Def": 5,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 10,
+				"Mag": 10,
+				"Skl": 15,
+				"Spd": 15,
+				"Lck": 10,
+				"Def": 5,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 50,
+				"Str": 28,
+				"Mag": 31,
+				"Skl": 33,
+				"Spd": 33,
+				"Lck": 32,
+				"Def": 29,
+				"Res": 29
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Wolfskin": {
+			"name": "Wolfskin",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 19,
+				"Str": 8,
+				"Mag": 0,
+				"Skl": 4,
+				"Spd": 6,
+				"Lck": 0,
+				"Def": 4,
+				"Res": 0
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 5,
+				"Spd": 15,
+				"Lck": 5,
+				"Def": 10,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 45,
+				"Str": 24,
+				"Mag": 15,
+				"Skl": 18,
+				"Spd": 22,
+				"Lck": 17,
+				"Def": 21,
+				"Res": 15
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Wolfssegner": {
+			"name": "Wolfssegner",
+			"requiredGender": "",
+			"levelMod": 20,
+			"statMods": {
+				"HP": 22,
+				"Str": 11,
+				"Mag": 0,
+				"Skl": 6,
+				"Spd": 7,
+				"Lck": 1,
+				"Def": 7,
+				"Res": 1
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 5,
+				"Spd": 15,
+				"Lck": 5,
+				"Def": 10,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 65,
+				"Str": 36,
+				"Mag": 25,
+				"Skl": 29,
+				"Spd": 31,
+				"Lck": 26,
+				"Def": 32,
+				"Res": 26
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Dread Fighter": {
+			"name": "Dread Fighter",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 19,
+				"Str": 8,
+				"Mag": 3,
+				"Skl": 6,
+				"Spd": 8,
+				"Lck": 1,
+				"Def": 6,
+				"Res": 9
+			},
+			"growths": {
+				"HP": 15,
+				"Str": 15,
+				"Mag": 5,
+				"Skl": 5,
+				"Spd": 15,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 32,
+				"Mag": 28,
+				"Skl": 29,
+				"Spd": 31,
+				"Lck": 26,
+				"Def": 29,
+				"Res": 34
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Dark Falcon": {
+			"name": "Dark Falcon",
+			"requiredGender": "",
+			"statMods": {
+				"HP": 17,
+				"Str": 4,
+				"Mag": 7,
+				"Skl": 5,
+				"Spd": 9,
+				"Lck": 4,
+				"Def": 3,
+				"Res": 9
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 10,
+				"Mag": 15,
+				"Skl": 5,
+				"Spd": 15,
+				"Lck": 15,
+				"Def": 0,
+				"Res": 20
+			},
+			"maxStats": {
+				"HP": 45,
+				"Str": 27,
+				"Mag": 32,
+				"Skl": 28,
+				"Spd": 33,
+				"Lck": 32,
+				"Def": 26,
+				"Res": 34
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Ballistician": {
+			"name": "Ballistician",
+			"requiredGender": "M",
+			"statMods": {
+				"HP": 18,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 7,
+				"Spd": 2,
+				"Lck": 4,
+				"Def": 3,
+				"Res": 1
+			},
+			"growths": {
+				"HP": 5,
+				"Str": 25,
+				"Mag": 0,
+				"Skl": 15,
+				"Spd": 0,
+				"Lck": 10,
+				"Def": 5,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 50,
+				"Str": 39,
+				"Mag": 25,
+				"Skl": 31,
+				"Spd": 25,
+				"Lck": 32,
+				"Def": 27,
+				"Res": 26
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Witch": {
+			"name": "Witch",
+			"requiredGender": "F",
+			"statMods": {
+				"HP": 17,
+				"Str": 0,
+				"Mag": 10,
+				"Skl": 5,
+				"Spd": 9,
+				"Lck": 3,
+				"Def": 4,
+				"Res": 5
+			},
+			"growths": {
+				"HP": 5,
+				"Str": 0,
+				"Mag": 25,
+				"Skl": 5,
+				"Spd": 20,
+				"Lck": 5,
+				"Def": 0,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 50,
+				"Str": 25,
+				"Mag": 36,
+				"Skl": 27,
+				"Spd": 34,
+				"Lck": 28,
+				"Def": 26,
+				"Res": 29
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Lodestar": {
+			"name": "Lodestar",
+			"requiredGender": "M",
+			"statMods": {
+				"HP": 19,
+				"Str": 7,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 9,
+				"Lck": 7,
+				"Def": 7,
+				"Res": 2
+			},
+			"growths": {
+				"HP": 15,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 20,
+				"Spd": 10,
+				"Lck": 25,
+				"Def": 5,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 60,
+				"Str": 29,
+				"Mag": 26,
+				"Skl": 35,
+				"Spd": 33,
+				"Lck": 40,
+				"Def": 30,
+				"Res": 29
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Vanguard": {
+			"name": "Vanguard",
+			"requiredGender": "M",
+			"statMods": {
+				"HP": 21,
+				"Str": 10,
+				"Mag": 0,
+				"Skl": 6,
+				"Spd": 7,
+				"Lck": 3,
+				"Def": 9,
+				"Res": 1
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 20,
+				"Mag": 0,
+				"Skl": 5,
+				"Spd": 5,
+				"Lck": 10,
+				"Def": 15,
+				"Res": 0
+			},
+			"maxStats": {
+				"HP": 65,
+				"Str": 36,
+				"Mag": 25,
+				"Skl": 29,
+				"Spd": 30,
+				"Lck": 30,
+				"Def": 32,
+				"Res": 27
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Great Lord": {
+			"name": "Great Lord",
+			"requiredGender": "F",
+			"statMods": {
+				"HP": 18,
+				"Str": 8,
+				"Mag": 1,
+				"Skl": 8,
+				"Spd": 9,
+				"Lck": 5,
+				"Def": 7,
+				"Res": 3
+			},
+			"growths": {
+				"HP": 15,
+				"Str": 15,
+				"Mag": 0,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 15,
+				"Def": 10,
+				"Res": 5
+			},
+			"maxStats": {
+				"HP": 60,
+				"Str": 30,
+				"Mag": 25,
+				"Skl": 32,
+				"Spd": 34,
+				"Lck": 35,
+				"Def": 29,
+				"Res": 31
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Grandmaster": {
+			"name": "Grandmaster",
+			"requiredGender": "M",
+			"statMods": {
+				"HP": 18,
+				"Str": 7,
+				"Mag": 6,
+				"Skl": 8,
+				"Spd": 7,
+				"Lck": 2,
+				"Def": 6,
+				"Res": 8
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 15,
+				"Mag": 15,
+				"Skl": 15,
+				"Spd": 5,
+				"Lck": 0,
+				"Def": 5,
+				"Res": 15
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 31,
+				"Mag": 33,
+				"Skl": 33,
+				"Spd": 29,
+				"Lck": 26,
+				"Def": 28,
+				"Res": 33
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		}
+	},
+	"boonBane": {
+		"HP": {
+			"name": "HP",
+			"boon": {
+				"baseStats": {
+					"HP": 3,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 15,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 5,
+					"Res": 5
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 1,
+					"Mag": 1,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 2,
+					"Def": 2,
+					"Res": 2
+				}
+			},
+			"bane": {
+				"baseStats": {
+					"HP": -2,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": -10,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": -5,
+					"Res": -5
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": -1,
+					"Mag": -1,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": -1,
+					"Def": -1,
+					"Res": -1
+				}
+			}
+		},
+		"Str": {
+			"name": "Str",
+			"boon": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 2,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": 15,
+					"Mag": 0,
+					"Skl": 5,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 5,
+					"Res": 0
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 4,
+					"Mag": 0,
+					"Skl": 2,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 2,
+					"Res": 0
+				}
+			},
+			"bane": {
+				"baseStats": {
+					"HP": 0,
+					"Str": -1,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": -10,
+					"Mag": 0,
+					"Skl": -5,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": -5,
+					"Res": 0
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": -3,
+					"Mag": 0,
+					"Skl": -1,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": -1,
+					"Res": 0
+				}
+			}
+		},
+		"Mag": {
+			"name": "Mag",
+			"boon": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 3,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 20,
+					"Skl": 0,
+					"Spd": 5,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 5
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 4,
+					"Skl": 0,
+					"Spd": 2,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 2
+				}
+			},
+			"bane": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": -2,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": -15,
+					"Skl": 0,
+					"Spd": -5,
+					"Lck": 0,
+					"Def": 0,
+					"Res": -5
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": -3,
+					"Skl": 0,
+					"Spd": -1,
+					"Lck": 0,
+					"Def": 0,
+					"Res": -1
+				}
+			}
+		},
+		"Skl": {
+			"name": "Skl",
+			"boon": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 3,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": 5,
+					"Mag": 0,
+					"Skl": 25,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 5,
+					"Res": 0
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 2,
+					"Mag": 0,
+					"Skl": 4,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 2,
+					"Res": 0
+				}
+			},
+			"bane": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": -2,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": -5,
+					"Mag": 0,
+					"Skl": -20,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": -5,
+					"Res": 0
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": -1,
+					"Mag": 0,
+					"Skl": -3,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": -1,
+					"Res": 0
+				}
+			}
+		},
+		"Spd": {
+			"name": "Spd",
+			"boon": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 2,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 5,
+					"Spd": 15,
+					"Lck": 5,
+					"Def": 0,
+					"Res": 0
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 2,
+					"Spd": 4,
+					"Lck": 2,
+					"Def": 0,
+					"Res": 0
+				}
+			},
+			"bane": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": -1,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": -5,
+					"Spd": -10,
+					"Lck": -5,
+					"Def": 0,
+					"Res": 0
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": -1,
+					"Spd": -3,
+					"Lck": -1,
+					"Def": 0,
+					"Res": 0
+				}
+			}
+		},
+		"Lck": {
+			"name": "Lck",
+			"boon": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 3,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": 5,
+					"Mag": 5,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 25,
+					"Def": 0,
+					"Res": 0
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 2,
+					"Mag": 2,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 4,
+					"Def": 0,
+					"Res": 0
+				}
+			},
+			"bane": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": -2,
+					"Def": 0,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": -5,
+					"Mag": -5,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": -20,
+					"Def": 0,
+					"Res": 0
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": -1,
+					"Mag": -1,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": -3,
+					"Def": 0,
+					"Res": 0
+				}
+			}
+		},
+		"Def": {
+			"name": "Def",
+			"boon": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 1,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 5,
+					"Def": 10,
+					"Res": 5
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 2,
+					"Def": 4,
+					"Res": 2
+				}
+			},
+			"bane": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": -1,
+					"Res": 0
+				},
+				"growths": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": -5,
+					"Def": -10,
+					"Res": -5
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": -1,
+					"Def": -3,
+					"Res": -1
+				}
+			}
+		},
+		"Res": {
+			"name": "Res",
+			"boon": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 1
+				},
+				"growths": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 5,
+					"Skl": 0,
+					"Spd": 5,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 10
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 2,
+					"Skl": 0,
+					"Spd": 2,
+					"Lck": 0,
+					"Def": 0,
+					"Res": 4
+				}
+			},
+			"bane": {
+				"baseStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": 0,
+					"Skl": 0,
+					"Spd": 0,
+					"Lck": 0,
+					"Def": 0,
+					"Res": -1
+				},
+				"growths": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": -5,
+					"Skl": 0,
+					"Spd": -5,
+					"Lck": 0,
+					"Def": 0,
+					"Res": -10
+				},
+				"maxStats": {
+					"HP": 0,
+					"Str": 0,
+					"Mag": -1,
+					"Skl": 0,
+					"Spd": -1,
+					"Lck": 0,
+					"Def": 0,
+					"Res": -3
+				}
+			}
+		}
+	}
+}

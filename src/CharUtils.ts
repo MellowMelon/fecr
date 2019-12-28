@@ -51,13 +51,21 @@ export function getTeamCharList(
 
 export function createChar(game: GameData, name: CharName): Char {
 	const gameCharData = game.chars[name];
-	return {
+	const ret: Char = {
 		name,
 		history: [],
 		baseClass: gameCharData.baseClass,
 		baseLevel: gameCharData.baseLevel,
 		baseStats: gameCharData.baseStats,
 	};
+	if (gameCharData.hasBoonBane) {
+		ret.boon = game.stats[0];
+		ret.bane = game.stats[1];
+	}
+	if (gameCharData.hasParent) {
+		ret.parent = Object.keys(game.chars)[0];
+	}
+	return ret;
 }
 
 export function createHistoryEntry(

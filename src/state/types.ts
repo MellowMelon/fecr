@@ -1,9 +1,10 @@
 import {
+	Stat,
+	StatsTable,
 	CharName,
 	CharClass,
 	EquipName,
 	HistoryEntry,
-	StatsTable,
 	Team,
 	GameID,
 	GameData,
@@ -76,6 +77,18 @@ export type ViewActionUpdateCharBaseStats = {
 	type: "updateCharBaseStats";
 	stats: StatsTable;
 };
+export type ViewActionUpdateCharBaseBoon = {
+	type: "updateCharBaseBoon";
+	value: Stat;
+};
+export type ViewActionUpdateCharBaseBane = {
+	type: "updateCharBaseBane";
+	value: Stat;
+};
+export type ViewActionUpdateCharBaseParent = {
+	type: "updateCharBaseParent";
+	name: CharName;
+};
 export type ViewActionUpdateCharHistoryAdd = {
 	type: "updateCharHistoryAdd";
 	entryType: HistoryEntry["type"];
@@ -125,6 +138,9 @@ export type ViewAction =
 	| ViewActionUpdateCharBaseClass
 	| ViewActionUpdateCharBaseLevel
 	| ViewActionUpdateCharBaseStats
+	| ViewActionUpdateCharBaseBoon
+	| ViewActionUpdateCharBaseBane
+	| ViewActionUpdateCharBaseParent
 	| ViewActionUpdateCharHistoryAdd
 	| ViewActionUpdateCharHistoryMove
 	| ViewActionUpdateCharHistoryDelete

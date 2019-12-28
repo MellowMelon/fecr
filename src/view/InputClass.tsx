@@ -1,7 +1,7 @@
 import React from "react";
 import {CharClass, GameData} from "../types";
 
-import {Select} from "grommet";
+import InputSelect from "./InputSelect";
 
 type Props = {
 	game: GameData;
@@ -12,11 +12,11 @@ type Props = {
 const InputClass: React.FunctionComponent<Props> = function(props: Props) {
 	const {game, value, onSelect} = props;
 	return (
-		<Select
+		<InputSelect
 			name="charclass"
 			options={Object.keys(game.classes)}
 			value={value}
-			onChange={evt => onSelect(evt.option)}
+			onSelect={onSelect}
 		/>
 	);
 };

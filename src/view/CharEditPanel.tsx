@@ -20,9 +20,9 @@ type Props = {
 const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 	const char = props.char;
 	if (!char) return null;
-	const {game, dispatch} = props;
+	const {game, team, dispatch} = props;
 
-	const plan = getCharPlan(game, char);
+	const plan = getCharPlan(game, team, char);
 	const histErrorTable: {[histIndex: number]: string} = {};
 	plan.errors.forEach(e => {
 		histErrorTable[e.histIndex] = e.error;
@@ -42,6 +42,7 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 			/>
 			<CharEditBases
 				game={game}
+				name={char.name}
 				baseLevel={char.baseLevel}
 				baseClass={char.baseClass}
 				baseStats={char.baseStats}

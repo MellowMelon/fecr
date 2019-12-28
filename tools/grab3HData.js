@@ -527,7 +527,6 @@ async function main() {
 			Barbarossa: {name: "Barbarossa", requiredGender: ""},
 			"Death Knight": {name: "Death Knight", requiredGender: ""},
 		},
-		equipment: {},
 	};
 
 	await processAll(finalJSON);

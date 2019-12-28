@@ -94,7 +94,7 @@ function fixEquip(
 			errors: [`${where}: Not a string (typeof: ${typeof e})`],
 		};
 	}
-	if (!game.equipment[e]) {
+	if (!game.equipment || !game.equipment[e]) {
 		return {
 			value: null,
 			errors: [`${where}: Equipment ${e} not in game ${game.id}`],
