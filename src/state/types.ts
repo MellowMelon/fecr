@@ -4,6 +4,7 @@ import {
 	CharName,
 	CharClass,
 	EquipName,
+	AbilityName,
 	HistoryEntry,
 	Team,
 	GameID,
@@ -123,6 +124,12 @@ export type ViewActionUpdateCharHistoryEquip = {
 	histIndex: number;
 	newEquip: EquipName | null;
 };
+export type ViewActionUpdateCharHistoryAbility = {
+	type: "updateCharHistoryAbility";
+	histIndex: number;
+	ability?: AbilityName;
+	active?: boolean;
+};
 
 export type ViewAction =
 	| ViewActionLoad
@@ -148,4 +155,5 @@ export type ViewAction =
 	| ViewActionUpdateCharHistoryClass
 	| ViewActionUpdateCharHistoryLevel
 	| ViewActionUpdateCharHistoryStats
-	| ViewActionUpdateCharHistoryEquip;
+	| ViewActionUpdateCharHistoryEquip
+	| ViewActionUpdateCharHistoryAbility;

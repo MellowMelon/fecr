@@ -1,18 +1,20 @@
 import _ from "lodash";
 
 import * as ProbDist from "./ProbDist";
-import {assertNever, sumObjects} from "./Utils";
+import {assertNever, filterNonempty, sumObjects} from "./Utils";
 import {
 	Stat,
 	StatsTable,
 	CharClass,
 	CharName,
 	EquipName,
+	AbilityName,
 	HistoryEntryCheckpoint,
 	HistoryEntryClass,
 	HistoryEntryBoost,
 	HistoryEntryMaxBoost,
 	HistoryEntryEquipChange,
+	HistoryEntryAbilityChange,
 	HistoryEntry,
 	StatsDist,
 	Char,
@@ -36,6 +38,7 @@ export type CharCheckpoint = {
 	boosts: StatsTable;
 	growthList: GrowthHistory;
 	equip: EquipName | null;
+	abilities: AbilityName[];
 };
 
 type AdvanceEntry = HistoryEntry | {type: "level"; count: number};
@@ -142,6 +145,7 @@ function getBaseGameChar(game: GameData, name: CharName): CharCheckpoint {
 		boosts: _.mapValues(stats, () => 0),
 		growthList: _.mapValues(stats, () => []),
 		equip: null,
+		abilities: gameCharData.initialAbilities || [],
 	};
 }
 
@@ -288,6 +292,42 @@ function getChanceOf1HP(
 	return p;
 }
 
+export function getRealMax(game: GameData, curr: CharCheckpoint): StatsTable {
+	const gameClassData = game.classes[curr.charClass];
+	const charMax = curr.maxStats;
+	const abilityMaxList = curr.abilities.map(ability => {
+		const gameAbi = game.abilities && game.abilities[ability];
+		return gameAbi && gameAbi.maxStats;
+	});
+	const objs: StatsTable[] = filterNonempty([
+		charMax,
+		gameClassData.maxStats,
+		...abilityMaxList,
+	]);
+	return sumObjects(...objs);
+}
+
+export function getRealGrowths(
+	game: GameData,
+	curr: CharCheckpoint
+): StatsTable {
+	const gameClassData = game.classes[curr.charClass];
+	const charGrowths = curr.growths;
+	const equipGrowths =
+		curr.equip && game.equipment ? game.equipment[curr.equip].growths : null;
+	const abilityGrowthsList = curr.abilities.map(ability => {
+		const gameAbi = game.abilities && game.abilities[ability];
+		return gameAbi && gameAbi.growths;
+	});
+	const objs: StatsTable[] = filterNonempty([
+		charGrowths,
+		gameClassData.growths,
+		equipGrowths,
+		...abilityGrowthsList,
+	]);
+	return sumObjects(...objs);
+}
+
 // Pass the HP distribution, the minimum HP of the class being promoted to, and
 // the chance returned from getChanceOf1HP. Adjusts the distribution to account
 // for a possible 1HP bonus when promoting. Also accounts for the usual
@@ -363,11 +403,11 @@ function simulateBoosts(
 	entry: HistoryEntryBoost
 ): AdvanceChar {
 	const {stats} = entry;
+	const realMax = getRealMax(game, char.curr);
 	// The whole point of distNB is to not use modifyBothDists here.
 	const newDist = _.mapValues(char.curr.dist, (pd, statName) => {
 		if (!stats[statName]) return pd;
-		const max = char.curr.maxStats[statName];
-		pd = ProbDist.applyIncrease(pd, stats[statName], max);
+		pd = ProbDist.applyIncrease(pd, stats[statName], realMax[statName]);
 		return pd;
 	});
 	const newBoosts = _.mapValues(char.curr.boosts, (old, statName) => {
@@ -400,25 +440,32 @@ function simulateEquipChange(
 	return modifyCurrent(char, {equip: equip});
 }
 
+function simulateAbilityChange(
+	game: GameData,
+	char: AdvanceChar,
+	entry: HistoryEntryAbilityChange
+) {
+	const {ability, active} = entry;
+	const newAbilities = char.curr.abilities.slice(0);
+	const index = newAbilities.indexOf(ability);
+	if (active && index === -1) {
+		newAbilities.push(ability);
+	} else if (!active && index >= 0) {
+		newAbilities.splice(index, 1);
+	}
+	return modifyCurrent(char, {abilities: newAbilities});
+}
+
 function simulateLevels(
 	game: GameData,
 	char: AdvanceChar,
 	count: number
 ): AdvanceChar {
-	const gameClassData = game.classes[char.curr.charClass];
-	const charGrowths = char.curr.growths;
-	const equipGrowths =
-		char.curr.equip && game.equipment
-			? game.equipment[char.curr.equip].growths
-			: {};
-	const realGrowths = sumObjects(
-		charGrowths,
-		gameClassData.growths,
-		equipGrowths
-	);
+	const realGrowths = getRealGrowths(game, char.curr);
+	const realMax = getRealMax(game, char.curr);
 	let newChar = char;
 	newChar = modifyBothDistsMV(newChar, (pd, statName) => {
-		const max = char.curr.maxStats[statName];
+		const max = realMax[statName];
 		const growth = realGrowths[statName];
 		for (let i = 0; i < count; i += 1) {
 			pd = ProbDist.applyGrowthRate(pd, growth / 100, max);
@@ -455,6 +502,8 @@ export function reduceChar(
 		return simulateMaxBoosts(game, char, entry);
 	} else if (entry.type === "equipchange") {
 		return simulateEquipChange(game, char, entry);
+	} else if (entry.type === "ability") {
+		return simulateAbilityChange(game, char, entry);
 	}
 	return assertNever(entry);
 }

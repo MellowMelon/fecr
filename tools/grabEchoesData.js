@@ -253,11 +253,8 @@ async function main() {
 			classChangeResetsLevel: true,
 			classChangeGetsAtLeast1HP: true,
 			enableCharMax: true,
-			enableEquipment: true,
-			enableMaxIncrease: false,
 			enableClassMins: true,
-			enableClassMods: false,
-			enableClassMax: false,
+			enableEquipment: true,
 			histAddLayout: [
 				["checkpoint", "class"],
 				["boost", "equipchange"],

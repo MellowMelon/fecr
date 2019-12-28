@@ -8,6 +8,7 @@ export type StatsTable = {[stat: string]: number};
 export type CharName = string;
 export type CharClass = string;
 export type EquipName = string;
+export type AbilityName = string;
 
 export type HistoryEntryClass = {
 	type: "class";
@@ -28,6 +29,13 @@ export type HistoryEntryMaxBoost = {
 	level: number;
 	stats: StatsTable;
 };
+export type HistoryEntryAbilityChange = {
+	type: "ability";
+	id: number;
+	level: number;
+	ability: AbilityName;
+	active: boolean;
+};
 export type HistoryEntryEquipChange = {
 	type: "equipchange";
 	id: number;
@@ -44,6 +52,7 @@ export type HistoryEntry =
 	| HistoryEntryClass
 	| HistoryEntryBoost
 	| HistoryEntryMaxBoost
+	| HistoryEntryAbilityChange
 	| HistoryEntryEquipChange
 	| HistoryEntryCheckpoint;
 export type History = HistoryEntry[];
@@ -83,6 +92,7 @@ export type CharData = {
 	maxStats: StatsTable;
 	hasBoonBane?: boolean;
 	hasParent?: boolean;
+	initialAbilities?: AbilityName[];
 	defaultAltName?: string;
 	basesAlts?: CharDataBasesAlt[];
 };
@@ -100,6 +110,12 @@ export type ClassData = {
 export type EquipmentData = {
 	name: EquipName;
 	growths: StatsTable;
+};
+
+export type AbilityData = {
+	name: AbilityName;
+	growths?: StatsTable;
+	maxStats?: StatsTable;
 };
 
 export type BoonBaneData = {
@@ -125,13 +141,14 @@ export type GameData = {
 	globals: {
 		maxLevel: number;
 		maxStat: number;
-		classChangeResetsLevel: boolean;
-		enableCharMax: boolean;
-		enableClassMins: boolean;
-		enableClassMods: boolean;
-		enableClassMax: boolean;
-		enableEquipment: boolean;
-		enableMaxIncrease: boolean;
+		classChangeResetsLevel?: boolean;
+		enableCharMax?: boolean;
+		enableClassMins?: boolean;
+		enableClassMods?: boolean;
+		enableClassMax?: boolean;
+		enableEquipment?: boolean;
+		enableAbilities?: boolean;
+		enableMaxIncrease?: boolean;
 		hideNewLevel?: boolean;
 		classChangeGetsAtLeast1HP?: boolean;
 		histAddLayout: HistoryEntry["type"][][];
@@ -140,5 +157,6 @@ export type GameData = {
 	chars: {[name: string]: CharData};
 	classes: {[charClass: string]: ClassData};
 	equipment?: {[name: string]: EquipmentData};
+	abilities?: {[name: string]: AbilityData};
 	boonBane?: {[stat: string]: BoonBaneData};
 };

@@ -1,16 +1,18 @@
 import React, {memo} from "react";
-import {Box, DropButton, Heading, Text} from "grommet";
+import {Box, CheckBox, DropButton, Heading, Text} from "grommet";
 import {Alert as AlertIcon} from "grommet-icons";
 
 import {
 	Stat,
 	CharClass,
 	EquipName,
+	AbilityName,
 	HistoryEntryCheckpoint,
 	HistoryEntryClass,
 	HistoryEntryBoost,
 	HistoryEntryMaxBoost,
 	HistoryEntryEquipChange,
+	HistoryEntryAbilityChange,
 	HistoryEntry,
 	GameData,
 } from "../types";
@@ -21,6 +23,7 @@ import HistoryBase from "./HistoryBase";
 import InputStats from "./InputStats";
 import InputClass from "./InputClass";
 import InputEquip from "./InputEquip";
+import InputAbility from "./InputAbility";
 import HelpButton from "./HelpButton";
 
 type Props = {
@@ -95,6 +98,14 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 		dispatch({type: "updateCharHistoryEquip", histIndex, newEquip: e});
 	};
 
+	const onSelectAbility = function(a: AbilityName) {
+		dispatch({type: "updateCharHistoryAbility", histIndex, ability: a});
+	};
+
+	const onSelectAbilityActive = function(active: boolean) {
+		dispatch({type: "updateCharHistoryAbility", histIndex, active});
+	};
+
 	const errorStr = error
 		? `This entry is invalid and will be ignored by the report. (${error})`
 		: undefined;
@@ -104,7 +115,7 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 			return (
 				<Box gap="small">
 					{renderHistoryHeader(
-						"Checkpoint",
+						"Actual Stats",
 						getHelp(game, "hist_checkpoint"),
 						errorStr
 					)}
@@ -177,6 +188,27 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 						errorStr
 					)}
 					<InputEquip game={game} value={h.equip} onSelect={onSelectEquip} />
+				</Box>
+			);
+		},
+		ability(h: HistoryEntryAbilityChange) {
+			return (
+				<Box gap="small">
+					{renderHistoryHeader(
+						"Ability Change",
+						getHelp(game, "hist_abilitychange"),
+						errorStr
+					)}
+					<InputAbility
+						game={game}
+						value={h.ability}
+						onSelect={onSelectAbility}
+					/>
+					<CheckBox
+						checked={h.active}
+						label="Active"
+						onChange={evt => onSelectAbilityActive(evt.target.checked)}
+					/>
 				</Box>
 			);
 		},

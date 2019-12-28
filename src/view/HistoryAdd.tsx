@@ -14,10 +14,11 @@ type Props = {
 };
 
 const labelTable = {
-	checkpoint: "Add Checkpoint",
+	checkpoint: "Add Actual Stats",
 	class: "Add Class Change",
 	boost: "Add Stat Boost",
 	maxboost: "Add Max Stat Increase",
+	ability: "Add Ability Change",
 	equipchange: "Add Equipment Change",
 };
 

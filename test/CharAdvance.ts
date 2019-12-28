@@ -66,6 +66,14 @@ const gameBase: GameData = {
 			statMins: {hp: 20, mp: 20},
 			statMods: {hp: 10, mp: 10},
 			growths: {hp: 30, mp: 20},
+			maxStats: {hp: 10, mp: 10},
+		},
+		strongNoMax: {
+			name: "strongNoMax",
+			requiredGender: "",
+			statMins: {hp: 20, mp: 20},
+			statMods: {hp: 10, mp: 10},
+			growths: {hp: 30, mp: 20},
 			maxStats: {hp: 0, mp: 0},
 		},
 	},
@@ -73,6 +81,16 @@ const gameBase: GameData = {
 		super: {
 			name: "super",
 			growths: {hp: 100, mp: 30},
+		},
+	},
+	abilities: {
+		aptitude: {
+			name: "aptitude",
+			growths: {hp: 50, mp: 50},
+		},
+		limitbreak: {
+			name: "limitbreak",
+			maxStats: {hp: 10, mp: 10},
 		},
 	},
 	boonBane: {
@@ -101,6 +119,17 @@ const gameBase: GameData = {
 				growths: {hp: 0, mp: -10},
 				maxStats: {hp: 0, mp: -11},
 			},
+		},
+	},
+};
+
+const gameInitAbi: GameData = {
+	...gameBase,
+	chars: {
+		...gameBase.chars,
+		Bob: {
+			...gameBase.chars.Bob,
+			initialAbilities: ["aptitude"],
 		},
 	},
 };
@@ -179,7 +208,7 @@ function checkFinal(
 	});
 }
 
-const defaultBase: CharCheckpoint = {
+const defaultBob: CharCheckpoint = {
 	name: "Bob",
 	charClass: "weak",
 	level: 2,
@@ -198,6 +227,7 @@ const defaultBase: CharCheckpoint = {
 	boosts: {hp: 0, mp: 0},
 	growthList: {hp: [], mp: []},
 	equip: null,
+	abilities: [],
 };
 
 test("computeChar, base default", t => {
@@ -210,29 +240,8 @@ test("computeChar, base default", t => {
 	};
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
-		base: defaultBase,
-		checkpoints: [
-			{
-				name: "Bob",
-				charClass: "weak",
-				level: 2,
-				stats: {hp: 30, mp: 10},
-				dist: {
-					hp: {30: 1},
-					mp: {10: 1},
-				},
-				distNB: {
-					hp: {30: 1},
-					mp: {10: 1},
-				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
-				min: {hp: 30, mp: 10},
-				boosts: {hp: 0, mp: 0},
-				growthList: {hp: [], mp: []},
-				equip: null,
-			},
-		],
+		base: defaultBob,
+		checkpoints: [defaultBob],
 		errors: [],
 	});
 });
@@ -248,8 +257,7 @@ test("computeChar, base custom", t => {
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
+			...defaultBob,
 			level: 4,
 			stats: {hp: 35, mp: 15},
 			dist: {
@@ -260,12 +268,7 @@ test("computeChar, base custom", t => {
 				hp: {35: 1},
 				mp: {15: 1},
 			},
-			growths: gameBase.chars.Bob.growths,
-			maxStats: gameBase.chars.Bob.maxStats,
 			min: {hp: 35, mp: 15},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [],
 		errors: [],
@@ -285,9 +288,7 @@ test("computeChar, base boon/bane", t => {
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
+			...defaultBob,
 			stats: {hp: 34, mp: 9},
 			dist: {
 				hp: {34: 1},
@@ -300,9 +301,6 @@ test("computeChar, base boon/bane", t => {
 			growths: {hp: 90, mp: 20},
 			maxStats: {hp: 64, mp: 39},
 			min: {hp: 34, mp: 9},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [],
 		errors: [],
@@ -322,9 +320,7 @@ test("computeChar, base boon/bane missing", t => {
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
+			...defaultBob,
 			stats: {hp: 28, mp: 10},
 			dist: {
 				hp: {28: 1},
@@ -337,9 +333,6 @@ test("computeChar, base boon/bane missing", t => {
 			growths: {hp: 30, mp: 30},
 			maxStats: {hp: 38, mp: 50},
 			min: {hp: 28, mp: 10},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [],
 		errors: [],
@@ -365,24 +358,9 @@ test("computeChar, base parent", t => {
 	const final = computeChar(gameBase, {Bob: c, Alice: cParent}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
-			stats: {hp: 30, mp: 10},
-			dist: {
-				hp: {30: 1},
-				mp: {10: 1},
-			},
-			distNB: {
-				hp: {30: 1},
-				mp: {10: 1},
-			},
+			...defaultBob,
 			growths: {hp: 40, mp: 57},
 			maxStats: {hp: 91, mp: 131},
-			min: {hp: 30, mp: 10},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [],
 		errors: [],
@@ -420,25 +398,10 @@ test("computeChar, base parent of parent", t => {
 	);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
-			stats: {hp: 30, mp: 10},
-			dist: {
-				hp: {30: 1},
-				mp: {10: 1},
-			},
-			distNB: {
-				hp: {30: 1},
-				mp: {10: 1},
-			},
+			...defaultBob,
 			growths: {hp: 42, mp: 60},
 			// Most important here is this ending in 1, not 2. Only one +1 bonus.
 			maxStats: {hp: 141, mp: 221},
-			min: {hp: 30, mp: 10},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [],
 		errors: [],
@@ -457,24 +420,8 @@ test("computeChar, base parent breaks out of loops of length 1", t => {
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
-			stats: {hp: 30, mp: 10},
-			dist: {
-				hp: {30: 1},
-				mp: {10: 1},
-			},
-			distNB: {
-				hp: {30: 1},
-				mp: {10: 1},
-			},
-			growths: gameBase.chars.Bob.growths,
+			...defaultBob,
 			maxStats: {hp: 100, mp: 100},
-			min: {hp: 30, mp: 10},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [],
 		errors: [],
@@ -533,24 +480,9 @@ test("computeChar, base parent with boon/bane", t => {
 	const final = computeChar(gameBase, {Bob: c, Alice: cParent}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
-			stats: {hp: 30, mp: 10},
-			dist: {
-				hp: {30: 1},
-				mp: {10: 1},
-			},
-			distNB: {
-				hp: {30: 1},
-				mp: {10: 1},
-			},
+			...defaultBob,
 			growths: {hp: 30, mp: 72},
 			maxStats: {hp: 79, mp: 144},
-			min: {hp: 30, mp: 10},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [],
 		errors: [],
@@ -570,11 +502,10 @@ test("computeChar, leveling", t => {
 	};
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
-		base: defaultBase,
+		base: defaultBob,
 		checkpoints: [
 			{
-				name: "Bob",
-				charClass: "weak",
+				...defaultBob,
 				level: 3,
 				stats: {hp: 31, mp: 11},
 				dist: {
@@ -585,16 +516,10 @@ test("computeChar, leveling", t => {
 					hp: {30: 0.5, 31: 0.5},
 					mp: {10: 0.8, 11: 0.2},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
-				min: {hp: 30, mp: 10},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50], mp: [20]},
-				equip: null,
 			},
 			{
-				name: "Bob",
-				charClass: "weak",
+				...defaultBob,
 				level: 5,
 				stats: {hp: 32, mp: 11},
 				dist: {
@@ -605,12 +530,7 @@ test("computeChar, leveling", t => {
 					hp: {30: 0.125, 31: 0.375, 32: 0.375, 33: 0.125},
 					mp: {10: 0.512, 11: 0.384, 12: 0.096, 13: 0.008},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
-				min: {hp: 30, mp: 10},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 50, 50], mp: [20, 20, 20]},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -630,11 +550,10 @@ test("computeChar, low level error", t => {
 	};
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
-		base: defaultBase,
+		base: defaultBob,
 		checkpoints: [
 			{
-				name: "Bob",
-				charClass: "weak",
+				...defaultBob,
 				level: 5,
 				stats: {hp: 32, mp: 11},
 				dist: {
@@ -645,12 +564,7 @@ test("computeChar, low level error", t => {
 					hp: {30: 0.125, 31: 0.375, 32: 0.375, 33: 0.125},
 					mp: {10: 0.512, 11: 0.384, 12: 0.096, 13: 0.008},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
-				min: {hp: 30, mp: 10},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 50, 50], mp: [20, 20, 20]},
-				equip: null,
 			},
 		],
 		errors: [{histIndex: 1, error: "Level would decrease"}],
@@ -672,12 +586,10 @@ test("computeChar, boosts", t => {
 	};
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
-		base: defaultBase,
+		base: defaultBob,
 		checkpoints: [
 			{
-				name: "Bob",
-				charClass: "weak",
-				level: 2,
+				...defaultBob,
 				stats: {hp: 35, mp: 10},
 				dist: {
 					hp: {35: 1},
@@ -687,17 +599,10 @@ test("computeChar, boosts", t => {
 					hp: {30: 1},
 					mp: {10: 1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
-				min: {hp: 30, mp: 10},
 				boosts: {hp: 5, mp: 0},
-				growthList: {hp: [], mp: []},
-				equip: null,
 			},
 			{
-				name: "Bob",
-				charClass: "weak",
-				level: 2,
+				...defaultBob,
 				stats: {hp: 35, mp: 12},
 				dist: {
 					hp: {35: 1},
@@ -707,19 +612,14 @@ test("computeChar, boosts", t => {
 					hp: {30: 1},
 					mp: {10: 1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
-				min: {hp: 30, mp: 10},
 				boosts: {hp: 5, mp: 2},
-				growthList: {hp: [], mp: []},
-				equip: null,
 			},
 		],
 		errors: [],
 	});
 });
 
-test("computeChar, class change min and mods", t => {
+test("computeChar, class change min, mods, max", t => {
 	const c: Char = {
 		name: "Bob",
 		history: [
@@ -746,12 +646,11 @@ test("computeChar, class change min and mods", t => {
 	};
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
-		base: defaultBase,
+		base: defaultBob,
 		checkpoints: [
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "strong",
-				level: 2,
 				stats: {hp: 40, mp: 30},
 				dist: {
 					hp: {40: 1},
@@ -761,17 +660,11 @@ test("computeChar, class change min and mods", t => {
 					hp: {40: 1},
 					mp: {30: 1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 30, mp: 20},
-				boosts: {hp: 0, mp: 0},
-				growthList: {hp: [], mp: []},
-				equip: null,
 			},
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "weak",
-				level: 2,
 				stats: {hp: 30, mp: 20},
 				dist: {
 					hp: {30: 1},
@@ -781,12 +674,7 @@ test("computeChar, class change min and mods", t => {
 					hp: {30: 1},
 					mp: {20: 1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 30, mp: 20},
-				boosts: {hp: 0, mp: 0},
-				growthList: {hp: [], mp: []},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -820,12 +708,11 @@ test("computeChar, class change ignoreMins", t => {
 	};
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
-		base: defaultBase,
+		base: defaultBob,
 		checkpoints: [
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "strong",
-				level: 2,
 				stats: {hp: 40, mp: 20},
 				dist: {
 					hp: {40: 1},
@@ -835,32 +722,9 @@ test("computeChar, class change ignoreMins", t => {
 					hp: {40: 1},
 					mp: {20: 1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
-				min: {hp: 30, mp: 10},
-				boosts: {hp: 0, mp: 0},
-				growthList: {hp: [], mp: []},
-				equip: null,
 			},
 			{
-				name: "Bob",
-				charClass: "weak",
-				level: 2,
-				stats: {hp: 30, mp: 10},
-				dist: {
-					hp: {30: 1},
-					mp: {10: 1},
-				},
-				distNB: {
-					hp: {30: 1},
-					mp: {10: 1},
-				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
-				min: {hp: 30, mp: 10},
-				boosts: {hp: 0, mp: 0},
-				growthList: {hp: [], mp: []},
-				equip: null,
+				...defaultBob,
 			},
 		],
 		errors: [],
@@ -887,10 +751,10 @@ test("computeChar, class change growths", t => {
 	};
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
-		base: defaultBase,
+		base: defaultBob,
 		checkpoints: [
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "strong",
 				level: 3,
 				stats: {hp: 40, mp: 30},
@@ -902,15 +766,11 @@ test("computeChar, class change growths", t => {
 					hp: {40: 0.5, 41: 0.5},
 					mp: {30: 1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 30, mp: 20},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50], mp: [20]},
-				equip: null,
 			},
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "strong",
 				level: 4,
 				stats: {hp: 41, mp: 30},
@@ -922,12 +782,8 @@ test("computeChar, class change growths", t => {
 					hp: {40: 0.1, 41: 0.5, 42: 0.4},
 					mp: {30: 0.5, 31: 0.5},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 30, mp: 20},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 80], mp: [20, 50]},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -953,10 +809,10 @@ test("computeChar, class change level reset", t => {
 	};
 	const final = computeChar(gameCL1, {Bob: c}, c);
 	checkFinal(t, final, {
-		base: defaultBase,
+		base: defaultBob,
 		checkpoints: [
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "strong",
 				level: 2,
 				stats: {hp: 41, mp: 30},
@@ -968,12 +824,8 @@ test("computeChar, class change level reset", t => {
 					hp: {40: 0.1, 41: 0.5, 42: 0.4},
 					mp: {30: 0.5, 31: 0.5},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 30, mp: 20},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 80], mp: [20, 50]},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -1005,10 +857,10 @@ test("computeChar, level reset only applies to class change", t => {
 	};
 	const final = computeChar(gameCL1, {Bob: c}, c);
 	checkFinal(t, final, {
-		base: defaultBase,
+		base: defaultBob,
 		checkpoints: [
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "strong",
 				level: 2,
 				stats: {hp: 41, mp: 30},
@@ -1020,12 +872,9 @@ test("computeChar, level reset only applies to class change", t => {
 					hp: {40: 0.1, 41: 0.5, 42: 0.4},
 					mp: {30: 0.5, 31: 0.5},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 30, mp: 20},
 				boosts: {hp: 1, mp: 0},
 				growthList: {hp: [50, 80], mp: [20, 50]},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -1043,9 +892,7 @@ test("computeChar, caps", t => {
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
+			...defaultBob,
 			stats: {hp: 49, mp: 48},
 			dist: {
 				hp: {49: 1},
@@ -1055,17 +902,11 @@ test("computeChar, caps", t => {
 				hp: {49: 1},
 				mp: {48: 1},
 			},
-			growths: gameBase.chars.Bob.growths,
-			maxStats: gameBase.chars.Bob.maxStats,
 			min: {hp: 49, mp: 48},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [
 			{
-				name: "Bob",
-				charClass: "weak",
+				...defaultBob,
 				level: 5,
 				stats: {hp: 50, mp: 50},
 				dist: {
@@ -1076,12 +917,8 @@ test("computeChar, caps", t => {
 					hp: {49: 0.125, 50: 0.875},
 					mp: {48: 0.512, 49: 0.384, 50: 0.104},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 49, mp: 48},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 50, 50], mp: [20, 20, 20]},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -1102,9 +939,7 @@ test("computeChar, boosts hitting a cap", t => {
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
+			...defaultBob,
 			stats: {hp: 49, mp: 48},
 			dist: {
 				hp: {49: 1},
@@ -1114,18 +949,11 @@ test("computeChar, boosts hitting a cap", t => {
 				hp: {49: 1},
 				mp: {48: 1},
 			},
-			growths: gameBase.chars.Bob.growths,
-			maxStats: gameBase.chars.Bob.maxStats,
 			min: {hp: 49, mp: 48},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [
 			{
-				name: "Bob",
-				charClass: "weak",
-				level: 2,
+				...defaultBob,
 				stats: {hp: 50, mp: 48},
 				dist: {
 					hp: {50: 1},
@@ -1135,12 +963,8 @@ test("computeChar, boosts hitting a cap", t => {
 					hp: {49: 1},
 					mp: {48: 1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 49, mp: 48},
 				boosts: {hp: 10, mp: 0},
-				growthList: {hp: [], mp: []},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -1155,7 +979,7 @@ test("computeChar, real stats remembered when class mods go over cap", t => {
 				type: "class",
 				id: 1,
 				level: 2,
-				newClass: "strong",
+				newClass: "strongNoMax",
 				ignoreMins: false,
 			},
 			{type: "checkpoint", id: 2, level: 4, stats: {hp: 50, mp: 50}},
@@ -1175,9 +999,7 @@ test("computeChar, real stats remembered when class mods go over cap", t => {
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
+			...defaultBob,
 			stats: {hp: 49, mp: 48},
 			dist: {
 				hp: {49: 1},
@@ -1187,17 +1009,12 @@ test("computeChar, real stats remembered when class mods go over cap", t => {
 				hp: {49: 1},
 				mp: {48: 1},
 			},
-			growths: gameBase.chars.Bob.growths,
-			maxStats: gameBase.chars.Bob.maxStats,
 			min: {hp: 49, mp: 48},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [
 			{
-				name: "Bob",
-				charClass: "strong",
+				...defaultBob,
+				charClass: "strongNoMax",
 				level: 4,
 				stats: {hp: 50, mp: 50},
 				dist: {
@@ -1208,15 +1025,11 @@ test("computeChar, real stats remembered when class mods go over cap", t => {
 					hp: {50: 1},
 					mp: {50: 1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 49, mp: 48},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [80, 80], mp: [50, 50]},
-				equip: null,
 			},
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "weak",
 				level: 5,
 				stats: {hp: 49, mp: 48},
@@ -1228,12 +1041,8 @@ test("computeChar, real stats remembered when class mods go over cap", t => {
 					hp: {49: 0.5, 50: 0.5},
 					mp: {48: 0.8, 49: 0.2},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 49, mp: 48},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [80, 80, 50], mp: [50, 50, 20]},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -1260,9 +1069,7 @@ test("computeChar, class change hp up 1 when all mins met", t => {
 	const final = computeChar(gameC1HP, {Bob: c}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
+			...defaultBob,
 			stats: {hp: 30, mp: 30},
 			dist: {
 				hp: {30: 1},
@@ -1272,18 +1079,12 @@ test("computeChar, class change hp up 1 when all mins met", t => {
 				hp: {30: 1},
 				mp: {30: 1},
 			},
-			growths: gameBase.chars.Bob.growths,
-			maxStats: gameBase.chars.Bob.maxStats,
 			min: {hp: 30, mp: 30},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "strong",
-				level: 2,
 				stats: {hp: 41, mp: 40},
 				dist: {
 					hp: {41: 1},
@@ -1293,12 +1094,7 @@ test("computeChar, class change hp up 1 when all mins met", t => {
 					hp: {41: 1},
 					mp: {40: 1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 30, mp: 30},
-				boosts: {hp: 0, mp: 0},
-				growthList: {hp: [], mp: []},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -1325,9 +1121,7 @@ test("computeChar, class change hp up 1 skipped with ignoreMins", t => {
 	const final = computeChar(gameC1HP, {Bob: c}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
+			...defaultBob,
 			stats: {hp: 30, mp: 30},
 			dist: {
 				hp: {30: 1},
@@ -1337,18 +1131,12 @@ test("computeChar, class change hp up 1 skipped with ignoreMins", t => {
 				hp: {30: 1},
 				mp: {30: 1},
 			},
-			growths: gameBase.chars.Bob.growths,
-			maxStats: gameBase.chars.Bob.maxStats,
 			min: {hp: 30, mp: 30},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "strong",
-				level: 2,
 				stats: {hp: 40, mp: 40},
 				dist: {
 					hp: {40: 1},
@@ -1358,12 +1146,7 @@ test("computeChar, class change hp up 1 skipped with ignoreMins", t => {
 					hp: {40: 1},
 					mp: {40: 1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 30, mp: 30},
-				boosts: {hp: 0, mp: 0},
-				growthList: {hp: [], mp: []},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -1391,9 +1174,7 @@ test("computeChar, class change hp up 1 respects other stat chances", t => {
 	const final = computeChar(gameC1HP, {Bob: c}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
+			...defaultBob,
 			stats: {hp: 30, mp: 19},
 			dist: {
 				hp: {30: 1},
@@ -1403,16 +1184,11 @@ test("computeChar, class change hp up 1 respects other stat chances", t => {
 				hp: {30: 1},
 				mp: {19: 1},
 			},
-			growths: gameBase.chars.Bob.growths,
-			maxStats: gameBase.chars.Bob.maxStats,
 			min: {hp: 30, mp: 19},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "weak",
 				level: 4,
 				stats: {hp: 31, mp: 20},
@@ -1424,15 +1200,11 @@ test("computeChar, class change hp up 1 respects other stat chances", t => {
 					hp: {30: 0.25, 31: 0.5, 32: 0.25},
 					mp: {19: 0.64, 20: 0.32, 31: 0.04},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 30, mp: 19},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 50], mp: [20, 20]},
-				equip: null,
 			},
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "strong",
 				level: 4,
 				stats: {hp: 41, mp: 30},
@@ -1444,12 +1216,8 @@ test("computeChar, class change hp up 1 respects other stat chances", t => {
 					hp: {40: 0.16, 41: 0.41, 42: 0.34, 43: 0.09},
 					mp: {30: 0.96, 31: 0.04},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 30, mp: 20},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50, 50], mp: [20, 20]},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -1477,9 +1245,7 @@ test("computeChar, class change hp up 1 respects own stat chances", t => {
 	const final = computeChar(gameC1HP, {Bob: c}, c);
 	checkFinal(t, final, {
 		base: {
-			name: "Bob",
-			charClass: "weak",
-			level: 2,
+			...defaultBob,
 			stats: {hp: 19, mp: 19},
 			dist: {
 				hp: {19: 1},
@@ -1489,16 +1255,11 @@ test("computeChar, class change hp up 1 respects own stat chances", t => {
 				hp: {19: 1},
 				mp: {19: 1},
 			},
-			growths: gameBase.chars.Bob.growths,
-			maxStats: gameBase.chars.Bob.maxStats,
 			min: {hp: 19, mp: 19},
-			boosts: {hp: 0, mp: 0},
-			growthList: {hp: [], mp: []},
-			equip: null,
 		},
 		checkpoints: [
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "weak",
 				level: 3,
 				stats: {hp: 20, mp: 20},
@@ -1510,15 +1271,11 @@ test("computeChar, class change hp up 1 respects own stat chances", t => {
 					hp: {19: 0.5, 20: 0.5},
 					mp: {19: 0.8, 20: 0.2},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 19, mp: 19},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50], mp: [20]},
-				equip: null,
 			},
 			{
-				name: "Bob",
+				...defaultBob,
 				charClass: "strong",
 				level: 3,
 				stats: {hp: 31, mp: 30},
@@ -1530,12 +1287,8 @@ test("computeChar, class change hp up 1 respects own stat chances", t => {
 					hp: {30: 0.9, 31: 0.1},
 					mp: {30: 1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
 				min: {hp: 20, mp: 20},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [50], mp: [20]},
-				equip: null,
 			},
 		],
 		errors: [],
@@ -1557,11 +1310,10 @@ test("computeChar, equipment", t => {
 	};
 	const final = computeChar(gameBase, {Bob: c}, c);
 	checkFinal(t, final, {
-		base: defaultBase,
+		base: defaultBob,
 		checkpoints: [
 			{
-				name: "Bob",
-				charClass: "weak",
+				...defaultBob,
 				level: 4,
 				stats: {hp: 32, mp: 11},
 				dist: {
@@ -1572,12 +1324,169 @@ test("computeChar, equipment", t => {
 					hp: {31: 0.25, 32: 0.5, 33: 0.25},
 					mp: {10: 0.4, 11: 0.5, 12: 0.1},
 				},
-				growths: gameBase.chars.Bob.growths,
-				maxStats: gameBase.chars.Bob.maxStats,
-				min: {hp: 30, mp: 10},
-				boosts: {hp: 0, mp: 0},
 				growthList: {hp: [150, 50], mp: [50, 20]},
 				equip: "super",
+			},
+		],
+		errors: [],
+	});
+});
+
+test("computeChar, abilities", t => {
+	const c: Char = {
+		name: "Bob",
+		history: [
+			{type: "ability", id: 1, level: 2, ability: "limitbreak", active: true},
+			{type: "ability", id: 2, level: 2, ability: "aptitude", active: true},
+			{type: "ability", id: 3, level: 3, ability: "aptitude", active: false},
+			{type: "checkpoint", id: 4, level: 4, stats: {hp: 32, mp: 11}},
+		],
+		baseClass: gameBase.chars.Bob.baseClass,
+		baseLevel: gameBase.chars.Bob.baseLevel,
+		baseStats: gameBase.chars.Bob.baseStats,
+	};
+	const final = computeChar(gameBase, {Bob: c}, c);
+	checkFinal(t, final, {
+		base: defaultBob,
+		checkpoints: [
+			{
+				...defaultBob,
+				level: 4,
+				stats: {hp: 32, mp: 11},
+				dist: {
+					hp: {31: 0.5, 32: 0.5},
+					mp: {10: 0.24, 11: 0.62, 12: 0.14},
+				},
+				distNB: {
+					hp: {31: 0.5, 32: 0.5},
+					mp: {10: 0.24, 11: 0.62, 12: 0.14},
+				},
+				growthList: {hp: [100, 50], mp: [70, 20]},
+				abilities: ["limitbreak"],
+			},
+		],
+		errors: [],
+	});
+});
+
+test("computeChar, initial abilities", t => {
+	const c: Char = {
+		name: "Bob",
+		history: [{type: "checkpoint", id: 1, level: 3, stats: {hp: 31, mp: 11}}],
+		baseClass: gameBase.chars.Bob.baseClass,
+		baseLevel: gameBase.chars.Bob.baseLevel,
+		baseStats: gameBase.chars.Bob.baseStats,
+	};
+	const final = computeChar(gameInitAbi, {Bob: c}, c);
+	checkFinal(t, final, {
+		base: {
+			...defaultBob,
+			abilities: ["aptitude"],
+		},
+		checkpoints: [
+			{
+				...defaultBob,
+				level: 3,
+				stats: {hp: 31, mp: 11},
+				dist: {
+					hp: {31: 1},
+					mp: {10: 0.3, 11: 0.7},
+				},
+				distNB: {
+					hp: {31: 1},
+					mp: {10: 0.3, 11: 0.7},
+				},
+				growthList: {hp: [100], mp: [70]},
+				abilities: ["aptitude"],
+			},
+		],
+		errors: [],
+	});
+});
+
+test("computeChar, abilities temp max increase remembered", t => {
+	const c: Char = {
+		name: "Bob",
+		history: [
+			{type: "equipchange", id: 1, level: 2, equip: "super"},
+			{type: "ability", id: 2, level: 2, ability: "limitbreak", active: true},
+			{type: "ability", id: 3, level: 2, ability: "aptitude", active: true},
+			{type: "checkpoint", id: 4, level: 5, stats: {hp: 55, mp: 13}},
+			{type: "ability", id: 5, level: 5, ability: "limitbreak", active: false},
+			{type: "checkpoint", id: 6, level: 6, stats: {hp: 50, mp: 13}},
+			{type: "ability", id: 7, level: 6, ability: "limitbreak", active: true},
+			{type: "checkpoint", id: 8, level: 6, stats: {hp: 55, mp: 13}},
+		],
+		baseClass: gameBase.chars.Bob.baseClass,
+		baseLevel: gameBase.chars.Bob.baseLevel,
+		baseStats: {hp: 49, mp: 10},
+	};
+	const final = computeChar(gameBase, {Bob: c}, c);
+	checkFinal(t, final, {
+		base: {
+			...defaultBob,
+			stats: {hp: 49, mp: 10},
+			dist: {
+				hp: {49: 1},
+				mp: {10: 1},
+			},
+			distNB: {
+				hp: {49: 1},
+				mp: {10: 1},
+			},
+			min: {hp: 49, mp: 10},
+		},
+		checkpoints: [
+			{
+				...defaultBob,
+				level: 5,
+				stats: {hp: 55, mp: 13},
+				dist: {
+					hp: {55: 1},
+					mp: {13: 1},
+				},
+				distNB: {
+					hp: {55: 1},
+					mp: {13: 1},
+				},
+				growthList: {hp: [200, 200, 200], mp: [100, 100, 100]},
+				min: {hp: 49, mp: 10},
+				equip: "super",
+				abilities: ["limitbreak", "aptitude"],
+			},
+			{
+				...defaultBob,
+				level: 6,
+				stats: {hp: 50, mp: 13},
+				dist: {
+					hp: {50: 1},
+					mp: {13: 1},
+				},
+				distNB: {
+					hp: {50: 1},
+					mp: {13: 1},
+				},
+				growthList: {hp: [200, 200, 200, 200], mp: [100, 100, 100, 100]},
+				min: {hp: 49, mp: 10},
+				equip: "super",
+				abilities: ["aptitude"],
+			},
+			{
+				...defaultBob,
+				level: 6,
+				stats: {hp: 55, mp: 13},
+				dist: {
+					hp: {55: 1},
+					mp: {13: 1},
+				},
+				distNB: {
+					hp: {55: 1},
+					mp: {13: 1},
+				},
+				growthList: {hp: [200, 200, 200, 200], mp: [100, 100, 100, 100]},
+				min: {hp: 49, mp: 10},
+				equip: "super",
+				abilities: ["aptitude", "limitbreak"],
 			},
 		],
 		errors: [],

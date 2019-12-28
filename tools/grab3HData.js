@@ -240,12 +240,9 @@ async function main() {
 		globals: {
 			maxLevel: 99,
 			maxStat: 999,
-			classChangeResetsLevel: false,
 			enableCharMax: true,
 			enableClassMins: true,
 			enableClassMods: true,
-			enableClassMax: false,
-			enableEquipment: false,
 			enableMaxIncrease: true,
 			hideNewLevel: true,
 			histAddLayout: [

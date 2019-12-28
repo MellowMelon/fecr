@@ -1,5 +1,11 @@
 import _ from "lodash";
-import {HistoryEntry, Char, CharDataBasesAlt, GameData} from "../types";
+import {
+	HistoryEntry,
+	HistoryEntryAbilityChange,
+	Char,
+	CharDataBasesAlt,
+	GameData,
+} from "../types";
 import gameTable from "../GameTable";
 import {assertNever} from "../Utils";
 import {createChar, createHistoryEntry} from "../CharUtils";
@@ -279,6 +285,20 @@ function reduceActionMain(s: ViewState, a: ViewAction): ViewState {
 			return {
 				...oldEntry,
 				equip: a.newEquip,
+			};
+		});
+	} else if (a.type === "updateCharHistoryAbility") {
+		return updateHistoryEntry(s, a.histIndex, (game, oldChar, oldEntry) => {
+			if (!("ability" in oldEntry)) {
+				console.error("Unexpected data shape while handling action", a);
+				return oldEntry;
+			}
+			const newData: Partial<HistoryEntryAbilityChange> = {};
+			if (a.ability !== undefined) newData.ability = a.ability;
+			if (a.active !== undefined) newData.active = a.active;
+			return {
+				...oldEntry,
+				...newData,
 			};
 		});
 	}

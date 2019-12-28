@@ -9,6 +9,7 @@ import {
 	Team,
 	GameData,
 } from "./types";
+import {assertNever} from "./Utils";
 
 export type TeamCharList = {
 	index: number;
@@ -112,7 +113,16 @@ export function createHistoryEntry(
 			level,
 			equip: null,
 		};
-	} else {
+	} else if (type === "ability") {
+		const ability = Object.keys(game.abilities || {})[0] || "";
+		return {
+			type: "ability",
+			id,
+			level,
+			ability,
+			active: true,
+		};
+	} else if (type === "checkpoint") {
 		const lastCPI = lastIndexOfCheckpoint(game, char);
 		let stats = char.baseStats || gameCharData.baseStats;
 		if (lastCPI > -1) {
@@ -125,6 +135,8 @@ export function createHistoryEntry(
 			level,
 			stats,
 		};
+	} else {
+		return assertNever(type);
 	}
 }
 

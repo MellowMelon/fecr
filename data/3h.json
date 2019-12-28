@@ -5,12 +5,9 @@
 	"globals": {
 		"maxLevel": 99,
 		"maxStat": 999,
-		"classChangeResetsLevel": false,
 		"enableCharMax": true,
 		"enableClassMins": true,
 		"enableClassMods": true,
-		"enableClassMax": false,
-		"enableEquipment": false,
 		"enableMaxIncrease": true,
 		"hideNewLevel": true,
 		"histAddLayout": [
@@ -1500,6 +1497,17 @@
 				"Def": 0,
 				"Res": 0,
 				"Cha": 0
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Noble": {
@@ -1537,6 +1545,17 @@
 				"Def": 0,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Myrmidon": {
@@ -1574,6 +1593,17 @@
 				"Def": 0,
 				"Res": -5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Soldier": {
@@ -1611,6 +1641,17 @@
 				"Def": 0,
 				"Res": -5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Fighter": {
@@ -1648,6 +1689,17 @@
 				"Def": 0,
 				"Res": -5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Monk": {
@@ -1685,6 +1737,17 @@
 				"Def": 0,
 				"Res": 5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Lord": {
@@ -1722,6 +1785,17 @@
 				"Def": 0,
 				"Res": 0,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Mercenary": {
@@ -1759,6 +1833,17 @@
 				"Def": 0,
 				"Res": -5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Thief": {
@@ -1796,6 +1881,17 @@
 				"Def": 0,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Armored Knight": {
@@ -1833,6 +1929,17 @@
 				"Def": 10,
 				"Res": -5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Cavalier": {
@@ -1870,6 +1977,17 @@
 				"Def": 5,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Brigand": {
@@ -1907,6 +2025,17 @@
 				"Def": 0,
 				"Res": -5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Archer": {
@@ -1944,6 +2073,17 @@
 				"Def": 0,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Mage": {
@@ -1981,6 +2121,17 @@
 				"Def": -5,
 				"Res": 5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Priest": {
@@ -2018,6 +2169,17 @@
 				"Def": -5,
 				"Res": 10,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Brawler": {
@@ -2055,6 +2217,17 @@
 				"Def": 0,
 				"Res": -10,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Dark Mage": {
@@ -2091,6 +2264,17 @@
 				"Lck": 0,
 				"Def": -5,
 				"Res": 5,
+				"Cha": 0
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
 				"Cha": 0
 			}
 		},
@@ -2129,6 +2313,17 @@
 				"Def": 0,
 				"Res": 5,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Hero": {
@@ -2166,6 +2361,17 @@
 				"Def": 0,
 				"Res": -5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Swordmaster": {
@@ -2203,6 +2409,17 @@
 				"Def": 0,
 				"Res": -5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Assassin": {
@@ -2236,6 +2453,17 @@
 				"Mag": 0,
 				"Dex": 20,
 				"Spd": 20,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
 				"Lck": 0,
 				"Def": 0,
 				"Res": 0,
@@ -2277,6 +2505,17 @@
 				"Def": 15,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Paladin": {
@@ -2314,6 +2553,17 @@
 				"Def": 5,
 				"Res": 5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Wyvern Rider": {
@@ -2351,6 +2601,17 @@
 				"Def": 5,
 				"Res": -5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Warrior": {
@@ -2388,6 +2649,17 @@
 				"Def": 0,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Sniper": {
@@ -2425,6 +2697,17 @@
 				"Def": 0,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Grappler": {
@@ -2462,6 +2745,17 @@
 				"Def": 0,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Warlock": {
@@ -2499,6 +2793,17 @@
 				"Def": -5,
 				"Res": 5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Bishop": {
@@ -2536,6 +2841,17 @@
 				"Def": -5,
 				"Res": 5,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Falcon Knight": {
@@ -2573,6 +2889,17 @@
 				"Def": 0,
 				"Res": 5,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Wyvern Lord": {
@@ -2610,6 +2937,17 @@
 				"Def": 5,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Mortal Savant": {
@@ -2647,6 +2985,17 @@
 				"Def": 0,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Great Knight": {
@@ -2684,6 +3033,17 @@
 				"Def": 5,
 				"Res": -5,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Bow Knight": {
@@ -2721,6 +3081,17 @@
 				"Def": 0,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Dark Knight": {
@@ -2758,6 +3129,17 @@
 				"Def": 5,
 				"Res": 10,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Holy Knight": {
@@ -2795,6 +3177,17 @@
 				"Def": 5,
 				"Res": 10,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"War Master": {
@@ -2832,6 +3225,17 @@
 				"Def": 0,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Gremory": {
@@ -2869,6 +3273,17 @@
 				"Def": 0,
 				"Res": 5,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Dancer": {
@@ -2906,6 +3321,17 @@
 				"Def": -5,
 				"Res": -5,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Enlightened One": {
@@ -2943,6 +3369,17 @@
 				"Def": 5,
 				"Res": 0,
 				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Armored Lord": {
@@ -2980,6 +3417,17 @@
 				"Def": 5,
 				"Res": 5,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Emperor": {
@@ -3017,6 +3465,17 @@
 				"Def": 5,
 				"Res": 5,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"High Lord": {
@@ -3054,6 +3513,17 @@
 				"Def": 5,
 				"Res": 0,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Great Lord": {
@@ -3091,6 +3561,17 @@
 				"Def": 5,
 				"Res": 0,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Wyvern Master": {
@@ -3128,6 +3609,17 @@
 				"Def": 5,
 				"Res": 0,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Barbarossa": {
@@ -3165,6 +3657,17 @@
 				"Def": 5,
 				"Res": 0,
 				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
 			}
 		},
 		"Death Knight": {
@@ -3201,6 +3704,17 @@
 				"Lck": 0,
 				"Def": 5,
 				"Res": 5,
+				"Cha": 0
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
 				"Cha": 0
 			}
 		}

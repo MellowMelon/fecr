@@ -110,9 +110,6 @@ const urlFetchTable = _.keyBy(urlFetchList, "url");
 
 const statsList = ["HP", "Str", "Mag", "Skl", "Spd", "Lck", "Def", "Res"];
 
-// Manually collapse alts if they're all identical
-// Remove *<small>1</small> when doing these mappings
-
 const charMappingRaw = [
 	["Avatar", "CorrinM"],
 	["Avatar", "CorrinF"],
@@ -572,17 +569,16 @@ async function main() {
 		globals: {
 			maxLevel: 99,
 			maxStat: 99,
-			classChangeResetsLevel: false,
 			enableCharMax: true,
 			enableClassMins: true,
 			enableClassMods: true,
 			enableClassMax: true,
-			enableEquipment: false,
+			enableAbilities: true,
 			enableMaxIncrease: true,
 			hideNewLevel: false,
 			histAddLayout: [
 				["checkpoint", "class"],
-				["boost", "maxboost"],
+				["boost", "ability", "maxboost"],
 			],
 		},
 		stats: statsList,
@@ -596,7 +592,7 @@ async function main() {
 			Silas: {name: "Silas", gender: "M"},
 			Shura: {name: "Shura", gender: "M"},
 			Izana: {name: "Izana", gender: "M"},
-			Mozu: {name: "Mozu", gender: "F"},
+			Mozu: {name: "Mozu", gender: "F", initialAbilities: ["Aptitude"]},
 			Rinkah: {name: "Rinkah", gender: "F"},
 			Sakura: {name: "Sakura", gender: "F"},
 			Hana: {name: "Hana", gender: "F"},
@@ -728,6 +724,15 @@ async function main() {
 			Grandmaster: {name: "Grandmaster", requiredGender: "M"},
 		},
 		boonBane: getFatesBoonBane(),
+		abilities: {
+			Aptitude: {
+				name: "Aptitude",
+				growths: _.zipObject(
+					statsList,
+					statsList.map(() => 10)
+				),
+			},
+		},
 	};
 
 	await processAll(finalJSON);

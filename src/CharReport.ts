@@ -1,8 +1,8 @@
 import _ from "lodash";
 import {Stat, CharClass, StatsTable, StatsDist, GameData} from "./types";
-import {CharCheckpoint} from "./CharAdvance";
+import {CharCheckpoint, getRealMax, getRealGrowths} from "./CharAdvance";
 import {makeZeroStats} from "./CharUtils";
-import {assertNever, filterNonempty, sumObjects} from "./Utils";
+import {assertNever, filterNonempty} from "./Utils";
 import * as ProbDist from "./ProbDist";
 
 type StatsStrTable = {[stat: string]: string};
@@ -37,7 +37,7 @@ export type CharReport = {
 };
 
 const reportDetailsLabels = {
-	current: "Current",
+	current: "Actual",
 	classMod: "Class Modifier",
 	percentiles: "Percentile Range",
 	median: "Median",
@@ -156,6 +156,9 @@ export function getCharReport(
 
 	const effLevelsStr = _.mapValues(effLevels, x => x.toFixed(2));
 
+	const realGrowths = getRealGrowths(game, char);
+	const realMax = getRealMax(game, char);
+
 	return {
 		charClass,
 		charLevel: level,
@@ -169,8 +172,8 @@ export function getCharReport(
 		charGrowths: char.growths,
 		classGrowths: gameClassData.growths,
 		equipGrowths: gameEquipData.growths,
-		realGrowths: sumObjects(char.growths, gameClassData.growths),
-		maxStats: char.maxStats,
+		realGrowths,
+		maxStats: realMax,
 		charMax: base.maxStats,
 		classMax: gameClassData.maxStats,
 		statsDist: char.dist,

@@ -53,20 +53,20 @@ so a guessed or approximate level is okay. The main exception is when a Class
 Change's minimum stats are significant, in which case it matters whether a stat
 boost came before or after.`,
 	},
-	reportIntro: `The Report tab is the payoff of using this tool; it gives a
-visual representation of how likely each stat was to take each value and how
-your character compares. You can view this report for any checkpoint you
-specified in the Edit tab.
+	reportIntro: `The Report tab is the payoff of using this tool. It gives a
+visual representation of how likely each stat was to take each value and
+compares this to the values you specified in Actual Stats entries from the edit
+tab.
 
-Each stat has a summary showing the current value, how ahead or behind it is,
+Each stat has a summary showing the actual value, how ahead or behind it is,
 how good that value is as a percentile range, and a graph of the stat's
 probability distribution. (On smaller devices, some items may not be visible in
 the summary.) The bars on the graph represent the probabilities of the stat
 assuming each value.`,
 	histIntro_class: {
 		all: `A **Class Change** entry is for when a character promoted or
-reclassed. This will apply the minimum stats, modifiers, and growths of that
-class until the next class change.`,
+reclassed. This will apply the modifiers and growths of that class until the
+next class change.`,
 		15: `A **Class Change** entry is for when a character promoted or
 reclassed. This will apply the minimum stats and growths of that class until
 the next class change.`,
@@ -76,42 +76,50 @@ growths of that class until the next class change.`,
 	},
 	histIntro_boost: {
 		all: `A **Stat Boost** entry is for when a character had a stat permanently
-increased, such as from an Energy Drop. Don't input modifiers from
-classes, abilities, cooking, or equipment here.`,
+increased, such as from an Energy Drop.`,
 		15: `A **Stat Boost** entry is for when a character had a stat permanently
-increased, such as from a spring. Don't input modifiers from abilities or
-equipment here.`,
+increased, such as from a spring.`,
 		16: `A **Stat Boost** entry is for when a character had a stat permanently
-increased, such as from an Energy Drop or tea time. Don't input modifiers from
-classes, abilities, cooking, or equipment here.`,
+increased, such as from an Energy Drop or tea time.`,
 	},
-	histIntro_maxboost: `A **Max Stat Increase** entry is for when a Saint
-Statue was fully restored and increased the maximum stats for a character.
-Don't worry about this if the character's stats are not high enough to be at
-risk of hitting the maximum.`,
+	histIntro_maxboost: {
+		all: `A **Max Stat Increase** entry is for noting anything that affected
+a character's maximum stats.`,
+		14: `A **Max Stat Increase** entry is for when a character's max stats
+increased due to My Castle statues. Unfortunately, the simulation does get more
+accurate if you provide the exact times of these increases, which is onerous.
+It's up to you how meticulously to keep track of it all.`,
+		16: `A **Max Stat Increase** entry is for when a Saint
+Statue was fully restored and increased the maximum stats for a character.`,
+	},
 	histIntro_equipchange: {
-		all: `An **Equipment Change** entry is for when the
-character equips or unequips something that affects growths or maximum stats.
-Equipping a new item is considered to unequip the old one by the simulator.`,
-		15: `An **Equipment Change** entry is for when the character equips an astral
-shard from the DLC. These items affect growth rates. Equipping a new item is
-considered to unequip the old one by the simulator.`,
+		all: `An **Equipment Change** entry is for when the character equips or
+unequips something that affects growths or maximum stats. Equipping a new item
+is considered to unequip the old one by the simulator.`,
+		15: `An **Equipment Change** entry is for when the character equips an
+astral shard from the DLC. These items affect growth rates. Equipping a new
+item is considered to unequip the old one by the simulator.`,
 	},
-	histIntro_checkpoint: `A **Checkpoint** entry is your chance to tell the
-simulator what the character's stats were at any given point in time. The
-Report tab will let you compare these actual values to the expected ones for
-each checkpoint you specify.`,
-	report_current: `The stat's current value.`,
+	histIntro_abilitychange: {
+		all: `An **Ability Change** entry is for when the character equips or
+unequips an ability. Multiple abilities can be equipped at once`,
+		14: `An **Ability Change** entry is for when the character equips or
+unequips Aptitude, which increases growths.`,
+	},
+	histIntro_checkpoint: `An **Actual Stats** entry is your chance to tell the
+simulator what the character's stats were at any point in time. The
+Report tab can view each of these entries.`,
+	report_current: `The stat's actual value.`,
 	report_classMod: `The modifier for this stat from the character's current
 class.`,
-	report_percentiles: `The lower and upper percentile of the current value in
+	report_percentiles: `The lower and upper percentile of the actual value in
 the distribution. For example, if your character is 20-40%, then given the same
 history of class changes and stat boosts, a character is 20% likely to do
 strictly worse than yours did, and 60% (100% minus 40%) likely to do strictly
 better.`,
 	report_median: `The value of the stat at the 50th percentile. This is a good
 measure of where a typical character would be.`,
-	report_medianDiff: `The difference of the stat's current value and the median.`,
+	report_medianDiff: `The difference of the stat's actual value and the median.`,
 	report_average: `The weighted average of all values in the distribution.
 While this tool puts more emphasis on the percentiles and median, the average
 is easier to compute and still useful.`,
@@ -164,6 +172,7 @@ type MainHelpTable = {
 	hist_class: HelpEntry;
 	hist_boost: HelpEntry;
 	hist_maxboost: HelpEntry;
+	hist_abilitychange: HelpEntry;
 	hist_equipchange: HelpEntry;
 	histAdd: HelpEntry;
 	report: HelpEntry;
@@ -203,6 +212,9 @@ current team at all, copy the current URL before clicking this.
 `,
 	hist_maxboost: `
 {{histIntro_maxboost}}
+`,
+	hist_abilitychange: `
+{{histIntro_abilitychange}}
 `,
 	hist_equipchange: `
 {{histIntro_equipchange}}
@@ -263,16 +275,8 @@ function resolvePreFragments(
 	} else if (typeof entry === "function") {
 		return entry(game);
 	} else {
-		// Games like Fates (14) with multiple versions have another fallback.
-		let auxID = "all";
-		if (game.id.startsWith("14")) {
-			auxID = "14";
-		}
 		return (
-			entry[game.id] ||
-			entry[auxID] ||
-			entry.all ||
-			`(Missing help entry for ${cacheKey})`
+			entry[game.id] || entry.all || `(Missing help entry for ${cacheKey})`
 		);
 	}
 }

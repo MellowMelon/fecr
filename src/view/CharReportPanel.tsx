@@ -284,7 +284,8 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 			<Box>
 				{charHeader}
 				<Paragraph>
-					Provide a checkpoint in the Edit tab to view this character's report.
+					Provide an Actual Stats entry in the Edit tab to view this character's
+					report.
 				</Paragraph>
 			</Box>
 		);
@@ -315,7 +316,7 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 			</Box>
 			<Box direction="row" pad={{horizontal: "large"}} wrap>
 				<Box margin={{right: "medium"}}>
-					<Text weight="bold">Checkpoint</Text>
+					<Text weight="bold">Actual Stats from</Text>
 				</Box>
 				<Box width="medium">{cpSelect}</Box>
 			</Box>

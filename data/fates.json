@@ -5,17 +5,16 @@
 	"globals": {
 		"maxLevel": 99,
 		"maxStat": 99,
-		"classChangeResetsLevel": false,
 		"enableCharMax": true,
 		"enableClassMins": true,
 		"enableClassMods": true,
 		"enableClassMax": true,
-		"enableEquipment": false,
+		"enableAbilities": true,
 		"enableMaxIncrease": true,
 		"hideNewLevel": false,
 		"histAddLayout": [
 			["checkpoint", "class"],
-			["boost", "maxboost"]
+			["boost", "ability", "maxboost"]
 		]
 	},
 	"stats": ["HP", "Str", "Mag", "Skl", "Spd", "Lck", "Def", "Res"],
@@ -477,6 +476,7 @@
 		"Mozu": {
 			"name": "Mozu",
 			"gender": "F",
+			"initialAbilities": ["Aptitude"],
 			"baseClass": "Villager",
 			"baseLevel": 1,
 			"baseStats": {
@@ -6412,6 +6412,21 @@
 					"Def": 0,
 					"Res": -3
 				}
+			}
+		}
+	},
+	"abilities": {
+		"Aptitude": {
+			"name": "Aptitude",
+			"growths": {
+				"HP": 10,
+				"Str": 10,
+				"Mag": 10,
+				"Skl": 10,
+				"Spd": 10,
+				"Lck": 10,
+				"Def": 10,
+				"Res": 10
 			}
 		}
 	}
