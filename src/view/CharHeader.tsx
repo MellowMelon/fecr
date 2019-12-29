@@ -17,6 +17,7 @@ const CharHeader: React.FunctionComponent<Props> = function(props: Props) {
 	const {game, team, charName, dispatch} = props;
 	const teamCharList = getTeamCharList(game, team, charName);
 	const teamCount = teamCharList.chars.length;
+	const teamCountOther = teamCount + (team && team[charName] ? -1 : 0);
 
 	const src = "images/chars/" + game.id + "-" + charName.toLowerCase() + ".jpg";
 	const img = (
@@ -38,14 +39,14 @@ const CharHeader: React.FunctionComponent<Props> = function(props: Props) {
 	const prevButton = (
 		<Button
 			icon={<PreviousIcon />}
-			disabled={teamCount === 1}
+			disabled={teamCountOther === 0}
 			onClick={() => onNavigate(-1)}
 		/>
 	);
 	const nextButton = (
 		<Button
 			icon={<NextIcon />}
-			disabled={teamCount === 1}
+			disabled={teamCountOther === 0}
 			onClick={() => onNavigate(1)}
 		/>
 	);

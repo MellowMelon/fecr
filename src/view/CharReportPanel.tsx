@@ -287,15 +287,18 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 	}
 	const cr = getCharReport(game, cp, computed.base);
 
-	console.log("Report showing", cp);
-
 	return (
 		<Box>
 			{charHeader}
 			<Box pad={{horizontal: "large"}} alignSelf="end">
 				<HelpButton title="Help - Report" md={getHelp(game, "report")} />
 			</Box>
-			<Box direction="row" pad={{horizontal: "large"}} wrap>
+			<Box
+				direction="row"
+				pad={{horizontal: "large"}}
+				margin={{bottom: "medium"}}
+				wrap
+			>
 				<Box margin={{right: "medium"}}>
 					<Text weight="bold">Actual Stats from</Text>
 				</Box>

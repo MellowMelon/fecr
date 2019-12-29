@@ -303,7 +303,7 @@ export function getReportDetailsValue(
 	} else if (key === "averageNB") {
 		return cr.sdNBAverage[statName];
 	} else if (key === "minimum") {
-		return cr.minStats[statName];
+		return cr.minStats[statName] + cr.classStatMods[statName];
 	} else if (key === "maximum") {
 		return cr.maxStats[statName];
 	} else if (key === "charMax") {

@@ -53,7 +53,7 @@ const defaultDims: GraphDims = {
 	axisMarkLabelHeight: 13,
 	bgColor: "#FFFFFF",
 	barColor: "#4477FF",
-	barFocusColor: "#FF6633",
+	barFocusColor: "#FF5533",
 	lightFocusColor: "#FFDDBB",
 	labelLightColor: "#999999",
 	labelFocusColor: "#444444",

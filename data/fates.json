@@ -96,7 +96,7 @@
 		"Felicia": {
 			"name": "Felicia",
 			"gender": "F",
-			"baseClass": "Maid/Butler",
+			"baseClass": "Maid/Butler (max lv 40)",
 			"baseLevel": 1,
 			"baseStats": {
 				"HP": 19,
@@ -150,7 +150,7 @@
 		"Jakob": {
 			"name": "Jakob",
 			"gender": "M",
-			"baseClass": "Maid/Butler",
+			"baseClass": "Maid/Butler (max lv 40)",
 			"baseLevel": 1,
 			"baseStats": {
 				"HP": 21,
@@ -5465,6 +5465,50 @@
 			"name": "Maid/Butler",
 			"requiredGender": "",
 			"levelMod": 20,
+			"statMods": {
+				"HP": 18,
+				"Str": 4,
+				"Mag": 5,
+				"Skl": 9,
+				"Spd": 8,
+				"Lck": 4,
+				"Def": 5,
+				"Res": 4
+			},
+			"growths": {
+				"HP": 0,
+				"Str": 10,
+				"Mag": 10,
+				"Skl": 15,
+				"Spd": 15,
+				"Lck": 10,
+				"Def": 5,
+				"Res": 10
+			},
+			"maxStats": {
+				"HP": 50,
+				"Str": 28,
+				"Mag": 31,
+				"Skl": 33,
+				"Spd": 33,
+				"Lck": 32,
+				"Def": 29,
+				"Res": 29
+			},
+			"statMins": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Skl": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0
+			}
+		},
+		"Maid/Butler (max lv 40)": {
+			"name": "Maid/Butler (max lv 40)",
+			"requiredGender": "",
 			"statMods": {
 				"HP": 18,
 				"Str": 4,

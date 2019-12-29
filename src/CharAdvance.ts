@@ -66,6 +66,20 @@ function getBaseDist(stats: StatsTable): StatsDist {
 	return _.mapValues(stats, val => ProbDist.initAtValue(val));
 }
 
+function withoutClassMods(
+	game: GameData,
+	stats: StatsTable,
+	charClass: CharClass
+): StatsTable {
+	const gameClassData = game.classes[charClass];
+	if (!gameClassData || !gameClassData.statMods) {
+		return stats;
+	}
+	return _.mapValues(stats, (value, statName) => {
+		return value - gameClassData.statMods[statName];
+	});
+}
+
 function modifyCurrent(
 	char: AdvanceChar,
 	updates: Partial<CharCheckpoint>
@@ -113,7 +127,7 @@ function getNewLevelInt(
 export function getNewLevel(
 	game: GameData,
 	char: Char,
-	histIndex: number
+	histIndex = -1
 ): number {
 	const currH = char.history[histIndex] || _.last(char.history);
 	if (!currH) return char.baseLevel;
@@ -130,18 +144,20 @@ function getBaseGameChar(game: GameData, name: CharName): CharCheckpoint {
 	if (!gameCharData) {
 		throw new Error("Char " + name + " not in game " + game.name);
 	}
+	const charClass = gameCharData.baseClass;
+	const level = gameCharData.baseLevel;
 	const stats = gameCharData.baseStats;
 	const dist = getBaseDist(stats);
 	return {
 		name,
-		charClass: gameCharData.baseClass,
-		level: gameCharData.baseLevel,
+		charClass,
+		level,
 		stats,
 		dist,
 		distNB: dist,
 		growths: gameCharData.growths,
 		maxStats: gameCharData.maxStats,
-		min: stats,
+		min: withoutClassMods(game, stats, charClass),
 		boosts: _.mapValues(stats, () => 0),
 		growthList: _.mapValues(stats, () => []),
 		equip: null,
@@ -185,7 +201,7 @@ function getBaseCharRec(
 
 	baseChar.dist = getBaseDist(baseChar.stats);
 	baseChar.distNB = baseChar.dist;
-	baseChar.min = baseChar.stats;
+	baseChar.min = withoutClassMods(game, baseChar.stats, baseChar.charClass);
 
 	// Parent, with a recursive call that protects against loops
 	if (!parentChain.has(char.name) && char.parent) {

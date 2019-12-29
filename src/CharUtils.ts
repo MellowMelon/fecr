@@ -10,6 +10,7 @@ import {
 	GameData,
 } from "./types";
 import {assertNever} from "./Utils";
+import {getNewLevel} from "./CharAdvance";
 
 export type TeamCharList = {
 	index: number;
@@ -77,12 +78,7 @@ export function createHistoryEntry(
 	const gameCharData = game.chars[char.name];
 	const id = getNextHistoryID(char);
 
-	let level: number;
-	if (char.history.length) {
-		level = _.last(char.history)!.level;
-	} else {
-		level = char.baseLevel || gameCharData.baseLevel;
-	}
+	const level = getNewLevel(game, char);
 
 	if (type === "class") {
 		return {

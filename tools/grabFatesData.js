@@ -278,6 +278,7 @@ const classMappingRaw = [
 	["Troubadour"],
 	["Strategist"],
 	["Maid, Butler", "Maid/Butler"],
+	["Maid, Butler", "Maid/Butler (max lv 40)"],
 	["Wolfskin"],
 	["Wolfssegner"],
 	["Dread Fighter"],
@@ -505,6 +506,7 @@ async function processAll(finalJSON) {
 		} else if (chap16Alts.has(name)) {
 			addBases("r", c, name);
 			addBases("r", c, name, name + " (Chapter 16)");
+			c.baseClass = "Maid/Butler (max lv 40)";
 			c.defaultAltName = "Chapter 1";
 			c.basesAlts[0].name = "Chapter 16";
 		} else if (name === "Kaze") {
@@ -712,6 +714,10 @@ async function main() {
 			Troubadour: {name: "Troubadour", requiredGender: ""},
 			Strategist: {name: "Strategist", requiredGender: ""},
 			"Maid/Butler": {name: "Maid/Butler", requiredGender: ""},
+			"Maid/Butler (max lv 40)": {
+				name: "Maid/Butler (max lv 40)",
+				requiredGender: "",
+			},
 			Wolfskin: {name: "Wolfskin", requiredGender: ""},
 			Wolfssegner: {name: "Wolfssegner", requiredGender: ""},
 			"Dread Fighter": {name: "Dread Fighter", requiredGender: ""},

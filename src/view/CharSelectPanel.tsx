@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Image, Paragraph} from "grommet";
+import {Box, Button, Image, Paragraph} from "grommet";
 
 import {CharName, GameData, Team} from "../types";
 import {doesCharHaveData} from "../CharUtils";
@@ -83,10 +83,20 @@ const CharSelectPanel: React.FunctionComponent<Props> = function(props: Props) {
 		);
 	}
 
+	const onResetAll = function() {
+		dispatch({type: "resetGame"});
+	};
+
 	return (
 		<Box>
 			{onTeamFrag}
 			{offTeamFrag}
+			<Button
+				alignSelf="center"
+				margin={{top: "medium"}}
+				label="Reset All"
+				onClick={onResetAll}
+			/>
 		</Box>
 	);
 };

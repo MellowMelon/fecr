@@ -1,18 +1,9 @@
 import React, {useState} from "react";
+import {Button, Box, Heading, Layer, Markdown, Tabs, Tab, Text} from "grommet";
 import {
-	Button,
-	Box,
-	Heading,
-	Layer,
-	Markdown,
-	Menu,
-	Tabs,
-	Tab,
-	Text,
-} from "grommet";
-import {
+	CircleQuestion as CircleQuestionIcon,
 	FormClose as FormCloseIcon,
-	Menu as MenuIcon,
+	Share as ShareIcon,
 	Undo as UndoIcon,
 	Redo as RedoIcon,
 } from "grommet-icons";
@@ -33,40 +24,48 @@ type Props = {
 };
 
 const GameMain: React.FunctionComponent<Props> = function(props: Props) {
+	const [showHelp, setShowHelp] = useState<boolean>(false);
 	const [showPersist, setShowPersist] = useState<boolean>(false);
 
 	const {state, dispatch} = props;
 	const {team, charTab, charName} = state;
 	const game = state.game!;
 
-	const topMenuItems = [
-		{
-			label: "Back to Game Select",
-			onClick: () => dispatch({type: "deselectGame"}),
-		},
-		{label: "Save / Load", onClick: () => setShowPersist(true)},
-	];
+	let helpModal = null;
+	if (showHelp) {
+		const onCloseHelp = () => setShowHelp(false);
+
+		helpModal = (
+			<Layer onEsc={onCloseHelp} onClickOutside={onCloseHelp}>
+				<Box pad="medium" overflow="auto">
+					<Box direction="row" align="center">
+						<Heading margin="none" level={4}>
+							Getting Started
+						</Heading>
+						<Box flex />
+						<Button icon={<FormCloseIcon />} onClick={onCloseHelp} />
+					</Box>
+					<Markdown>{getHelp(game, "start")}</Markdown>
+				</Box>
+			</Layer>
+		);
+	}
 
 	let persistModal = null;
 	if (showPersist) {
-		const onReset = function() {
-			dispatch({type: "resetGame"});
-			setShowPersist(false);
-		};
-		const onClose = () => setShowPersist(false);
+		const onClosePersist = () => setShowPersist(false);
 
 		persistModal = (
-			<Layer onEsc={onClose} onClickOutside={onClose}>
+			<Layer onEsc={onClosePersist} onClickOutside={onClosePersist}>
 				<Box pad="medium" overflow="auto">
 					<Box direction="row" align="center">
 						<Heading margin="none" level={4}>
 							Save / Load
 						</Heading>
 						<Box flex />
-						<Button icon={<FormCloseIcon />} onClick={onClose} />
+						<Button icon={<FormCloseIcon />} onClick={onClosePersist} />
 					</Box>
 					<Markdown>{getHelp(game, "saveLoad")}</Markdown>
-					<Button label="Reset" onClick={onReset} />
 				</Box>
 			</Layer>
 		);
@@ -107,14 +106,25 @@ const GameMain: React.FunctionComponent<Props> = function(props: Props) {
 	return (
 		<Box gap="medium">
 			<Box direction="row">
-				<Menu icon={<MenuIcon />} items={topMenuItems} />
+				<Button
+					icon={<CircleQuestionIcon />}
+					title="Help"
+					onClick={() => setShowHelp(true)}
+				/>
+				<Button
+					icon={<ShareIcon />}
+					title="Save/Load"
+					onClick={() => setShowPersist(true)}
+				/>
 				<Button
 					icon={<UndoIcon />}
+					title="Undo"
 					disabled={!canUndo}
 					onClick={() => dispatch({type: "undo"})}
 				/>
 				<Button
 					icon={<RedoIcon />}
+					title="Redo"
 					disabled={!canRedo}
 					onClick={() => dispatch({type: "redo"})}
 				/>
@@ -140,6 +150,7 @@ const GameMain: React.FunctionComponent<Props> = function(props: Props) {
 					{reportTabBody}
 				</Tab>
 			</Tabs>
+			{helpModal}
 			{persistModal}
 		</Box>
 	);

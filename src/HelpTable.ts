@@ -70,6 +70,15 @@ so a guessed or approximate level is okay. The main exception is when a Class
 Change's minimum stats are significant, in which case it matters whether a stat
 boost came before or after.`,
 	},
+	maxBoostCorrectnessBlurb: {
+		all: ` `,
+		14: `Unfortunately, the simulation does get a bit more accurate if you
+provide the exact times of these increases, which is onerous. It's up to you
+how meticulously to keep track of it all.`,
+		16: `The simulation does get a bit more accurate if you provide the exact
+times of these increases. But in many playthroughs, they will have minimal
+effect.`,
+	},
 	reportIntro: `The Report tab is the payoff of using this tool. It gives a
 visual representation of how likely each stat was to take each value and
 compares this to the values you specified in Actual Stats entries from the edit
@@ -100,28 +109,26 @@ increased, such as from a spring.`,
 increased, such as from an Energy Drop or tea time.`,
 	},
 	histIntro_maxboost: {
-		all: `A **Max Stat Increase** entry is for noting anything that affected
-a character's maximum stats.`,
+		all: `A **Max Stat Increase** entry is for noting any modifiers to a
+character's maximum stats.`,
 		14: `A **Max Stat Increase** entry is for when a character's max stats
-increased due to My Castle statues. Unfortunately, the simulation does get a
-bit more accurate if you provide the exact times of these increases, which is
-onerous. It's up to you how meticulously to keep track of it all.`,
+increased due to My Castle statues.`,
 		16: `A **Max Stat Increase** entry is for when a Saint
-Statue was fully restored and increased the maximum stats for a character.`,
+Statue was fully restored and increased the maximum stats for all characters.`,
 	},
 	histIntro_equipchange: {
-		all: `An **Equipment Change** entry is for when the character equips or
-unequips something that affects growths or maximum stats. Equipping a new item
+		all: `An **Equipment Change** entry is for when the character equipped or
+unequipped something that affects growths or maximum stats. Equipping a new item
 is considered to unequip the old one by the simulator.`,
-		15: `An **Equipment Change** entry is for when the character equips an
+		15: `An **Equipment Change** entry is for when the character equipped an
 astral shard from the DLC. These items affect growth rates. Equipping a new
 item is considered to unequip the old one by the simulator.`,
 	},
 	histIntro_ability: {
-		all: `An **Ability Change** entry is for when the character equips or
-unequips an ability. Multiple abilities can be equipped at once`,
-		14: `An **Ability Change** entry is for when the character equips or
-unequips Aptitude, which increases growths.`,
+		all: `An **Ability Change** entry is for when the character equipped or
+unequipped an ability. Multiple abilities can be equipped at once`,
+		14: `An **Ability Change** entry is for when the character equipped or
+unequipped Aptitude, which increases growths.`,
 	},
 	histIntro_checkpoint: `An **Actual Stats** entry is where you enter the stats
 your character had in the game. The Report tab can view each entry you add.
@@ -151,7 +158,8 @@ were in the long run.`,
 	report_medianDiffNB: `The ahead/behind value, with stat boosts ignored.`,
 	report_averageNB: `The average, with stat boosts ignored.`,
 	report_minimum: `The highest value among the base stat and all class minimums
-for classes the character has been in.`,
+for classes the character has been in, with the current class modifier
+applied.`,
 	report_maximum: {
 		all: `The maximum value of this stat for the character.`,
 		16: `The current maximum of this stat, taking into account the
@@ -191,6 +199,7 @@ equipment, if any.`,
 // We define this type explicitly so that this file's exported function can
 // type-check the key argument.
 type MainHelpTable = {
+	start: HelpEntry;
 	saveLoad: HelpEntry;
 	bases: HelpEntry;
 	hist_checkpoint: HelpEntry;
@@ -206,14 +215,24 @@ type MainHelpTable = {
 export type HelpKey = keyof MainHelpTable;
 
 const mainHelpTable: MainHelpTable = {
+	start: `
+This tool is for players of the Fire Emblem games to see how well the random
+level ups are treating their characters in a playthrough.
+
+First, select a character from the Select tab. In the Edit tab, enter the class
+changes, stat boosts, and other important events as they happen to that
+character. Each time you want to check out how the character is doing, add an
+Actual Stats entry and view it in the Report tab.
+
+Click any circled question mark for more information on how that part of the
+page works.
+`,
 	saveLoad: `
 To **save**, copy the URL in your address bar. This URL updates after
 every change.
 
-To **load**, paste a URL saved previously.
-
-If you'd like to start over, use the button below. But if you care about your
-current team at all, copy the current URL before clicking this.
+To **load**, paste a URL saved previously. You can also share the URL with
+others.
 `,
 	bases: `
 {{basesBlurb}}
@@ -241,6 +260,8 @@ current team at all, copy the current URL before clicking this.
 `,
 	hist_maxboost: `
 {{histIntro_maxboost}}
+
+{{maxBoostCorrectnessBlurb}}
 `,
 	hist_ability: `
 {{histIntro_ability}}

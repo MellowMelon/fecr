@@ -41,9 +41,7 @@ const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 
 	return (
 		<Box align="center" gap="small">
-			<Heading truncate level={1}>
-				Fire Emblem Character Reports
-			</Heading>
+			<Heading level={1}>Fire Emblem Character Reports</Heading>
 			<Text>
 				A tool to definitively gauge whether Fire Emblem's random level ups have
 				been kind to you.

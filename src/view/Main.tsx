@@ -18,7 +18,7 @@ type ReducerType = (s: ViewState, a: ViewAction) => ViewState;
 const grommetTheme: any = {
 	global: {
 		colors: {
-			brand: "#FF6633",
+			brand: "#FF5533",
 			"neutral-1": "#4477FF",
 		},
 		focus: {
