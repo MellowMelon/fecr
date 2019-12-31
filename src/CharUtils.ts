@@ -39,6 +39,20 @@ function lastIndexOfCheckpoint(game: GameData, char: Char): number {
 	return -1;
 }
 
+export function getCheckpointIndex(
+	game: GameData,
+	char: Char,
+	histIndex: number
+): number {
+	let cpIndex = 0;
+	for (let i = 0; i < histIndex; i += 1) {
+		if (char.history[i].type === "checkpoint") {
+			cpIndex += 1;
+		}
+	}
+	return cpIndex;
+}
+
 export function getTeamCharList(
 	game: GameData,
 	team: Team | null,

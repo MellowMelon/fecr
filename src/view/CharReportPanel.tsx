@@ -141,41 +141,57 @@ function renderStatPanel(
 		pdgDims = pdgSmallDims;
 	}
 
-	let realStatBox: React.ReactNode = (
-		<Box width="xsmall" align="center">
-			<Text size="large">{cr.charRealStats[statName]}</Text>
-		</Box>
-	);
-	if (isXSmall) {
-		realStatBox = null;
+	let medianBox: React.ReactNode = null;
+	let realStatBox: React.ReactNode = null;
+	let percBox: React.ReactNode = null;
+	let medDiffBox: React.ReactNode = null;
+
+	if (!cr.charRealStats) {
+		const medianColor = getMedDiffColor(0);
+		medianBox = (
+			<Box width="xsmall" align="center">
+				<Text color={medianColor} size="large">
+					{cr.sdMedian[statName]}
+				</Text>
+			</Box>
+		);
 	}
 
-	const perc = postprocessPercentRange(
-		String(getReportDetailsValue(game, cr, statName, "percentiles"))
-	);
-	const percColor = getPercColor(cr.sdPercentiles[statName]);
-	const percTextSize = isXSmall ? "medium" : "large";
-	const percBox: React.ReactNode = (
-		<Box background={percColor} width="xsmall" align="center">
-			<Text textAlign="center" size={percTextSize}>
-				{perc}
-			</Text>
-		</Box>
-	);
+	if (cr.charRealStats && !isXSmall) {
+		realStatBox = (
+			<Box width="xsmall" align="center">
+				<Text size="large">{cr.charRealStats[statName]}</Text>
+			</Box>
+		);
+	}
 
-	const medDiff = cr.sdMedianDiff[statName];
-	const medDiffColor = getMedDiffColor(parseFloat(medDiff));
-	// Use endash for negative sign.
-	const medDiffDisp = medDiff.replace("-", "\u2013");
-	let medDiffBox: React.ReactNode = (
-		<Box width="xsmall" align="center">
-			<Text color={medDiffColor} size="large" weight="bold">
-				{medDiffDisp}
-			</Text>
-		</Box>
-	);
-	if (isSmall) {
-		medDiffBox = null;
+	if (cr.sdPercentiles) {
+		const perc = postprocessPercentRange(
+			String(getReportDetailsValue(game, cr, statName, "percentiles"))
+		);
+		const percColor = getPercColor(cr.sdPercentiles[statName]);
+		const percTextSize = isXSmall ? "medium" : "large";
+		percBox = (
+			<Box background={percColor} width="xsmall" align="center">
+				<Text textAlign="center" size={percTextSize}>
+					{perc}
+				</Text>
+			</Box>
+		);
+	}
+
+	if (cr.sdMedianDiff && !isSmall) {
+		const medDiff = cr.sdMedianDiff[statName];
+		const medDiffColor = getMedDiffColor(parseFloat(medDiff));
+		// Use endash for negative sign.
+		const medDiffDisp = medDiff.replace("-", "\u2013");
+		medDiffBox = (
+			<Box width="xsmall" align="center">
+				<Text color={medDiffColor} size="large" weight="bold">
+					{medDiffDisp}
+				</Text>
+			</Box>
+		);
 	}
 
 	const accordionLabel = (
@@ -185,6 +201,7 @@ function renderStatPanel(
 					{statName}
 				</Text>
 			</Box>
+			{medianBox}
 			{realStatBox}
 			{medDiffBox}
 			{percBox}
@@ -192,7 +209,7 @@ function renderStatPanel(
 			<Box flex={false} margin={{left: "medium"}}>
 				<ProbDistGraph
 					dist={cr.statsDist[statName]}
-					curr={cr.charRealStats[statName]}
+					curr={cr.charRealStats && cr.charRealStats[statName]}
 					dims={pdgDims}
 				/>
 			</Box>

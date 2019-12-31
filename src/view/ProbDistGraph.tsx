@@ -64,7 +64,7 @@ const defaultDims: GraphDims = {
 
 export type Props = {
 	dist: ProbDist.ProbDist;
-	curr: number;
+	curr: number | null;
 	dims?: Partial<GraphDims>;
 	dpr?: number;
 };
@@ -120,20 +120,20 @@ function pruneDist(
 
 function shouldLabel(
 	x: number,
-	curr: number,
+	curr: number | null,
 	minVal: number,
 	maxVal: number,
 	dims: GraphDims
 ): boolean {
 	const div = dims.labelAuxDivisor;
+	const currInRange = curr !== null && curr >= minVal && curr <= maxVal;
 	// True if no label would be drawn at all without some override.
-	const wouldHaveNoLabel =
-		minVal > getFloorMult(maxVal, div) && !(curr >= minVal && curr <= maxVal);
+	const wouldHaveNoLabel = minVal > getFloorMult(maxVal, div) && !currInRange;
 	// True if this label is too close to the current value and needs hiding.
 	const omitCloseToCurr =
 		!dims.horizontal &&
-		curr >= minVal &&
-		curr <= maxVal &&
+		curr !== null &&
+		currInRange &&
 		Math.abs(x - curr) <= 1 &&
 		dims.barSize + dims.barSpacing < dims.labelWidth;
 	return (
@@ -231,7 +231,7 @@ function drawCanvas(ctx: CanvasRenderingContext2D, props: Props) {
 	ctx.fill();
 
 	// Highlight current value
-	if (curr >= minVal && curr <= maxVal) {
+	if (curr !== null && curr >= minVal && curr <= maxVal) {
 		ctx.fillStyle = dims.lightFocusColor;
 		ctx.beginPath();
 		if (dims.horizontal) {

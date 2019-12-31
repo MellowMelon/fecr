@@ -29,7 +29,7 @@ export type CharCheckpoint = {
 	name: CharName;
 	charClass: CharClass;
 	level: number;
-	stats: StatsTable;
+	stats: StatsTable | null;
 	dist: StatsDist;
 	distNB: StatsDist;
 	growths: StatsTable;

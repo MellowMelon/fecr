@@ -247,6 +247,9 @@ others.
 {{histIntro_checkpoint}}
 
 {{inputStatsBlurb}}
+
+The Set to Medians button replaces the stats with the computed medians. It's
+there in case you want to use this tool just for planning and viewing averages.
 `,
 	hist_class: `
 {{histIntro_class}}

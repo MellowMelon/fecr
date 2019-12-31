@@ -1,5 +1,5 @@
 import React, {memo} from "react";
-import {Box, CheckBox, DropButton, Heading, Text} from "grommet";
+import {Box, Button, CheckBox, DropButton, Heading, Text} from "grommet";
 import {Alert as AlertIcon} from "grommet-icons";
 
 import {
@@ -90,6 +90,10 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 		dispatch({type: "updateCharHistoryStats", histIndex, stats});
 	};
 
+	const onSetStatsToMedians = function() {
+		dispatch({type: "updateCharHistoryStatsMedians", histIndex});
+	};
+
 	const onSelectClass = function(c: CharClass) {
 		dispatch({type: "updateCharHistoryClass", histIndex, newClass: c});
 	};
@@ -120,6 +124,9 @@ const HistoryEntryView: React.FunctionComponent<Props> = function(
 						errorStr
 					)}
 					<InputStats game={game} value={h.stats} onChange={onChangeStats} />
+					<Box direction="row">
+						<Button label="Set to Medians" onClick={onSetStatsToMedians} />
+					</Box>
 				</Box>
 			);
 		},

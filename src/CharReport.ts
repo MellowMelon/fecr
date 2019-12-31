@@ -11,7 +11,7 @@ type StatsPercTable = {[stat: string]: [number, number]};
 export type CharReport = {
 	charClass: CharClass;
 	charLevel: number;
-	charRealStats: StatsTable;
+	charRealStats: StatsTable | null;
 	classStatMods: StatsTable;
 	minStats: StatsTable;
 	boosts: StatsTable;
@@ -30,12 +30,12 @@ export type CharReport = {
 	statsDist: StatsDist;
 	sdAverage: StatsStrTable;
 	sdMedian: StatsStrTable;
-	sdMedianDiff: StatsStrTable;
-	sdPercentiles: StatsPercTable;
+	sdMedianDiff: StatsStrTable | null;
+	sdPercentiles: StatsPercTable | null;
 	sdNBAverage: StatsStrTable;
 	sdNBMedian: StatsStrTable;
-	sdNBMedianDiff: StatsStrTable;
-	sdNBPercentiles: StatsPercTable;
+	sdNBMedianDiff: StatsStrTable | null;
+	sdNBPercentiles: StatsPercTable | null;
 };
 
 const reportDetailsLabels = {
@@ -84,8 +84,8 @@ type DistAgg = {
 	sdAverageNum: StatsTable;
 	sdAverage: StatsStrTable;
 	sdMedian: StatsStrTable;
-	sdMedianDiff: StatsStrTable;
-	sdPercentiles: StatsPercTable;
+	sdMedianDiff: StatsStrTable | null;
+	sdPercentiles: StatsPercTable | null;
 };
 
 function halfIntToString(halfInt: number): string {
@@ -96,21 +96,28 @@ function halfIntToString(halfInt: number): string {
 	return halfInt.toFixed(0);
 }
 
-function computeDistDerived(stats: StatsTable, dist: StatsDist): DistAgg {
+function computeDistDerived(
+	stats: StatsTable | null,
+	dist: StatsDist
+): DistAgg {
 	const sdAverageNum = _.mapValues(dist, pd => ProbDist.getAverage(pd));
 	const sdAverage = _.mapValues(sdAverageNum, x => x.toFixed(2));
 	const sdMedian = _.mapValues(dist, ProbDist.getMedian);
 	const sdMedianDisp = _.mapValues(sdMedian, halfIntToString);
-	const sdMedianDiff = _.mapValues(sdMedian, (med, statName) => {
-		const curr = stats[statName];
-		const diff = halfIntToString(curr - med);
-		if (curr > med) return "+" + diff;
-		if (curr < med) return diff;
-		return "0";
-	});
-	const sdPercentiles = _.mapValues(dist, (pd, statName) =>
-		computePercentiles(pd, statName, stats[statName])
-	);
+	const sdMedianDiff =
+		stats &&
+		_.mapValues(sdMedian, (med, statName) => {
+			const curr = stats[statName];
+			const diff = halfIntToString(curr - med);
+			if (curr > med) return "+" + diff;
+			if (curr < med) return diff;
+			return "0";
+		});
+	const sdPercentiles =
+		stats &&
+		_.mapValues(dist, (pd, statName) =>
+			computePercentiles(pd, statName, stats[statName])
+		);
 	return {
 		sdAverageNum,
 		sdAverage,
@@ -281,25 +288,29 @@ export function getReportDetailsValue(
 	key: ReportDetailKey
 ): number | string {
 	if (key === "current") {
-		return cr.charRealStats[statName];
+		return cr.charRealStats ? cr.charRealStats[statName] : "n/a";
 	} else if (key === "classMod") {
 		return cr.classStatMods[statName];
 	} else if (key === "percentiles") {
-		return renderPercentRange(cr.sdPercentiles[statName]);
+		return cr.sdPercentiles
+			? renderPercentRange(cr.sdPercentiles[statName])
+			: "n/a";
 	} else if (key === "median") {
 		return cr.sdMedian[statName];
 	} else if (key === "medianDiff") {
-		return cr.sdMedianDiff[statName];
+		return cr.sdMedianDiff ? cr.sdMedianDiff[statName] : "n/a";
 	} else if (key === "average") {
 		return cr.sdAverage[statName];
 	} else if (key === "boost") {
 		return cr.boosts[statName];
 	} else if (key === "percentilesNB") {
-		return renderPercentRange(cr.sdNBPercentiles[statName]);
+		return cr.sdNBPercentiles
+			? renderPercentRange(cr.sdNBPercentiles[statName])
+			: "n/a";
 	} else if (key === "medianNB") {
 		return cr.sdNBMedian[statName];
 	} else if (key === "medianDiffNB") {
-		return cr.sdNBMedianDiff[statName];
+		return cr.sdNBMedianDiff ? cr.sdNBMedianDiff[statName] : "n/a";
 	} else if (key === "averageNB") {
 		return cr.sdNBAverage[statName];
 	} else if (key === "minimum") {
