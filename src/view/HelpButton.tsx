@@ -20,6 +20,8 @@ const HelpButton: React.FunctionComponent<Props> = function(props: Props) {
 
 	let helpModal = null;
 	if (show) {
+		// We have some extra margins at the bottom to try to deal with a phone bug
+		// that doesn't allow scrolling for just-too-large modals.
 		helpModal = (
 			<Layer margin="large" onEsc={onClose} onClickOutside={onClose}>
 				<Box pad="medium" overflow="auto">
@@ -30,7 +32,7 @@ const HelpButton: React.FunctionComponent<Props> = function(props: Props) {
 						<Box flex />
 						<Button icon={<FormCloseIcon />} onClick={onClose} />
 					</Box>
-					<Box>
+					<Box margin={{bottom: "medium"}}>
 						<Markdown>{props.md}</Markdown>
 					</Box>
 				</Box>

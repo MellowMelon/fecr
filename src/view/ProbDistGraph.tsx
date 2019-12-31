@@ -66,6 +66,7 @@ export type Props = {
 	dist: ProbDist.ProbDist;
 	curr: number;
 	dims?: Partial<GraphDims>;
+	dpr?: number;
 };
 
 function getFloorMult(x: number, div: number): number {
@@ -229,6 +230,28 @@ function drawCanvas(ctx: CanvasRenderingContext2D, props: Props) {
 	ctx.rect(0, 0, ctx.canvas.width, ctx.canvas.height);
 	ctx.fill();
 
+	// Highlight current value
+	if (curr >= minVal && curr <= maxVal) {
+		ctx.fillStyle = dims.lightFocusColor;
+		ctx.beginPath();
+		if (dims.horizontal) {
+			ctx.rect(
+				0,
+				getBarPos(curr),
+				dims.barMaxLen + dims.labelWidth,
+				aux.barTotalSize
+			);
+		} else {
+			ctx.rect(
+				getBarPos(curr),
+				0,
+				aux.barTotalSize,
+				dims.barMaxLen + dims.labelHeight
+			);
+		}
+		ctx.fill();
+	}
+
 	// Axes marks
 	ctx.strokeStyle = dims.axisMarkColor;
 	if (dims.axisMarkLabelFontSize) {
@@ -261,28 +284,6 @@ function drawCanvas(ctx: CanvasRenderingContext2D, props: Props) {
 		}
 	});
 	ctx.stroke();
-
-	// Highlight current value
-	if (curr >= minVal && curr <= maxVal) {
-		ctx.fillStyle = dims.lightFocusColor;
-		ctx.beginPath();
-		if (dims.horizontal) {
-			ctx.rect(
-				0,
-				getBarPos(curr),
-				dims.barMaxLen + dims.labelWidth,
-				aux.barTotalSize
-			);
-		} else {
-			ctx.rect(
-				getBarPos(curr),
-				0,
-				aux.barTotalSize,
-				dims.barMaxLen + dims.labelHeight
-			);
-		}
-		ctx.fill();
-	}
 
 	// Axes
 	ctx.strokeStyle = dims.axisColor;
@@ -333,15 +334,28 @@ function drawCanvas(ctx: CanvasRenderingContext2D, props: Props) {
 
 const ProbDistGraph: React.FunctionComponent<Props> = function(props: Props) {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const dpr = props.dpr || 2;
 
 	useLayoutEffect(() => {
 		const ctx = canvasRef.current && canvasRef.current.getContext("2d");
 		if (ctx) {
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 			drawCanvas(ctx, props);
 		}
 	});
 
 	const [width, height] = getCanvasSize(props);
-	return <canvas ref={canvasRef} width={width} height={height} />;
+	const style = {
+		width: width + "px",
+		height: height + "px",
+	};
+	return (
+		<canvas
+			ref={canvasRef}
+			width={dpr * width}
+			height={dpr * height}
+			style={style}
+		/>
+	);
 };
 export default ProbDistGraph;
