@@ -94,6 +94,7 @@ const InputNumber: React.FunctionComponent<Props> = function(props: Props) {
 			<Box background="light-1">
 				<MaskedInput
 					plain
+					type="number"
 					size="medium"
 					mask={[{regexp: /^[+\-]?[0-9]*$/}]}
 					value={currDisp}
