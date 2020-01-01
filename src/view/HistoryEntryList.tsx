@@ -35,8 +35,12 @@ const HistoryEntryList: React.FunctionComponent<Props> = function(
 		INIT_RENDER_COUNT
 	);
 	useEffect(() => {
-		if (histRenderCount < histCount) {
-			setHistRenderCount(histRenderCount + 1);
+		let c = histRenderCount;
+		if (c < histCount) {
+			const id = setTimeout(() => {
+				setHistRenderCount(c + 1);
+			}, 20);
+			return () => clearTimeout(id);
 		}
 	});
 
