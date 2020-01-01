@@ -88,7 +88,12 @@ Each stat has a summary showing the actual value, how ahead or behind it is,
 how good that value is as a percentile range, and a graph of the stat's
 probability distribution. (On smaller devices, some items may not be visible in
 the summary.) The bars on the graph represent the probabilities of the stat
-assuming each value.`,
+assuming each value.
+
+Using the slider, you can also view info for all the levels the character went
+through in between your Actual Stats entries. When displaying data with no
+actual stats numbers, the summary will just show the median in yellow and the
+graph, with no percentiles or anything else.`,
 	histIntro_class: {
 		all: `A **Class Change** entry is for when a character promoted or
 reclassed. This will apply the modifiers and growths of that class until the

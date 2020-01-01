@@ -88,7 +88,7 @@ function loadStateFromUnser(unser: UnserializeResult): ViewState {
 	const charTab = charName ? "report" : "select";
 
 	return {
-		viewingGame: true,
+		viewingGame: !!charName,
 		game,
 		team,
 		charName,

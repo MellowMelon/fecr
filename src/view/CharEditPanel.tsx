@@ -57,10 +57,10 @@ const CharEditPanel: React.FunctionComponent<Props> = function(props: Props) {
 				histErrorTable={histErrorTable}
 				dispatch={dispatch}
 			/>
+			<HistoryAdd game={game} dispatch={dispatch} />
 			<Box alignSelf="center">
 				<Button label="Reset Character" onClick={onResetCharacter} />
 			</Box>
-			<HistoryAdd game={game} dispatch={dispatch} />
 		</Box>
 	);
 };

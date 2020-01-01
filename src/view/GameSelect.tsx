@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React from "react";
-import {Box, Button, Heading, Image, Text} from "grommet";
+import {Box, Button, Heading, Image, Markdown, Text} from "grommet";
 
 import {GameID} from "../types";
 import gameTable from "../GameTable";
@@ -10,6 +10,11 @@ type Props = {
 	initialID: GameID | null;
 	dispatch: (a: ViewAction) => void;
 };
+
+const creditsMD = `
+- Nintendo and Intelligent Systems, for the original material.
+- [Serene's Forest](https://serenesforest.net), for the game data and assets.
+`;
 
 const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 	const gameEls: React.ReactElement[] = [];
@@ -48,6 +53,8 @@ const GameSelect: React.FunctionComponent<Props> = function(props: Props) {
 			</Text>
 			<Text>Select the game for which you want to input characters.</Text>
 			{gameEls}
+			<Heading level={2}>Acknowledgements</Heading>
+			<Markdown>{creditsMD}</Markdown>
 		</Box>
 	);
 };
