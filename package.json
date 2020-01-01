@@ -1,18 +1,17 @@
 {
-	"name": "fe-char-ts",
+	"name": "fecr",
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
 		"check": "run-p -s lint ts test",
 		"pretty": "pretty-quick --write --branch master",
-		"pretty-all": "prettier \"{src,test}/**/*.{js,jsx,json,css,ts,tsx}\" --write",
-		"lint": "eslint --cache \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+		"pretty-all": "prettier \"{data,src,test,tools}/**/*.{js,jsx,json,ts,tsx}\" --write",
+		"lint": "eslint --cache \"{data,src,test,tools}/**/*.{js,jsx,json,ts,tsx}\"",
 		"ts": "tsc --noEmit",
 		"test": "NODE_NO_WARNINGS=1 ava",
 		"build": "webpack",
 		"watch": "webpack -w",
-		"build-prod": "NODE_ENV=production webpack",
-		"start": "http-server public -c-1 -o index.html"
+		"build-prod": "NODE_ENV=production webpack"
 	},
 	"ava": {
 		"compileEnhancements": false,

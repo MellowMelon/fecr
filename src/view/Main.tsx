@@ -1,5 +1,6 @@
 import React, {useReducer} from "react";
-import {Box, Grommet, Layer, Text} from "grommet";
+import {Anchor, Box, Grommet, Layer, Text} from "grommet";
+import {Github as GithubIcon} from "grommet-icons";
 
 import {ViewState, ViewAction} from "../state/types";
 import {reduceAction} from "../state/Reducer";
@@ -97,16 +98,25 @@ const Main: React.FunctionComponent<Props> = function(props: Props) {
 
 	return (
 		<Grommet theme={grommetTheme}>
-			<Box fill align="center" gap="medium">
+			<Box fill align="center">
 				<Box width="large">
 					{mainView}
 					{errorModal}
 				</Box>
-				<Box width="medium" margin={{top: "medium"}}>
-					<Text size="9px" color="dark-1">
-						<em>Fire Emblem</em> is copyrighted by Nintendo and Intelligent
-						Systems. This site has no affiliation with the copyright holders.
-					</Text>
+				<Box width="large" align="center" margin={{top: "medium"}} gap="small">
+					<Box direction="row">
+						<Anchor
+							icon={<GithubIcon />}
+							href="https://github.com/MellowMelon/fecr"
+							target="_blank"
+						/>
+					</Box>
+					<Box width="medium">
+						<Text size="9px" color="dark-1">
+							<em>Fire Emblem</em> is copyrighted by Nintendo and Intelligent
+							Systems. This site has no affiliation with the copyright holders.
+						</Text>
+					</Box>
 				</Box>
 			</Box>
 		</Grommet>

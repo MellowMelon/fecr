@@ -1,6 +1,14 @@
 import _ from "lodash";
 import React, {memo, useState, useMemo} from "react";
-import {Accordion, Box, Paragraph, RangeInput, Select, Text} from "grommet";
+import {
+	Accordion,
+	Anchor,
+	Box,
+	Paragraph,
+	RangeInput,
+	Select,
+	Text,
+} from "grommet";
 
 import {Char, Team, GameData} from "../types";
 import {AdvanceFinal, CharCheckpoint, computeChar} from "../CharAdvance";
@@ -124,7 +132,6 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 			[game, team, char]
 		);
 	} catch (ex) {
-		// TODO: where to report bugs?
 		return (
 			<Box border={{color: "status-error", size: "large"}} pad="small">
 				{charHeader}
@@ -133,7 +140,11 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 					this character. ({ex.message})
 				</Paragraph>
 				<Paragraph color="status-error">
-					You can report this as a bug.
+					You can{" "}
+					<Anchor href="https://github.com/MellowMelon/fecr">
+						report this as a bug
+					</Anchor>
+					.
 				</Paragraph>
 			</Box>
 		);
