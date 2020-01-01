@@ -1,5 +1,7 @@
 import {GameData} from "./types";
 
+// This file is a manual bulk import of the data directory with game JSONs.
+
 const gameTable: {[id: string]: GameData} = {};
 
 import Game3H from "../data/3h.json";

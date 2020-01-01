@@ -12,6 +12,10 @@ import {
 } from "../types";
 import {UndoRedo} from "./OpsUndoRedo";
 
+// Types for the state and actions used by the reducer in views. In general,
+// this folder, relative to the one above, contains code specific to the state
+// needed for the views themselves, instead of general game logic.
+
 export type CharTab = "select" | "edit" | "report";
 
 export type LoadError = string;

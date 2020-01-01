@@ -2,6 +2,8 @@ import _ from "lodash";
 import {GameData} from "./types";
 import {getReportDetailsRows, getReportDetailsLabel} from "./CharReport";
 
+// Contains all the text for the help buttons.
+
 // The help is tailored to each game but still reuses a lot of text, so this
 // file's setup is a bit complicated. Each help entry can be a simple string,
 // an object mapping game IDs to specific strings, or (rarely) a function
@@ -13,6 +15,9 @@ import {getReportDetailsRows, getReportDetailsLabel} from "./CharReport";
 // main help strings can include these fragments with {{fragment name}}.
 // Fragments can be included in each other recursively.
 
+// If any strings need to be empty, enter a single space so that the value is
+// not mistaken for missing by the code.
+
 type HelpEntry =
 	| string
 	| {[gameID: string]: string}
@@ -20,9 +25,8 @@ type HelpEntry =
 
 type HelpTable = {[name: string]: HelpEntry};
 
-// If any of these need to be empty, enter a single space so that the value is
-// not mistaken for missing by hte code.
-
+// This table contains the fragments, which importers of this file cannot
+// directly use. They get included as parts of actual help entries.
 const fragments: HelpTable = {
 	histAddBlurb: `For the simulator to correctly determine the likelihood of the
 character's stats obtaining each value, it needs to know everything that could
@@ -219,6 +223,8 @@ type MainHelpTable = {
 
 export type HelpKey = keyof MainHelpTable;
 
+// This table contains the keys that other code refers to when importing this
+// file.
 const mainHelpTable: MainHelpTable = {
 	start: `
 This tool is for players of the Fire Emblem games to see how well the random
@@ -298,10 +304,16 @@ others.
 	},
 };
 
+// The rest of this file is plumbing and implementation.
+
+// Maps keys corresponding to (game, main entry) or (game, fragment pairs) to
+// their resolved text, which never changes.
 const resolveCache: {[key: string]: string} = {};
 
+// Finds the {{}} syntax for including fragments in other help entries.
 const fragmentRE = /\{\{([a-zA-Z0-9_]+)\}\}/g;
 
+// Helper. Find and replace all the fragments in an entry.
 function resolveFragments(game: GameData, str: string): string {
 	let m = fragmentRE.exec(str);
 	while (m) {
@@ -320,6 +332,8 @@ function resolveFragments(game: GameData, str: string): string {
 	return str;
 }
 
+// Helper. Parse the multivalued format of a help entry and return a string
+// without any fragments resolved.
 function resolvePreFragments(
 	game: GameData,
 	cacheKey: string,
@@ -336,6 +350,8 @@ function resolvePreFragments(
 	}
 }
 
+// Given an entry in the main table or a fragment, turn it into the final
+// help string. Cache it if it wasn't already.
 function resolve(game: GameData, cacheKey: string, entry: HelpEntry): string {
 	const realCacheKey = `${game.id}_${cacheKey}`;
 	if (resolveCache[realCacheKey]) {
@@ -350,6 +366,7 @@ function resolve(game: GameData, cacheKey: string, entry: HelpEntry): string {
 	return final;
 }
 
+// Main export.
 function getHelp(game: GameData, key: HelpKey): string {
 	if (!mainHelpTable[key]) {
 		return `(Missing help table key ${key})`;

@@ -1,3 +1,5 @@
+// A quick undo-redo data structure using immutability.
+
 export type UndoRedo<T> = {
 	entries: T[];
 	currUndoIndex: number;

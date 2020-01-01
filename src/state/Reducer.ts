@@ -15,6 +15,10 @@ import {CharTab, ViewState, ViewAction} from "./types";
 import {createEmpty, loadState} from "./Create";
 import * as OpsUndoRedo from "./OpsUndoRedo";
 
+// This exports the function used by the view reducer to handle actions. It
+// also contains the hooks for determining when to add to the undo list or
+// update the URL.
+
 function createFromGame(game: GameData): ViewState {
 	return {
 		...createEmpty(),

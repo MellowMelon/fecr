@@ -14,6 +14,10 @@ import {
 import gameTable from "./GameTable";
 import {makeZeroStats} from "./CharUtils";
 
+// This file ensures that whatever JSON gets loaded from the URL is sanely
+// formatted and adjusts it as needed. It is covered by the CharSerialize
+// testing infrastructure.
+
 export type FixRes<T> = {
 	value: T;
 	errors: string[];

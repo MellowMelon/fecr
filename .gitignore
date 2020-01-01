@@ -5,12 +5,10 @@
 /.vscode
 
 # Generated files
-/public/js/*.js
-/generated
-/node_modules
-/.eslintcache
 *.js.map
 npm-debug.log
+/public/js/*.js
+/node_modules
+/.eslintcache
 /.cache-loader
 .cache
-tools/*.diff

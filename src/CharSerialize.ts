@@ -2,6 +2,11 @@ import _ from "lodash";
 import Jsonpack from "jsonpack";
 import {Team, GameID, GameData} from "./types";
 
+// This file handles the URL hashing. At the time of writing, the hashing is
+// done by passing the team through jsonpack, then encoding its output in base
+// 64. This is version 2 of the format; 2_ is prepended so that we can change
+// this later and stay backwards compatible.
+
 const FORMAT_VERSION = 2;
 
 function encodeBase64(data: string): string {

@@ -12,11 +12,15 @@ import {
 import {assertNever} from "./Utils";
 import {getNewLevel} from "./CharAdvance";
 
+// This file contains a few miscellaneous utilities for dealing with characters
+// and teams.
+
 export type TeamCharList = {
 	index: number;
 	chars: CharName[];
 };
 
+// Create a stats table whose values are all zeroes.
 export function makeZeroStats(game: GameData): StatsTable {
 	const ret: StatsTable = {};
 	game.stats.forEach(n => {
@@ -25,11 +29,13 @@ export function makeZeroStats(game: GameData): StatsTable {
 	return ret;
 }
 
+// Helper. Generates the next history ID value.
 function getNextHistoryID(char: Char): number {
 	const last = _.max(char.history.map(h => h.id));
 	return (last || 0) + 1;
 }
 
+// Helper. Find the index of the last checkpoint for a character.
 function lastIndexOfCheckpoint(game: GameData, char: Char): number {
 	for (let i = char.history.length - 1; i >= 0; i -= 1) {
 		if (char.history[i].type === "checkpoint") {
@@ -39,6 +45,8 @@ function lastIndexOfCheckpoint(game: GameData, char: Char): number {
 	return -1;
 }
 
+// Given a history entry corresponding to a checkpoint, get the index it would
+// have in an array of only checkpoints of this character.
 export function getCheckpointIndex(
 	game: GameData,
 	char: Char,
@@ -53,6 +61,21 @@ export function getCheckpointIndex(
 	return cpIndex;
 }
 
+// Returns whether this character is considered to have data and be on the
+// team by the tool.
+export function doesCharHaveData(
+	game: GameData,
+	char: Char | undefined | null
+): boolean {
+	if (!char) return false;
+	const cp = char.history.find(h => h.type === "checkpoint");
+	return !!cp;
+}
+
+// Get the list of characters with data on the team. If no team is passed, get
+// all characters in the game. Optionally pass in a selected character name
+// and return its index in the team. Index is -1 if not on the team or no
+// name was passed.
 export function getTeamCharList(
 	game: GameData,
 	team: Team | null,
@@ -65,6 +88,7 @@ export function getTeamCharList(
 	return {index, chars};
 }
 
+// Create a new character object with the default bases.
 export function createChar(game: GameData, name: CharName): Char {
 	const gameCharData = game.chars[name];
 	const ret: Char = {
@@ -84,6 +108,8 @@ export function createChar(game: GameData, name: CharName): Char {
 	return ret;
 }
 
+// Create a new history entry of a given type, with values autofilled from
+// the character's existing entries.
 export function createHistoryEntry(
 	game: GameData,
 	char: Char,
@@ -148,13 +174,4 @@ export function createHistoryEntry(
 	} else {
 		return assertNever(type);
 	}
-}
-
-export function doesCharHaveData(
-	game: GameData,
-	char: Char | undefined | null
-): boolean {
-	if (!char) return false;
-	const cp = char.history.find(h => h.type === "checkpoint");
-	return !!cp;
 }

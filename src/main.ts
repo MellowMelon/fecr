@@ -2,6 +2,8 @@ import ReactDOM from "react-dom";
 import React from "react";
 import MainContainer from "./view/Main";
 
+// Entry point of the application.
+
 function renderFromURLHash() {
 	const h = window.location.hash.slice(1) || null;
 	const el = React.createElement(MainContainer, {urlHash: h});

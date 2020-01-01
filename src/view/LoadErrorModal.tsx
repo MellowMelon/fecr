@@ -1,10 +1,10 @@
 import React from "react";
 import {Anchor, Button, Box, Paragraph} from "grommet";
 
-import * as ViewState from "../ViewState";
+import {LoadError} from "../state/types";
 
 type Props = {
-	error: ViewState.LoadError;
+	error: LoadError;
 	warningOnly: boolean;
 	onClose: () => void;
 };

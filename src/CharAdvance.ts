@@ -22,32 +22,64 @@ import {
 	GameData,
 } from "./types";
 
+// This file contains all the tricky math involved in simulating a Fire Emblem
+// character. The main export is computeChar, whose implementation provides a
+// good overview of all the steps involved.
+
+// This file has the option to enable storing intermediates (in the tool
+// itself, this is always on). This causes a viewable checkpoint to be
+// generated for every level and class change even without an Actual Stats
+// entry, in which case the stats field is missing. In the returned types,
+// mainCPIndices is the array of indices of checkpoints corresponding to Actual
+// Stats entries in history. This will list all indices if intermediates are
+// not being used.
+
 type GrowthHistory = {[stat: string]: number[]};
 
-// Character at a specific point in time
+// Type for a character at a specific point in time
 export type CharCheckpoint = {
+	// Character name.
 	name: CharName;
+	// Current class.
 	charClass: CharClass;
+	// Current level.
 	level: number;
+	// The actual stats on the history entry. null for an intermediate.
 	stats: StatsTable | null;
+	// The main computed value. Contains a probability distribution per stat.
 	dist: StatsDist;
+	// Same as dist, but ignores stat boosts.
 	distNB: StatsDist;
+	// The character's growths. We can't look it up from the game because
+	// they might be variable, e.g. child units in Fates.
 	growths: StatsTable;
+	// The character's max stats. Stored for the same reason that growths are.
 	maxStats: StatsTable;
+	// The running minimums as displayed on the report panel.
 	min: StatsTable;
+	// The total boosts of each stat.
 	boosts: StatsTable;
+	// A record of the real growths per level gained by the character.
 	growthList: GrowthHistory;
+	// The character's current equipment.
 	equip: EquipName | null;
+	// Array of the character's current abilities in no particular order.
 	abilities: AbilityName[];
 };
 
+// Available options for doing the advancing. Not user-set at the moment.
 type AdvanceOptions = {
 	includeIntermediates?: boolean;
 };
 
-type AdvanceEntry = HistoryEntry | {type: "level"; count: number};
+// Type for an error found when.
 type AdvanceError = {histIndex: number; error: string};
 
+// An event for a character for which computation must be done. Either from
+// user-input history or just gaining a level.
+type AdvanceEntry = HistoryEntry | {type: "level"; count: number};
+
+// Internal type with the state of the simulation.
 type AdvanceChar = {
 	curr: CharCheckpoint;
 	base: CharCheckpoint;
@@ -56,12 +88,15 @@ type AdvanceChar = {
 	includeIntermediates: boolean;
 };
 
+// Plan for the simulation, including a list of events to process and the
+// initial state of the simulation.
 type AdvancePlan = {
 	init: AdvanceChar;
 	entries: AdvanceEntry[];
 	errors: AdvanceError[];
 };
 
+// The final return after the simulation is completed.
 export type AdvanceFinal = {
 	base: CharCheckpoint;
 	checkpoints: CharCheckpoint[];
@@ -69,10 +104,13 @@ export type AdvanceFinal = {
 	errors: AdvanceError[];
 };
 
+// Helper. Generates a probability distribution from a table of stat values,
+// with probability 1 of obtaining each value in the source.
 function getBaseDist(stats: StatsTable): StatsDist {
 	return _.mapValues(stats, val => ProbDist.initAtValue(val));
 }
 
+// Helper. Subtracts the class modifiers from the given stats.
 function withoutClassMods(
 	game: GameData,
 	stats: StatsTable,
@@ -87,6 +125,7 @@ function withoutClassMods(
 	});
 }
 
+// Helper for immutably modifying AdvanceChar, specifically it's curr field.
 function modifyCurrent(
 	char: AdvanceChar,
 	updates: Partial<CharCheckpoint>
@@ -100,6 +139,8 @@ function modifyCurrent(
 	};
 }
 
+// Helper for making the same changes to the stat distributions, both main
+// and no-bonus versions.
 function modifyBothDists(
 	char: AdvanceChar,
 	f: (dist: StatsDist) => StatsDist
@@ -110,6 +151,8 @@ function modifyBothDists(
 	});
 }
 
+// Helper. Alternate form of modifyBothDists which runs the same computation
+// against every stat in both distributions.
 function modifyBothDistsMV(
 	char: AdvanceChar,
 	f: (pd: ProbDist.ProbDist, statName: Stat) => ProbDist.ProbDist
@@ -119,6 +162,7 @@ function modifyBothDistsMV(
 	});
 }
 
+// Helper. Internal version of getNewLevel with different parameters.
 function getNewLevelInt(
 	game: GameData,
 	histEntry: HistoryEntry,
@@ -131,6 +175,9 @@ function getNewLevelInt(
 	return Math.max(histEntry.level + oldMod - newMod, 1);
 }
 
+// Given a character and an index into its history, return the level it would
+// have right after processing that entry. This is always the history entry's
+// level unless a class change is involved.
 export function getNewLevel(
 	game: GameData,
 	char: Char,
@@ -146,6 +193,8 @@ export function getNewLevel(
 	return getNewLevelInt(game, currH, oldClass);
 }
 
+// Helper. Get the starting character just using game data, without accounting
+// for any custom bases, boon/bane, etc.
 function getBaseGameChar(game: GameData, name: CharName): CharCheckpoint {
 	const gameCharData = game.chars[name];
 	if (!gameCharData) {
@@ -231,11 +280,16 @@ function getBaseCharRec(
 	return baseChar;
 }
 
+// Helper. Get the starting character while respecting custom initial data,
+// boon/bane, etc. The only reason we have to pass the whole team, currently,
+// is if the character's parent has a boon/bane affecting growths and maxes.
 function getBaseChar(game: GameData, team: Team, char: Char): CharCheckpoint {
 	const parentChain: Set<CharName> = new Set();
 	return getBaseCharRec(game, team, char, parentChain);
 }
 
+// Return the AdvancePlan for a character, containing a list of each event that
+// the computation must process.
 export function getCharPlan(
 	game: GameData,
 	team: Team,
@@ -255,6 +309,7 @@ export function getCharPlan(
 		includeIntermediates,
 	};
 
+	// Loop to figure out where to insert level ups in the character's history.
 	let histIndex = 0;
 	let currLevel = baseChar.level;
 	let currClass = baseChar.charClass;
@@ -282,6 +337,8 @@ export function getCharPlan(
 	return {init, entries, errors};
 }
 
+// Return the resolved maximum stats of a character at a point in time,
+// including modifiers from classes, abilities, etc.
 export function getRealMax(game: GameData, curr: CharCheckpoint): StatsTable {
 	const gameClassData = game.classes[curr.charClass];
 	const charMax = curr.maxStats;
@@ -297,6 +354,8 @@ export function getRealMax(game: GameData, curr: CharCheckpoint): StatsTable {
 	return sumObjects(...objs);
 }
 
+// Return the resolved growths of a character at a point in time, including
+// modifiers from classes, abilities, etc.
 export function getRealGrowths(
 	game: GameData,
 	curr: CharCheckpoint
@@ -318,7 +377,13 @@ export function getRealGrowths(
 	return sumObjects(...objs);
 }
 
-// If entry is null, it means an intermediate.
+// Helper. Immutably modifies AdvanceChar to add a new checkpoint, which has
+// the values used for display in the report tab. Whether this checkpoint is an
+// intermediate or not is determined by whether an Actual Stats entry is
+// passed. This is also when we actually apply stat maximums to the
+// distributions. We do that as late as possible to ensure we can do correct
+// computations when a stat has an internal value over the cap that will reveal
+// itself on a class change.
 function addCheckpoint(
 	game: GameData,
 	char: AdvanceChar,
@@ -366,10 +431,15 @@ function getChanceOf1HP(
 	return p;
 }
 
-// Pass the HP distribution, the minimum HP of the class being promoted to, and
-// the chance returned from getChanceOf1HP. Adjusts the distribution to account
-// for a possible 1HP bonus when promoting. Also accounts for the usual
-// applyMin step.
+// Helper for promotions in games like Echoes where you get +1 HP if all stats
+// are above the minimums. Pass the HP distribution, the minimum HP of the
+// class being promoted to, and the chance returned from getChanceOf1HP.
+// Adjusts the distribution to account for a possible 1HP bonus when promoting.
+// Also accounts for the usual applyMin step. This computation is not 100%
+// correct for the second promotion and beyond. It's only correct if the
+// probability distributions are independent of each other, and the +1HP
+// calculation introduces a dependence. But the error is negligible, so we
+// allow it.
 function simulatePromotionHP(
 	pd: ProbDist.ProbDist,
 	minHP: number,
@@ -389,6 +459,7 @@ function simulatePromotionHP(
 	return newPD;
 }
 
+// Processes a class change entry in an advance plan.
 function simulateClass(
 	game: GameData,
 	char: AdvanceChar,
@@ -415,6 +486,8 @@ function simulateClass(
 		level: getNewLevelInt(game, entry, oldClass),
 		min: newMins,
 	});
+	// Minimums do not use the class modifiers. So subtract old mods, apply mins,
+	// and add new mods.
 	newChar = modifyBothDistsMV(newChar, (pd, statName) => {
 		if (enableClassMods) {
 			pd = ProbDist.applyIncrease(pd, -oldMods[statName]);
@@ -435,6 +508,7 @@ function simulateClass(
 	return newChar;
 }
 
+// Processes a permanent stat boost entry in an advance plan.
 function simulateBoosts(
 	game: GameData,
 	char: AdvanceChar,
@@ -457,6 +531,7 @@ function simulateBoosts(
 	});
 }
 
+// Processes a max stat boost entry in an advance plan.
 function simulateMaxBoosts(
 	game: GameData,
 	char: AdvanceChar,
@@ -469,6 +544,7 @@ function simulateMaxBoosts(
 	return modifyCurrent(char, {maxStats: newMax});
 }
 
+// Processes an equipment change in an advance plan.
 function simulateEquipChange(
 	game: GameData,
 	char: AdvanceChar,
@@ -478,6 +554,7 @@ function simulateEquipChange(
 	return modifyCurrent(char, {equip: equip});
 }
 
+// Processes an ability change in an advance plan.
 function simulateAbilityChange(
 	game: GameData,
 	char: AdvanceChar,
@@ -494,6 +571,7 @@ function simulateAbilityChange(
 	return modifyCurrent(char, {abilities: newAbilities});
 }
 
+// Processes some number of level ups in an advance plan.
 function simulateLevels(
 	game: GameData,
 	char: AdvanceChar,
@@ -523,7 +601,8 @@ function simulateLevels(
 	return newChar;
 }
 
-export function reduceChar(
+// Helper. Applies one entry of the plan to the simulation.
+function reduceChar(
 	game: GameData,
 	char: AdvanceChar,
 	entry: AdvanceEntry
@@ -556,6 +635,7 @@ export function reduceChar(
 	return char;
 }
 
+// Main export.
 export function computeChar(
 	game: GameData,
 	team: Team,

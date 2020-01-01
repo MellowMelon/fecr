@@ -5,9 +5,16 @@ import {makeZeroStats} from "./CharUtils";
 import {assertNever, filterNonempty} from "./Utils";
 import * as ProbDist from "./ProbDist";
 
+// This file contains some logic used for showing the character report. It
+// basically runs some stats functions on the output of CharAdvance without
+// doing any tricky computations itself. It also manages the logic of which
+// report details values to include in each game.
+
 type StatsStrTable = {[stat: string]: string};
 type StatsPercTable = {[stat: string]: [number, number]};
 
+// The returned type of this file's main export, with all the data derived from
+// a CharCheckpoint object.
 export type CharReport = {
 	charClass: CharClass;
 	charLevel: number;
@@ -38,6 +45,7 @@ export type CharReport = {
 	sdNBPercentiles: StatsPercTable | null;
 };
 
+// List of the possible report details rows and the displayed label for each.
 const reportDetailsLabels = {
 	current: "Actual",
 	classMod: "Class Modifier",
@@ -67,6 +75,8 @@ const reportDetailsLabels = {
 
 type ReportDetailKey = keyof typeof reportDetailsLabels;
 
+// Helper. Determines the percentile of a value in a probability distribution
+// while specially handling out-of-range values.
 function computePercentiles(
 	pd: ProbDist.ProbDist,
 	statName: string,
@@ -80,6 +90,7 @@ function computePercentiles(
 	return ProbDist.getPercentileRangeOfValue(pd, curr);
 }
 
+// Helper type for computeDistDerived.
 type DistAgg = {
 	sdAverageNum: StatsTable;
 	sdAverage: StatsStrTable;
@@ -88,6 +99,8 @@ type DistAgg = {
 	sdPercentiles: StatsPercTable | null;
 };
 
+// Helper. Converts a half integer to a string while avoiding decimals if
+// possible.
 function halfIntToString(halfInt: number): string {
 	const fp = ((halfInt % 1) + 1) % 1;
 	if (fp > 0.1 && fp < 0.9) {
@@ -96,6 +109,8 @@ function halfIntToString(halfInt: number): string {
 	return halfInt.toFixed(0);
 }
 
+// Helper. Computes distribution-derived data. This is separate because we need
+// this twice: main and no-bonuses.
 function computeDistDerived(
 	stats: StatsTable | null,
 	dist: StatsDist
@@ -127,6 +142,8 @@ function computeDistDerived(
 	};
 }
 
+// The main export. Returns the CharReport object given checkpoints in a
+// CharAdvance return.
 export function getCharReport(
 	game: GameData,
 	char: CharCheckpoint,
@@ -218,9 +235,10 @@ export function getCharReport(
 	};
 }
 
-// This one gets a bit of post processing in CharReportPanel to set a color for
-// the error case.
-export function renderPercentRange([lo, hi]: [number, number]): string {
+// Helper. Returns a percent range in renderable string form. The string may
+// have ERROR: in front. Actual rendering should strip this off and change the
+// rendered color if so. CharReportPanel does this post processing.
+function renderPercentRange([lo, hi]: [number, number]): string {
 	if (lo < -0.0001) {
 		return "ERROR:Too low";
 	} else if (hi > 1.0001) {
@@ -238,6 +256,7 @@ export function renderPercentRange([lo, hi]: [number, number]): string {
 	return loDisp + "\u2011" + hiDisp + "%";
 }
 
+// Given a game, return which rows should be shown in the report details.
 export function getReportDetailsRows(game: GameData): ReportDetailKey[] {
 	const g = game.globals;
 	const showCharMax =
@@ -274,6 +293,7 @@ export function getReportDetailsRows(game: GameData): ReportDetailKey[] {
 	return filterNonempty(base);
 }
 
+// Compute the label for a report details row.
 export function getReportDetailsLabel(
 	game: GameData,
 	key: ReportDetailKey
@@ -281,6 +301,7 @@ export function getReportDetailsLabel(
 	return reportDetailsLabels[key] || `(Missing label for report row ${key})`;
 }
 
+// Compute the value for a report details row, given a CharReport.
 export function getReportDetailsValue(
 	game: GameData,
 	cr: CharReport,

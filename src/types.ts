@@ -1,15 +1,28 @@
 import {ProbDist} from "./ProbDist";
 
+// This file contains basic types common to almost everything.
+
 export type Gender = "M" | "F";
 
 export type Stat = string;
 export type StatsTable = {[stat: string]: number};
+
+export type StatsDist = {[stat: string]: ProbDist};
+
+// Regrettably, typescript makes the newtype pattern cumbersome, but these
+// would have been a good place for it.
 
 export type CharName = string;
 export type CharClass = string;
 export type EquipName = string;
 export type AbilityName = string;
 
+//
+// Team and character data as they occur in runtime and saved URL hashes.
+//
+
+// Character history. The only reason these have IDs is so that we have a value
+// to feed to React's key prop.
 export type HistoryEntryClass = {
 	type: "class";
 	id: number;
@@ -42,6 +55,7 @@ export type HistoryEntryEquipChange = {
 	level: number;
 	equip: EquipName | null;
 };
+// The tool calls these entries "Actual Stats" now.
 export type HistoryEntryCheckpoint = {
 	type: "checkpoint";
 	id: number;
@@ -56,8 +70,6 @@ export type HistoryEntry =
 	| HistoryEntryEquipChange
 	| HistoryEntryCheckpoint;
 export type History = HistoryEntry[];
-
-export type StatsDist = {[stat: string]: ProbDist};
 
 // Actual character in a playthrough
 export type Char = {
@@ -81,7 +93,10 @@ export type CharDataBasesAlt = {
 	baseStats?: StatsTable;
 };
 
-// Data for character in game
+//
+// Types used for building game JSONs.
+//
+
 export type CharData = {
 	name: CharName;
 	gender: Gender;

@@ -6,6 +6,10 @@ import {fixTeam} from "../CharFix";
 import {LoadError, ViewState} from "./types";
 import * as OpsUndoRedo from "./OpsUndoRedo";
 
+// Contains functions used to create the initial values of view state. This
+// also handles creating state from loaded data, either in the URL or autosaved
+// to local storage.
+
 export function createEmpty(): ViewState {
 	return {
 		viewingGame: false,
