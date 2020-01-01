@@ -41,6 +41,10 @@ export type CharCheckpoint = {
 	abilities: AbilityName[];
 };
 
+type AdvanceOptions = {
+	includeIntermediates?: boolean;
+};
+
 type AdvanceEntry = HistoryEntry | {type: "level"; count: number};
 type AdvanceError = {histIndex: number; error: string};
 
@@ -48,6 +52,8 @@ type AdvanceChar = {
 	curr: CharCheckpoint;
 	base: CharCheckpoint;
 	checkpoints: CharCheckpoint[];
+	mainCPIndices: number[];
+	includeIntermediates: boolean;
 };
 
 type AdvancePlan = {
@@ -59,6 +65,7 @@ type AdvancePlan = {
 export type AdvanceFinal = {
 	base: CharCheckpoint;
 	checkpoints: CharCheckpoint[];
+	mainCPIndices?: number[];
 	errors: AdvanceError[];
 };
 
@@ -232,8 +239,10 @@ function getBaseChar(game: GameData, team: Team, char: Char): CharCheckpoint {
 export function getCharPlan(
 	game: GameData,
 	team: Team,
-	char: Char
+	char: Char,
+	options?: AdvanceOptions
 ): AdvancePlan {
+	const {includeIntermediates = false} = options || {};
 	const entries: AdvanceEntry[] = [];
 	const errors: AdvanceError[] = [];
 
@@ -241,7 +250,9 @@ export function getCharPlan(
 	const init = {
 		base: baseChar,
 		curr: baseChar,
-		checkpoints: [],
+		checkpoints: includeIntermediates ? [baseChar] : [],
+		mainCPIndices: [],
+		includeIntermediates,
 	};
 
 	let histIndex = 0;
@@ -307,10 +318,11 @@ export function getRealGrowths(
 	return sumObjects(...objs);
 }
 
+// If entry is null, it means an intermediate.
 function addCheckpoint(
 	game: GameData,
 	char: AdvanceChar,
-	entry: HistoryEntryCheckpoint
+	entry: HistoryEntryCheckpoint | null
 ): AdvanceChar {
 	const realMax = getRealMax(game, char.curr);
 	const realChar = modifyBothDistsMV(char, (pd, statName) => {
@@ -320,9 +332,18 @@ function addCheckpoint(
 	});
 	const newCP = {
 		...realChar.curr,
-		stats: entry.stats,
+		stats: entry ? entry.stats : null,
 	};
-	return {...char, checkpoints: [...char.checkpoints, newCP]};
+
+	const preCPList =
+		entry && char.includeIntermediates
+			? char.checkpoints.slice(0, -1)
+			: char.checkpoints;
+	const newCPList = [...preCPList, newCP];
+	const newCPInds = entry
+		? [...char.mainCPIndices, newCPList.length - 1]
+		: char.mainCPIndices;
+	return {...char, checkpoints: newCPList, mainCPIndices: newCPInds};
 }
 
 // Helper for dealing with special 1hp promotion bonus when no stats would
@@ -507,37 +528,52 @@ export function reduceChar(
 	char: AdvanceChar,
 	entry: AdvanceEntry
 ): AdvanceChar {
-	if (entry.type === "level") {
-		return simulateLevels(game, char, entry.count);
+	if (entry.type === "level" && char.includeIntermediates) {
+		for (let i = 0; i < entry.count; i += 1) {
+			char = simulateLevels(game, char, 1);
+			char = addCheckpoint(game, char, null);
+		}
+	} else if (entry.type === "level") {
+		char = simulateLevels(game, char, entry.count);
 	} else if (entry.type === "checkpoint") {
-		return addCheckpoint(game, char, entry);
+		char = addCheckpoint(game, char, entry);
 	} else if (entry.type === "class") {
-		return simulateClass(game, char, entry);
+		char = simulateClass(game, char, entry);
+		if (char.includeIntermediates) {
+			char = addCheckpoint(game, char, null);
+		}
 	} else if (entry.type === "boost") {
-		return simulateBoosts(game, char, entry);
+		char = simulateBoosts(game, char, entry);
 	} else if (entry.type === "maxboost") {
-		return simulateMaxBoosts(game, char, entry);
+		char = simulateMaxBoosts(game, char, entry);
 	} else if (entry.type === "equipchange") {
-		return simulateEquipChange(game, char, entry);
+		char = simulateEquipChange(game, char, entry);
 	} else if (entry.type === "ability") {
-		return simulateAbilityChange(game, char, entry);
+		char = simulateAbilityChange(game, char, entry);
+	} else {
+		return assertNever(entry);
 	}
-	return assertNever(entry);
+	return char;
 }
 
 export function computeChar(
 	game: GameData,
 	team: Team,
-	char: Char
+	char: Char,
+	options?: AdvanceOptions
 ): AdvanceFinal {
-	const plan = getCharPlan(game, team, char);
-	const final = plan.entries.reduce(
+	const plan = getCharPlan(game, team, char, options);
+	const doneChar = plan.entries.reduce(
 		(c, e) => reduceChar(game, c, e),
 		plan.init
 	);
-	return {
+	const final: AdvanceFinal = {
 		base: plan.init.base,
-		checkpoints: final.checkpoints,
+		checkpoints: doneChar.checkpoints,
 		errors: plan.errors,
 	};
+	if (options && options.includeIntermediates) {
+		final.mainCPIndices = doneChar.mainCPIndices;
+	}
+	return final;
 }

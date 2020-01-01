@@ -8,9 +8,7 @@ import {
 } from "../types";
 import gameTable from "../GameTable";
 import {assertNever} from "../Utils";
-import {getCheckpointIndex, createChar, createHistoryEntry} from "../CharUtils";
-import {computeChar} from "../CharAdvance";
-import {getCharReport} from "../CharReport";
+import {createChar, createHistoryEntry} from "../CharUtils";
 import {serialize} from "../CharSerialize";
 
 import {CharTab, ViewState, ViewAction} from "./types";
@@ -276,25 +274,6 @@ function reduceActionMain(s: ViewState, a: ViewAction): ViewState {
 			return {
 				...oldEntry,
 				stats: {...oldEntry.stats, ...a.stats},
-			};
-		});
-	} else if (a.type === "updateCharHistoryStatsMedians") {
-		return updateHistoryEntry(s, a.histIndex, (game, oldChar, oldEntry) => {
-			if (!("stats" in oldEntry)) {
-				console.error("Unexpected data shape while handling action", a);
-				return oldEntry;
-			}
-			const computed = computeChar(game, s.team, oldChar);
-			const cpIndex = getCheckpointIndex(game, oldChar, a.histIndex);
-			const cr = getCharReport(
-				game,
-				computed.checkpoints[cpIndex],
-				computed.base
-			);
-			const medians = _.mapValues(cr.sdMedian, x => parseInt(x));
-			return {
-				...oldEntry,
-				stats: {...oldEntry.stats, ...medians},
 			};
 		});
 	} else if (a.type === "updateCharHistoryEquip") {

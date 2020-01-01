@@ -39,7 +39,7 @@ const HistoryAdd: React.FunctionComponent<Props> = function(props: Props) {
 	};
 
 	let buttonLayout = game.globals.histAddLayout;
-	if (screenSize === "xsmall" || screenSize == "xxsmall") {
+	if (screenSize === "xsmall" || screenSize === "xxsmall") {
 		buttonLayout = _.flatten(buttonLayout).map(x => [x]);
 	}
 

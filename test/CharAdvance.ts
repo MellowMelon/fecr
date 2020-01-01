@@ -184,27 +184,42 @@ function checkDist(
 	});
 }
 
+type CPEntry = {cp: CharCheckpoint; name: string};
+
+// Turns the computeChar output into an array of checkpoints as a helper for
+// checkFinal, which needs to mangle each checkpoint for float reasons.
+function findAllCPObjects(a: AdvanceFinal): CPEntry[] {
+	const cps: CPEntry[] = [];
+	a.checkpoints.forEach((c, i) => {
+		cps.push({cp: c, name: `cp[${i}]`});
+	});
+	return cps;
+}
+
 function checkFinal(
 	t: ExecutionContext<any>,
 	actual: AdvanceFinal,
 	exp: AdvanceFinal
 ) {
-	t.is(actual.checkpoints.length, exp.checkpoints.length);
+	const actCPs = findAllCPObjects(actual);
+	const expCPs = findAllCPObjects(exp);
+	t.is(actCPs.length, expCPs.length);
 	// Save the expected dists, then replace them with the actual ones and do
 	// a deep equality check.
-	const expDists = exp.checkpoints.map(c => c.dist);
-	const expDistsNB = exp.checkpoints.map(c => c.distNB);
-	exp.checkpoints.forEach((c, i) => {
-		c.dist = actual.checkpoints[i].dist;
-		c.distNB = actual.checkpoints[i].distNB;
+	const expDists = expCPs.map(c => c.cp.dist);
+	const expDistsNB = expCPs.map(c => c.cp.distNB);
+	expCPs.forEach((c, i) => {
+		c.cp.dist = actCPs[i].cp.dist;
+		c.cp.distNB = actCPs[i].cp.distNB;
 	});
 	t.deepEqual(actual, exp);
 	// Now manually check the dists with tolerances.
-	exp.checkpoints.forEach((c, i) => {
-		c.dist = expDists[i];
-		checkDist(t, actual.checkpoints[i].dist, c.dist, `cp[${i}] dist`);
-		c.distNB = expDistsNB[i];
-		checkDist(t, actual.checkpoints[i].distNB, c.distNB, `cp[${i}] distNB`);
+	expCPs.forEach((c, i) => {
+		t.is(c.name, actCPs[i].name);
+		c.cp.dist = expDists[i];
+		c.cp.distNB = expDistsNB[i];
+		checkDist(t, actCPs[i].cp.dist, c.cp.dist, `${c.name} dist`);
+		checkDist(t, actCPs[i].cp.distNB, c.cp.distNB, `${c.name} distNB`);
 	});
 }
 
@@ -533,6 +548,54 @@ test("computeChar, leveling", t => {
 				growthList: {hp: [50, 50, 50], mp: [20, 20, 20]},
 			},
 		],
+		errors: [],
+	});
+});
+
+test("computeChar, intermediates", t => {
+	const c: Char = {
+		name: "Bob",
+		history: [{type: "checkpoint", id: 1, level: 4, stats: {hp: 31, mp: 11}}],
+		baseClass: gameBase.chars.Bob.baseClass,
+		baseLevel: gameBase.chars.Bob.baseLevel,
+		baseStats: gameBase.chars.Bob.baseStats,
+	};
+	const opts = {includeIntermediates: true};
+	const final = computeChar(gameBase, {Bob: c}, c, opts);
+	checkFinal(t, final, {
+		base: defaultBob,
+		checkpoints: [
+			defaultBob,
+			{
+				...defaultBob,
+				level: 3,
+				stats: null,
+				dist: {
+					hp: {30: 0.5, 31: 0.5},
+					mp: {10: 0.8, 11: 0.2},
+				},
+				distNB: {
+					hp: {30: 0.5, 31: 0.5},
+					mp: {10: 0.8, 11: 0.2},
+				},
+				growthList: {hp: [50], mp: [20]},
+			},
+			{
+				...defaultBob,
+				level: 4,
+				stats: {hp: 31, mp: 11},
+				dist: {
+					hp: {30: 0.25, 31: 0.5, 32: 0.25},
+					mp: {10: 0.64, 11: 0.32, 12: 0.04},
+				},
+				distNB: {
+					hp: {30: 0.25, 31: 0.5, 32: 0.25},
+					mp: {10: 0.64, 11: 0.32, 12: 0.04},
+				},
+				growthList: {hp: [50, 50], mp: [20, 20]},
+			},
+		],
+		mainCPIndices: [2],
 		errors: [],
 	});
 });

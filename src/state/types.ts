@@ -119,10 +119,6 @@ export type ViewActionUpdateCharHistoryStats = {
 	histIndex: number;
 	stats: StatsTable;
 };
-export type updateCharHistoryStatsMedians = {
-	type: "updateCharHistoryStatsMedians";
-	histIndex: number;
-};
 export type ViewActionUpdateCharHistoryEquip = {
 	type: "updateCharHistoryEquip";
 	histIndex: number;
@@ -159,6 +155,5 @@ export type ViewAction =
 	| ViewActionUpdateCharHistoryClass
 	| ViewActionUpdateCharHistoryLevel
 	| ViewActionUpdateCharHistoryStats
-	| updateCharHistoryStatsMedians
 	| ViewActionUpdateCharHistoryEquip
 	| ViewActionUpdateCharHistoryAbility;

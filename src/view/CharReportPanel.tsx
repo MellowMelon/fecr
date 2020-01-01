@@ -1,29 +1,15 @@
+import _ from "lodash";
 import React, {memo, useState, useMemo} from "react";
-import {
-	Accordion,
-	AccordionPanel,
-	Box,
-	Paragraph,
-	ResponsiveContext,
-	Select,
-	Text,
-} from "grommet";
-import {Table, TableBody, TableCell, TableRow} from "grommet";
+import {Accordion, Box, Paragraph, RangeInput, Select, Text} from "grommet";
 
-import {Stat, Char, Team, GameData} from "../types";
-import {CharCheckpoint, computeChar} from "../CharAdvance";
-import {
-	CharReport,
-	getCharReport,
-	getReportDetailsRows,
-	getReportDetailsLabel,
-	getReportDetailsValue,
-} from "../CharReport";
+import {Char, Team, GameData} from "../types";
+import {AdvanceFinal, CharCheckpoint, computeChar} from "../CharAdvance";
+import {getCharReport} from "../CharReport";
 import getHelp from "../HelpTable";
 import {ViewAction} from "../state/types";
 
 import CharHeader from "./CharHeader";
-import ProbDistGraph, {GraphDims} from "./ProbDistGraph";
+import CharReportStatPanel from "./CharReportStatPanel";
 import HelpButton from "./HelpButton";
 
 type Props = {
@@ -33,24 +19,9 @@ type Props = {
 	dispatch: (a: ViewAction) => void;
 };
 
-const pdgSmallDims: Partial<GraphDims> = {
-	barSize: 12,
-	barSpacing: 2,
-	barMinCount: 10,
-	barMaxCount: 10,
-};
-const pdgXXSmallDims: Partial<GraphDims> = {
-	barSize: 8,
-	barSpacing: 1,
-	barMinCount: 10,
-	barMaxCount: 10,
-	axisMarkLabelFontSize: 10,
-	axisMarkLabelWidth: 18,
-	axisMarkLabelHeight: 11,
-};
-
-function renderCPLabel(cp: CharCheckpoint, index: number): string {
-	return `${index + 1}. ${cp.charClass} level ${cp.level}`;
+function renderCPLabel(cp: CharCheckpoint, index?: number): string {
+	const indexLabel = index === undefined ? "" : `${index + 1}. `;
+	return `${indexLabel}${cp.charClass} level ${cp.level}`;
 }
 
 function renderCPSelect(
@@ -77,176 +48,65 @@ function renderCPSelect(
 	);
 }
 
-function getPercColor([lo, hi]: [number, number]): string {
-	let val = 0.5;
-	if (lo < -0.001) {
-		return "none";
-	} else if (hi > 1.001) {
-		return "none";
-	} else if (hi < 0.5) {
-		val = hi;
-	} else if (lo > 0.5) {
-		val = lo;
-	}
-	const hue = 10 + val * 100;
-	return `hsl(${hue}, 80%, 80%)`;
-}
+type ResolvedCP = {
+	// The element of computed.checkpoints to show right now.
+	currCheckpoint: CharCheckpoint;
+	// All main checkpoints shown by the select control. Each corresponds to a
+	// checkpoint history entry.
+	mainCheckpoints: CharCheckpoint[];
+	// The index into computed.checkpoints.
+	realCPIndex: number;
+	// The index into this object's mainCheckpoints.
+	mainCPIndex: number;
+	// Whether the current checkpoint is also a main one.
+	isOnMain: boolean;
+	// The list of all realCPIndex values that correspond to main checkpoints.
+	mainCPIndices: number[];
+};
 
-function getMedDiffColor(medDiff: number): string {
-	if (medDiff > 0) return `hsl(110, 80%, 40%)`;
-	if (medDiff < 0) return `hsl(10, 80%, 60%)`;
-	return `hsl(60, 80%, 40%)`;
-}
-
-function postprocessPercentRange(str: string): React.ReactNode {
-	if (str.startsWith("ERROR:")) {
-		return <Text color="status-error">{str.slice(6)}</Text>;
-	}
-	return <Text>{str}</Text>;
-}
-
-function renderDetailsTable(
-	data: [string, React.ReactNode][]
-): React.ReactNode {
-	const rows = data.map((d, i) => {
-		return (
-			<TableRow key={i}>
-				<TableCell size="1/3">
-					<strong>{d[0]}</strong>
-				</TableCell>
-				<TableCell>{d[1]}</TableCell>
-			</TableRow>
-		);
-	});
-	return (
-		<Table>
-			<TableBody>{rows}</TableBody>
-		</Table>
-	);
-}
-
-function renderStatPanel(
-	game: GameData,
-	cr: CharReport,
-	statName: Stat,
-	screenSize: string
-) {
-	const isXXSmall = screenSize === "xxsmall";
-	const isXSmall = isXXSmall || screenSize === "xsmall";
-	const isSmall = isXSmall || screenSize === "small";
-	let pdgDims;
-	if (isXXSmall) {
-		pdgDims = pdgXXSmallDims;
-	} else if (isXSmall) {
-		pdgDims = pdgSmallDims;
-	}
-
-	let medianBox: React.ReactNode = null;
-	let realStatBox: React.ReactNode = null;
-	let percBox: React.ReactNode = null;
-	let medDiffBox: React.ReactNode = null;
-
-	if (!cr.charRealStats) {
-		const medianColor = getMedDiffColor(0);
-		medianBox = (
-			<Box width="xsmall" align="center">
-				<Text color={medianColor} size="large">
-					{cr.sdMedian[statName]}
-				</Text>
-			</Box>
-		);
-	}
-
-	if (cr.charRealStats && !isXSmall) {
-		realStatBox = (
-			<Box width="xsmall" align="center">
-				<Text size="large">{cr.charRealStats[statName]}</Text>
-			</Box>
-		);
-	}
-
-	if (cr.sdPercentiles) {
-		const perc = postprocessPercentRange(
-			String(getReportDetailsValue(game, cr, statName, "percentiles"))
-		);
-		const percColor = getPercColor(cr.sdPercentiles[statName]);
-		const percTextSize = isXSmall ? "medium" : "large";
-		percBox = (
-			<Box background={percColor} width="xsmall" align="center">
-				<Text textAlign="center" size={percTextSize}>
-					{perc}
-				</Text>
-			</Box>
-		);
-	}
-
-	if (cr.sdMedianDiff && !isSmall) {
-		const medDiff = cr.sdMedianDiff[statName];
-		const medDiffColor = getMedDiffColor(parseFloat(medDiff));
-		// Use endash for negative sign.
-		const medDiffDisp = medDiff.replace("-", "\u2013");
-		medDiffBox = (
-			<Box width="xsmall" align="center">
-				<Text color={medDiffColor} size="large" weight="bold">
-					{medDiffDisp}
-				</Text>
-			</Box>
-		);
-	}
-
-	const accordionLabel = (
-		<Box direction="row" flex align="center" pad="small">
-			<Box width="xsmall" align="center">
-				<Text size="large" weight="bold">
-					{statName}
-				</Text>
-			</Box>
-			{medianBox}
-			{realStatBox}
-			{medDiffBox}
-			{percBox}
-			<Box flex />
-			<Box flex={false} margin={{left: "medium"}}>
-				<ProbDistGraph
-					dist={cr.statsDist[statName]}
-					curr={cr.charRealStats && cr.charRealStats[statName]}
-					dims={pdgDims}
-				/>
-			</Box>
-		</Box>
-	);
-
-	const detailsRowKeys = getReportDetailsRows(game);
-	const details: [string, React.ReactNode][] = detailsRowKeys.map(k => {
-		const rowLabel = getReportDetailsLabel(game, k);
-		let value: React.ReactNode = getReportDetailsValue(game, cr, statName, k);
-		if (k === "percentiles" || k === "percentilesNB") {
-			// value should already be a string, but Typescript doesn't know.
-			value = postprocessPercentRange(String(value));
+// Deals with all the mainCPIndices / cpIndex computations
+function resolveCPs(
+	computed: AdvanceFinal,
+	cpIndex: number | null
+): ResolvedCP {
+	const realCPIndex =
+		cpIndex === null ? computed.checkpoints.length - 1 : cpIndex;
+	const currCheckpoint = computed.checkpoints[realCPIndex];
+	const mainList =
+		computed.mainCPIndices || _.range(computed.checkpoints.length);
+	const mainCheckpoints = mainList.map(i => computed.checkpoints[i]);
+	let mainCPIndex = realCPIndex;
+	if (computed.mainCPIndices) {
+		mainCPIndex = 0;
+		while (
+			mainCPIndex < mainList.length - 1 &&
+			mainList[mainCPIndex] < realCPIndex
+		) {
+			mainCPIndex += 1;
 		}
-		return [rowLabel, value];
-	});
+	}
+	const isOnMain = mainList[mainCPIndex] === realCPIndex;
 
-	return (
-		<AccordionPanel key={statName} label={accordionLabel}>
-			<Box margin="small" pad="small" background="light-4">
-				{renderDetailsTable(details)}
-			</Box>
-		</AccordionPanel>
-	);
+	return {
+		currCheckpoint,
+		mainCheckpoints,
+		realCPIndex,
+		mainCPIndex,
+		isOnMain,
+		mainCPIndices: mainList || _.range(computed.checkpoints.length),
+	};
 }
 
 const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 	const {game, team, char, dispatch} = props;
 	if (!char) return null;
 
-	// Properly initialized later. Defined up here to avoid hook errors.
-	const [cpIndex, setCPIndex] = useState<number>(-1);
+	// Defined early to avoid hook errors. Values of null mean the default and are
+	// converted to the right value once the report data is fetched.
+	const [cpIndex, setCPIndex] = useState<number | null>(null);
 
 	// Set to char.name, but must be unset first render to get cpIndex right.
 	const [prevName, setPrevName] = useState<string>("");
-
-	const screenSize = React.useContext(ResponsiveContext);
 
 	const charHeader = (
 		<CharHeader
@@ -257,13 +117,17 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 		/>
 	);
 
-	let computed;
+	let computed: AdvanceFinal;
 	try {
-		computed = useMemo(() => computeChar(game, team, char), [game, team, char]);
+		computed = useMemo(
+			() => computeChar(game, team, char, {includeIntermediates: true}),
+			[game, team, char]
+		);
 	} catch (ex) {
 		// TODO: where to report bugs?
 		return (
 			<Box border={{color: "status-error", size: "large"}} pad="small">
+				{charHeader}
 				<Paragraph color="status-error">
 					Uh oh! Something went wrong when trying to generate the report for
 					this character. ({ex.message})
@@ -275,7 +139,26 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 		);
 	}
 
-	if (!computed.checkpoints.length) {
+	if (prevName !== char.name) {
+		setCPIndex(null);
+		setPrevName(char.name);
+		return null;
+	}
+
+	const {
+		currCheckpoint,
+		mainCheckpoints,
+		realCPIndex,
+		mainCPIndex,
+		isOnMain,
+		mainCPIndices,
+	} = resolveCPs(computed, cpIndex);
+
+	function selectMainCheckpoint(mainIndex: number) {
+		setCPIndex(mainCPIndices[mainIndex]);
+	}
+
+	if (!mainCPIndices.length || !currCheckpoint) {
 		return (
 			<Box>
 				{charHeader}
@@ -287,22 +170,29 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 		);
 	}
 
-	const initCPIndex = computed.checkpoints.length - 1;
-	if (
-		initCPIndex !== cpIndex &&
-		(prevName !== char.name || cpIndex >= computed.checkpoints.length)
-	) {
-		setPrevName(char.name);
-		setCPIndex(initCPIndex);
-		return null;
-	}
+	const cr = getCharReport(game, currCheckpoint, computed.base);
 
-	const cpSelect = renderCPSelect(computed.checkpoints, cpIndex, setCPIndex);
-	const cp = computed.checkpoints[cpIndex];
-	if (!cp) {
-		return null;
-	}
-	const cr = getCharReport(game, cp, computed.base);
+	const cpSelect = renderCPSelect(
+		mainCheckpoints,
+		mainCPIndex,
+		selectMainCheckpoint
+	);
+
+	const textStyle: React.CSSProperties | undefined = isOnMain
+		? {visibility: "hidden"}
+		: undefined;
+	const intPanel = (
+		<Box align="start">
+			<RangeInput
+				value={realCPIndex}
+				min={0}
+				max={computed.checkpoints.length - 1}
+				onChange={(evt: any) => setCPIndex(parseInt(evt.target.value))}
+				width="medium"
+			/>
+			<Text style={textStyle}>Showing: {renderCPLabel(currCheckpoint)}</Text>
+		</Box>
+	);
 
 	return (
 		<Box>
@@ -310,19 +200,21 @@ const CharReportPanel: React.FunctionComponent<Props> = function(props: Props) {
 			<Box pad={{horizontal: "large"}} alignSelf="end">
 				<HelpButton title="Help - Report" md={getHelp(game, "report")} />
 			</Box>
-			<Box
-				direction="row"
-				pad={{horizontal: "large"}}
-				margin={{bottom: "medium"}}
-				wrap
-			>
-				<Box margin={{right: "medium"}}>
-					<Text weight="bold">Actual Stats from</Text>
+			<Box pad={{horizontal: "large"}} margin={{bottom: "medium"}}>
+				<Box direction="row" wrap>
+					<Box margin={{right: "medium"}}>
+						<Text weight="bold">Actual Stats from</Text>
+					</Box>
+					<Box margin={{right: "medium"}} width="medium">
+						{cpSelect}
+					</Box>
 				</Box>
-				<Box width="medium">{cpSelect}</Box>
+				{intPanel}
 			</Box>
 			<Accordion>
-				{game.stats.map(s => renderStatPanel(game, cr, s, screenSize))}
+				{game.stats.map(s => (
+					<CharReportStatPanel key={s} game={game} cr={cr} statName={s} />
+				))}
 			</Accordion>
 		</Box>
 	);
