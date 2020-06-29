@@ -11,6 +11,9 @@
 		"test": "NODE_NO_WARNINGS=1 ava",
 		"build": "webpack",
 		"watch": "webpack -w",
+		"clear-cache": "rm .cache-loader/*",
+		"rebuild": "npm run clear-cache && npm run build",
+		"rewatch": "npm run clear-cache && npm run watch",
 		"build-prod": "NODE_ENV=production webpack"
 	},
 	"ava": {
