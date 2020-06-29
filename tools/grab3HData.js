@@ -86,6 +86,10 @@ const charMappingRaw = [
 	["Shamir"],
 	["Jeritza"],
 	["Anna"],
+	["Yuri"],
+	["Balthus"],
+	["Constance"],
+	["Hapi"],
 ];
 
 const charMapping = {};
@@ -131,6 +135,7 @@ const classMappingRaw = [
 	["Sniper"],
 	["Grappler"],
 	["Warlock"],
+	["Dark Bishop"],
 	["Bishop"],
 	["Falcon Knight"],
 	["Wyvern Lord"],
@@ -142,6 +147,10 @@ const classMappingRaw = [
 	["War Master"],
 	["Gremory"],
 	["Death Knight"],
+	["Trickster"],
+	["War Monk/Cleric"],
+	["Dark Flier"],
+	["Valkyrie"],
 ];
 
 const classMapping = {};
@@ -192,12 +201,16 @@ async function processAll(finalJSON) {
 	const classGrowths = turnTRsToClassStats(fetched["3h_class_growths"]);
 
 	_.each(finalJSON.chars, (c, name) => {
-		if (charBases[name]) {
+		if (c.baseStats) {
+			// Manually set. Don't replace.
+		} else if (charBases[name]) {
 			c.baseStats = charBases[name];
 		} else {
 			console.error("No base stats found for character " + name);
 		}
-		if (charGrowths[name]) {
+		if (c.growths) {
+			// Manually set. Don't replace.
+		} else if (charGrowths[name]) {
 			c.growths = charGrowths[name];
 			if (name === "Cyril") {
 				applyAptitude(c.growths);
@@ -205,7 +218,9 @@ async function processAll(finalJSON) {
 		} else {
 			console.error("No growths found for character " + name);
 		}
-		if (charMax[name]) {
+		if (c.maxStats) {
+			// Manually set. Don't replace.
+		} else if (charMax[name]) {
 			c.maxStats = charMax[name];
 		} else {
 			console.error("No max stats found for character " + name);
@@ -213,17 +228,23 @@ async function processAll(finalJSON) {
 	});
 
 	_.each(finalJSON.classes, (c, name) => {
-		if (classMins[name]) {
+		if (c.statMins) {
+			// Manually set. Don't replace.
+		} else if (classMins[name]) {
 			c.statMins = classMins[name];
 		} else {
 			console.error("No min stats found for class " + name);
 		}
-		if (classMods[name]) {
+		if (c.statMods) {
+			// Manually set. Don't replace.
+		} else if (classMods[name]) {
 			c.statMods = classMods[name];
 		} else {
 			console.error("No stat modifiers found for class " + name);
 		}
-		if (classGrowths[name]) {
+		if (c.growths) {
+			// Manually set. Don't replace.
+		} else if (classGrowths[name]) {
 			c.growths = classGrowths[name];
 		} else {
 			console.error("No growths found for class " + name);
@@ -276,14 +297,20 @@ async function main() {
 				baseClass: "Noble",
 				baseLevel: 1,
 			},
-			Dorothea: {
-				name: "Dorothea",
-				gender: "F",
-				baseClass: "Commoner",
-				baseLevel: 1,
-			},
 			Ferdinand: {
 				name: "Ferdinand",
+				gender: "M",
+				baseClass: "Noble",
+				baseLevel: 1,
+			},
+			Linhardt: {
+				name: "Linhardt",
+				gender: "M",
+				baseClass: "Noble",
+				baseLevel: 1,
+			},
+			Caspar: {
+				name: "Caspar",
 				gender: "M",
 				baseClass: "Noble",
 				baseLevel: 1,
@@ -294,22 +321,16 @@ async function main() {
 				baseClass: "Noble",
 				baseLevel: 1,
 			},
-			Caspar: {
-				name: "Caspar",
-				gender: "M",
-				baseClass: "Noble",
+			Dorothea: {
+				name: "Dorothea",
+				gender: "F",
+				baseClass: "Commoner",
 				baseLevel: 1,
 			},
 			Petra: {
 				name: "Petra",
 				gender: "F",
 				baseClass: "Commoner",
-				baseLevel: 1,
-			},
-			Linhardt: {
-				name: "Linhardt",
-				gender: "M",
-				baseClass: "Noble",
 				baseLevel: 1,
 			},
 			Dimitri: {
@@ -330,27 +351,27 @@ async function main() {
 				baseClass: "Noble",
 				baseLevel: 1,
 			},
-			Mercedes: {
-				name: "Mercedes",
-				gender: "F",
-				baseClass: "Commoner",
-				baseLevel: 1,
-			},
 			Ashe: {
 				name: "Ashe",
 				gender: "M",
 				baseClass: "Commoner",
 				baseLevel: 1,
 			},
-			Annette: {
-				name: "Annette",
-				gender: "F",
-				baseClass: "Noble",
-				baseLevel: 1,
-			},
 			Sylvain: {
 				name: "Sylvain",
 				gender: "M",
+				baseClass: "Noble",
+				baseLevel: 1,
+			},
+			Mercedes: {
+				name: "Mercedes",
+				gender: "F",
+				baseClass: "Commoner",
+				baseLevel: 1,
+			},
+			Annette: {
+				name: "Annette",
+				gender: "F",
 				baseClass: "Noble",
 				baseLevel: 1,
 			},
@@ -372,14 +393,14 @@ async function main() {
 				baseClass: "Noble",
 				baseLevel: 1,
 			},
-			Hilda: {
-				name: "Hilda",
-				gender: "F",
-				baseClass: "Noble",
-				baseLevel: 1,
-			},
 			Raphael: {
 				name: "Raphael",
+				gender: "M",
+				baseClass: "Commoner",
+				baseLevel: 1,
+			},
+			Ignatz: {
+				name: "Ignatz",
 				gender: "M",
 				baseClass: "Commoner",
 				baseLevel: 1,
@@ -390,14 +411,14 @@ async function main() {
 				baseClass: "Noble",
 				baseLevel: 1,
 			},
-			Ignatz: {
-				name: "Ignatz",
-				gender: "M",
-				baseClass: "Commoner",
-				baseLevel: 1,
-			},
 			Marianne: {
 				name: "Marianne",
+				gender: "F",
+				baseClass: "Noble",
+				baseLevel: 1,
+			},
+			Hilda: {
+				name: "Hilda",
 				gender: "F",
 				baseClass: "Noble",
 				baseLevel: 1,
@@ -406,18 +427,6 @@ async function main() {
 				name: "Leonie",
 				gender: "F",
 				baseClass: "Commoner",
-				baseLevel: 1,
-			},
-			Manuela: {
-				name: "Manuela",
-				gender: "F",
-				baseClass: "Commoner",
-				baseLevel: 1,
-			},
-			Hanneman: {
-				name: "Hanneman",
-				gender: "M",
-				baseClass: "Noble",
 				baseLevel: 1,
 			},
 			Seteth: {
@@ -432,8 +441,26 @@ async function main() {
 				baseClass: "Noble",
 				baseLevel: 1,
 			},
-			Cyril: {
-				name: "Cyril",
+			Hanneman: {
+				name: "Hanneman",
+				gender: "M",
+				baseClass: "Noble",
+				baseLevel: 1,
+			},
+			Manuela: {
+				name: "Manuela",
+				gender: "F",
+				baseClass: "Commoner",
+				baseLevel: 1,
+			},
+			Gilbert: {
+				name: "Gilbert",
+				gender: "M",
+				baseClass: "Commoner",
+				baseLevel: 1,
+			},
+			Alois: {
+				name: "Alois",
 				gender: "M",
 				baseClass: "Commoner",
 				baseLevel: 1,
@@ -444,22 +471,16 @@ async function main() {
 				baseClass: "Noble",
 				baseLevel: 1,
 			},
-			Alois: {
-				name: "Alois",
-				gender: "M",
-				baseClass: "Commoner",
-				baseLevel: 1,
-			},
-			Gilbert: {
-				name: "Gilbert",
-				gender: "M",
-				baseClass: "Commoner",
-				baseLevel: 1,
-			},
 			Shamir: {
 				name: "Shamir",
 				gender: "F",
 				baseClass: "Noble",
+				baseLevel: 1,
+			},
+			Cyril: {
+				name: "Cyril",
+				gender: "M",
+				baseClass: "Commoner",
 				baseLevel: 1,
 			},
 			Jeritza: {
@@ -473,6 +494,74 @@ async function main() {
 				gender: "F",
 				baseClass: "Commoner",
 				baseLevel: 1,
+			},
+			Yuri: {
+				name: "Yuri",
+				gender: "M",
+				baseClass: "Commoner",
+				baseLevel: 3,
+				baseStats: {
+					HP: 25,
+					Str: 11,
+					Mag: 7,
+					Dex: 8,
+					Spd: 10,
+					Lck: 8,
+					Def: 6,
+					Res: 8,
+					Cha: 9,
+				},
+			},
+			Balthus: {
+				name: "Balthus",
+				gender: "M",
+				baseClass: "Noble",
+				baseLevel: 3,
+				baseStats: {
+					HP: 29,
+					Str: 12,
+					Mag: 6,
+					Dex: 5,
+					Spd: 8,
+					Lck: 3,
+					Def: 8,
+					Res: 5,
+					Cha: 5,
+				},
+			},
+			Constance: {
+				name: "Constance",
+				gender: "F",
+				baseClass: "Noble",
+				baseLevel: 3,
+				baseStats: {
+					HP: 23,
+					Str: 5,
+					Mag: 12,
+					Dex: 7,
+					Spd: 7,
+					Lck: 4,
+					Def: 3,
+					Res: 6,
+					Cha: 7,
+				},
+			},
+			Hapi: {
+				name: "Hapi",
+				gender: "F",
+				baseClass: "Commoner",
+				baseLevel: 3,
+				baseStats: {
+					HP: 27,
+					Str: 7,
+					Mag: 12,
+					Dex: 9,
+					Spd: 7,
+					Lck: 4,
+					Def: 4,
+					Res: 8,
+					Cha: 5,
+				},
 			},
 		},
 		classes: {
@@ -504,6 +593,7 @@ async function main() {
 			Sniper: {name: "Sniper", requiredGender: ""},
 			Grappler: {name: "Grappler", requiredGender: "M"},
 			Warlock: {name: "Warlock", requiredGender: ""},
+			"Dark Bishop": {name: "Dark Bishop", requiredGender: ""},
 			Bishop: {name: "Bishop", requiredGender: ""},
 			"Falcon Knight": {name: "Falcon Knight", requiredGender: "F"},
 			"Wyvern Lord": {name: "Wyvern Lord", requiredGender: ""},
@@ -523,6 +613,10 @@ async function main() {
 			"Wyvern Master": {name: "Wyvern Master", requiredGender: ""},
 			Barbarossa: {name: "Barbarossa", requiredGender: ""},
 			"Death Knight": {name: "Death Knight", requiredGender: ""},
+			Trickster: {name: "Trickster", requiredGender: ""},
+			"War Monk/Cleric": {name: "War Monk/Cleric", requiredGender: ""},
+			"Dark Flier": {name: "Dark Flier", requiredGender: "F"},
+			Valkyrie: {name: "Valkyrie", requiredGender: "F"},
 		},
 	};
 

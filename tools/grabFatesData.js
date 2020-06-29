@@ -528,12 +528,16 @@ async function processAll(finalJSON) {
 			console.error("No bases found for character " + name);
 		}
 
-		if (charGrowths[name]) {
+		if (c.growths) {
+			// Manually set. Don't replace.
+		} else if (charGrowths[name]) {
 			c.growths = charGrowths[name];
 		} else {
 			console.error("No growths found for character " + name);
 		}
-		if (charMax[name]) {
+		if (c.maxStats) {
+			// Manually set. Don't replace.
+		} else if (charMax[name]) {
 			c.maxStats = charMax[name];
 		} else if (!c.maxStats) {
 			console.error("No max stats found for character " + name);
@@ -544,17 +548,23 @@ async function processAll(finalJSON) {
 		if (promotedClasses.has(name)) {
 			c.levelMod = 20;
 		}
-		if (classMods[name]) {
+		if (c.statMods) {
+			// Manually set. Don't replace.
+		} else if (classMods[name]) {
 			c.statMods = classMods[name];
 		} else {
 			console.error("No stat modifiers found for class " + name);
 		}
-		if (classGrowths[name]) {
+		if (c.growths) {
+			// Manually set. Don't replace.
+		} else if (classGrowths[name]) {
 			c.growths = classGrowths[name];
 		} else {
 			console.error("No growths found for class " + name);
 		}
-		if (classMax[name]) {
+		if (c.maxStats) {
+			// Manually set. Don't replace.
+		} else if (classMax[name]) {
 			c.maxStats = classMax[name];
 		} else {
 			console.error("No min stats found for class " + name);

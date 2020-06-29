@@ -173,45 +173,6 @@
 				"Cha": 49
 			}
 		},
-		"Dorothea": {
-			"name": "Dorothea",
-			"gender": "F",
-			"baseClass": "Commoner",
-			"baseLevel": 1,
-			"baseStats": {
-				"HP": 24,
-				"Str": 5,
-				"Mag": 11,
-				"Dex": 6,
-				"Spd": 7,
-				"Lck": 6,
-				"Def": 4,
-				"Res": 7,
-				"Cha": 8
-			},
-			"growths": {
-				"HP": 40,
-				"Str": 20,
-				"Mag": 40,
-				"Dex": 45,
-				"Spd": 40,
-				"Lck": 35,
-				"Def": 15,
-				"Res": 35,
-				"Cha": 40
-			},
-			"maxStats": {
-				"HP": 76,
-				"Str": 30,
-				"Mag": 61,
-				"Dex": 62,
-				"Spd": 57,
-				"Lck": 49,
-				"Def": 38,
-				"Res": 50,
-				"Cha": 58
-			}
-		},
 		"Ferdinand": {
 			"name": "Ferdinand",
 			"gender": "M",
@@ -251,43 +212,43 @@
 				"Cha": 57
 			}
 		},
-		"Bernadetta": {
-			"name": "Bernadetta",
-			"gender": "F",
+		"Linhardt": {
+			"name": "Linhardt",
+			"gender": "M",
 			"baseClass": "Noble",
 			"baseLevel": 1,
 			"baseStats": {
-				"HP": 25,
-				"Str": 8,
-				"Mag": 5,
-				"Dex": 7,
-				"Spd": 7,
-				"Lck": 5,
-				"Def": 4,
-				"Res": 2,
-				"Cha": 6
+				"HP": 24,
+				"Str": 5,
+				"Mag": 10,
+				"Dex": 6,
+				"Spd": 5,
+				"Lck": 7,
+				"Def": 5,
+				"Res": 9,
+				"Cha": 3
 			},
 			"growths": {
-				"HP": 35,
-				"Str": 35,
-				"Mag": 20,
-				"Dex": 55,
-				"Spd": 50,
-				"Lck": 25,
-				"Def": 20,
-				"Res": 30,
-				"Cha": 35
+				"HP": 30,
+				"Str": 30,
+				"Mag": 45,
+				"Dex": 40,
+				"Spd": 40,
+				"Lck": 45,
+				"Def": 30,
+				"Res": 45,
+				"Cha": 20
 			},
 			"maxStats": {
-				"HP": 70,
-				"Str": 51,
-				"Mag": 40,
-				"Dex": 75,
-				"Spd": 69,
-				"Lck": 41,
-				"Def": 41,
-				"Res": 39,
-				"Cha": 49
+				"HP": 63,
+				"Str": 42,
+				"Mag": 66,
+				"Dex": 56,
+				"Spd": 55,
+				"Lck": 63,
+				"Def": 48,
+				"Res": 65,
+				"Cha": 43
 			}
 		},
 		"Caspar": {
@@ -329,6 +290,84 @@
 				"Cha": 46
 			}
 		},
+		"Bernadetta": {
+			"name": "Bernadetta",
+			"gender": "F",
+			"baseClass": "Noble",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 25,
+				"Str": 8,
+				"Mag": 5,
+				"Dex": 7,
+				"Spd": 7,
+				"Lck": 5,
+				"Def": 4,
+				"Res": 2,
+				"Cha": 6
+			},
+			"growths": {
+				"HP": 35,
+				"Str": 35,
+				"Mag": 20,
+				"Dex": 55,
+				"Spd": 50,
+				"Lck": 25,
+				"Def": 20,
+				"Res": 30,
+				"Cha": 35
+			},
+			"maxStats": {
+				"HP": 70,
+				"Str": 51,
+				"Mag": 40,
+				"Dex": 75,
+				"Spd": 69,
+				"Lck": 41,
+				"Def": 41,
+				"Res": 39,
+				"Cha": 49
+			}
+		},
+		"Dorothea": {
+			"name": "Dorothea",
+			"gender": "F",
+			"baseClass": "Commoner",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 24,
+				"Str": 5,
+				"Mag": 11,
+				"Dex": 6,
+				"Spd": 7,
+				"Lck": 6,
+				"Def": 4,
+				"Res": 7,
+				"Cha": 8
+			},
+			"growths": {
+				"HP": 40,
+				"Str": 20,
+				"Mag": 40,
+				"Dex": 45,
+				"Spd": 40,
+				"Lck": 35,
+				"Def": 15,
+				"Res": 35,
+				"Cha": 40
+			},
+			"maxStats": {
+				"HP": 76,
+				"Str": 30,
+				"Mag": 61,
+				"Dex": 62,
+				"Spd": 57,
+				"Lck": 49,
+				"Def": 38,
+				"Res": 50,
+				"Cha": 58
+			}
+		},
 		"Petra": {
 			"name": "Petra",
 			"gender": "F",
@@ -366,45 +405,6 @@
 				"Def": 42,
 				"Res": 35,
 				"Cha": 63
-			}
-		},
-		"Linhardt": {
-			"name": "Linhardt",
-			"gender": "M",
-			"baseClass": "Noble",
-			"baseLevel": 1,
-			"baseStats": {
-				"HP": 24,
-				"Str": 5,
-				"Mag": 10,
-				"Dex": 6,
-				"Spd": 5,
-				"Lck": 7,
-				"Def": 5,
-				"Res": 9,
-				"Cha": 3
-			},
-			"growths": {
-				"HP": 30,
-				"Str": 30,
-				"Mag": 45,
-				"Dex": 40,
-				"Spd": 40,
-				"Lck": 45,
-				"Def": 30,
-				"Res": 45,
-				"Cha": 20
-			},
-			"maxStats": {
-				"HP": 63,
-				"Str": 42,
-				"Mag": 66,
-				"Dex": 56,
-				"Spd": 55,
-				"Lck": 63,
-				"Def": 48,
-				"Res": 65,
-				"Cha": 43
 			}
 		},
 		"Dimitri": {
@@ -524,45 +524,6 @@
 				"Cha": 42
 			}
 		},
-		"Mercedes": {
-			"name": "Mercedes",
-			"gender": "F",
-			"baseClass": "Commoner",
-			"baseLevel": 1,
-			"baseStats": {
-				"HP": 25,
-				"Str": 6,
-				"Mag": 10,
-				"Dex": 6,
-				"Spd": 8,
-				"Lck": 5,
-				"Def": 5,
-				"Res": 9,
-				"Cha": 8
-			},
-			"growths": {
-				"HP": 30,
-				"Str": 25,
-				"Mag": 50,
-				"Dex": 45,
-				"Spd": 40,
-				"Lck": 30,
-				"Def": 25,
-				"Res": 45,
-				"Cha": 40
-			},
-			"maxStats": {
-				"HP": 64,
-				"Str": 37,
-				"Mag": 72,
-				"Dex": 62,
-				"Spd": 58,
-				"Lck": 54,
-				"Def": 44,
-				"Res": 65,
-				"Cha": 58
-			}
-		},
 		"Ashe": {
 			"name": "Ashe",
 			"gender": "M",
@@ -602,45 +563,6 @@
 				"Cha": 36
 			}
 		},
-		"Annette": {
-			"name": "Annette",
-			"gender": "F",
-			"baseClass": "Noble",
-			"baseLevel": 1,
-			"baseStats": {
-				"HP": 23,
-				"Str": 6,
-				"Mag": 11,
-				"Dex": 7,
-				"Spd": 7,
-				"Lck": 6,
-				"Def": 5,
-				"Res": 4,
-				"Cha": 6
-			},
-			"growths": {
-				"HP": 25,
-				"Str": 30,
-				"Mag": 50,
-				"Dex": 50,
-				"Spd": 35,
-				"Lck": 35,
-				"Def": 20,
-				"Res": 30,
-				"Cha": 35
-			},
-			"maxStats": {
-				"HP": 55,
-				"Str": 43,
-				"Mag": 73,
-				"Dex": 69,
-				"Spd": 50,
-				"Lck": 49,
-				"Def": 40,
-				"Res": 41,
-				"Cha": 49
-			}
-		},
 		"Sylvain": {
 			"name": "Sylvain",
 			"gender": "M",
@@ -678,6 +600,84 @@
 				"Def": 56,
 				"Res": 38,
 				"Cha": 57
+			}
+		},
+		"Mercedes": {
+			"name": "Mercedes",
+			"gender": "F",
+			"baseClass": "Commoner",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 25,
+				"Str": 6,
+				"Mag": 10,
+				"Dex": 6,
+				"Spd": 8,
+				"Lck": 5,
+				"Def": 5,
+				"Res": 9,
+				"Cha": 8
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 25,
+				"Mag": 50,
+				"Dex": 45,
+				"Spd": 40,
+				"Lck": 30,
+				"Def": 25,
+				"Res": 45,
+				"Cha": 40
+			},
+			"maxStats": {
+				"HP": 64,
+				"Str": 37,
+				"Mag": 72,
+				"Dex": 62,
+				"Spd": 58,
+				"Lck": 54,
+				"Def": 44,
+				"Res": 65,
+				"Cha": 58
+			}
+		},
+		"Annette": {
+			"name": "Annette",
+			"gender": "F",
+			"baseClass": "Noble",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 23,
+				"Str": 6,
+				"Mag": 11,
+				"Dex": 7,
+				"Spd": 7,
+				"Lck": 6,
+				"Def": 5,
+				"Res": 4,
+				"Cha": 6
+			},
+			"growths": {
+				"HP": 25,
+				"Str": 30,
+				"Mag": 50,
+				"Dex": 50,
+				"Spd": 35,
+				"Lck": 35,
+				"Def": 20,
+				"Res": 30,
+				"Cha": 35
+			},
+			"maxStats": {
+				"HP": 55,
+				"Str": 43,
+				"Mag": 73,
+				"Dex": 69,
+				"Spd": 50,
+				"Lck": 49,
+				"Def": 40,
+				"Res": 41,
+				"Cha": 49
 			}
 		},
 		"Ingrid": {
@@ -797,45 +797,6 @@
 				"Cha": 46
 			}
 		},
-		"Hilda": {
-			"name": "Hilda",
-			"gender": "F",
-			"baseClass": "Noble",
-			"baseLevel": 1,
-			"baseStats": {
-				"HP": 29,
-				"Str": 10,
-				"Mag": 5,
-				"Dex": 5,
-				"Spd": 8,
-				"Lck": 6,
-				"Def": 6,
-				"Res": 3,
-				"Cha": 7
-			},
-			"growths": {
-				"HP": 50,
-				"Str": 45,
-				"Mag": 25,
-				"Dex": 30,
-				"Spd": 50,
-				"Lck": 35,
-				"Def": 35,
-				"Res": 20,
-				"Cha": 50
-			},
-			"maxStats": {
-				"HP": 94,
-				"Str": 66,
-				"Mag": 36,
-				"Dex": 42,
-				"Spd": 70,
-				"Lck": 49,
-				"Def": 49,
-				"Res": 39,
-				"Cha": 76
-			}
-		},
 		"Raphael": {
 			"name": "Raphael",
 			"gender": "M",
@@ -873,45 +834,6 @@
 				"Def": 63,
 				"Res": 36,
 				"Cha": 51
-			}
-		},
-		"Lysithea": {
-			"name": "Lysithea",
-			"gender": "F",
-			"baseClass": "Noble",
-			"baseLevel": 1,
-			"baseStats": {
-				"HP": 22,
-				"Str": 4,
-				"Mag": 11,
-				"Dex": 7,
-				"Spd": 7,
-				"Lck": 4,
-				"Def": 3,
-				"Res": 4,
-				"Cha": 5
-			},
-			"growths": {
-				"HP": 20,
-				"Str": 15,
-				"Mag": 60,
-				"Dex": 60,
-				"Spd": 50,
-				"Lck": 15,
-				"Def": 10,
-				"Res": 25,
-				"Cha": 25
-			},
-			"maxStats": {
-				"HP": 48,
-				"Str": 30,
-				"Mag": 86,
-				"Dex": 82,
-				"Spd": 69,
-				"Lck": 40,
-				"Def": 36,
-				"Res": 41,
-				"Cha": 44
 			}
 		},
 		"Ignatz": {
@@ -953,6 +875,45 @@
 				"Cha": 45
 			}
 		},
+		"Lysithea": {
+			"name": "Lysithea",
+			"gender": "F",
+			"baseClass": "Noble",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 22,
+				"Str": 4,
+				"Mag": 11,
+				"Dex": 7,
+				"Spd": 7,
+				"Lck": 4,
+				"Def": 3,
+				"Res": 4,
+				"Cha": 5
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 15,
+				"Mag": 60,
+				"Dex": 60,
+				"Spd": 50,
+				"Lck": 15,
+				"Def": 10,
+				"Res": 25,
+				"Cha": 25
+			},
+			"maxStats": {
+				"HP": 48,
+				"Str": 30,
+				"Mag": 86,
+				"Dex": 82,
+				"Spd": 69,
+				"Lck": 40,
+				"Def": 36,
+				"Res": 41,
+				"Cha": 44
+			}
+		},
 		"Marianne": {
 			"name": "Marianne",
 			"gender": "F",
@@ -992,6 +953,45 @@
 				"Cha": 57
 			}
 		},
+		"Hilda": {
+			"name": "Hilda",
+			"gender": "F",
+			"baseClass": "Noble",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 29,
+				"Str": 10,
+				"Mag": 5,
+				"Dex": 5,
+				"Spd": 8,
+				"Lck": 6,
+				"Def": 6,
+				"Res": 3,
+				"Cha": 7
+			},
+			"growths": {
+				"HP": 50,
+				"Str": 45,
+				"Mag": 25,
+				"Dex": 30,
+				"Spd": 50,
+				"Lck": 35,
+				"Def": 35,
+				"Res": 20,
+				"Cha": 50
+			},
+			"maxStats": {
+				"HP": 94,
+				"Str": 66,
+				"Mag": 36,
+				"Dex": 42,
+				"Spd": 70,
+				"Lck": 49,
+				"Def": 49,
+				"Res": 39,
+				"Cha": 76
+			}
+		},
 		"Leonie": {
 			"name": "Leonie",
 			"gender": "F",
@@ -1029,84 +1029,6 @@
 				"Def": 57,
 				"Res": 36,
 				"Cha": 57
-			}
-		},
-		"Manuela": {
-			"name": "Manuela",
-			"gender": "F",
-			"baseClass": "Commoner",
-			"baseLevel": 1,
-			"baseStats": {
-				"HP": 26,
-				"Str": 10,
-				"Mag": 8,
-				"Dex": 6,
-				"Spd": 8,
-				"Lck": 6,
-				"Def": 5,
-				"Res": 4,
-				"Cha": 7
-			},
-			"growths": {
-				"HP": 50,
-				"Str": 35,
-				"Mag": 35,
-				"Dex": 40,
-				"Spd": 60,
-				"Lck": 35,
-				"Def": 30,
-				"Res": 25,
-				"Cha": 50
-			},
-			"maxStats": {
-				"HP": 91,
-				"Str": 53,
-				"Mag": 48,
-				"Dex": 56,
-				"Spd": 83,
-				"Lck": 52,
-				"Def": 42,
-				"Res": 44,
-				"Cha": 69
-			}
-		},
-		"Hanneman": {
-			"name": "Hanneman",
-			"gender": "M",
-			"baseClass": "Noble",
-			"baseLevel": 1,
-			"baseStats": {
-				"HP": 25,
-				"Str": 6,
-				"Mag": 10,
-				"Dex": 6,
-				"Spd": 6,
-				"Lck": 4,
-				"Def": 5,
-				"Res": 7,
-				"Cha": 5
-			},
-			"growths": {
-				"HP": 40,
-				"Str": 30,
-				"Mag": 55,
-				"Dex": 45,
-				"Spd": 20,
-				"Lck": 35,
-				"Def": 25,
-				"Res": 40,
-				"Cha": 35
-			},
-			"maxStats": {
-				"HP": 77,
-				"Str": 43,
-				"Mag": 78,
-				"Dex": 62,
-				"Spd": 35,
-				"Lck": 49,
-				"Def": 36,
-				"Res": 57,
-				"Cha": 48
 			}
 		},
 		"Seteth": {
@@ -1187,121 +1109,82 @@
 				"Cha": 65
 			}
 		},
-		"Cyril": {
-			"name": "Cyril",
+		"Hanneman": {
+			"name": "Hanneman",
 			"gender": "M",
-			"baseClass": "Commoner",
-			"baseLevel": 1,
-			"baseStats": {
-				"HP": 24,
-				"Str": 7,
-				"Mag": 4,
-				"Dex": 6,
-				"Spd": 6,
-				"Lck": 6,
-				"Def": 5,
-				"Res": 2,
-				"Cha": 4
-			},
-			"growths": {
-				"HP": 55,
-				"Str": 40,
-				"Mag": 35,
-				"Dex": 60,
-				"Spd": 60,
-				"Lck": 50,
-				"Def": 30,
-				"Res": 30,
-				"Cha": 35
-			},
-			"maxStats": {
-				"HP": 85,
-				"Str": 55,
-				"Mag": 48,
-				"Dex": 78,
-				"Spd": 76,
-				"Lck": 66,
-				"Def": 45,
-				"Res": 41,
-				"Cha": 48
-			}
-		},
-		"Catherine": {
-			"name": "Catherine",
-			"gender": "F",
 			"baseClass": "Noble",
 			"baseLevel": 1,
 			"baseStats": {
-				"HP": 27,
-				"Str": 8,
-				"Mag": 5,
+				"HP": 25,
+				"Str": 6,
+				"Mag": 10,
 				"Dex": 6,
-				"Spd": 7,
-				"Lck": 6,
+				"Spd": 6,
+				"Lck": 4,
 				"Def": 5,
-				"Res": 2,
-				"Cha": 4
+				"Res": 7,
+				"Cha": 5
 			},
 			"growths": {
-				"HP": 50,
-				"Str": 50,
-				"Mag": 25,
-				"Dex": 40,
-				"Spd": 55,
-				"Lck": 30,
-				"Def": 30,
-				"Res": 20,
-				"Cha": 25
+				"HP": 40,
+				"Str": 30,
+				"Mag": 55,
+				"Dex": 45,
+				"Spd": 20,
+				"Lck": 35,
+				"Def": 25,
+				"Res": 40,
+				"Cha": 35
 			},
 			"maxStats": {
-				"HP": 92,
-				"Str": 70,
-				"Mag": 36,
-				"Dex": 56,
-				"Spd": 75,
-				"Lck": 43,
-				"Def": 42,
-				"Res": 37,
-				"Cha": 35
+				"HP": 77,
+				"Str": 43,
+				"Mag": 78,
+				"Dex": 62,
+				"Spd": 35,
+				"Lck": 49,
+				"Def": 36,
+				"Res": 57,
+				"Cha": 48
 			}
 		},
-		"Alois": {
-			"name": "Alois",
-			"gender": "M",
+		"Manuela": {
+			"name": "Manuela",
+			"gender": "F",
 			"baseClass": "Commoner",
 			"baseLevel": 1,
 			"baseStats": {
-				"HP": 28,
-				"Str": 9,
-				"Mag": 4,
-				"Dex": 5,
-				"Spd": 6,
-				"Lck": 5,
+				"HP": 26,
+				"Str": 10,
+				"Mag": 8,
+				"Dex": 6,
+				"Spd": 8,
+				"Lck": 6,
 				"Def": 5,
-				"Res": 2,
+				"Res": 4,
 				"Cha": 7
 			},
 			"growths": {
-				"HP": 45,
-				"Str": 45,
-				"Mag": 20,
-				"Dex": 35,
-				"Spd": 40,
-				"Lck": 30,
-				"Def": 40,
-				"Res": 20,
-				"Cha": 40
+				"HP": 50,
+				"Str": 35,
+				"Mag": 35,
+				"Dex": 40,
+				"Spd": 60,
+				"Lck": 35,
+				"Def": 30,
+				"Res": 25,
+				"Cha": 50
 			},
 			"maxStats": {
-				"HP": 86,
-				"Str": 71,
-				"Mag": 33,
-				"Dex": 48,
-				"Spd": 56,
-				"Lck": 42,
-				"Def": 55,
-				"Res": 37,
-				"Cha": 57
+				"HP": 91,
+				"Str": 53,
+				"Mag": 48,
+				"Dex": 56,
+				"Spd": 83,
+				"Lck": 52,
+				"Def": 42,
+				"Res": 44,
+				"Cha": 69
 			}
 		},
 		"Gilbert": {
@@ -1343,6 +1226,84 @@
 				"Cha": 49
 			}
 		},
+		"Alois": {
+			"name": "Alois",
+			"gender": "M",
+			"baseClass": "Commoner",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 28,
+				"Str": 9,
+				"Mag": 4,
+				"Dex": 5,
+				"Spd": 6,
+				"Lck": 5,
+				"Def": 5,
+				"Res": 2,
+				"Cha": 7
+			},
+			"growths": {
+				"HP": 45,
+				"Str": 45,
+				"Mag": 20,
+				"Dex": 35,
+				"Spd": 40,
+				"Lck": 30,
+				"Def": 40,
+				"Res": 20,
+				"Cha": 40
+			},
+			"maxStats": {
+				"HP": 86,
+				"Str": 71,
+				"Mag": 33,
+				"Dex": 48,
+				"Spd": 56,
+				"Lck": 42,
+				"Def": 55,
+				"Res": 37,
+				"Cha": 57
+			}
+		},
+		"Catherine": {
+			"name": "Catherine",
+			"gender": "F",
+			"baseClass": "Noble",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 27,
+				"Str": 8,
+				"Mag": 5,
+				"Dex": 6,
+				"Spd": 7,
+				"Lck": 6,
+				"Def": 5,
+				"Res": 2,
+				"Cha": 4
+			},
+			"growths": {
+				"HP": 50,
+				"Str": 50,
+				"Mag": 25,
+				"Dex": 40,
+				"Spd": 55,
+				"Lck": 30,
+				"Def": 30,
+				"Res": 20,
+				"Cha": 25
+			},
+			"maxStats": {
+				"HP": 92,
+				"Str": 70,
+				"Mag": 36,
+				"Dex": 56,
+				"Spd": 75,
+				"Lck": 43,
+				"Def": 42,
+				"Res": 37,
+				"Cha": 35
+			}
+		},
 		"Shamir": {
 			"name": "Shamir",
 			"gender": "F",
@@ -1380,6 +1341,45 @@
 				"Def": 37,
 				"Res": 35,
 				"Cha": 43
+			}
+		},
+		"Cyril": {
+			"name": "Cyril",
+			"gender": "M",
+			"baseClass": "Commoner",
+			"baseLevel": 1,
+			"baseStats": {
+				"HP": 24,
+				"Str": 7,
+				"Mag": 4,
+				"Dex": 6,
+				"Spd": 6,
+				"Lck": 6,
+				"Def": 5,
+				"Res": 2,
+				"Cha": 4
+			},
+			"growths": {
+				"HP": 55,
+				"Str": 40,
+				"Mag": 35,
+				"Dex": 60,
+				"Spd": 60,
+				"Lck": 50,
+				"Def": 30,
+				"Res": 30,
+				"Cha": 35
+			},
+			"maxStats": {
+				"HP": 85,
+				"Str": 55,
+				"Mag": 48,
+				"Dex": 78,
+				"Spd": 76,
+				"Lck": 66,
+				"Def": 45,
+				"Res": 41,
+				"Cha": 48
 			}
 		},
 		"Jeritza": {
@@ -1458,6 +1458,162 @@
 				"Def": 44,
 				"Res": 49,
 				"Cha": 60
+			}
+		},
+		"Yuri": {
+			"name": "Yuri",
+			"gender": "M",
+			"baseClass": "Commoner",
+			"baseLevel": 3,
+			"baseStats": {
+				"HP": 25,
+				"Str": 11,
+				"Mag": 7,
+				"Dex": 8,
+				"Spd": 10,
+				"Lck": 8,
+				"Def": 6,
+				"Res": 8,
+				"Cha": 9
+			},
+			"growths": {
+				"HP": 30,
+				"Str": 40,
+				"Mag": 35,
+				"Dex": 40,
+				"Spd": 65,
+				"Lck": 45,
+				"Def": 30,
+				"Res": 35,
+				"Cha": 50
+			},
+			"maxStats": {
+				"HP": 64,
+				"Str": 59,
+				"Mag": 55,
+				"Dex": 68,
+				"Spd": 92,
+				"Lck": 77,
+				"Def": 48,
+				"Res": 51,
+				"Cha": 71
+			}
+		},
+		"Balthus": {
+			"name": "Balthus",
+			"gender": "M",
+			"baseClass": "Noble",
+			"baseLevel": 3,
+			"baseStats": {
+				"HP": 29,
+				"Str": 12,
+				"Mag": 6,
+				"Dex": 5,
+				"Spd": 8,
+				"Lck": 3,
+				"Def": 8,
+				"Res": 5,
+				"Cha": 5
+			},
+			"growths": {
+				"HP": 50,
+				"Str": 50,
+				"Mag": 30,
+				"Dex": 25,
+				"Spd": 30,
+				"Lck": 20,
+				"Def": 45,
+				"Res": 30,
+				"Cha": 30
+			},
+			"maxStats": {
+				"HP": 100,
+				"Str": 71,
+				"Mag": 48,
+				"Dex": 39,
+				"Spd": 46,
+				"Lck": 35,
+				"Def": 69,
+				"Res": 43,
+				"Cha": 46
+			}
+		},
+		"Constance": {
+			"name": "Constance",
+			"gender": "F",
+			"baseClass": "Noble",
+			"baseLevel": 3,
+			"baseStats": {
+				"HP": 23,
+				"Str": 5,
+				"Mag": 12,
+				"Dex": 7,
+				"Spd": 7,
+				"Lck": 4,
+				"Def": 3,
+				"Res": 6,
+				"Cha": 7
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 20,
+				"Mag": 60,
+				"Dex": 30,
+				"Spd": 35,
+				"Lck": 15,
+				"Def": 15,
+				"Res": 30,
+				"Cha": 25
+			},
+			"maxStats": {
+				"HP": 51,
+				"Str": 32,
+				"Mag": 84,
+				"Dex": 68,
+				"Spd": 60,
+				"Lck": 42,
+				"Def": 39,
+				"Res": 51,
+				"Cha": 62
+			}
+		},
+		"Hapi": {
+			"name": "Hapi",
+			"gender": "F",
+			"baseClass": "Commoner",
+			"baseLevel": 3,
+			"baseStats": {
+				"HP": 27,
+				"Str": 7,
+				"Mag": 12,
+				"Dex": 9,
+				"Spd": 7,
+				"Lck": 4,
+				"Def": 4,
+				"Res": 8,
+				"Cha": 5
+			},
+			"growths": {
+				"HP": 35,
+				"Str": 35,
+				"Mag": 45,
+				"Dex": 45,
+				"Spd": 40,
+				"Lck": 20,
+				"Def": 15,
+				"Res": 45,
+				"Cha": 25
+			},
+			"maxStats": {
+				"HP": 69,
+				"Str": 41,
+				"Mag": 76,
+				"Dex": 70,
+				"Spd": 51,
+				"Lck": 40,
+				"Def": 42,
+				"Res": 61,
+				"Cha": 43
 			}
 		}
 	},
@@ -2806,6 +2962,54 @@
 				"Cha": 0
 			}
 		},
+		"Dark Bishop": {
+			"name": "Dark Bishop",
+			"requiredGender": "",
+			"statMins": {
+				"HP": 30,
+				"Str": 8,
+				"Mag": 17,
+				"Dex": 12,
+				"Spd": 14,
+				"Lck": 10,
+				"Def": 12,
+				"Res": 15,
+				"Cha": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 4,
+				"Dex": 2,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 3,
+				"Cha": 0
+			},
+			"growths": {
+				"HP": 10,
+				"Str": 0,
+				"Mag": 10,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": -5,
+				"Res": 5,
+				"Cha": 0
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
+			}
+		},
 		"Bishop": {
 			"name": "Bishop",
 			"requiredGender": "",
@@ -3705,6 +3909,198 @@
 				"Def": 5,
 				"Res": 5,
 				"Cha": 0
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
+			}
+		},
+		"Trickster": {
+			"name": "Trickster",
+			"requiredGender": "",
+			"statMins": {
+				"HP": 28,
+				"Str": 14,
+				"Mag": 12,
+				"Dex": 10,
+				"Spd": 14,
+				"Lck": 12,
+				"Def": 10,
+				"Res": 10,
+				"Cha": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 3,
+				"Spd": 4,
+				"Lck": 3,
+				"Def": 0,
+				"Res": 1,
+				"Cha": 0
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 15,
+				"Spd": 20,
+				"Lck": 10,
+				"Def": 0,
+				"Res": 5,
+				"Cha": 0
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
+			}
+		},
+		"War Monk/Cleric": {
+			"name": "War Monk/Cleric",
+			"requiredGender": "",
+			"statMins": {
+				"HP": 32,
+				"Str": 17,
+				"Mag": 10,
+				"Dex": 10,
+				"Spd": 10,
+				"Lck": 10,
+				"Def": 14,
+				"Res": 11,
+				"Cha": 0
+			},
+			"statMods": {
+				"HP": 3,
+				"Str": 2,
+				"Mag": 0,
+				"Dex": 1,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 1,
+				"Res": 1,
+				"Cha": 0
+			},
+			"growths": {
+				"HP": 40,
+				"Str": 10,
+				"Mag": 5,
+				"Dex": 10,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 5,
+				"Cha": 5
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
+			}
+		},
+		"Dark Flier": {
+			"name": "Dark Flier",
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 25,
+				"Str": 8,
+				"Mag": 6,
+				"Dex": 7,
+				"Spd": 8,
+				"Lck": 8,
+				"Def": 5,
+				"Res": 4,
+				"Cha": 0
+			},
+			"statMods": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 3,
+				"Spd": 4,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 3,
+				"Cha": 0
+			},
+			"growths": {
+				"HP": 20,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 10,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 10,
+				"Cha": 10
+			},
+			"maxStats": {
+				"HP": 0,
+				"Str": 0,
+				"Mag": 0,
+				"Dex": 0,
+				"Spd": 0,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 0,
+				"Cha": 0
+			}
+		},
+		"Valkyrie": {
+			"name": "Valkyrie",
+			"requiredGender": "F",
+			"statMins": {
+				"HP": 20,
+				"Str": 5,
+				"Mag": 10,
+				"Dex": 10,
+				"Spd": 9,
+				"Lck": 9,
+				"Def": 9,
+				"Res": 13,
+				"Cha": 0
+			},
+			"statMods": {
+				"HP": 1,
+				"Str": 0,
+				"Mag": 4,
+				"Dex": 0,
+				"Spd": -2,
+				"Lck": 0,
+				"Def": 0,
+				"Res": 2,
+				"Cha": 2
+			},
+			"growths": {
+				"HP": 5,
+				"Str": 0,
+				"Mag": 5,
+				"Dex": 0,
+				"Spd": -5,
+				"Lck": 5,
+				"Def": 5,
+				"Res": 10,
+				"Cha": 10
 			},
 			"maxStats": {
 				"HP": 0,

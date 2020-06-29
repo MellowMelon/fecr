@@ -194,7 +194,9 @@ async function processAll(finalJSON) {
 	);
 
 	_.each(finalJSON.chars, (c, name) => {
-		if (charBases[name]) {
+		if (c.baseStats) {
+			// Manually set. Don't replace.
+		} else if (charBases[name]) {
 			c.baseClass = convertBaseClass(charBasesRaw[name][1], name, c.gender);
 			if (!classMins[c.baseClass]) {
 				console.error(
@@ -206,7 +208,9 @@ async function processAll(finalJSON) {
 		} else {
 			console.error("No base stats found for character " + name);
 		}
-		if (charGrowths[name]) {
+		if (c.growths) {
+			// Manually set. Don't replace.
+		} else if (charGrowths[name]) {
 			c.growths = charGrowths[name];
 			if (name === "Cyril") {
 				applyAptitude(c.growths);
@@ -214,7 +218,9 @@ async function processAll(finalJSON) {
 		} else {
 			console.error("No growths found for character " + name);
 		}
-		if (charMax[name]) {
+		if (c.maxStats) {
+			// Manually set. Don't replace.
+		} else if (charMax[name]) {
 			c.maxStats = charMax[name];
 		} else {
 			console.error("No max stats found for character " + name);
@@ -222,13 +228,17 @@ async function processAll(finalJSON) {
 	});
 
 	_.each(finalJSON.classes, (c, name) => {
-		if (classMins[name]) {
+		if (c.statMins) {
+			// Manually set. Don't replace.
+		} else if (classMins[name]) {
 			c.statMins = classMins[name];
 			c.statMins.Res = 0;
 		} else {
 			console.error("No min stats found for class " + name);
 		}
-		if (classGrowths[name]) {
+		if (c.growths) {
+			// Manually set. Don't replace.
+		} else if (classGrowths[name]) {
 			c.growths = classGrowths[name];
 		} else {
 			console.error("No growths found for class " + name);
